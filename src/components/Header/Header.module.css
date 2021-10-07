@@ -1,0 +1,81 @@
+.header_container {
+    max-width: 1440px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.logo {
+    font-size: 24px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.right_container {
+    min-width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.right_container_is_auth {
+    min-width: 700px;
+}
+
+.to_auth {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+}
+
+.profile_img {
+    width: 33px;
+    height: 33px;
+    border-radius: 16px;
+}
+
+.profile_block {
+    display: flex;
+    align-items: center;
+}
+
+.left_container .icons {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+}
+
+.right_container .icons {
+    width: 70px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+}
+
+
+
+.status {
+    font-size: 13px;
+    color: #2C2C2C;
+}
+
+.profile_content {
+    margin-right: 10px;
+}
+
+.header {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+}
+
+.left_container {
+    display: flex;
+    align-items: center;
+}

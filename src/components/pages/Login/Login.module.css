@@ -1,0 +1,29 @@
+.container {
+    margin-top: 180px;
+    display: flex;
+}
+
+.change_display {
+    display: flex;
+}
+
+.tel, .email {
+    width: 50%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    user-select: none;
+    cursor: pointer;
+}
+
+.deactivate {
+    background-color: rgba(0, 0, 0, 0.19);
+    color: #2C2C2C;
+}
+
+.form_container {
+    padding: 20px;
+    
+}

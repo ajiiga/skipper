@@ -8,6 +8,7 @@ const RegistrationForm = () => {
     return (
         <Formik
             initialValues={{
+                tel: '',
                 firstName: '',
                 secondName: '',
                 password: '',
@@ -28,6 +29,18 @@ const RegistrationForm = () => {
                   isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit} className={s.form}>
+                    <div className={s.input_tel}>
+                        <div className={s.num_in_input}>+7</div>
+                        <input
+                            type="text"
+                            name="tel"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.tel}
+                            className={s.input}
+                            placeholder={'Номер телефона'}
+                        />
+                    </div>
                     <input
                         type="text"
                         name="firstName"

@@ -1,15 +1,17 @@
 import React from 'react';
 import {Formik} from "formik";
-import s from './EmailForm.module.css'
+import s from '../../Login/EmailForm/EmailForm.module.css'
 import Button from "../../../UI/Button/Button";
 import {Link} from "react-router-dom";
 
-const EmailForm = () => {
+const RegistrationForm = () => {
     return (
         <Formik
             initialValues={{
-                email: '',
+                firstName: '',
+                secondName: '',
                 password: '',
+                secondPassword: '',
                 saveMe: false
             }}
             onSubmit={(values) => {
@@ -27,15 +29,23 @@ const EmailForm = () => {
               }) => (
                 <form onSubmit={handleSubmit} className={s.form}>
                     <input
-                        type="email"
-                        name="email"
+                        type="text"
+                        name="firstName"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.email}
+                        value={values.firstName}
                         className={s.input}
-                        placeholder={'Email'}
+                        placeholder={'Имя'}
                     />
-                    {errors.email && touched.email && errors.email}
+                    <input
+                        type="text"
+                        name="secondName"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.secondName}
+                        className={s.input}
+                        placeholder={'Фамилия'}
+                    />
                     <input
                         type="password"
                         name="password"
@@ -43,7 +53,16 @@ const EmailForm = () => {
                         onBlur={handleBlur}
                         value={values.password}
                         className={s.input}
-                        placeholder={'Password'}
+                        placeholder={'Пароль'}
+                    />
+                    <input
+                        type="password"
+                        name="secondPassword"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.secondPassword}
+                        className={s.input}
+                        placeholder={'Повторите пароль'}
                     />
                     <div className={s.low_container}>
                         <div>
@@ -56,7 +75,6 @@ const EmailForm = () => {
                         </div>
                         <span className={s.lost_password}>Забыли пароль?</span>
                     </div>
-                    {errors.password && touched.password && errors.password}
                     <div className={s.btn_container}>
                         <Button title={'Войти'} onClick={handleSubmit}
                                 disabled={isSubmitting}/>
@@ -72,4 +90,4 @@ const EmailForm = () => {
     );
 };
 
-export default EmailForm;
+export default RegistrationForm;

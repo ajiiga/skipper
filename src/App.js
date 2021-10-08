@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import {BrowserRouter, Route, Redirect, Switch} from "react-router-dom";
 import s from './App.module.css'
 import Login from "./components/pages/Login/Login";
+import Registration from "./components/pages/Registration/Registration";
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
                             <Login />
                         </Route>
                         <Route path={'/registration'}>
-                            registration
+                            <Registration />
                         </Route>
                         <Redirect to={'/login'}/>
                     </Switch>

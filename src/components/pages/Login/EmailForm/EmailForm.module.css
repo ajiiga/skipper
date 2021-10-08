@@ -13,17 +13,28 @@
     font-size: 16px;
 }
 
-.submit {
-    background-color: #FEDC2E;
-    padding: 10px 0;
-    outline: none;
-    border: none;
-    border-radius: 6px;
-    font-size: 22px;
-    font-weight: bold;
-}
 
 .input::-webkit-input-placeholder { /* WebKit browsers */
     color: rgba(0, 0, 0, 0.4);
+}
+
+.low_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.lost_password {
+    color: rgba(44, 44, 44, 0.56);
+}
+
+.btn_container {
+    margin-top: 40px;
+    display: grid;
+}
+
+.to_reg {
+    text-align: center;
+    margin-top: 20px;
+    color: rgba(44, 44, 44, 0.56);;
 }
 

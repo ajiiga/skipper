@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import s from './Login.module.css'
 import AuthContainer from "../../UI/AuthContainer/AuthContainer";
 import EmailForm from "./EmailForm/EmailForm";
+import skype from '../../../static/img/Login/skype.png'
+import img from '../../../static/img/log_reg.svg'
 
 const Login = () => {
     let [emailMode, setMode] = useState(true)
@@ -30,9 +32,19 @@ const Login = () => {
                     ) : (
                         <div>tel</div>
                     )}
+                    <div className={s.networks}>
+                        <img src={skype} className={s.network} alt=""/>
+                        <img src={skype} className={s.network} alt=""/>
+                        <img src={skype} className={s.network} alt=""/>
+                    </div>
+                    <p className={s.description}>
+                        Входя в систему или регистрируясь, вы соглашаетесь с <u>политикой безопасности</u> и <u>правилами поведения</u> Skipper
+                    </p>
                 </div>
-
             </AuthContainer>
+
+            <img src={img} alt=""/>
+
         </div>
     );
 };

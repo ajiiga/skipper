@@ -3,8 +3,15 @@ import {Formik} from "formik";
 import s from './EmailForm.module.css'
 import Button from "../../../UI/Button/Button";
 import {Link} from "react-router-dom";
+import * as yup from 'yup'
 
 const EmailForm = () => {
+
+    const validationSchema = yup.object({
+        email: yup.string().required('Обязательное поле'),
+        password: yup.string().required('Обязательное поле')
+    })
+
     return (
         <Formik
             initialValues={{
@@ -15,6 +22,7 @@ const EmailForm = () => {
             onSubmit={(values) => {
                 console.log(values)
             }}
+            validationSchema={validationSchema}
         >
             {({
                   values,
@@ -26,6 +34,7 @@ const EmailForm = () => {
                   isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit} className={s.form}>
+                    {errors.email && touched.email && errors.email}
                     <input
                         type="email"
                         name="email"
@@ -35,7 +44,6 @@ const EmailForm = () => {
                         className={s.input}
                         placeholder={'Email'}
                     />
-                    {errors.email && touched.email && errors.email}
                     <input
                         type="password"
                         name="password"
@@ -56,7 +64,6 @@ const EmailForm = () => {
                         </div>
                         <span className={s.lost_password}>Забыли пароль?</span>
                     </div>
-                    {errors.password && touched.password && errors.password}
                     <div className={s.btn_container}>
                         <Button title={'Войти'} onClick={handleSubmit}
                                 disabled={isSubmitting}/>

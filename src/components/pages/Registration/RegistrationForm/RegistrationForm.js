@@ -76,12 +76,12 @@ const RegistrationForm = () => {
                         <span className={s.lost_password}>Забыли пароль?</span>
                     </div>
                     <div className={s.btn_container}>
-                        <Button title={'Войти'} onClick={handleSubmit}
+                        <Button title={'Зарегистрироваться'} onClick={handleSubmit}
                                 disabled={isSubmitting}/>
                     </div>
-                    <Link to={'/registration'}>
+                    <Link to={'/login'}>
                         <div className={s.to_reg}>
-                            Зарегистрироваться
+                            Войти
                         </div>
                     </Link>
                 </form>

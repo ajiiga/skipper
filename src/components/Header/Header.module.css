@@ -44,6 +44,7 @@
 .profile_block {
     display: flex;
     align-items: center;
+    user-select: none;
 }
 
 .left_container .icons {
@@ -65,10 +66,12 @@
 .status {
     font-size: 13px;
     color: #2C2C2C;
+    text-align: right;
 }
 
 .profile_content {
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .header {

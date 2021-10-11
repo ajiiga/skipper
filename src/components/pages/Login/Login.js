@@ -4,6 +4,7 @@ import AuthContainer from "../../UI/AuthContainer/AuthContainer";
 import EmailForm from "./EmailForm/EmailForm";
 import skype from '../../../static/img/Login/skype.png'
 import img from '../../../static/img/log_reg.svg'
+import TelForm from "./TelForm/TelForm";
 
 const Login = () => {
     let [emailMode, setMode] = useState(true)
@@ -30,7 +31,7 @@ const Login = () => {
                     {emailMode ? (
                         <EmailForm />
                     ) : (
-                        <div>tel</div>
+                        <TelForm />
                     )}
                     <div className={s.networks}>
                         <img src={skype} className={s.network} alt=""/>

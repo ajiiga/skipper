@@ -4,11 +4,12 @@ import s from './EmailForm.module.css'
 import Button from "../../../UI/Button/Button";
 import {Link} from "react-router-dom";
 import * as yup from 'yup'
+import TextInput from "../../../UI/TextInput/TextInput";
 
 const EmailForm = () => {
 
     const validationSchema = yup.object({
-        email: yup.string().required('Обязательное поле'),
+        email: yup.string().required('Обязательное поле').email('Неправильная форма почты'),
         password: yup.string().required('Обязательное поле')
     })
 
@@ -34,25 +35,28 @@ const EmailForm = () => {
                   isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit} className={s.form}>
-                    {errors.email && touched.email && errors.email}
-                    <input
-                        type="email"
-                        name="email"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.email}
-                        className={s.input}
-                        placeholder={'Email'}
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.password}
-                        className={s.input}
-                        placeholder={'Password'}
-                    />
+                    <div className={s.input_container}>
+                        <TextInput
+                            type="email"
+                            name="email"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.email}
+                            placeholder={'Email'}
+                        />
+                        <div className={s.error}>{errors.email && touched.email && errors.email}</div>
+                    </div>
+                    <div className={s.input_container}>
+                        <TextInput
+                            type="password"
+                            name="password"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.password}
+                            placeholder={'Password'}
+                        />
+                        <div className={s.error}>{errors.password && touched.password && errors.password}</div>
+                    </div>
                     <div className={s.low_container}>
                         <div>
                             <input

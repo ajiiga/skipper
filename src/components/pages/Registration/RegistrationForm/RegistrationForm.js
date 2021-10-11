@@ -3,8 +3,17 @@ import {Formik} from "formik";
 import s from '../../Login/EmailForm/EmailForm.module.css'
 import Button from "../../../UI/Button/Button";
 import {Link} from "react-router-dom";
+import TextInput from "../../../UI/TextInput/TextInput";
+import * as yup from "yup";
 
 const RegistrationForm = () => {
+    const validationSchema = yup.object({
+        tel: yup.number().typeError('Неправильная форма').required('Обязательное поле'),
+        firstName: yup.string().required('Обязательное поле'),
+        secondName: yup.string().required('Обязательное поле'),
+        password: yup.string().required('Обязательное поле'),
+        secondPassword: yup.string().oneOf([yup.ref('password')], 'Пароли не совпадают').required('Обязательное поле') ,
+    })
     return (
         <Formik
             initialValues={{
@@ -18,6 +27,7 @@ const RegistrationForm = () => {
             onSubmit={(values) => {
                 console.log(values)
             }}
+            validationSchema={validationSchema}
         >
             {({
                   values,
@@ -29,54 +39,69 @@ const RegistrationForm = () => {
                   isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit} className={s.form}>
-                    <div className={s.input_tel}>
-                        <div className={s.num_in_input}>+7</div>
-                        <input
+                    <div className={s.input_container}>
+                        <div className={s.input_tel}>
+                            <div className={s.num_in_input}>+7</div>
+                            <TextInput
+                                type="text"
+                                name="tel"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.tel}
+                                placeholder={'Номер телефона'}
+                                error={errors.tel && touched.tel && errors.tel}
+                            />
+                        </div>
+                        <div className={s.error}>{errors.tel && touched.tel && errors.tel}</div>
+                    </div>
+
+                    <div className={s.input_container}>
+                        <TextInput
                             type="text"
-                            name="tel"
+                            name="firstName"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.tel}
-                            className={s.input}
-                            placeholder={'Номер телефона'}
+                            value={values.firstName}
+                            placeholder={'Имя'}
                         />
+                        <div className={s.error}>{errors.firstName && touched.firstName && errors.firstName}</div>
                     </div>
-                    <input
-                        type="text"
-                        name="firstName"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.firstName}
-                        className={s.input}
-                        placeholder={'Имя'}
-                    />
-                    <input
-                        type="text"
-                        name="secondName"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.secondName}
-                        className={s.input}
-                        placeholder={'Фамилия'}
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.password}
-                        className={s.input}
-                        placeholder={'Пароль'}
-                    />
-                    <input
-                        type="password"
-                        name="secondPassword"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.secondPassword}
-                        className={s.input}
-                        placeholder={'Повторите пароль'}
-                    />
+
+                    <div className={s.input_container}>
+                        <TextInput
+                            type="text"
+                            name="secondName"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.secondName}
+                            placeholder={'Фамилия'}
+                        />
+                        <div className={s.error}>{errors.secondName && touched.secondName && errors.secondName}</div>
+                    </div>
+
+                    <div className={s.input_container}>
+                        <TextInput
+                            type="password"
+                            name="password"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.password}
+                            placeholder={'Пароль'}
+                        />
+                        <div className={s.error}>{errors.password && touched.password && errors.password}</div>
+                    </div>
+
+                    <div className={s.input_container}>
+                        <TextInput
+                            type="password"
+                            name="secondPassword"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.secondPassword}
+                            placeholder={'Повторите пароль'}
+                        />
+                        <div className={s.error}>{errors.secondPassword && touched.secondPassword && errors.secondPassword}</div>
+                    </div>
                     <div className={s.low_container}>
                         <div>
                             <input

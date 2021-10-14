@@ -1,8 +1,8 @@
 import React from 'react';
-import s from '../Login/Login.module.css'
-import AuthContainer from "../../UI/AuthContainer/AuthContainer";
-import img from "../../../static/img/log_reg.svg";
-import skype from "../../../static/img/Login/skype.png";
+import s from '../../styles/AuthService.module.css'
+import AuthContainer from "../../../../components/UI/AuthContainer/AuthContainer";
+import img from "../../../../static/img/log_reg.svg";
+import skype from "../../../../static/img/Login/skype.png";
 import RegistrationForm from "./RegistrationForm/RegistrationForm";
 
 const Registration = () => {

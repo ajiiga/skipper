@@ -1,9 +1,9 @@
 import React from 'react';
 import * as yup from "yup";
 import {Formik} from "formik";
-import s from "../EmailForm/EmailForm.module.css";
-import TextInput from "../../../UI/TextInput/TextInput";
-import Button from "../../../UI/Button/Button";
+import s from "../../../styles/Forms.module.css";
+import TextInput from "../../../../../components/UI/TextInput/TextInput";
+import Button from "../../../../../components/UI/Button/Button";
 import {Link} from "react-router-dom";
 
 const TelForm = () => {

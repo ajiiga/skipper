@@ -1,10 +1,10 @@
 import React from 'react';
 import {Formik} from "formik";
-import s from './EmailForm.module.css'
-import Button from "../../../UI/Button/Button";
+import s from '../../../styles/Forms.module.css'
+import Button from "../../../../../components/UI/Button/Button";
 import {Link} from "react-router-dom";
 import * as yup from 'yup'
-import TextInput from "../../../UI/TextInput/TextInput";
+import TextInput from "../../../../../components/UI/TextInput/TextInput";
 
 const EmailForm = () => {
 

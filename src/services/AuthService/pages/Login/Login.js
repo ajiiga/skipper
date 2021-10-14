@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import s from './Login.module.css'
-import AuthContainer from "../../UI/AuthContainer/AuthContainer";
+import s from '../../styles/AuthService.module.css'
+import AuthContainer from "../../../../components/UI/AuthContainer/AuthContainer";
 import EmailForm from "./EmailForm/EmailForm";
-import skype from '../../../static/img/Login/skype.png'
-import img from '../../../static/img/log_reg.svg'
+import skype from '../../../../static/img/Login/skype.png'
+import img from '../../../../static/img/log_reg.svg'
 import TelForm from "./TelForm/TelForm";
 
 const Login = () => {

@@ -52,3 +52,17 @@
     font-weight: bold;
     text-transform: uppercase;
 }
+
+@media (max-width: 1680px) {
+    .container {
+        flex-wrap: wrap;
+    }
+
+    .container img {
+        display: none;
+    }
+
+    .networks img {
+        display: block;
+    }
+}

@@ -8,6 +8,7 @@ import {observer} from "mobx-react-lite";
 import authStore from "./store/authStore";
 import Footer from "./components/Footer/Footer";
 import AuthService from "./services/AuthService/AuthService";
+import PublicService from "./services/PublicService/PublicService";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
                 <div className={s.container}>
                     <Switch>
                         {AuthService.urls.map(route => <Route exact={route.exact} path={route.path} component={route.component} />)}
+                        {PublicService.urls.map(route => <Route exact={route.exact} path={route.path} component={route.component} />)}
                         <Redirect to={authStore.isAuth ? '/' : '/login'}/>
                     </Switch>
                 </div>

@@ -18,16 +18,17 @@
 /*    width: 860px;*/
 /*}*/
 
-.learn_text {
+.yellow_text {
     background-color: #FFDD2D;
     border-radius: 40px;
     padding: 2px 10px;
 }
 
 .search_icon {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     user-select: none;
+    cursor: pointer;
 }
 
 .input_container {
@@ -54,4 +55,28 @@
 .input::placeholder {
     font-style: italic;
     font-weight: lighter;
+}
+
+.lower_display {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+    align-items: center;
+}
+
+.full_catalog {
+    font-size: 36px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.to_mentor_btn {
+    font-size: 24px;
+    text-decoration: underline;
+}
+
+.right_arrow {
+    width: 30px;
+    margin-left: 10px;
 }

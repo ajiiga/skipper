@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    width: 890px;
+    position: relative;
+}
+
+.item {
+    height: 129px;
+    color: white;
+    font-weight: bold;
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 0 20px;
+    background: #2C2C2C;
+    border: 6px solid #FEDC2E;
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin-right: 25px;
+}
+
+.track {
+    display: flex;
+    transition: 0.5s;
+}
+
+.track_container {
+    overflow: hidden;
+    display: flex;
+}
+
+.prev, .next {
+    position: absolute;
+    height: 25px;
+    margin-top: inherit;
+    cursor: pointer;
+    user-select: none;
+}
+
+.prev {
+    left: -35px;
+    transform: rotate(180deg);
+}
+
+.next {
+    right: -35px;
+}

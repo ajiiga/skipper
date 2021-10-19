@@ -12,7 +12,7 @@ const Header = ({isAuth, profile}) => {
     if (!isAuth) return (
         <header>
             <div className={s.header_container}>
-                <span className={s.logo}>Skipper</span>
+                <Link to={'/'}><span className={s.logo}>Skipper</span></Link>
                 <div className={s.right_container}>
                     <div>Change language</div>
                     <Link to={'/registration'}>

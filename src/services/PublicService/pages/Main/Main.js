@@ -23,7 +23,7 @@ const Main = () => {
                     <MainSlider
                         items={['IT и технологии', 'Финансы и расчеты', 'Юриспруденция', 'IT и технологии', 'IT и технологии', 'Финансы и расчеты', 'Юриспруденция', 'IT и технологии']}/>
                 </div>
-                <img src={img} alt=""/>
+                <img className={s.main_img} src={img} alt=""/>
             </div>
             <div className={s.lower_display}>
                 <Link to={'/'}>

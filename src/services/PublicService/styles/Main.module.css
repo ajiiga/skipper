@@ -5,6 +5,7 @@
 .content_container {
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 
 .title {
@@ -12,6 +13,11 @@
     font-weight: 600;
     font-size: 40px;
     line-height: 27px;
+}
+
+.main_img {
+    position: absolute;
+    right: -80px;
 }
 
 /*.left_side {*/
@@ -60,7 +66,7 @@
 .lower_display {
     display: flex;
     justify-content: space-between;
-    margin-top: 100px;
+    margin-top: 250px;
     align-items: center;
 }
 

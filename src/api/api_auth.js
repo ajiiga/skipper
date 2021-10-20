@@ -5,7 +5,7 @@ export let getStatusRequest = () => {
 }
 
 export let loginRequest = (email, password) => {
-    return $api.post('/auth/sign-in/', {email: email, password: password})
+    return $api.post('/auth/sign-in', {email: email, password: password})
 }
 
 export let logoutRequest = () => {

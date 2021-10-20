@@ -1,4 +1,5 @@
 import {makeAutoObservable} from "mobx";
+import {getStatusRequest, loginRequest} from "../api/api_auth";
 
 class AuthService {
     isAuth = false
@@ -22,12 +23,15 @@ class AuthService {
         this.isInitialisation = status
     }
 
-    checkAuth = () => {
-
+    checkStatus = () => {
+        getStatusRequest().then(r => {
+            console.log(r)
+            this.setInitialisation(false)
+        })
     }
 
     login = (login, password) => {
-
+        loginRequest(login, password)
     }
 
     logout = () => {

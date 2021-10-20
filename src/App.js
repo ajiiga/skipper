@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Header from "./components/Header/Header";
 import {BrowserRouter, Route, Redirect, Switch} from "react-router-dom";
 import s from './App.module.css'
@@ -11,7 +11,12 @@ import AuthService from "./services/AuthService/AuthService";
 import PublicService from "./services/PublicService/PublicService";
 
 function App() {
+    useEffect(() => {
+        authStore.checkStatus()
+    }, [])
 
+    if (authStore.isInitialisation)
+        return (<div>Loading...</div>)
     return (
         <BrowserRouter>
             <div className="App">

@@ -31,7 +31,10 @@ class AuthService {
     }
 
     login = (login, password) => {
-        loginRequest(login, password)
+        loginRequest(login, password).then(r => {
+            this.setUser(r.data)
+            console.log(r.data)
+        })
     }
 
     logout = () => {

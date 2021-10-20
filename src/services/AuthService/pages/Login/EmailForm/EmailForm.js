@@ -5,6 +5,8 @@ import Button from "../../../../../components/UI/Button/Button";
 import {Link} from "react-router-dom";
 import * as yup from 'yup'
 import TextInput from "../../../../../components/UI/TextInput/TextInput";
+import {observer} from "mobx-react-lite";
+import authStore from "../../../../../store/authStore";
 
 const EmailForm = () => {
 
@@ -21,7 +23,7 @@ const EmailForm = () => {
                 saveMe: false
             }}
             onSubmit={(values) => {
-                console.log(values)
+                authStore.login(values.email, values.password)
             }}
             validationSchema={validationSchema}
         >
@@ -70,7 +72,7 @@ const EmailForm = () => {
                     </div>
                     <div className={s.btn_container}>
                         <Button title={'Войти'} onClick={handleSubmit}
-                                disabled={isSubmitting}/>
+                                disabled={false}/>
                     </div>
                     <Link to={'/registration'}>
                         <div className={s.to_reg}>
@@ -83,4 +85,4 @@ const EmailForm = () => {
     );
 };
 
-export default EmailForm;
+export default observer(EmailForm);

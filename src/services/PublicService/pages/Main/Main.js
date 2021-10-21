@@ -31,7 +31,7 @@ const Main = () => {
                                                                                               className={s.right_arrow}
                                                                                               alt=""/></div>
                 </Link>
-                <Link to={'/'}>
+                <Link to={'/mentor_registration'}>
                     <div className={s.to_mentor_btn}>Я хочу зарабывать на своих знаниях</div>
                 </Link>
             </div>

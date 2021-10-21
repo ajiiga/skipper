@@ -11,9 +11,9 @@ import AuthService from "./services/AuthService/AuthService";
 import PublicService from "./services/PublicService/PublicService";
 
 function App() {
-    useEffect(() => {
-        authStore.checkStatus()
-    }, [])
+    // useEffect(() => {
+    //     authStore.checkStatus()
+    // }, [])
 
     if (authStore.isInitialisation)
         return (<div>Loading...</div>)

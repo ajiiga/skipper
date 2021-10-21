@@ -11,3 +11,7 @@ export let loginRequest = (email, password) => {
 export let logoutRequest = () => {
     return $api.delete('/auth/login/')
 }
+
+export let registrationRequest = (first_name, second_name,  email, password) => {
+    return $api.post('/auth/sign-up', {first_name: first_name, second_name:second_name, email: email, password: password})
+}

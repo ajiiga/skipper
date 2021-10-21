@@ -3,9 +3,6 @@
     flex-direction: column;
 }
 
-.input::-webkit-input-placeholder { /* WebKit browsers */
-    color: rgba(0, 0, 0, 0.4);
-}
 
 .low_container {
     display: flex;
@@ -30,12 +27,13 @@
 .input_tel {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 
 
 .num_in_input {
-    width: 30%;
+    width: 100px;
     text-align: center;
     padding: 20px;
     border: 1px solid rgba(0, 0, 0, 0.4);
@@ -56,3 +54,32 @@
     margin: 5px 0 0 0;
 }
 
+
+.photo {
+    width: 86px;
+    height: 86px;
+    border-radius: 52px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.photo_description {
+    height: 60px;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.photo_img {
+    width: 40px;
+    height: 40px;
+}

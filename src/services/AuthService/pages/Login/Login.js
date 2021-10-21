@@ -44,7 +44,7 @@ const Login = () => {
                 </div>
             </AuthContainer>
 
-            <img src={img} alt=""/>
+            <img className={s.main_img} src={img} alt=""/>
 
         </div>
     );

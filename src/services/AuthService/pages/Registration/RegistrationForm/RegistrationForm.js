@@ -5,10 +5,13 @@ import Button from "../../../../../components/UI/Button/Button";
 import {Link} from "react-router-dom";
 import TextInput from "../../../../../components/UI/TextInput/TextInput";
 import * as yup from "yup";
+import authStore from "../../../../../store/authStore";
+import {observer} from "mobx-react-lite";
 
 const RegistrationForm = () => {
     const validationSchema = yup.object({
-        tel: yup.number().typeError('Неправильная форма').required('Обязательное поле'),
+        // tel: yup.number().typeError('Неправильная форма').required('Обязательное поле'),
+        email: yup.string().required('Обязательное поле').email('Неправильная форма почты'),
         firstName: yup.string().required('Обязательное поле'),
         secondName: yup.string().required('Обязательное поле'),
         password: yup.string().required('Обязательное поле'),
@@ -17,7 +20,7 @@ const RegistrationForm = () => {
     return (
         <Formik
             initialValues={{
-                tel: '',
+                email: '',
                 firstName: '',
                 secondName: '',
                 password: '',
@@ -25,7 +28,7 @@ const RegistrationForm = () => {
                 saveMe: false
             }}
             onSubmit={(values) => {
-                console.log(values)
+                authStore.registration(values.firstName, values.secondName, values.email, values.password)
             }}
             validationSchema={validationSchema}
         >
@@ -40,31 +43,15 @@ const RegistrationForm = () => {
               }) => (
                 <form onSubmit={handleSubmit} className={s.form}>
                     <div className={s.input_container}>
-                        <div className={s.input_tel}>
-                            <div className={s.num_in_input}>+7</div>
-                            <TextInput
-                                type="text"
-                                name="tel"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.tel}
-                                placeholder={'Номер телефона'}
-                                error={errors.tel && touched.tel && errors.tel}
-                            />
-                        </div>
-                        <div className={s.error}>{errors.tel && touched.tel && errors.tel}</div>
-                    </div>
-
-                    <div className={s.input_container}>
                         <TextInput
-                            type="text"
-                            name="firstName"
+                            type="email"
+                            name="email"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.firstName}
-                            placeholder={'Имя'}
+                            value={values.email}
+                            placeholder={'Email'}
                         />
-                        <div className={s.error}>{errors.firstName && touched.firstName && errors.firstName}</div>
+                        <div className={s.error}>{errors.email && touched.email && errors.email}</div>
                     </div>
 
                     <div className={s.input_container}>
@@ -77,6 +64,18 @@ const RegistrationForm = () => {
                             placeholder={'Фамилия'}
                         />
                         <div className={s.error}>{errors.secondName && touched.secondName && errors.secondName}</div>
+                    </div>
+
+                    <div className={s.input_container}>
+                        <TextInput
+                            type="text"
+                            name="firstName"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.firstName}
+                            placeholder={'Имя'}
+                        />
+                        <div className={s.error}>{errors.firstName && touched.firstName && errors.firstName}</div>
                     </div>
 
                     <div className={s.input_container}>
@@ -104,12 +103,13 @@ const RegistrationForm = () => {
                     </div>
                     <div className={s.low_container}>
                         <div>
+                            <label>
                             <input
                                 name="saveMe"
                                 type="checkbox"
                                 onChange={handleChange}
                                 value={values.saveMe}/>
-                            <label>Оставаться в системе</label>
+                            Оставаться в системе</label>
                         </div>
                         <span className={s.lost_password}>Забыли пароль?</span>
                     </div>
@@ -128,4 +128,4 @@ const RegistrationForm = () => {
     );
 };
 
-export default RegistrationForm;
+export default observer(RegistrationForm);

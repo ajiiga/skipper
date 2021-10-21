@@ -61,12 +61,13 @@ const EmailForm = () => {
                     </div>
                     <div className={s.low_container}>
                         <div>
-                            <input
-                                name="saveMe"
-                                type="checkbox"
-                                onChange={handleChange}
-                                value={values.saveMe}/>
-                            <label>Оставаться в системе</label>
+                            <label>
+                                <input
+                                    name="saveMe"
+                                    type="checkbox"
+                                    onChange={handleChange}
+                                    value={values.saveMe}/>
+                                Оставаться в системе</label>
                         </div>
                         <span className={s.lost_password}>Забыли пароль?</span>
                     </div>

@@ -27,7 +27,6 @@
 
 .form_container {
     padding: 30px;
-    margin-top: 40px;
 }
 
 .networks {
@@ -58,7 +57,7 @@
         flex-wrap: wrap;
     }
 
-    .container img {
+    .main_img {
         display: none;
     }
 

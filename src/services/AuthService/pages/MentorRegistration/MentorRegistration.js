@@ -1,25 +1,20 @@
 import React from 'react';
-import s from '../../styles/AuthService.module.css'
+import s from "../../styles/AuthService.module.css";
 import AuthContainer from "../../../../components/UI/AuthContainer/AuthContainer";
-import img from "../../../../static/img/log_reg.svg";
+import img from "../../../../static/img/mentor_log_reg.svg";
 import skype from "../../../../static/img/Login/skype.png";
-import RegistrationForm from "./RegistrationForm/RegistrationForm";
+import MentorRegistrationForm from "./MentorRegistrationForm/MentorRegistrationForm";
 
-const Registration = () => {
+const MentorRegistration = () => {
     return (
         <div className={s.container}>
             <AuthContainer>
                 <div className={s.one_display}>
-                    Регистрация
+                    Регистрация ментора
                 </div>
 
                 <div className={s.form_container}>
-                        <RegistrationForm />
-                    <div className={s.networks}>
-                        <img src={skype} className={s.network} alt=""/>
-                        <img src={skype} className={s.network} alt=""/>
-                        <img src={skype} className={s.network} alt=""/>
-                    </div>
+                    <MentorRegistrationForm />
                     <p className={s.description}>
                         Входя в систему или регистрируясь, вы соглашаетесь с <u>политикой безопасности</u> и <u>правилами поведения</u> Skipper
                     </p>
@@ -32,4 +27,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default MentorRegistration;

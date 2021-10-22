@@ -1,0 +1,17 @@
+.textarea {
+    box-sizing: border-box;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    font-size: 16px;
+    width: 100%;
+    resize: none;
+    font-family: sans-serif;
+    height: 110px;
+    padding: 20px 20px 0;
+}
+
+.textarea::-webkit-input-placeholder { /* WebKit browsers */
+    color: rgba(0, 0, 0, 0.4);
+    font-family: 'Montserrat', sans-serif;
+}

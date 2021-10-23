@@ -7,6 +7,8 @@ class AuthService {
 
     user = {}
 
+    mentor = true
+
     constructor() {
         makeAutoObservable(this)
     }

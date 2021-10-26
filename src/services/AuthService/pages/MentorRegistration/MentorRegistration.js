@@ -18,7 +18,7 @@ const MentorRegistration = () => {
 
                 <div className={s.form_container}>
                     {
-                        authStore.mentor ?
+                        authStore.isAuth && !authStore.mentor ?
                         <MentorMenteeRegistrationForm /> :
                         <MentorRegistrationForm/>
                     }

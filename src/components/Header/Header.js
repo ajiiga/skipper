@@ -37,14 +37,13 @@ const Header = ({isAuth, profile}) => {
             <header className={`${s.header} ${s.header_fixed}`}>
                 <div className={s.header_container}>
                     <div className={s.left_container}>
-                        <span className={s.logo}>Skipper</span>
+                        <Link to={'/'}><span className={s.logo}>Skipper</span></Link>
                         <div className={s.icons}>
                             <div className={s.icon}></div>
                             <div className={s.icon}></div>
                             <div className={s.icon}></div>
                             <div className={s.icon}></div>
                             <div className={s.icon}></div>
-
                         </div>
                     </div>
                     <div className={`${s.right_container} ${s.right_container_is_auth}`}>

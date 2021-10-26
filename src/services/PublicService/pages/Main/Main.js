@@ -5,6 +5,7 @@ import search_icon from '../../../../static/img/Main/search_icon.png'
 import MainSlider from "./MainSlider/MainSlider";
 import right_arrow from '../../../../static/img/Main/right-arrow.png'
 import {Link} from "react-router-dom";
+import authStore from "../../../../store/authStore";
 
 const Main = () => {
     let [searchQuery, setSearchQuery] = useState('')
@@ -32,7 +33,7 @@ const Main = () => {
                                                                                               alt=""/></div>
                 </Link>
                 <Link to={'/mentor_registration'}>
-                    <div className={s.to_mentor_btn}>Я хочу зарабывать на своих знаниях</div>
+                    {!authStore.mentor && <div className={s.to_mentor_btn}>Я хочу зарабывать на своих знаниях</div>}
                 </Link>
             </div>
 

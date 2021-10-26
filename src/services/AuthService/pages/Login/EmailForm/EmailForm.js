@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Formik} from "formik";
 import s from '../../../styles/Forms.module.css'
 import Button from "../../../../../components/UI/Button/Button";
@@ -7,8 +7,11 @@ import * as yup from 'yup'
 import TextInput from "../../../../../components/UI/TextInput/TextInput";
 import {observer} from "mobx-react-lite";
 import authStore from "../../../../../store/authStore";
+import Preloader from "../../../../../components/UI/Preloader/Preloader";
 
 const EmailForm = () => {
+
+    let [isFetching, setIsFetching] = useState(false)
 
     const validationSchema = yup.object({
         email: yup.string().required('Обязательное поле').email('Неправильная форма почты'),
@@ -23,7 +26,8 @@ const EmailForm = () => {
                 saveMe: false
             }}
             onSubmit={(values) => {
-                authStore.login(values.email, values.password)
+                setIsFetching(true)
+                authStore.login(values.email, values.password).then(x => setIsFetching(false))
             }}
             validationSchema={validationSchema}
         >
@@ -71,6 +75,8 @@ const EmailForm = () => {
                         </div>
                         <span className={s.lost_password}>Забыли пароль?</span>
                     </div>
+                    {isFetching && <Preloader/>}
+
                     <div className={s.btn_container}>
                         <Button title={'Войти'} onClick={handleSubmit}
                                 disabled={false}/>

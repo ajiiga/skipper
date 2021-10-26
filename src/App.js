@@ -9,21 +9,29 @@ import authStore from "./store/authStore";
 import Footer from "./components/Footer/Footer";
 import AuthService from "./services/AuthService/AuthService";
 import PublicService from "./services/PublicService/PublicService";
+import Preloader from "./components/UI/Preloader/Preloader";
 
 function App() {
-    // useEffect(() => {
-    //     authStore.checkStatus()
-    // }, [])
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            authStore.checkAuth()
+            authStore.checkStatus()
+        }
+        else {
+            authStore.setIsInitialisation(false)
+        }
+    }, [])
 
     if (authStore.isInitialisation)
-        return (<div>Loading...</div>)
+        return (<Preloader />)
     return (
         <BrowserRouter>
             <div className="App">
                 <Header isAuth={authStore.isAuth} profile={{name: 'Азамат Мусагалиев', status: 'ментор'}}/>
                 <div className={s.container}>
                     <Switch>
-                        {AuthService.urls.map(route => <Route exact={route.exact} path={route.path} component={route.component} />)}
+                        {!authStore.isAuth && AuthService.urls.map(route => <Route exact={route.exact} path={route.path} component={route.component} />)}
+                        {authStore.isAuth && !authStore.mentor && AuthService.urls.filter(page => page.path === '/mentor_registration').map(route => <Route exact={route.exact} path={route.path} component={route.component} />)}
                         {PublicService.urls.map(route => <Route exact={route.exact} path={route.path} component={route.component} />)}
                         <Redirect to={authStore.isAuth ? '/' : '/login'}/>
                     </Switch>

@@ -1,0 +1,12 @@
+.container, .content_container {
+    margin-top: 33px;
+}
+
+.content_container {
+    display: flex;
+}
+
+.fixed_sidebar {
+    position: fixed;
+    height: 100%;
+}

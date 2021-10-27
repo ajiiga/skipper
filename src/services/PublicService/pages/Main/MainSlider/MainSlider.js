@@ -23,7 +23,7 @@ const MainSlider = ({items}) => {
             {(items.length < 3 || currentTranslate !== 0) && <img src={arrow} className={s.prev} onClick={handlePrev}/>}
             <div className={s.track_container}>
                 <div className={s.track} ref={track}>
-                    {items.map((text) => <div className={s.item}>{text}</div>)}
+                    {items.map((text, index) => <div key={index} className={s.item}>{text}</div>)}
                 </div>
             </div>
             {((items.length < 3) || (-currentTranslate !== changeWidth * (items.length - 3))) &&  (<img src={arrow} className={s.next} onClick={handleNext}/>)}

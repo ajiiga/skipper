@@ -1,7 +1,7 @@
 .container {
     display: none;
     position: absolute;
-    min-width: 200px;
+    min-width: 210px;
     z-index: 1;
     margin-top: 52px;
     background-color: #FFFFFF;
@@ -12,6 +12,10 @@
 
 .show {
     display: block;
+}
+
+.block {
+    cursor: pointer;
 }
 
 .block:not(:last-child)  {

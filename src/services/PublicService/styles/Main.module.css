@@ -20,10 +20,6 @@
     right: -80px;
 }
 
-/*.left_side {*/
-/*    width: 860px;*/
-/*}*/
-
 .yellow_text {
     background-color: #FFDD2D;
     border-radius: 40px;
@@ -80,9 +76,18 @@
 .to_mentor_btn {
     font-size: 24px;
     text-decoration: underline;
+    background: #F4F4F4;
+    padding: 5px 15px;
+    border-radius: 8px;
 }
 
 .right_arrow {
     width: 30px;
     margin-left: 10px;
+}
+
+@media (max-width: 1680px) {
+    .main_img {
+        display: none;
+    }
 }

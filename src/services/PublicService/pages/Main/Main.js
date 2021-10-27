@@ -27,7 +27,7 @@ const Main = () => {
                 <img className={s.main_img} src={img} alt=""/>
             </div>
             <div className={s.lower_display}>
-                <Link to={'/'}>
+                <Link to={'/catalog'}>
                     <div className={`${s.yellow_text} ${s.full_catalog}`}>Полный каталог <img src={right_arrow}
                                                                                               className={s.right_arrow}
                                                                                               alt=""/></div>

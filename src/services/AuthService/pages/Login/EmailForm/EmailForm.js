@@ -9,9 +9,7 @@ import {observer} from "mobx-react-lite";
 import authStore from "../../../../../store/authStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";
 
-const EmailForm = () => {
-
-    let [isFetching, setIsFetching] = useState(false)
+const EmailForm = ({isFetching, setIsFetching}) => {
 
     const validationSchema = yup.object({
         email: yup.string().required('Обязательное поле').email('Неправильная форма почты'),

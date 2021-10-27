@@ -8,6 +8,7 @@ const ProfileModal = ({open, setOpen}) => {
         window.addEventListener('click', closeModal)
         return () => {
             window.removeEventListener('click', closeModal)
+            setOpen(false)
         }
     }, [])
     return (

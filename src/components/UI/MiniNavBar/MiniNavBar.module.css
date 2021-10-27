@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.line_between {
+    border-right: 1px solid #979797;
+    margin: 0 10px;
+    height: 14px;
+    background-color: #979797;
+}
+
+.main_url {
+    font-size: 18px;
+}
+
+.child_url {
+    font-size: 14px;
+}

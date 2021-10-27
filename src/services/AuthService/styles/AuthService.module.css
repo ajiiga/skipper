@@ -52,6 +52,11 @@
     text-transform: uppercase;
 }
 
+.main_img {
+    position: fixed;
+    right: 10%;
+}
+
 @media (max-width: 1680px) {
     .container {
         flex-wrap: wrap;

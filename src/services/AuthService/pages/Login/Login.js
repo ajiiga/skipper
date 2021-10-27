@@ -8,6 +8,7 @@ import TelForm from "./TelForm/TelForm";
 
 const Login = () => {
     let [emailMode, setMode] = useState(true)
+    let [isFetching, setIsFetching] = useState(false)
 
     return (
         <div className={s.container}>
@@ -29,7 +30,7 @@ const Login = () => {
 
                 <div className={s.form_container}>
                     {emailMode ? (
-                        <EmailForm />
+                        <EmailForm isFetching={isFetching} setIsFetching={setIsFetching}/>
                     ) : (
                         <TelForm />
                     )}

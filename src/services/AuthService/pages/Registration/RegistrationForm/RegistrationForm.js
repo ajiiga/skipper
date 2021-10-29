@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Formik} from "formik";
 import s from '../../../styles/Forms.module.css'
 import Button from "../../../../../components/UI/Button/Button";
@@ -7,11 +7,13 @@ import TextInput from "../../../../../components/UI/TextInput/TextInput";
 import * as yup from "yup";
 import authStore from "../../../../../store/authStore";
 import {observer} from "mobx-react-lite";
+import Preloader from "../../../../../components/UI/Preloader/Preloader";
 
-const RegistrationForm = () => {
+const RegistrationForm = ({isFetching, setIsFetching}) => {
+    let [status, setStatus] = useState('')
+
     const validationSchema = yup.object({
-        // tel: yup.number().typeError('Неправильная форма').required('Обязательное поле'),
-        email: yup.string().required('Обязательное поле').email('Неправильная форма почты'),
+        tel: yup.number().typeError('Неправильная форма').required('Обязательное поле'),
         firstName: yup.string().required('Обязательное поле'),
         secondName: yup.string().required('Обязательное поле'),
         password: yup.string().required('Обязательное поле'),
@@ -20,7 +22,7 @@ const RegistrationForm = () => {
     return (
         <Formik
             initialValues={{
-                email: '',
+                tel: '',
                 firstName: '',
                 secondName: '',
                 password: '',
@@ -28,7 +30,13 @@ const RegistrationForm = () => {
                 saveMe: false
             }}
             onSubmit={(values) => {
-                authStore.registration(values.firstName, values.secondName, values.email, values.password)
+                setIsFetching(true)
+                authStore.registration(values.firstName, values.secondName, `8${values.tel}`, values.password).then(x => {
+                    setIsFetching(false)
+                    if (!x.response) {
+                        setStatus(x.message)
+                    }
+                })
             }}
             validationSchema={validationSchema}
         >
@@ -42,16 +50,21 @@ const RegistrationForm = () => {
                   isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit} className={s.form}>
+                    {status && <div className={s.status_error}>{status}</div>}
                     <div className={s.input_container}>
-                        <TextInput
-                            type="email"
-                            name="email"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.email}
-                            placeholder={'Email'}
-                        />
-                        <div className={s.error}>{errors.email && touched.email && errors.email}</div>
+                        <div className={s.input_tel}>
+                            <div className={s.num_in_input}>+7</div>
+                            <TextInput
+                                type="text"
+                                name="tel"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.tel}
+                                placeholder={'Номер телефона'}
+                                error={errors.tel && touched.tel && errors.tel}
+                            />
+                        </div>
+                        <div className={s.error}>{errors.tel && touched.tel && errors.tel}</div>
                     </div>
 
                     <div className={s.input_container}>
@@ -113,9 +126,10 @@ const RegistrationForm = () => {
                         </div>
                         <span className={s.lost_password}>Забыли пароль?</span>
                     </div>
+                    {isFetching && <Preloader />}
                     <div className={s.btn_container}>
                         <Button title={'Зарегистрироваться'} onClick={handleSubmit}
-                                disabled={isSubmitting}/>
+                                disabled={isFetching}/>
                     </div>
                     <Link to={'/login'}>
                         <div className={s.to_reg}>

@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as yup from "yup";
 import {Formik} from "formik";
 import s from "../../../styles/Forms.module.css";
 import TextInput from "../../../../../components/UI/TextInput/TextInput";
 import Button from "../../../../../components/UI/Button/Button";
 import {Link} from "react-router-dom";
+import authStore from "../../../../../store/authStore";
+import Preloader from "../../../../../components/UI/Preloader/Preloader";
 
-const TelForm = () => {
+const TelForm = ({isFetching, setIsFetching}) => {
+    let [status, setStatus] = useState('')
+
     const validationSchema = yup.object({
         tel: yup.number().typeError('Неправильная форма').required('Обязательное поле'),
         password: yup.string().required('Обязательное поле')
@@ -20,7 +24,13 @@ const TelForm = () => {
                 saveMe: false
             }}
             onSubmit={(values) => {
-                console.log(values)
+                setIsFetching(true)
+                authStore.login(`8${values.tel}`, values.password).then(x => {
+                    setIsFetching(false)
+                    if (!x.response) {
+                        setStatus(x.message)
+                    }
+                })
             }}
             validationSchema={validationSchema}
         >
@@ -34,6 +44,7 @@ const TelForm = () => {
                   isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit} className={s.form}>
+                    {status && <div className={s.status_error}>{status}</div>}
                     <div className={s.input_container}>
                         <div className={s.input_tel}>
                             <div className={s.num_in_input}>+7</div>
@@ -71,6 +82,7 @@ const TelForm = () => {
                         </div>
                         <span className={s.lost_password}>Забыли пароль?</span>
                     </div>
+                    {isFetching && <Preloader/>}
                     <div className={s.btn_container}>
                         <Button title={'Войти'} onClick={handleSubmit}
                                 disabled={isSubmitting}/>

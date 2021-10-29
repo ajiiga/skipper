@@ -12,6 +12,8 @@ const Catalog = () => {
                     <MiniNavBar child={'Каталог'}/>
                     <SideBar/>
                 </div>
+                <div className={s.fake_sidebar}/>
+                <div>hello</div>
             </div>
         </div>
     );

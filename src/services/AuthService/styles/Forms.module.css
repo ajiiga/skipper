@@ -93,3 +93,8 @@
     object-fit: cover;
     border: 1px solid rgba(0, 0, 0, 0.4);
 }
+
+.status_error {
+    color: red;
+    margin: 10px 0;
+}

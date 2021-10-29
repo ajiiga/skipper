@@ -6,9 +6,9 @@ export let getStatusRequest = () => {
 }
 
 export let loginRequest = (email, password) => {
-    return axios.post(`${API_URL}/auth/sign-in`, {email: email, password: password})
+    return axios.post(`${API_URL}/auth/sign-in`, {login: email, password: password})
 }
 
-export let registrationRequest = (first_name, second_name,  email, password) => {
-    return $api.post('/auth/sign-up', {first_name: first_name, second_name:second_name, email: email, password: password})
+export let registrationRequest = (first_name, second_name,  phone, password) => {
+    return $api.post('/auth/user-sign-up', {phone: phone, first_name: first_name, second_name:second_name, password: password})
 }

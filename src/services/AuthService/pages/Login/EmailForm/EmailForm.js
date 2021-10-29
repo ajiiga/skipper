@@ -10,6 +10,7 @@ import authStore from "../../../../../store/authStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";
 
 const EmailForm = ({isFetching, setIsFetching}) => {
+    let [status, setStatus] = useState('')
 
     const validationSchema = yup.object({
         email: yup.string().required('Обязательное поле').email('Неправильная форма почты'),
@@ -25,7 +26,12 @@ const EmailForm = ({isFetching, setIsFetching}) => {
             }}
             onSubmit={(values) => {
                 setIsFetching(true)
-                authStore.login(values.email, values.password).then(x => setIsFetching(false))
+                authStore.login(values.email, values.password).then(x => {
+                    setIsFetching(false)
+                    if (!x.response) {
+                        setStatus(x.message)
+                    }
+                })
             }}
             validationSchema={validationSchema}
         >
@@ -39,6 +45,7 @@ const EmailForm = ({isFetching, setIsFetching}) => {
                   isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit} className={s.form}>
+                    {status && <div className={s.status_error}>{status}</div>}
                     <div className={s.input_container}>
                         <TextInput
                             type="email"
@@ -77,7 +84,7 @@ const EmailForm = ({isFetching, setIsFetching}) => {
 
                     <div className={s.btn_container}>
                         <Button title={'Войти'} onClick={handleSubmit}
-                                disabled={false}/>
+                                disabled={isFetching}/>
                     </div>
                     <Link to={'/registration'}>
                         <div className={s.to_reg}>

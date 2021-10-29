@@ -32,7 +32,7 @@ const Login = () => {
                     {emailMode ? (
                         <EmailForm isFetching={isFetching} setIsFetching={setIsFetching}/>
                     ) : (
-                        <TelForm />
+                        <TelForm isFetching={isFetching} setIsFetching={setIsFetching}/>
                     )}
                     <div className={s.networks}>
                         <img src={skype} className={s.network} alt=""/>

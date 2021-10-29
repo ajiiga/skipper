@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from '../../styles/AuthService.module.css'
 import AuthContainer from "../../../../components/UI/AuthContainer/AuthContainer";
 import img from "../../../../static/img/log_reg.svg";
@@ -6,6 +6,10 @@ import skype from "../../../../static/img/Login/skype.png";
 import RegistrationForm from "./RegistrationForm/RegistrationForm";
 
 const Registration = () => {
+
+    let [isFetching, setIsFetching] = useState(false)
+
+
     return (
         <div className={s.container}>
             <AuthContainer>
@@ -14,7 +18,7 @@ const Registration = () => {
                 </div>
 
                 <div className={s.form_container}>
-                        <RegistrationForm />
+                        <RegistrationForm isFetching={isFetching} setIsFetching={setIsFetching}  />
                     <div className={s.networks}>
                         <img src={skype} className={s.network} alt=""/>
                         <img src={skype} className={s.network} alt=""/>

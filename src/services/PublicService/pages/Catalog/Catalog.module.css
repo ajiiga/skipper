@@ -4,9 +4,14 @@
 
 .content_container {
     display: flex;
+    justify-content: space-between;
 }
 
 .fixed_sidebar {
     position: fixed;
     height: 100%;
+}
+
+.fake_sidebar {
+    width: 270px;
 }

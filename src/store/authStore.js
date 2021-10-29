@@ -33,22 +33,33 @@ class AuthService {
         })
     }
 
-    login = (login, password) => {
-        loginRequest(login, password).then(r => {
+    async login(login, password) {
+        try {
+            let r = await loginRequest(login, password)
             localStorage.setItem('token', r.data.accessToken)
             localStorage.setItem('refreshToken', r.data.refreshToken)
             this.setUser(r.data)
             this.setAuth(true)
-        })
+            return {response: true}
+        } catch (e) {
+            return {response: false, message: e.response.data['error generate token']}
+        }
+
     }
 
-    registration = (first_name, second_name, email, password) => {
-        registrationRequest(first_name, second_name, email, password).then(r => {
+
+    async registration(first_name, second_name, phone, password) {
+        try {
+            let r = await registrationRequest(first_name, second_name, phone, password)
             localStorage.setItem('token', r.data.accessToken)
             localStorage.setItem('refreshToken', r.data.refreshToken)
             this.setUser(r.data)
             this.setAuth(true)
-        })
+            return {response: true}
+        }
+        catch (e) {
+            return {response: false, message: e.response.data.error}
+        }
     }
 
     logout = () => {

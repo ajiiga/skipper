@@ -10,6 +10,7 @@
 .fixed_sidebar {
     position: fixed;
     height: 100%;
+    width: 15%;
 }
 
 .fake_sidebar {

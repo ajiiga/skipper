@@ -1,5 +1,5 @@
 import {makeAutoObservable} from "mobx";
-import {getStatusRequest, loginRequest, registrationRequest} from "../api/api_auth";
+import {getStatusRequest, loginRequest, registrationMentorRequest, registrationRequest} from "../api/api_auth";
 import axios from "axios";
 import {API_URL} from "../api/api_setting";
 
@@ -33,14 +33,18 @@ class AuthService {
         })
     }
 
+    setTokensAndUser = (response) => {
+        localStorage.setItem('token', response.data.accessToken)
+        localStorage.setItem('refreshToken', response.data.refreshToken)
+        this.setUser(response.data)
+        this.setAuth(true)
+        return {response: true}
+    }
+
     async login(login, password) {
         try {
             let r = await loginRequest(login, password)
-            localStorage.setItem('token', r.data.accessToken)
-            localStorage.setItem('refreshToken', r.data.refreshToken)
-            this.setUser(r.data)
-            this.setAuth(true)
-            return {response: true}
+            return this.setTokensAndUser(r)
         } catch (e) {
             return {response: false, message: e.response.data['error generate token']}
         }
@@ -51,14 +55,20 @@ class AuthService {
     async registration(first_name, second_name, phone, password) {
         try {
             let r = await registrationRequest(first_name, second_name, phone, password)
-            localStorage.setItem('token', r.data.accessToken)
-            localStorage.setItem('refreshToken', r.data.refreshToken)
-            this.setUser(r.data)
-            this.setAuth(true)
-            return {response: true}
+            return this.setTokensAndUser(r)
         }
         catch (e) {
             return {response: false, message: e.response.data.error}
+        }
+    }
+
+    async registrationMentor(phone, second_name, first_name, specialization, description, time, password) {
+        try {
+            let r = await registrationMentorRequest(phone, second_name, first_name, specialization, description, time, password)
+            return this.setTokensAndUser(r)
+        }
+        catch (e) {
+
         }
     }
 

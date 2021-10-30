@@ -9,6 +9,30 @@ export let loginRequest = (email, password) => {
     return axios.post(`${API_URL}/auth/sign-in`, {login: email, password: password})
 }
 
-export let registrationRequest = (first_name, second_name,  phone, password) => {
-    return $api.post('/auth/user-sign-up', {phone: phone, first_name: first_name, second_name:second_name, password: password})
+export let registrationRequest = (first_name, second_name, phone, password) => {
+    return $api.post('/auth/user-sign-up', {
+        phone: phone,
+        first_name: first_name,
+        second_name: second_name,
+        password: password
+    })
+}
+
+export let registrationMentorRequest = (phone, second_name, first_name, specialization, description, time, password) => {
+
+    let bodyFormData = new FormData()
+    bodyFormData.set('phone', phone)
+    bodyFormData.set('second_name', second_name)
+    bodyFormData.set('first_name', first_name)
+    bodyFormData.set('specialization', specialization)
+    bodyFormData.set('description', description)
+    bodyFormData.set('time', time)
+    bodyFormData.set('password', password)
+
+    return axios({
+        method: 'post',
+        url: `${API_URL}/auth/mentor-sign-up`,
+        data: bodyFormData,
+        headers: {'Content-Type': 'multipart/form-data'}
+    })
 }

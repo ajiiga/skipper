@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    align-items: self-start;
+    justify-content: space-between;
+}
+
+.items_container {
+    display: flex;
+}
+
+.title {
+    font-size: 17px;
+    background: #CFCFCF;
+    border-radius: 32px;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.block:not(:last-child) {
+    margin-right: 100px;
+}
+
+
+.prev, .next {
+    cursor: pointer;
+}
+
+.prev {
+    transform: rotate(180deg);
+}

@@ -58,7 +58,7 @@
 }
 
 @media (max-width: 1680px) {
-    .container {
+    .items_container {
         flex-wrap: wrap;
     }
 

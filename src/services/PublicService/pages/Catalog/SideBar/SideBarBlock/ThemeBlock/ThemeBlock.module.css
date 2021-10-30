@@ -11,3 +11,7 @@
 .container:not(:last-child) {
     margin-bottom: 20px;
 }
+
+.container {
+    cursor: pointer;
+}

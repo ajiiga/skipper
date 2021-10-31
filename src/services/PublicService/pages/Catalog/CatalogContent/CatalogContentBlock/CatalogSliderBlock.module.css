@@ -6,6 +6,7 @@
 
 .items_container {
     display: flex;
+    width: 965px;
 }
 
 .title {

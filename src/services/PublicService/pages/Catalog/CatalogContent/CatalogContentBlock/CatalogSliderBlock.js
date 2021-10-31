@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import s from './CatalogSliderBlock.module.css'
 import CatalogLinkSearch from "./CatalogLinkSearch/CatalogLinkSearch";
 import {Link} from "react-router-dom";
@@ -6,16 +6,29 @@ import arrow from '../../../../../../static/img/Catalog/arrow.svg'
 
 const CatalogSliderBlock = ({activeThemes}) => {
 
+    let countShowBlocks = 3
+    let [page, setPage] = useState(0)
+
+    useEffect(() => {
+        setPage(0)
+    }, [activeThemes])
+
+    let showThemes = useMemo(() => {
+        return activeThemes.slice(page, page + countShowBlocks)
+    }, [activeThemes, page])
+
+    let nextPage = () => {setPage(page + 1)}
+    let prevPage = () => {setPage(page - 1)}
 
     return (
         <div className={s.container}>
-            <img src={arrow} alt="" className={s.prev}/>
+            <img src={arrow} alt="" className={s.prev} style={page === 0 ? {visibility: 'hidden'} : {}} onClick={() => prevPage()} />
             <div className={s.items_container}>
-                {activeThemes.map(t => <div className={s.block}>
+                {showThemes.map(t => <div className={s.block}>
                     <div className={s.title}>{t.title}</div>
                     {t.list.map(x => <CatalogLinkSearch name={x.name} count={x.count}/>)}</div>)}
             </div>
-            <img src={arrow} alt="" className={s.next}/>
+            <img src={arrow} alt="" className={s.next } style={(page + countShowBlocks) >=  activeThemes.length ? {visibility: 'hidden'} : {}} onClick={() => nextPage()}/>
         </div>
     );
 };

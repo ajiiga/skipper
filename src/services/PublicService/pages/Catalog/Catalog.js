@@ -40,9 +40,34 @@ const Catalog = () => {
                             {name: 'Программирование', count: 1506},
                             {name: 'Тестирование', count: 1566}
                         ]
-                    }]
+                    },
+                        {
+                            title: 'Дебил аналитика',
+                            list: [
+                                {name: 'Программирование', count: 1506},
+                                {name: 'Тестирование', count: 1566},
+                                {name: 'DevOps', count: 1232},
+                                {name: 'Аналитика', count: 1506},
+                                {name: 'DevOps', count: 1232},
+                            ]
+                        }]
                 },
-                {index: 2, logo: 2, name: 'Тестирование'},
+                {index: 2, logo: 2, name: 'Тестирование', items: [{
+                        title: 'Продуктовая аналитика',
+                        list: [
+                            {name: 'Программирование', count: 1506},
+                            {name: 'Тестирование', count: 1566},
+                            {name: 'DevOps', count: 1232},
+                            {name: 'Аналитика', count: 1506}
+                        ]
+                    }, {
+                        title: 'Системный анализ',
+                        list: [
+                            {name: 'Программирование', count: 1506},
+                            {name: 'Тестирование', count: 1566},
+                            {name: 'DevOps', count: 1232}
+                        ]
+                    }]},
                 {index: 3, logo: 3, name: 'DevOps'},
                 {index: 4, logo: 4, name: 'Аналитика'},
                 {index: 5, logo: 5, name: 'Администрирование'}

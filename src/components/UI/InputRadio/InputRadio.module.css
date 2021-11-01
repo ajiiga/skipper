@@ -1,0 +1,32 @@
+.container {
+    padding: 20px 0;
+}
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    border: 1px solid #979797;
+    margin-right: 10px;
+    transition: 0.25s;
+
+}
+
+.item {
+    display: flex;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.item:hover .circle {
+    background-color: #fff4be;
+}
+
+.active {
+    border: 1px solid #FEDC2E;
+    background-color: #FEDC2E;
+}
+
+.item:hover .active {
+    background-color: #FEDC2E;
+}

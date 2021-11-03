@@ -1,0 +1,28 @@
+.main {
+    position: relative;
+
+}
+
+.items {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 3px 3px 10px 6px rgb(0 0 0 / 6%);
+    font-weight: 500;
+    color: #333;
+    width: 98%;
+    overflow-y: scroll;
+    max-height: 300px;
+}
+
+.item {
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.item:hover {
+    background: #f4f4f4;
+}

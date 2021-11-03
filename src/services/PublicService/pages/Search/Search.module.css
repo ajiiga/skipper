@@ -1,7 +1,29 @@
 .container {
+    display: flex;
     margin-top: 33px;
 }
 
 .fixed_sidebar {
     width: 330px;
+    position: fixed;
+}
+
+.fake_sidebar {
+    width: 330px;
+}
+
+.content_container {
+    width: 100%;
+    margin-left: 200px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.tag_container {
+    margin-right: 15px;
+    margin-bottom: 10px;
 }

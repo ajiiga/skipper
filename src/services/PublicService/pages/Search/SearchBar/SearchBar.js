@@ -19,7 +19,7 @@ const SearchBar = () => {
                     <div className={s.title}>Рейтинг</div>
                     <div className={s.rating_num}>1 - 5</div>
                 </div>
-                <MultiRangeSlider min={0} max={5} onChange={setRange}/>
+                <MultiRangeSlider min={1} max={5} onChange={setRange}/>
             </div>
             <div className={s.btn_container}>
                 <button className={s.btn_clear_filter}>Сбросить все фильтры</button>

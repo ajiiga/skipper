@@ -1,0 +1,16 @@
+.tag {
+    display: flex;
+    align-items: center;
+    background: #F2F1F2;
+    border-radius: 15px;
+    padding: 4px 8px;
+    font-size: 14px;
+}
+
+.circle {
+    background: #FEDC2E;
+    border-radius: 15px;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+}

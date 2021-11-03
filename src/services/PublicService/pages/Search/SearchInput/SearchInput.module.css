@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.14);
+    box-sizing: border-box;
+    margin: 10px 0;
+}
+
+.input {
+    border: none;
+    outline: none;
+    width: 100%;
+    background: #FFFFFF;
+    font-size: 18px;
+}
+
+.input::placeholder {
+    font-style: italic;
+    font-weight: lighter;
+}
+
+
+.search_icon {
+    width: 30px;
+    height: 30px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.main {
+    position: relative;
+}

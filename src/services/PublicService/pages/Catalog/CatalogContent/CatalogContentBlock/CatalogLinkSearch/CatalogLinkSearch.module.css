@@ -2,6 +2,7 @@
     margin: 20px 10px;
     display: flex;
     color: #2C2C2C;
+    cursor: pointer;
 }
 
 .name, .count {

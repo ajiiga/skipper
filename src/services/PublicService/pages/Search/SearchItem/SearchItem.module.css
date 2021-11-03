@@ -1,0 +1,102 @@
+.container {
+    background: #FFFFFF;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+    border-radius: 8px;
+}
+
+.profile {
+    padding: 15px 30px;
+    display: flex;
+    border-bottom: 1px solid #D6D6D6;
+}
+
+.profile_img {
+    border-radius: 60px;
+    width: 111px;
+    height: 111px;
+    margin-right: 30px;
+}
+
+.title {
+
+}
+
+.profile_info {
+    width: 57%;
+}
+
+.status {
+    font-size: 12px;
+    color: #2C2C2C;
+    font-weight: 300;
+    line-height: 25px;
+}
+
+.description {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 23px;
+}
+
+.display {
+    width: 160px;
+    margin-left: auto;
+}
+
+.rating {
+    background: #7FC936;
+    border-radius: 3px;
+    color: white;
+    padding: 1px 35px;
+    margin-left: auto;
+    width: fit-content;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+.price_display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+
+
+.price_description {
+    font-size: 10px;
+    color: #717171;
+}
+
+
+.chat_btn, .follow_btn {
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+    padding: 5px 0;
+    margin-top: 8px
+}
+
+.chat_btn {
+    background: #FEDC2E;
+    font-size: 14px;
+}
+
+.follow_btn {
+    background: #EDEDED;
+    font-size: 12px;
+}
+
+.heart {
+    margin-right: 10px;
+}
+
+.services {
+    padding: 20px;
+}
+
+.container:not(:last-child) {
+    margin-bottom: 50px;
+}

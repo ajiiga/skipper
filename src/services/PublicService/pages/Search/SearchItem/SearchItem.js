@@ -10,7 +10,7 @@ const SearchItem = () => {
             <div className={s.profile}>
                 <img src={profile_img} alt="" className={s.profile_img}/>
                 <div className={s.profile_info}>
-                    <div className={s.title}>Сергей</div>
+                    <div className={s.title}>Сергей Веснушкин</div>
                     <div className={s.status}>Senior react developer</div>
                     <div className={s.description}>
                         Более 10 лет занимаюсь налогами, откатами и прочими бухгалтерскими штучками на производстве.

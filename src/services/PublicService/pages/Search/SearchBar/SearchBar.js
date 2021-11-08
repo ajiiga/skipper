@@ -4,11 +4,8 @@ import InputRadio from "../../../../../components/UI/InputRadio/InputRadio";
 import MultiRangeSlider from "../../../../../components/UI/MultiRangeSlider/MultiRangeSlider";
 import Button from "../../../../../components/UI/Button/Button";
 
-const SearchBar = () => {
-    let list = ['до $5', '$5-$10', '$10-$50', 'больше $500', 'All']
+const SearchBar = ({range, setRange, list, setActiveItem, activeItem}) => {
 
-    let [activeItem, setActiveItem] = useState(list[0])
-    let [range, setRange] = useState({min: 0, max: 5})
 
     return (
         <div className={s.container}>

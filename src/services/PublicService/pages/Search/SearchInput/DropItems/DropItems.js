@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import s from './DropItems.module.css';
 import {observer} from "mobx-react-lite";
 
-const DropItems = ({list, setShow, addTag}) => {
+const DropItems = ({list, setShow, addTag, setValue, getList}) => {
     let closeModal = () => setShow(false)
     useEffect(() => {
         window.addEventListener('click', closeModal)
@@ -16,6 +16,8 @@ const DropItems = ({list, setShow, addTag}) => {
             {list.length !== 0 ? list.map(x => <div key={x} onClick={() => {
                 addTag(x)
                 setShow(false)
+                setValue('')
+                getList()
             }} className={s.item}>{x}</div>) : 'Ничего не найдено'}
 
         </div>

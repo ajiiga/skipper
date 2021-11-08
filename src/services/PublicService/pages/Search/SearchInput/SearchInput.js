@@ -6,7 +6,7 @@ import publicStore from "../../../../../store/publicStore";
 import {observer} from "mobx-react-lite";
 import {computed} from "mobx";
 
-const SearchInput = ({value, changeValue}) => {
+const SearchInput = ({value, changeValue, getList}) => {
 
     let [show, setShow] = useState(false)
 
@@ -25,7 +25,7 @@ const SearchInput = ({value, changeValue}) => {
                 <img src={search_icon} className={s.search_icon} alt=""/>
             </div>
             {show && (
-                <DropItems list={showList} setShow={setShow} addTag={(tag) => publicStore.addTag(tag)} />
+                <DropItems list={showList} setShow={setShow} addTag={(tag) => publicStore.addTag(tag)} setValue={changeValue} getList={getList} />
             )}
         </div>
     );

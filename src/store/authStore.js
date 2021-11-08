@@ -62,13 +62,14 @@ class AuthService {
         }
     }
 
-    async registrationMentor(phone, second_name, first_name, specialization, description, time, password) {
+    async registrationMentor(phone, second_name, first_name, specialization, description, time, password, file) {
         try {
-            let r = await registrationMentorRequest(phone, second_name, first_name, specialization, description, time, password)
+            let r = await registrationMentorRequest(phone, second_name, first_name, specialization, description, time, password, file)
             return this.setTokensAndUser(r)
         }
         catch (e) {
-
+            console.log(e.response)
+            return {response: false, message: e?.response?.data}
         }
     }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from "../../styles/AuthService.module.css";
 import AuthContainer from "../../../../components/UI/AuthContainer/AuthContainer";
 import img from "../../../../static/img/mentor_log_reg.svg";
@@ -9,6 +9,8 @@ import MentorMenteeRegistrationForm
     from "./MentorMenteeRegistrationForm/MentorMenteeRegistrationForm";
 
 const MentorRegistration = () => {
+    let [isFetching, setIsFetching] = useState(false)
+
     return (
         <div className={s.container}>
             <AuthContainer>
@@ -20,7 +22,7 @@ const MentorRegistration = () => {
                     {
                         authStore.isAuth && !authStore.mentor ?
                         <MentorMenteeRegistrationForm /> :
-                        <MentorRegistrationForm/>
+                        <MentorRegistrationForm isFetching={isFetching} setIsFetching={setIsFetching}/>
                     }
                     <p className={s.description}>
                         Входя в систему или регистрируясь, вы соглашаетесь с <u>политикой безопасности</u> и <u>правилами поведения</u> Skipper

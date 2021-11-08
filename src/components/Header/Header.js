@@ -11,7 +11,7 @@ const Header = ({isAuth, profile}) => {
     //Хэдэр для не аутенфицированных пользователей
     if (!isAuth) return (
         <>
-            <header className={s.header_fixed}>
+            <header className={`${s.header} ${s.header_fixed}`}>
                 <div className={s.header_container}>
                     <Link to={'/'}><span className={s.logo}>Skipper</span></Link>
                     <div className={s.right_container}>

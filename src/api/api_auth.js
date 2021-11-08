@@ -18,7 +18,7 @@ export let registrationRequest = (first_name, second_name, phone, password) => {
     })
 }
 
-export let registrationMentorRequest = (phone, second_name, first_name, specialization, description, time, password) => {
+export let registrationMentorRequest = (phone, second_name, first_name, specialization, description, time, password, file) => {
 
     let bodyFormData = new FormData()
     bodyFormData.set('phone', phone)
@@ -28,6 +28,7 @@ export let registrationMentorRequest = (phone, second_name, first_name, speciali
     bodyFormData.set('description', description)
     bodyFormData.set('time', time)
     bodyFormData.set('password', password)
+    bodyFormData.set('profile_picture', file)
 
     return axios({
         method: 'post',

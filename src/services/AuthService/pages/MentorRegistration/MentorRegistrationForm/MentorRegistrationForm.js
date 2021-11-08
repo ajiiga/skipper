@@ -14,6 +14,7 @@ import CustomSelect from "../../../../../components/UI/CustomSelect/CustomSelect
 const MentorRegistrationForm = () => {
 
     let [preview, setPreview] = useState(null)
+    let [status, setStatus] = useState('')
 
     const validationSchema = yup.object({
         tel: yup.number().typeError('Неправильная форма').required('Обязательное поле'),
@@ -69,7 +70,7 @@ const MentorRegistrationForm = () => {
         }
     }
 
-    const [selected, setSelected] = useState("(GMT+5) Екатеринбург");
+    const [selectedTimeZone, setSelected] = useState("(GMT+5) Екатеринбург");
 
     return (
         <Formik
@@ -86,7 +87,14 @@ const MentorRegistrationForm = () => {
                 saveMe: false
             }}
             onSubmit={(values) => {
-                console.log({...values, timezone: selected})
+                console.log(values)
+                authStore.registrationMentor(values.tel, values.secondName, values.firstName, values.specialization,
+                    values.description, selectedTimeZone, values.password, values.file[0].file).then(x => {
+                    if (!x.response) {
+                        setStatus(x.message)
+                    }
+                })
+
             }}
             validationSchema={validationSchema}
         >
@@ -100,6 +108,7 @@ const MentorRegistrationForm = () => {
                   isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit} className={s.form}>
+                    {status && <div className={s.status_error}>{status}</div>}
                     <div className={s.input_container}>
                         <div className={s.input_tel}>
                             <div className={s.num_in_input}>+7</div>
@@ -213,7 +222,7 @@ const MentorRegistrationForm = () => {
 
                     <div className={s.input_container}>
                         <CustomSelect
-                            selected={selected}
+                            selected={selectedTimeZone}
                             setSelected={setSelected}
                             list={['(GMT+5) Екатеринбург', '(GMT-3) Лондон', '(GMT+2) Сидней', '(GMT+4) Москва', '(GMT-10) Манчестер']}/>
                     </div>

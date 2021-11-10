@@ -16,8 +16,9 @@
 
 .block {
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
-.block:not(:last-child)  {
-    margin-bottom: 10px;
+.exit {
+    margin-bottom: 0;
 }

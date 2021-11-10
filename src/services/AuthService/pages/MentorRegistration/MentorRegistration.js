@@ -21,7 +21,7 @@ const MentorRegistration = () => {
                 <div className={s.form_container}>
                     {
                         authStore.isAuth && !authStore.mentor ?
-                        <MentorMenteeRegistrationForm /> :
+                        <MentorMenteeRegistrationForm isFetching={isFetching} setIsFetching={setIsFetching} /> :
                         <MentorRegistrationForm isFetching={isFetching} setIsFetching={setIsFetching}/>
                     }
                     <p className={s.description}>

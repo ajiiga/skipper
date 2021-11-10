@@ -47,6 +47,7 @@
     user-select: none;
     min-width: 230px;
     justify-content: right;
+    cursor: pointer;
 }
 
 .left_container .icons {

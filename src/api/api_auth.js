@@ -2,7 +2,7 @@ import $api, {API_URL} from "./api_setting";
 import axios from "axios";
 
 export let getStatusRequest = () => {
-    return $api.get('/api/status')
+    return $api.get('/api/user-data')
 }
 
 export let loginRequest = (email, password) => {
@@ -28,11 +28,28 @@ export let registrationMentorRequest = (phone, second_name, first_name, speciali
     bodyFormData.set('description', description)
     bodyFormData.set('time', time)
     bodyFormData.set('password', password)
-    bodyFormData.set('profile_picture', file)
+    bodyFormData.set('file', file)
 
     return axios({
         method: 'post',
         url: `${API_URL}/auth/mentor-sign-up`,
+        data: bodyFormData,
+        headers: {'Content-Type': 'multipart/form-data'}
+    })
+}
+
+
+export let registrationMenteeMentorRequest = (specialization, description, time, file) => {
+
+    let bodyFormData = new FormData()
+    bodyFormData.set('specialization', specialization)
+    bodyFormData.set('description', description)
+    bodyFormData.set('time', time)
+    bodyFormData.set('file', file)
+
+    return axios({
+        method: 'post',
+        url: `${API_URL}/auth/user-mentor-sign-up`,
         data: bodyFormData,
         headers: {'Content-Type': 'multipart/form-data'}
     })

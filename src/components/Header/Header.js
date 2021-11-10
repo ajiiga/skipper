@@ -3,6 +3,7 @@ import s from './Header.module.css'
 import profileImg from '../../static/img/profile-img.jpg'
 import {Link} from "react-router-dom";
 import ProfileModal from "./ProfileModal/ProfileModal";
+import {observer} from "mobx-react-lite";
 
 const Header = ({isAuth, profile}) => {
 
@@ -57,8 +58,8 @@ const Header = ({isAuth, profile}) => {
                         <div>
                             <div className={s.profile_block} onClick={() => setOpenModal(true)}>
                                 <div className={s.profile_content}>
-                                    <div>{profile.name}</div>
-                                    <div className={s.status}>{profile.status}</div>
+                                    <div>{profile.first_name} {profile.second_name}</div>
+                                    <div className={s.status}>{profile?.is_mentor ? 'ментор' : 'менти'}</div>
                                 </div>
                                 <img src={profileImg} alt="" className={s.profile_img}/>
                             </div>
@@ -75,4 +76,4 @@ const Header = ({isAuth, profile}) => {
     )
 };
 
-export default Header;
+export default observer(Header);

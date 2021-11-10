@@ -33,7 +33,7 @@ const Main = () => {
                                                                                               alt=""/></div>
                 </Link>
                 <Link to={'/mentor_registration'}>
-                    {!authStore.mentor && <div className={s.to_mentor_btn}>Я хочу зарабывать на своих знаниях</div>}
+                    {!authStore.user?.is_mentor && <div className={s.to_mentor_btn}>Я хочу зарабывать на своих знаниях</div>}
                 </Link>
             </div>
 

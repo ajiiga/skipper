@@ -30,6 +30,10 @@ const TelForm = ({isFetching, setIsFetching}) => {
                     if (!x.response) {
                         setStatus(x.message)
                     }
+
+                    if (x.response) {
+                        authStore.checkStatus()
+                    }
                 })
             }}
             validationSchema={validationSchema}

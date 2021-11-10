@@ -8,9 +8,14 @@ import TextArea from "../../../../../components/UI/TextArea/TextArea";
 import CustomSelect from "../../../../../components/UI/CustomSelect/CustomSelect";
 import Button from "../../../../../components/UI/Button/Button";
 import {Link} from "react-router-dom";
+import publicStore from "../../../../../store/publicStore";
+import authStore from "../../../../../store/authStore";
+import Preloader from "../../../../../components/UI/Preloader/Preloader";
 
-const MentorMenteeRegistrationForm = () => {
+const MentorMenteeRegistrationForm = ({isFetching, setIsFetching}) => {
     let [preview, setPreview] = useState(null)
+    let [status, setStatus] = useState('')
+
 
     const validationSchema = yup.object({
         specialization: yup.string().required('Обязательное поле'),
@@ -72,7 +77,13 @@ const MentorMenteeRegistrationForm = () => {
                 saveMe: false
             }}
             onSubmit={(values) => {
-                console.log({...values, timezone: selected})
+                setIsFetching(true)
+                authStore.registrationMenteeMentor(values.specialization, values.description, values.file, values.file[0].file).then(x => {
+                    setIsFetching(false)
+                    if (!x.response) {
+                        setStatus(x.message)
+                    }
+                })
             }}
             validationSchema={validationSchema}
         >
@@ -86,7 +97,7 @@ const MentorMenteeRegistrationForm = () => {
                   isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit} className={s.form}>
-
+                    {status && <div className={s.status_error}>{status}</div>}
                     <div className={s.input_container}>
                         <TextInput
                             type="text"
@@ -177,9 +188,10 @@ const MentorMenteeRegistrationForm = () => {
                         </div>
                         <span className={s.lost_password}>Забыли пароль?</span>
                     </div>
+                    {isFetching && <Preloader />}
                     <div className={s.btn_container}>
                         <Button title={'Стать ментором'} onClick={handleSubmit}
-                                disabled={isSubmitting}/>
+                                disabled={isFetching}/>
                     </div>
                 </form>
             )}

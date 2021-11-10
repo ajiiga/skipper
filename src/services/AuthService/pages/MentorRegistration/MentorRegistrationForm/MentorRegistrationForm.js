@@ -9,9 +9,10 @@ import {Link} from "react-router-dom";
 import photo from '../../../../../static/img/Login/photo.svg'
 import TextArea from "../../../../../components/UI/TextArea/TextArea";
 import CustomSelect from "../../../../../components/UI/CustomSelect/CustomSelect";
+import Preloader from "../../../../../components/UI/Preloader/Preloader";
 
 
-const MentorRegistrationForm = () => {
+const MentorRegistrationForm = ({isFetching, setIsFetching}) => {
 
     let [preview, setPreview] = useState(null)
     let [status, setStatus] = useState('')
@@ -87,9 +88,10 @@ const MentorRegistrationForm = () => {
                 saveMe: false
             }}
             onSubmit={(values) => {
-                console.log(values)
+                setIsFetching(true)
                 authStore.registrationMentor(values.tel, values.secondName, values.firstName, values.specialization,
                     values.description, selectedTimeZone, values.password, values.file[0].file).then(x => {
+                        setIsFetching(false)
                     if (!x.response) {
                         setStatus(x.message)
                     }
@@ -262,9 +264,10 @@ const MentorRegistrationForm = () => {
                         </div>
                         <span className={s.lost_password}>Забыли пароль?</span>
                     </div>
+                    {isFetching && <Preloader/>}
                     <div className={s.btn_container}>
                         <Button title={'Зарегистрироваться'} onClick={handleSubmit}
-                                disabled={isSubmitting}/>
+                                disabled={isFetching}/>
                     </div>
                     <Link to={'/login'}>
                         <div className={s.to_reg}>

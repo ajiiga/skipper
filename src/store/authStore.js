@@ -49,7 +49,7 @@ class AuthService {
             let r = await loginRequest(login, password)
             return this.setTokensAndUser(r)
         } catch (e) {
-            return {response: false, message: e.response.data['error generate token']}
+            return {response: false, message: e.response.data['error']}
         }
 
     }
@@ -103,8 +103,8 @@ class AuthService {
 
     async initializationApp() {
         let res = await Promise.all([
-            this.checkAuth(),
-            this.checkStatus()
+            await this.checkAuth(),
+            await this.checkStatus()
         ]).then((x) => {
             this.setIsInitialisation(false)
         })

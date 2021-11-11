@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import s from './Header.module.css'
 import profileImg from '../../static/img/profile-img.jpg'
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import ProfileModal from "./ProfileModal/ProfileModal";
 import {observer} from "mobx-react-lite";
 
@@ -48,7 +48,7 @@ const Header = ({isAuth, profile}) => {
                         </div>
                     </div>
                     <div className={`${s.right_container} ${s.right_container_is_auth}`}>
-                        <div>Найти ментора</div>
+                        <NavLink to={'/search'}><div>Найти ментора</div></NavLink>
                         <div>Change language</div>
 
                         <div className={s.icons}>

@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 import arrow from '../../../../../../static/img/Catalog/arrow.svg'
 
 const CatalogSliderBlock = ({activeThemes}) => {
-
     let countShowBlocks = 3
     let [page, setPage] = useState(0)
 
@@ -24,9 +23,9 @@ const CatalogSliderBlock = ({activeThemes}) => {
         <div className={s.container}>
             <img src={arrow} alt="" className={s.prev} style={page === 0 ? {visibility: 'hidden'} : {}} onClick={() => prevPage()} />
             <div className={s.items_container}>
-                {showThemes.map(t => <div className={s.block}>
-                    <div className={s.title}>{t.title}</div>
-                    {t.list.map(x => <CatalogLinkSearch name={x.name} count={x.count}/>)}</div>)}
+                {showThemes.map(t => <div className={s.block} key={t.ID}>
+                    <div className={s.title}>{t.name2}</div>
+                    {t['Child2'].map(x => <CatalogLinkSearch key={x.ID} name={x.name3} count={x.count}/>)}</div>)}
             </div>
             <img src={arrow} alt="" className={s.next } style={(page + countShowBlocks) >=  activeThemes.length ? {visibility: 'hidden'} : {}} onClick={() => nextPage()}/>
         </div>

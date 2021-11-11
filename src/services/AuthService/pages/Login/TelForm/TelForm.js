@@ -89,7 +89,7 @@ const TelForm = ({isFetching, setIsFetching}) => {
                     {isFetching && <Preloader/>}
                     <div className={s.btn_container}>
                         <Button title={'Войти'} onClick={handleSubmit}
-                                disabled={isSubmitting}/>
+                                disabled={isFetching}/>
                     </div>
                     <Link to={'/registration'}>
                         <div className={s.to_reg}>

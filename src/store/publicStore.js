@@ -1,4 +1,5 @@
 import {makeAutoObservable} from "mobx";
+import {getCategoriesRequest} from "../api/api_public";
 
 class PublicStore {
     constructor() {
@@ -18,6 +19,11 @@ class PublicStore {
 
     clearTags = () => {
         this.tags = []
+    }
+
+    async getCategories() {
+        let r = await getCategoriesRequest()
+        return r.data.catalog
     }
 
     getTags = () => this.tags

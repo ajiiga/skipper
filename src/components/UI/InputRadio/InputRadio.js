@@ -5,7 +5,7 @@ const InputRadio = ({list, activeItem, setActiveItem}) => {
 
     return (
         <div className={s.container}>
-            {list.map(x => <div className={s.item} onClick={() => setActiveItem(x)}>
+            {list.map(x => <div key={x} className={s.item} onClick={() => setActiveItem(x)}>
                 <div className={`${s.circle} ${x === activeItem ? s.active : ''}`}/>
                 {x}</ div>)}
         </div>

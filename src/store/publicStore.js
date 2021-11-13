@@ -8,6 +8,8 @@ class PublicStore {
 
     tags = []
 
+    activeTheme = 1
+
     addTag = (tag) => {
         if (!this.tags.includes(tag))
             this.tags.push(tag)
@@ -26,7 +28,14 @@ class PublicStore {
         return r.data.catalog
     }
 
+    setActiveTheme = (id) => {
+        this.activeTheme = id
+    }
+
     getTags = () => this.tags
+
+    setDefaultActiveTheme = () => this.setActiveTheme(1)
+
 
 }
 

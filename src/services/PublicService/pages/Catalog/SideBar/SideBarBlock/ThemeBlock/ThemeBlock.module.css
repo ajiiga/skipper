@@ -15,3 +15,7 @@
 .container {
     cursor: pointer;
 }
+
+.active {
+    font-weight: bold;
+}

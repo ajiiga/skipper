@@ -7,10 +7,8 @@
     justify-content: space-between;
 }
 
-.fixed_sidebar {
-    position: fixed;
-    height: 100%;
-    width: 15%;
+.sidebar_container {
+    height: fit-content;
 }
 
 .fake_sidebar {

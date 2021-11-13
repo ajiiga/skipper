@@ -4,6 +4,7 @@ import AuthContainer from "../../../../components/UI/AuthContainer/AuthContainer
 import img from "../../../../static/img/log_reg.svg";
 import skype from "../../../../static/img/Login/skype.png";
 import RegistrationForm from "./RegistrationForm/RegistrationForm";
+import Footer from "../../../../components/Footer/Footer";
 
 const Registration = () => {
 
@@ -11,28 +12,32 @@ const Registration = () => {
 
 
     return (
-        <div className={s.container}>
-            <AuthContainer>
-                <div className={s.one_display}>
-                    Регистрация
-                </div>
-
-                <div className={s.form_container}>
-                        <RegistrationForm isFetching={isFetching} setIsFetching={setIsFetching}  />
-                    <div className={s.networks}>
-                        <img src={skype} className={s.network} alt=""/>
-                        <img src={skype} className={s.network} alt=""/>
-                        <img src={skype} className={s.network} alt=""/>
+        <>
+            <div className={s.container}>
+                <AuthContainer>
+                    <div className={s.one_display}>
+                        Регистрация
                     </div>
-                    <p className={s.description}>
-                        Входя в систему или регистрируясь, вы соглашаетесь с <u>политикой безопасности</u> и <u>правилами поведения</u> Skipper
-                    </p>
-                </div>
-            </AuthContainer>
 
-            <img className={s.main_img} src={img} alt=""/>
+                    <div className={s.form_container}>
+                        <RegistrationForm isFetching={isFetching} setIsFetching={setIsFetching}/>
+                        <div className={s.networks}>
+                            <img src={skype} className={s.network} alt=""/>
+                            <img src={skype} className={s.network} alt=""/>
+                            <img src={skype} className={s.network} alt=""/>
+                        </div>
+                        <p className={s.description}>
+                            Входя в систему или регистрируясь, вы соглашаетесь с <u>политикой безопасности</u> и <u>правилами
+                            поведения</u> Skipper
+                        </p>
+                    </div>
+                </AuthContainer>
 
-        </div>
+                <img className={s.main_img} src={img} alt=""/>
+
+            </div>
+            <Footer/>
+        </>
     );
 };
 

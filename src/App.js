@@ -35,7 +35,6 @@ function App() {
                         <Redirect to={authStore.isAuth ? '/' : '/login'}/>
                     </Switch>
                 </div>
-                <Footer/>
             </div>
         </BrowserRouter>
     );

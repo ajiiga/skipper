@@ -10,7 +10,7 @@ const SideBar = ({items, activeTheme, setActiveTheme}) => {
             <div className={s.container}>
                 <div className={s.title}>Каталог</div>
                 {jsonItems.map(x => {
-                    return <SideBarBlock key={x.ID} title={x['name0']} list={x['Child0']} setActiveTheme={setActiveTheme}/>
+                    return <SideBarBlock key={x.ID} title={x['name0']} list={x['Child0']} setActiveTheme={setActiveTheme} activeTheme={activeTheme}/>
                 })}
             </div>
     );

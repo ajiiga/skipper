@@ -7,7 +7,7 @@ import img from '../../../../static/img/log_reg.svg'
 import TelForm from "./TelForm/TelForm";
 
 const Login = () => {
-    let [emailMode, setMode] = useState(true)
+    let [emailMode, setMode] = useState(false)
     let [isFetching, setIsFetching] = useState(false)
 
     return (

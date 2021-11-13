@@ -7,10 +7,10 @@ import CatalogContent from "./CatalogContent/CatalogContent";
 import {getCategoriesRequest} from "../../../../api/api_public";
 import publicStore from "../../../../store/publicStore";
 import Preloader from "../../../../components/UI/Preloader/Preloader";
+import {observer} from "mobx-react-lite";
 
 const Catalog = () => {
 
-    let [activeTheme, setActiveTheme] = useState(1)
     let [isFetching, setIsFetching] = useState(true)
     let [items, setItems] = useState('')
 
@@ -22,6 +22,8 @@ const Catalog = () => {
             setIsFetching(false)
             }
         )
+
+        return () => publicStore.setDefaultActiveTheme()
     }, [])
 
 
@@ -31,14 +33,14 @@ const Catalog = () => {
         if (Array.isArray(items)) {
             let jsonItems = JSON.parse(items)
             for (let block of jsonItems) {
-                let delta = block['Child0'].filter(x => x.ID === activeTheme)
+                let delta = block['Child0'].filter(x => x.ID === publicStore.activeTheme)
                 if (delta.length !== 0) {
                     return delta[0]['Child1']
                 }
             }
         }
         return []
-    }, [activeTheme, items])
+    }, [publicStore.activeTheme, items])
 
     if (isFetching) {
         return <Preloader />
@@ -47,15 +49,14 @@ const Catalog = () => {
     return (
         <div className={s.container}>
             <div className={s.content_container}>
-                <div className={s.fixed_sidebar}>
+                <div className={s.sidebar_container}>
                     <MiniNavBar child={'Каталог'}/>
-                    <SideBar items={items} activeTheme={activeTheme} setActiveTheme={setActiveTheme}/>
+                    <SideBar items={items} activeTheme={publicStore.activeTheme} setActiveTheme={publicStore.setActiveTheme}/>
                 </div>
-                <div className={s.fake_sidebar}/>
                 <CatalogContent activeThemes={activeThemes}/>
             </div>
         </div>
     );
 };
 
-export default Catalog;
+export default observer(Catalog);

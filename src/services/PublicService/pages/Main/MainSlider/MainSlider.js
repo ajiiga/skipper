@@ -3,7 +3,7 @@ import s from './MainSlider.module.css'
 import arrow from '../../../../../static/img/Main/pointer.png'
 
 const MainSlider = ({items}) => {
-    let changeWidth = 300
+    let changeWidth = 305
     let [currentTranslate, setCurrentTranslate] = useState(0)
     let track = useRef()
 

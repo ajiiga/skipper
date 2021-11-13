@@ -8,6 +8,7 @@ import {observer} from "mobx-react-lite";
 import Tag from "../../../../components/UI/Tag/Tag";
 import SearchItem from "./SearchItem/SearchItem";
 import {autorun} from "mobx";
+import Footer from "../../../../components/Footer/Footer";
 
 const Search = () => {
 
@@ -17,7 +18,7 @@ const Search = () => {
 
     let [range, setRange] = useState({min: 1, max: 5})
 
-    let [activeItem, setActiveItem] = useState(list[0])
+    let [activeItem, setActiveItem] = useState(list[4])
 
     let getList = () => {
         let request = {
@@ -29,7 +30,9 @@ const Search = () => {
     }
 
     useEffect(() => {
-        return () => {publicStore.clearTags()}
+        return () => {
+            publicStore.clearTags()
+        }
     }, [])
 
 
@@ -38,26 +41,31 @@ const Search = () => {
     }, [activeItem, range])
 
     return (
-        <div className={s.container}>
-            <div className={s.fixed_sidebar}>
-                <MiniNavBar child={'Поиск'} />
-                <SearchBar range={range} setRange={setRange} list={list} setActiveItem={setActiveItem} activeItem={activeItem}/>
+        <>
+            <div className={s.container}>
+                <div className={s.fixed_sidebar}>
+                    <MiniNavBar child={'Поиск'}/>
+                    <SearchBar range={range} setRange={setRange} list={list} setActiveItem={setActiveItem}
+                               activeItem={activeItem}/>
+                </div>
+                <div className={s.fake_sidebar}/>
+                <div className={s.content_container}>
+                    <div>7,618 специалистов найдено</div>
+                    <SearchInput value={searchText} changeValue={setSearchText} getList={getList}/>
+                    <div className={s.tags}>{publicStore.getTags().map(x => <div key={x} className={s.tag_container}>
+                        <Tag title={x} onClick={() => {
+                            publicStore.deleteTag(x)
+                            getList()
+                        }}/></div>)}</div>
+                    <SearchItem/>
+                    <SearchItem/>
+                    <SearchItem/>
+                    <SearchItem/>
+                    <SearchItem/>
+                </div>
             </div>
-            <div className={s.fake_sidebar}/>
-            <div className={s.content_container}>
-                <div>7,618 специалистов найдено</div>
-                <SearchInput value={searchText} changeValue={setSearchText} getList={getList}/>
-                <div className={s.tags}>{publicStore.getTags().map(x => <div key={x} className={s.tag_container}><Tag title={x} onClick={() => {
-                    publicStore.deleteTag(x)
-                    getList()
-                }} /></div>)}</div>
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
-            </div>
-        </div>
+            <Footer/>
+        </>
     );
 };
 

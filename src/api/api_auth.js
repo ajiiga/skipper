@@ -2,7 +2,7 @@ import $api, {API_URL} from "./api_setting";
 import axios from "axios";
 
 export let getStatusRequest = () => {
-    return $api.get('/api/user-data')
+    return $api.get('/api/user/user-data')
 }
 
 export let loginRequest = (email, password) => {
@@ -49,7 +49,7 @@ export let registrationMenteeMentorRequest = (specialization, description, time,
 
     return axios({
         method: 'post',
-        url: `${API_URL}/auth/user-mentor-sign-up`,
+        url: `${API_URL}/api/user/user-mentor-sign-up`,
         data: bodyFormData,
         headers: {'Content-Type': 'multipart/form-data'}
     })

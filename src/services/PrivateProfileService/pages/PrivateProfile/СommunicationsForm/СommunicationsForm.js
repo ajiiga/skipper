@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from '../../../styles/PrivateProfileService.module.css'
 import default_img from "../../../../../static/img/PrivateProfile/communications.svg";
+import ModalContainer from "../../../../../components/UI/ModalContainer/ModalContainer";
+import {set} from "mobx";
 
 const CommunicationsForm = () => {
+    let [active, setActive] = useState(false)
     return (
         <div className={`${s.form_container} ${s.com_container}`}>
             <div className={s.set_photo_display}>
                 <img src={default_img} alt=""/>
                 <div className={s.btn_container}>
-                    <div className={s.btn}>Добавить</div>
+                    <div className={s.btn} onClick={() => setActive(true)}>Добавить</div>
                 </div>
                 <div className={s.description}>
                     Добавить новый способ связи
@@ -27,6 +30,9 @@ const CommunicationsForm = () => {
                     <div className={s.delete}>Удалить</div>
                 </div>
             </div>
+            <ModalContainer active={active} setActive={setActive}>
+
+            </ModalContainer>
         </div>
     );
 };

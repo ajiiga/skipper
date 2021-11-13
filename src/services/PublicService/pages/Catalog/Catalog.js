@@ -12,7 +12,7 @@ const Catalog = () => {
 
     let [activeTheme, setActiveTheme] = useState(1)
     let [isFetching, setIsFetching] = useState(true)
-    let [items, setItems] = useState([])
+    let [items, setItems] = useState('')
 
     useEffect(() => {
         publicStore.getCategories().then((data) => {
@@ -28,13 +28,16 @@ const Catalog = () => {
 
 
     let activeThemes = useMemo(() => {
-        for (let block of items) {
-            let jsonBlock = JSON.parse(block)
-            let delta = jsonBlock['Child0'].filter(x => x.ID === activeTheme)
-            if (delta.length !== 0) {
-                return delta[0]['Child1']
+        if (Array.isArray(items)) {
+            let jsonItems = JSON.parse(items)
+            for (let block of jsonItems) {
+                let delta = block['Child0'].filter(x => x.ID === activeTheme)
+                if (delta.length !== 0) {
+                    return delta[0]['Child1']
+                }
             }
         }
+        return []
     }, [activeTheme, items])
 
     if (isFetching) {

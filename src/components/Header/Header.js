@@ -4,6 +4,7 @@ import profileImg from '../../static/img/profile-img.jpg'
 import {Link, NavLink} from "react-router-dom";
 import ProfileModal from "./ProfileModal/ProfileModal";
 import {observer} from "mobx-react-lite";
+import {API_URL} from "../../api/api_setting";
 
 const Header = ({isAuth, profile}) => {
 
@@ -61,7 +62,7 @@ const Header = ({isAuth, profile}) => {
                                     <div>{profile.first_name} {profile.second_name}</div>
                                     <div className={s.status}>{profile?.is_mentor ? 'ментор' : 'менти'}</div>
                                 </div>
-                                <img src={profileImg} alt="" className={s.profile_img}/>
+                                <img src={`${API_URL}${profile.profile_picture}`} alt="" className={s.profile_img}/>
                             </div>
                             {openModal && <ProfileModal open={true} setOpen={setOpenModal}/>}
                         </div>

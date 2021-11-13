@@ -5,5 +5,5 @@ export let getServices = (params) => {
 }
 
 export let getCategoriesRequest = async () => {
-    return $api.get('/api/catalog')
+    return $api.get('/catalog')
 }

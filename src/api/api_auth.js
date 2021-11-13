@@ -51,6 +51,7 @@ export let registrationMenteeMentorRequest = (specialization, description, time,
         method: 'post',
         url: `${API_URL}/api/user/user-mentor-sign-up`,
         data: bodyFormData,
-        headers: {'Content-Type': 'multipart/form-data'}
+        headers: {'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`}
     })
 }

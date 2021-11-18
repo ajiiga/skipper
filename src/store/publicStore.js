@@ -1,5 +1,5 @@
 import {makeAutoObservable} from "mobx";
-import {getCategoriesRequest} from "../api/api_public";
+import {getCategoriesRequest, getMainSectionsRequest} from "../api/api_public";
 
 class PublicStore {
     constructor() {
@@ -26,6 +26,11 @@ class PublicStore {
     async getCategories() {
         let r = await getCategoriesRequest()
         return r.data.catalog
+    }
+
+    async getMainSection() {
+        let r = await getMainSectionsRequest()
+        return r.data?.Main_catalog
     }
 
     setActiveTheme = (id) => {

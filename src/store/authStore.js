@@ -34,7 +34,6 @@ class AuthService {
     async checkStatus() {
         let r = await getStatusRequest()
         this.setUser(r.data)
-        this.setIsInitialisation(false)
     }
 
     setTokensAndUser = (response) => {
@@ -91,13 +90,12 @@ class AuthService {
 
     async checkAuth() {
         try {
-            axios.post(`${API_URL}/auth/refresh-token`, {refreshToken: localStorage.getItem('refreshToken')}).then(r => {
+            await axios.post(`${API_URL}/auth/refresh-token`, {refreshToken: localStorage.getItem('refreshToken')}).then(r => {
                 localStorage.setItem('token', r.data.token)
                 this.setAuth(true)
-                console.log(this.isAuth)
             })
         } catch (e) {
-
+            this.logout()
         }
     }
 

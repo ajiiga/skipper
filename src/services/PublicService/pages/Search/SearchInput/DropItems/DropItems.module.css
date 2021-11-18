@@ -23,6 +23,6 @@
     transition: all 0.2s;
 }
 
-.item:hover {
+.active {
     background: #f4f4f4;
 }

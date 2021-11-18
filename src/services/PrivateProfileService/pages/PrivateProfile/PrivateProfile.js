@@ -5,6 +5,11 @@ import EditForm from "./EditForm/EditForm";
 import CommunicationsForm from "./СommunicationsForm/СommunicationsForm";
 import PurseForm from "./PurseForm/PurseForm";
 import NotificationsForm from "./NotificationsForm/NotificationsForm";
+import EducationForm from "./EducationForm/EducationForm";
+import authStore from "../../../../store/authStore";
+import Footer from "../../../../components/Footer/Footer";
+import WorkExperienceForm from "./WorkExperienceForm/WorkExperienceForm";
+import AchievementsForm from "./AchievementsForm/AchievementsForm";
 
 const PrivateProfile = () => {
     return (
@@ -19,7 +24,20 @@ const PrivateProfile = () => {
                 <PurseForm />
                 <div className={s.title}>Уведомления</div>
                 <NotificationsForm />
+                {authStore.user?.is_mentor && (
+                    <>
+                        <div className={s.title}>Образование</div>
+                        <EducationForm />
+                        <div className={s.title}>Опыт работы</div>
+                        <WorkExperienceForm/>
+                        <div className={s.title}>Мои достижения</div>
+                        <AchievementsForm />
+                    </>
+                )
+                }
+
             </div>
+            <Footer />
         </div>
     );
 };

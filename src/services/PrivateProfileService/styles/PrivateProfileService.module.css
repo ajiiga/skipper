@@ -176,10 +176,12 @@
     flex-direction: column;
     justify-content: space-around;
     height: 170px;
+    width: 75%;
 }
 
 .delete {
     color: red;
+    cursor: pointer;
 }
 
 .credit_card {
@@ -220,4 +222,42 @@
 .notification_tel_phone {
     display: flex;
     align-items: center;
+}
+
+.education_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.education_title {
+    font-weight: bold;
+}
+
+.education_name_title {
+    line-height: 24px;
+}
+
+.achievement_item {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    width: 75%;
+}
+
+.achievement_title {
+    width: 450px;
+
+}
+
+.education_items {
+    width: 75%;
+}
+
+.profile_img {
+    width: 120px;
+    height: 120px;
+    border-radius: 62px;
+    border: 1px solid #AEAEAE;
 }

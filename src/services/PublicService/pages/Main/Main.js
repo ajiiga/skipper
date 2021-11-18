@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from '../../styles/Main.module.css'
 import img from '../../../../static/img/Main/main.svg'
 import search_icon from '../../../../static/img/Main/search_icon.png'
@@ -6,9 +6,25 @@ import MainSlider from "./MainSlider/MainSlider";
 import right_arrow from '../../../../static/img/Main/right-arrow.png'
 import {Link} from "react-router-dom";
 import authStore from "../../../../store/authStore";
+import publicStore from "../../../../store/publicStore";
+import Preloader from "../../../../components/UI/Preloader/Preloader";
 
 const Main = () => {
+    let [isFetching, setIsFetching] = useState(true)
+    let [items, setItems] = useState('')
     let [searchQuery, setSearchQuery] = useState('')
+
+    useEffect(() => {
+        publicStore.getMainSection().then(r => {
+            let jsonItems = JSON.parse(r)
+            console.log('jsonItems', jsonItems)
+            setItems(jsonItems)
+            setIsFetching(false)
+        })
+    }, [])
+
+    if (isFetching)
+        return <Preloader />
 
     return (
         <div className={s.container}>
@@ -22,7 +38,7 @@ const Main = () => {
                         <img className={s.search_icon} src={search_icon} alt=""/>
                     </div>
                     <MainSlider
-                        items={['IT и технологии', 'Финансы и расчеты', 'Юриспруденция', 'IT и технологии', 'IT и технологии', 'Финансы и расчеты', 'Юриспруденция', 'IT и технологии']}/>
+                        items={items}/>
                 </div>
                 <img className={s.main_img} src={img} alt=""/>
             </div>

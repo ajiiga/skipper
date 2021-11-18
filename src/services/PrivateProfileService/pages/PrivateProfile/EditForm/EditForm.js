@@ -3,19 +3,23 @@ import s from '../../../styles/PrivateProfileService.module.css'
 import default_img from '../../../../../static/img/PrivateProfile/profile.svg'
 import CustomSelect from "../../../../../components/UI/CustomSelect/CustomSelect";
 import CustomMiniSelect from "../../../../../components/UI/CustomMiniSelect/CusomMiniSelect";
+import publicStore from "../../../../../store/publicStore";
+import authStore from "../../../../../store/authStore";
+import {API_URL} from "../../../../../api/api_setting";
 
 const EditForm = () => {
     let [day, setDay] = useState('День')
     let [month, setMonth] = useState('Месяц')
     let [year, setYear] = useState('Год')
     let [timezone, setTimezone] = useState('(GMT+5) Екатеринбург')
-    let [description, setDescription] = useState('')
+    let [description, setDescription] = useState(authStore.user.description)
 
 
     return (
         <div className={s.form_container}>
             <div className={s.set_photo_display}>
-                <img src={default_img} alt=""/>
+                {/*<img src={default_img} alt=""/>*/}
+                <img src={`${API_URL}${authStore.user.profile_picture}`} className={s.profile_img} alt=""/>
                 <div className={s.btn_container}>
                     <div className={s.btn}>Загрузить</div>
                 </div>
@@ -29,8 +33,8 @@ const EditForm = () => {
                 <div className={s.block}>
                     <div className={s.block_title}>Ваше полное имя</div>
                     <div className={s.block_input_display}>
-                        <input type="text" placeholder={'Фамилия'}/>
-                        <input type="text" placeholder={'Имя'}/>
+                        <input type="text" placeholder={'Фамилия'} value={authStore.user.second_name}/>
+                        <input type="text" placeholder={'Имя'} value={authStore.user.first_name}/>
                         <input type="text" placeholder={'Отчество'}/>
                     </div>
                 </div>

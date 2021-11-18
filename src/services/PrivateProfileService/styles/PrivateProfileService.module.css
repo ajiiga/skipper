@@ -38,6 +38,10 @@
     text-align: center;
     font-size: 14px;
     cursor: pointer;
+    background-color: white;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+
 }
 
 .set_photo_display {
@@ -89,7 +93,7 @@
 }
 
 .block_select_date_container {
-    width: 70px;
+    width: 105px;
     margin-right: 35px;
 }
 
@@ -113,7 +117,7 @@
     outline: none;
     resize: none;
     width: 100%;
-    font-family: 'Montserrat', sans-serif;
+    font-family: sans-serif;
     height: 72px;
 }
 
@@ -260,4 +264,20 @@
     height: 120px;
     border-radius: 62px;
     border: 1px solid #AEAEAE;
+}
+
+
+.submit_btn {
+    width: 210px;
+    margin-bottom: 25px;
+    margin-left: 200px;
+}
+
+.preloader_container {
+    margin-left: 200px;
+    padding: 0 0 20px 0 ;
+}
+
+.good_status {
+    color: green;
 }

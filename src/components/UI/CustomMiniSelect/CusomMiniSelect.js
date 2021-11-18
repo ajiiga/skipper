@@ -16,6 +16,7 @@ const CustomMiniSelect = ({list, selected, setSelected}) => {
                 <div className={s.dropdown_content}>
                     {list.map((option) => (
                         <div
+                            key={option}
                             onClick={(e) => {
                                 setSelected(option);
                                 setIsActive(false);

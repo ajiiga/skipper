@@ -93,12 +93,12 @@
 }
 
 .block_select_date_container {
-    width: 105px;
+    width: 120px;
     margin-right: 35px;
 }
 
 .block_select_timezone_container {
-
+    width: 250px;
 }
 
 .block_description {

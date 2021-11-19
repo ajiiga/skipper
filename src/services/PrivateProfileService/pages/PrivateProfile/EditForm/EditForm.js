@@ -61,9 +61,9 @@ const EditForm = () => {
     let [error, setError] = useState('')
 
     const validationSchema = yup.object({
-        firstName: yup.string(),
-        secondName: yup.string(),
-        patronymic: yup.string(),
+        first_name: yup.string().required('Поле "Имя" не заполнено'),
+        second_name: yup.string().required('Поле "Фамилия" не заполнено'),
+        patronymic: yup.string().required('Поле "Отчество" не заполнено'),
         description: yup.string().max(400, 'Не много ли о себе рассказали? Для кого 400 символов написано'),
     })
 
@@ -182,7 +182,13 @@ const EditForm = () => {
                                     </div>
                                 </div>
                             </div>
-                            {errors.description && <div
+                            {errors.first_name && touched.first_name && <div
+                                className={`${s.preloader_container} ${s.error_status}`}>{errors.first_name && touched.first_name && errors.first_name}</div>}
+                            {errors.second_name && touched.second_name && <div
+                                className={`${s.preloader_container} ${s.error_status}`}>{errors.second_name && touched.second_name && errors.second_name}</div>}
+                            {errors.patronymic && touched.patronymic && <div
+                                className={`${s.preloader_container} ${s.error_status}`}>{errors.patronymic && touched.patronymic && errors.patronymic}</div>}
+                            {errors.description && touched.description && <div
                                 className={`${s.preloader_container} ${s.error_status}`}>{errors.description && touched.description && errors.description}</div>}
                             {isFetching && <div className={s.preloader_container}><Preloader/></div>}
                             {status && <div className={`${s.preloader_container} ${s.good_status}`}>{status}</div>}

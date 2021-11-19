@@ -10,10 +10,11 @@ import {Formik} from "formik";
 import TextInput from "../../../../../components/UI/TextInput/TextInput";
 import privateProfileStore from "../../../../../store/privateProfileStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";
+import * as yup from "yup";
+import {set} from "mobx";
 
 function range(start, stop, step) {
     if (typeof stop == 'undefined') {
-        // one param defined
         stop = start;
         start = 0;
     }
@@ -51,12 +52,21 @@ const EditForm = () => {
         {name: 'Декабрь', num: 12},
     ]
     let years = range(1900, 2007)
-    let [day, setDay] = useState(authStore.user.date_of_birthday.split('.')[0])
-    let [month, setMonth] = useState(months.filter(x => x.num == authStore.user.date_of_birthday.split('.')[1])[0].name)
-    let [year, setYear] = useState(authStore.user.date_of_birthday.split('.')[2])
+    let [day, setDay] = useState(authStore.user.date_of_birthday ? authStore.user.date_of_birthday.split('.')[0] : 'День')
+    let [month, setMonth] = useState(authStore.user.date_of_birthday ? months.filter(x => x.num == authStore.user.date_of_birthday?.split('.')[1])[0]?.name : 'Месяц')
+    let [year, setYear] = useState(authStore.user.date_of_birthday ? authStore.user.date_of_birthday.split('.')[2] : 'Год')
     let [timezone, setTimezone] = useState('(GMT+5) Екатеринбург')
     let [isFetching, setIsFetching] = useState(false)
     let [status, setStatus] = useState('')
+    let [error, setError] = useState('')
+
+    const validationSchema = yup.object({
+        firstName: yup.string(),
+        secondName: yup.string(),
+        patronymic: yup.string(),
+        description: yup.string().max(400, 'Не много ли о себе рассказали? Для кого 400 символов написано'),
+    })
+
     return (
         <Formik
             initialValues={
@@ -67,8 +77,15 @@ const EditForm = () => {
                     description: authStore.user?.description ? authStore.user.description : ''
                 }
             }
+            validationSchema={validationSchema}
             onSubmit={(values) => {
-                privateProfileStore.UpdateProfileData(values.first_name, values.second_name, values.patronymic, [day, month, year].join('.'), timezone,values.description).then(
+                setIsFetching(true)
+                privateProfileStore.UpdateProfileData(values.first_name,
+                    values.second_name,
+                    values.patronymic,
+                    [day, months.filter(x => x.name === month)[0].num, year].join('.'),
+                    timezone,
+                    values.description).then(
                     (r) => {
                         setIsFetching(false)
                         setStatus('Данные успешно изменены')
@@ -96,60 +113,63 @@ const EditForm = () => {
                     </div>
 
 
-                    <form className={s.form}>
-                        <div className={s.block}>
-                            <div className={s.block_title}>Ваше полное имя</div>
-                            <div className={s.block_input_display}>
-                                <input
-                                    type="text"
-                                    name="second_name"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.second_name}
-                                    placeholder={'Фамилия'}
-                                />
-                                <input
-                                    type="text"
-                                    name="first_name"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    placeholder={'Имя'}
-                                    value={values.first_name}
-                                />
-                                <input
-                                    type="text"
-                                    name="patronymic"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.patronymic}
-                                    placeholder={'Отчество'}
-                                />
+                    <div className={s.form}>
+                        <form onSubmit={handleSubmit}>
+                            <div className={s.block}>
+                                <div className={s.block_title}>Ваше полное имя</div>
+                                <div className={s.block_input_display}>
+                                    <input
+                                        type="text"
+                                        name="second_name"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.second_name}
+                                        placeholder={'Фамилия'}
+                                    />
+                                    <input
+                                        type="text"
+                                        name="first_name"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        placeholder={'Имя'}
+                                        value={values.first_name}
+                                    />
+                                    <input
+                                        type="text"
+                                        name="patronymic"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.patronymic}
+                                        placeholder={'Отчество'}
+                                    />
+                                </div>
                             </div>
-                        </div>
 
-                        <div className={s.block}>
-                            <div className={s.block_title}>Дата рождения</div>
-                            <div className={s.block_select_date_container}>
-                                <CustomMiniSelect list={days} setSelected={setDay} selected={day}/>
+                            <div className={s.block}>
+                                <div className={s.block_title}>Дата рождения</div>
+                                <div className={s.block_select_date_container}>
+                                    <CustomMiniSelect list={days} setSelected={setDay} selected={day}/>
+                                </div>
+                                <div className={s.block_select_date_container}>
+                                    <CustomMiniSelect list={months.map(x => x.name)} setSelected={setMonth}
+                                                      selected={month}/>
+                                </div>
+                                <div className={s.block_select_date_container}>
+                                    <CustomMiniSelect list={years} setSelected={setYear} selected={year}/>
+                                </div>
                             </div>
-                            <div className={s.block_select_date_container}>
-                                <CustomMiniSelect list={months.map(x => x.name)} setSelected={setMonth} selected={month}/>
-                            </div>
-                            <div className={s.block_select_date_container}>
-                                <CustomMiniSelect list={years} setSelected={setYear} selected={year}/>
-                            </div>
-                        </div>
 
-                        <div className={s.block}>
-                            <div className={s.block_title}>Часовой пояс</div>
-                            <div className={s.block_select_timezone_container}>
-                                <CustomMiniSelect list={[1, 2, 3, 4]} setSelected={setTimezone} selected={timezone}/>
+                            <div className={s.block}>
+                                <div className={s.block_title}>Часовой пояс</div>
+                                <div className={s.block_select_timezone_container}>
+                                    <CustomMiniSelect list={[1, 2, 3, 4]} setSelected={setTimezone}
+                                                      selected={timezone}/>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className={s.block} style={{alignItems: 'flex-start'}}>
-                            <div className={s.block_title}>Обо мне</div>
-                            <div className={s.block_description}>
+                            <div className={s.block} style={{alignItems: 'flex-start'}}>
+                                <div className={s.block_title}>Обо мне</div>
+                                <div className={s.block_description}>
                         <textarea placeholder={'Расскажите о себе'} className={s.textarea}
                                   onChange={handleChange}
                                   onBlur={handleBlur}
@@ -157,25 +177,30 @@ const EditForm = () => {
                         >
                             {values.description}
                         </textarea>
-                                <div className={s.description_counter}>
-                                    {values.description.length}/400
+                                    <div className={s.description_counter}>
+                                        {values.description.length}/400
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {isFetching && <div className={s.preloader_container}><Preloader /></div>}
-                        {!isFetching && <div className={`${s.preloader_container} ${s.good_status}`}>{status}</div>}
-                        <button disabled={isFetching} className={`${s.btn} ${s.submit_btn}`} onClick={() => {
-                            setIsFetching(true)
-                            handleSubmit()
-                        }}>Подтвердить изменения</button>
+                            {errors.description && <div
+                                className={`${s.preloader_container} ${s.error_status}`}>{errors.description && touched.description && errors.description}</div>}
+                            {isFetching && <div className={s.preloader_container}><Preloader/></div>}
+                            {status && <div className={`${s.preloader_container} ${s.good_status}`}>{status}</div>}
+                            {error && <div className={`${s.preloader_container} ${s.error_status}`}>{error}</div>}
+                            <button disabled={isFetching} className={`${s.btn} ${s.submit_btn}`} onClick={() => {
+                                setStatus('')
+                                setError('')
+                                if (day === 'День' || month === 'Месяц' || year === 'Год') {
+                                    setError('Неправильная форма даты рождения')
+                                } else
+                                    handleSubmit()
+                            }}>Подтвердить изменения
+                            </button>
+                        </form>
 
-                        <div className={s.block}>
-                            <div className={s.block_title}>Email</div>
-                            <div className={s.email_input_display}>
-                                <input type="text" placeholder={'Адрес электронной почты'}/>
-                                <div className={s.btn}>Подтвердить</div>
-                            </div>
-                        </div>
+
+                        <EmailConfirm/>
+
 
                         <div className={s.block}>
                             <div className={s.block_title}>Пароль</div>
@@ -187,11 +212,52 @@ const EditForm = () => {
                             <div className={s.btn}>Удалить аккаунт</div>
                         </div>
 
-                    </form>
+                    </div>
                 </div>
             )}
         </Formik>
     );
 };
+
+
+const EmailConfirm = () => {
+    let [status, setStatus] = useState('')
+    const validationSchema = yup.object({
+        email: yup.string().required('Заполните поле с почтой').email('Неправильная форма почты'),
+    })
+    return (
+        <Formik
+            initialValues={{
+                email: ''
+            }}
+            onSubmit={(values) => {
+                setStatus('')
+                privateProfileStore.makeVerifyEmail(values.email).then(x => setStatus('Письмо отправлено на почту'))
+            }}
+            validationSchema={validationSchema}>
+            {({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  isSubmitting,
+              }) => <form onSubmit={handleSubmit}>
+                <div className={s.block}>
+                    <div className={s.block_title}>Email</div>
+                    <div className={s.email_input_display}>
+                        <input type="text" name="email" value={values.email} onChange={handleChange} onBlur={handleBlur}
+                               placeholder={'Адрес электронной почты'}/>
+                        <div className={s.btn} onClick={handleSubmit}>Подтвердить</div>
+                    </div>
+                </div>
+                {errors.email && <div className={`${s.error_status} ${s.email_error}`}>{errors.email && touched.email && errors.email}</div>}
+                {status && <div className={`${s.good_status} ${s.email_error}`}>{status}</div>}
+            </form>
+
+            }
+        </Formik>)
+}
 
 export default EditForm;

@@ -26,7 +26,8 @@
 
 .close {
     cursor: pointer;
-
+    position: absolute;
+    right: 40px;
 }
 
 
@@ -55,19 +56,22 @@
 
 .title {
     font-weight: bold;
+    width: 100%;
+    text-align: center;
 }
 
 .content {
-    padding: 20px;
+    padding: 0 20px 40px 20px;
 }
 
 .circle {
     position: absolute;
-    width: 150px;
+    width: 15px;
     height: 15px;
     background: #FFDD2D;
     border-radius: 15px;
     border: 1px solid #000000;
     bottom: -7.5px;
     left: 50%;
+    margin-left: -7.5px;
 }

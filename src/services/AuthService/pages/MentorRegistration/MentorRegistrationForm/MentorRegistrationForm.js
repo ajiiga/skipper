@@ -270,7 +270,7 @@ const MentorRegistrationForm = ({isFetching, setIsFetching}) => {
                     </div>
                     {isFetching && <Preloader/>}
                     <div className={s.btn_container}>
-                        <Button title={'Зарегистрироваться'} onClick={handleSubmit}
+                        <Button title={'Стать ментором'} onClick={handleSubmit}
                                 disabled={isFetching}/>
                     </div>
                     <Link to={'/login'}>

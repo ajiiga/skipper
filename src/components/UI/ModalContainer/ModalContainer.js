@@ -1,11 +1,18 @@
 import React from 'react';
 import s from './ModalContainer.module.css'
 import close from '../../../static/img/PrivateProfile/close.svg'
+import {values} from "mobx";
+import {Formik} from "formik";
+import * as yup from "yup";
 
-const ModalContainer = ({setActive, active}) => {
+const ModalContainer = ({setActive, active, children}) => {
     let closeModal = () => {
         setActive(false)
     }
+    const validationSchema = yup.object({
+        login: yup.string().required('Обязательное поле'),
+    })
+
 
     return (
         <div className={active? `${s.background} ${s.active}`:s.background} onClick={() => closeModal()}>
@@ -17,7 +24,7 @@ const ModalContainer = ({setActive, active}) => {
                     <div className={s.circle}/>
                 </div>
                 <div className={s.content}>
-
+                    {children}
                 </div>
             </div>
         </div>

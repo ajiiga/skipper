@@ -12,6 +12,14 @@ export let UpdateProfileDataRequest = (first_name, second_name, patronymic, date
 }
 
 
-export let makeVerifyEmail = (email) => {
-    return $api.get('/verify-email', {data: {email: email}})
+export let makeVerifyEmailRequest = (email) => {
+    return $api.get('api/user/user-verify-email', {data: {email: email}})
 }
+
+export let AddCommunicationRequest = (messenger_id, login) => {
+    return $api.post('/api/communication/create-user-communication', {messenger_id: messenger_id, login: login})
+}
+
+export let getMessengerListRequest = () => $api.get('api/communication/messenger-list')
+
+export let getMyCommunicationsRequest = () => $api.get('api/user/user-communications')

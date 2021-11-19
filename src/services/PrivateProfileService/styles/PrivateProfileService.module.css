@@ -281,3 +281,50 @@
 .good_status {
     color: green;
 }
+
+.error_status {
+    color: red;
+}
+
+.email_error {
+    margin-bottom: 25px;
+}
+
+.form_blocks {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.form_block {
+    display: flex;
+    margin-left: auto;
+    width: fit-content;
+    align-items: center;
+}
+
+.form_block_title {
+    font-weight: bold;
+    margin-right: 15px;
+    white-space: nowrap;
+}
+
+.form_input {
+    background: #FFFFFF;
+    border: 1px solid #AEAEAE;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 280px;
+    padding: 6px 8px;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form_custom_select_container {
+    width: 280px;
+}
+
+.form_content {
+    padding: 10px 80px;
+}

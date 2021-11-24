@@ -1,5 +1,5 @@
 import {
-    AddCommunicationRequest,
+    AddCommunicationRequest, changeProfileImageRequest,
     getMessengerListRequest, getMyCommunicationsRequest,
     makeVerifyEmailRequest,
     UpdateProfileDataRequest
@@ -14,14 +14,19 @@ class PrivateProfileStore {
     }
 
     async UpdateProfileData(first_name, second_name, patronymic, date_of_birthday, time, description) {
-        let r = await UpdateProfileDataRequest(first_name, second_name, patronymic, date_of_birthday, time, description)
-        authStore.user.first_name = first_name
-        authStore.user.second_name =second_name
-        authStore.user.patronymic = patronymic
-        authStore.user.date_of_birthday = date_of_birthday
-        authStore.user.time = time
-        authStore.user.description = description
-        console.log(r)
+        try {
+            let r = await UpdateProfileDataRequest(first_name, second_name, patronymic, date_of_birthday, time, description)
+            authStore.user.first_name = first_name
+            authStore.user.second_name =second_name
+            authStore.user.patronymic = patronymic
+            authStore.user.date_of_birthday = date_of_birthday
+            authStore.user.time = time
+            authStore.user.description = description
+            return {response: true}
+        }
+        catch (e) {
+            return {response: false, message: 'Проблемы с отправкой формы'}
+        }
     }
 
     async makeVerifyEmail(email) {
@@ -50,6 +55,16 @@ class PrivateProfileStore {
         return {
             messengers: res[0],
             myCommunications: res[1]
+        }
+    }
+
+    async changeProfileImage(file) {
+        try {
+            let r = await changeProfileImageRequest(file)
+            authStore.setUser({...authStore.user, profile_picture: r.data.profile_picture})
+        }
+        catch (e) {
+            console.log(e)
         }
     }
 

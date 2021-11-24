@@ -41,7 +41,7 @@
     background-color: white;
     outline: none;
     font-family: 'Montserrat', sans-serif;
-
+    display: block;
 }
 
 .set_photo_display {
@@ -264,6 +264,7 @@
     height: 120px;
     border-radius: 62px;
     border: 1px solid #AEAEAE;
+    object-fit: cover;
 }
 
 
@@ -327,4 +328,9 @@
 
 .form_content {
     padding: 10px 80px;
+}
+
+.error_image {
+    font-size: 12px;
+    color: red;
 }

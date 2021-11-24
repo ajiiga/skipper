@@ -1,17 +1,12 @@
 import React, {useState} from 'react';
 import s from '../../../styles/PrivateProfileService.module.css'
-import default_img from '../../../../../static/img/PrivateProfile/profile.svg'
-import CustomSelect from "../../../../../components/UI/CustomSelect/CustomSelect";
 import CustomMiniSelect from "../../../../../components/UI/CustomMiniSelect/CusomMiniSelect";
-import publicStore from "../../../../../store/publicStore";
 import authStore from "../../../../../store/authStore";
 import {API_URL} from "../../../../../api/api_setting";
-import {Formik} from "formik";
-import TextInput from "../../../../../components/UI/TextInput/TextInput";
+import {FieldArray, Formik} from "formik";
 import privateProfileStore from "../../../../../store/privateProfileStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";
 import * as yup from "yup";
-import {set} from "mobx";
 
 function range(start, stop, step) {
     if (typeof stop == 'undefined') {
@@ -88,7 +83,11 @@ const EditForm = () => {
                     values.description).then(
                     (r) => {
                         setIsFetching(false)
-                        setStatus('Данные успешно изменены')
+                        if (r.response)
+                            setStatus('Данные успешно изменены')
+                        if (!r.response) {
+                            setError(r.message)
+                        }
                     }
                 )
             }}>
@@ -101,18 +100,7 @@ const EditForm = () => {
                   handleSubmit,
                   isSubmitting,
               }) => (<div className={s.form_container}>
-                    <div className={s.set_photo_display}>
-                        {/*<img src={default_img} alt=""/>*/}
-                        <img src={`${API_URL}${authStore.user.profile_picture}`} className={s.profile_img} alt=""/>
-                        <div className={s.btn_container}>
-                            <div className={s.btn}>Загрузить</div>
-                        </div>
-                        <div className={s.description}>
-                            Размер фотографии не должен превышать 20Мб
-                        </div>
-                    </div>
-
-
+                    <SetPhoto/>
                     <div className={s.form}>
                         <form onSubmit={handleSubmit}>
                             <div className={s.block}>
@@ -258,11 +246,131 @@ const EmailConfirm = () => {
                         <div className={s.btn} onClick={handleSubmit}>Подтвердить</div>
                     </div>
                 </div>
-                {errors.email && <div className={`${s.error_status} ${s.email_error}`}>{errors.email && touched.email && errors.email}</div>}
+                {errors.email && <div
+                    className={`${s.error_status} ${s.email_error}`}>{errors.email && touched.email && errors.email}</div>}
                 {status && <div className={`${s.good_status} ${s.email_error}`}>{status}</div>}
             </form>
 
             }
+        </Formik>)
+}
+
+
+const SetPhoto = () => {
+    const validationSchema = yup.object({
+        file: yup.array().of(yup.object().shape({
+            file: yup.mixed().test('fileSize', 'Размер файла больше 5 мбайт', (value) => {
+                if (!value) return false
+                return value.size < 5000000
+            }).required(),
+            type: yup.string().oneOf(['image/png', 'image/jpeg'], 'Добавьте файл с правильным форматов').required(),
+            name: yup.string().required()
+        }).typeError('Добавьте файл'))
+    })
+
+    let [preview, setPreview] = useState(null)
+
+    const getFileSchema = (file) => (file && {
+        file: file,
+        type: file.type,
+        name: file.name
+    })
+
+    const getArrErrorsMessages = (errors) => {
+        const result = []
+        errors && Array.isArray(errors) && errors.forEach((value) => {
+            if (typeof value === 'string') {
+                result.push(value)
+            } else {
+                Object.values(value).forEach((error) => {
+                    result.push(error)
+                })
+            }
+        })
+        return result
+    }
+
+    const getError = (touched, error) => {
+        return touched && error && <p key={error} className={s.error_image}>{error}</p>
+    }
+
+    let setImage = (file) => {
+        let reader = new FileReader();
+
+        reader.onloadend = function () {
+            setPreview(reader.result);
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
+    let sendForm = (file) => {
+        if (['image/png', 'image/jpeg'].includes(file.type) && file.file.size < 5000000) {
+            privateProfileStore.changeProfileImage(file.file)
+        }
+    }
+    return (
+        <Formik
+            initialValues={{
+            file: undefined
+        }}
+                onSubmit={(values) => {
+
+                }}
+        validationSchema={validationSchema}
+        >
+            {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
+            }) => <div className={s.set_photo_display}>
+                {!preview || errors.file?.length > 0 ? <img src={`${API_URL}${authStore.user.profile_picture}`} className={s.profile_img} alt=""/>:<img src={preview} alt="" className={s.profile_img}/>}
+                {getArrErrorsMessages(errors.file).map((error) => <div key={getError(true, error)}
+                                                                       className={s.error}>{getError(true, error)}</div>)}
+                <FieldArray name={'file'}>
+                    {
+                        (arrayHelper) => (
+                            <input
+                                style={{display: 'none'}}
+                                type="file"
+                                id={'file'}
+                                onChange={(event => {
+                                    let preview_image = event.target.files[0]
+                                    const {files} = event.target
+                                    const file = getFileSchema(files.item(0))
+                                    if (!file) {
+                                        arrayHelper.remove(0)
+                                        setPreview(null)
+                                    }
+                                    if (Array.isArray(values.file)) {
+                                        arrayHelper.replace(0, file)
+                                        if (file) {
+                                            setImage(file.file)
+                                            sendForm(file)
+                                        }
+                                    } else {
+                                        arrayHelper.push(file)
+                                        setImage(file.file)
+                                        sendForm(file)
+                                    }
+                                })}/>)
+                    }
+                </FieldArray>
+                {!Array.isArray(errors.file) && errors.file && touched.file && errors.file}
+                <div className={s.btn_container}>
+                    <label htmlFor={'file'} className={s.btn}>Загрузить</label>
+                </div>
+
+                <div className={s.description}>
+                    Размер фотографии не должен превышать 5Мб
+                </div>
+            </div>}
         </Formik>)
 }
 

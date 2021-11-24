@@ -1,0 +1,10 @@
+.chat_btn {
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+    padding: 5px 0;
+    margin-top: 8px;
+    background: #FEDC2E;
+    font-size: 14px;
+    width: 100%;
+}

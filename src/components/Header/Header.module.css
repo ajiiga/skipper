@@ -39,6 +39,7 @@
     width: 33px;
     height: 33px;
     border-radius: 16px;
+    object-fit: cover;
 }
 
 .profile_block {

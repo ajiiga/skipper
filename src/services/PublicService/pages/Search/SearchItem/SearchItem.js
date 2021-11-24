@@ -3,6 +3,9 @@ import s from './SearchItem.module.css'
 import profile_img from '../../../../../static/img/profile-img.jpg'
 import black_heart from '../../../../../static/img/Search/black_heart.svg'
 import SearchService from "./SearchService/SearchService";
+import FollowButton from "../../../../../components/UI/FollowButton/FollowButton";
+import ChatButton from "../../../../../components/UI/ChatButton/ChatButton";
+import Rating from "../../../../../components/UI/Rating/Rating";
 
 const SearchItem = () => {
     return (
@@ -18,18 +21,13 @@ const SearchItem = () => {
                     </div>
                 </div>
                 <div className={s.display}>
-                    <div className={s.rating}>4.7</div>
+                    <Rating num={4.7} />
                     <div className={s.price_display}>
                         <div className={s.price}>$17</div>
                         <div className={s.price_description}>средняя цена занятия</div>
                     </div>
-                    <div className={s.follow_btn}>
-                        <img src={black_heart} className={s.heart} alt=""/>
-                        В избранное
-                    </div>
-                    <div className={s.chat_btn}>
-                        Чат
-                    </div>
+                   <FollowButton />
+                    <ChatButton />
                 </div>
             </div>
             <div className={s.services}>

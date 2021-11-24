@@ -1,0 +1,14 @@
+.info_table {
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.td_head {
+    width: 300px;
+}
+
+td {
+    padding: 12px 0;
+    border-top: 1px solid #DADADA;;
+}

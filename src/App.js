@@ -9,6 +9,7 @@ import AuthService from "./services/AuthService/AuthService";
 import PublicService from "./services/PublicService/PublicService";
 import Preloader from "./components/UI/Preloader/Preloader";
 import PrivateProfileService from "./services/PrivateProfileService/PrivateProfileService";
+import PublicProfilesService from "./services/PublicProfilesService/PublicProfilesService";
 
 function App() {
     useEffect(() => {
@@ -32,6 +33,7 @@ function App() {
                         {authStore.isAuth && !authStore.user?.is_mentor && AuthService.urls.filter(page => page.path === '/mentor_registration').map(route => <Route key={route.path} exact={route.exact} path={route.path} component={route.component} />)}
                         {PublicService.urls.map(route => <Route key={route.path} exact={route.exact} path={route.path} component={route.component} />)}
                         {authStore.isAuth && PrivateProfileService.urls.map(route => <Route key={route.path} exact={route.exact} path={route.path} component={route.component} />)}
+                        {PublicProfilesService.map(route => <Route key={route.path} exact={route.exact} component={route.component} path={route.path}/>)}
                         <Redirect to={authStore.isAuth ? '/' : '/login'}/>
                     </Switch>
                 </div>

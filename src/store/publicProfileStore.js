@@ -12,10 +12,10 @@ class publicProfileStore {
             let r = await getMenteeInfoRequest(id)
             let stringDate = r.data.register_date.slice(0, 10)
             let arrayDate = stringDate.split('-')
-            return {...r.data, year: arrayDate[0], month: arrayDate[1], day: arrayDate[2]}
+            return {response: true, data: {...r.data, year: arrayDate[0], month: arrayDate[1], day: arrayDate[2]}}
         }
         catch (e) {
-            console.log(e)
+            return {response: false}
         }
     }
 }

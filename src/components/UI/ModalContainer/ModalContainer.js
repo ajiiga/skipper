@@ -5,13 +5,10 @@ import {values} from "mobx";
 import {Formik} from "formik";
 import * as yup from "yup";
 
-const ModalContainer = ({setActive, active, children}) => {
+const ModalContainer = ({setActive, active, children, title}) => {
     let closeModal = () => {
         setActive(false)
     }
-    const validationSchema = yup.object({
-        login: yup.string().required('Обязательное поле'),
-    })
 
 
     return (
@@ -19,7 +16,7 @@ const ModalContainer = ({setActive, active, children}) => {
             <div className={s.block} onClick={e => e.stopPropagation()}>
                 <div className={s.title_container}>
                     <div/>
-                    <div className={s.title}>Добавление нового вида связи</div>
+                    <div className={s.title}>{title}</div>
                     <img src={close} className={s.close} alt="" onClick={() => setActive(false)}/>
                     <div className={s.circle}/>
                 </div>

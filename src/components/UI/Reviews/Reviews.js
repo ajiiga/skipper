@@ -18,15 +18,14 @@ const Reviews = () => {
             <div className={s.review_blocks}>
                 {reviews.map(x => <ReviewBlock name={x.name} count={x.count} text={x.text} />)}
             </div>
-            <div className={s.show_all_reviews} onClick={() => {
+            {arr.length > 3 && <div className={s.show_all_reviews} onClick={() => {
                 if (reviews.length === 3) {
                     setReviews(arr)
-                }
-                else
+                } else
                     setReviews(arr.slice(0, 3))
             }}>
                 {reviews.length === 3 ? 'Смотреть все отзывы' : 'Скрыть отзывы'}
-            </div>
+            </div>}
         </div>
     );
 };

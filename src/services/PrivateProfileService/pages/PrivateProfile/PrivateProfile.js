@@ -26,6 +26,7 @@ const PrivateProfile = () => {
                     messenger: x.Messenger[0].Name
                 }
             })
+
             setListMyCommunications(deltaMyCommunications)
             setIsFetching(false)
         })

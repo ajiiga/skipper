@@ -37,7 +37,7 @@ const CommunicationsForm = ({listMessengers, listMyCommunications, setListMyComm
                     <div className={s.delete}>Удалить</div>
                 </div>)}
             </div>
-            <ModalContainer active={active} setActive={setActive}>
+            <ModalContainer active={active} setActive={setActive} title={'Добавление нового вида связи'}>
                 <Formik
                     initialValues={{
                         login: ''

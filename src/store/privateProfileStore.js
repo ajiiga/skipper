@@ -1,6 +1,6 @@
 import {
-    AddCommunicationRequest, changeProfileImageRequest,
-    getMessengerListRequest, getMyCommunicationsRequest,
+    AddCommunicationRequest, addEducationRequest, changeProfileImageRequest,
+    getMessengerListRequest, getMyCommunicationsRequest, getMyEducationRequest,
     makeVerifyEmailRequest,
     UpdateProfileDataRequest
 } from "../api/api_private_profile";
@@ -65,6 +65,25 @@ class PrivateProfileStore {
         }
         catch (e) {
             console.log(e)
+        }
+    }
+
+    async getMyEducations() {
+        try {
+            let r = await getMyEducationRequest()
+            console.log(r.data)
+        }
+        catch (e) {
+
+        }
+    }
+
+    async addEducation(name, first_year, last_year) {
+        try {
+            let r = await addEducationRequest(name, first_year, last_year)
+        }
+        catch (e) {
+
         }
     }
 

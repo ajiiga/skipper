@@ -5,6 +5,11 @@ import {Link, NavLink} from "react-router-dom";
 import ProfileModal from "./ProfileModal/ProfileModal";
 import {observer} from "mobx-react-lite";
 import {API_URL} from "../../api/api_setting";
+import profile_img from '../../static/img/header_icons/profile.svg'
+import message from '../../static/img/header_icons/message.svg'
+import search_img from '../../static/img/header_icons/search.svg'
+import star_img from '../../../src/static/img/header_icons/star.svg'
+import bell_img from '../../static/img/header_icons/bell.svg'
 
 const Header = ({isAuth, profile}) => {
 
@@ -41,21 +46,20 @@ const Header = ({isAuth, profile}) => {
                     <div className={s.left_container}>
                         <Link to={'/'}><span className={s.logo}>Skipper</span></Link>
                         <div className={s.icons}>
-                            <div className={s.icon}></div>
-                            <div className={s.icon}></div>
-                            <div className={s.icon}></div>
-                            <div className={s.icon}></div>
-                            <div className={s.icon}></div>
+                            <div className={s.icon}><img src={profile_img} alt=""/></div>
+                            <div className={s.icon}><img src={message} alt=""/></div>
+                            <div className={s.icon}><img src={search_img} alt=""/></div>
+                            <div className={s.icon}><img src={star_img} alt=""/></div>
+                            <div className={s.my_lessons}>Мои занятия</div>
                         </div>
                     </div>
                     <div className={`${s.right_container} ${s.right_container_is_auth}`}>
-                        <NavLink to={'/search'}><div>Найти ментора</div></NavLink>
                         <div>Change language</div>
 
-                        <div className={s.icons}>
-                            <div className={s.icon}></div>
-                            <div className={s.icon}></div>
-                        </div>
+
+
+                            <div className={s.icon}><img src={bell_img} alt=""/></div>
+
                         <div>
                             <div className={s.profile_block} onClick={() => setOpenModal(true)}>
                                 <div className={s.profile_content}>

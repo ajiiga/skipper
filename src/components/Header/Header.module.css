@@ -21,7 +21,7 @@
 }
 
 .right_container_is_auth {
-    min-width: 700px;
+    min-width: 450px;
 }
 
 .to_auth {
@@ -32,7 +32,6 @@
 .icon {
     width: 20px;
     height: 20px;
-    background-color: black;
 }
 
 .profile_img {
@@ -52,10 +51,10 @@
 }
 
 .left_container .icons {
-    width: 200px;
+    width: 400px;
     display: flex;
     justify-content: space-between;
-    margin: 0 20px;
+    margin-left: 50px;
 }
 
 .right_container .icons {
@@ -97,4 +96,15 @@
 
 .hidden_block {
     height: 60px;
+}
+
+.my_lessons {
+    font-size: 15px;
+    background: #FFDD2D;
+    border-radius: 32px;
+    cursor: pointer;
+    user-select: none;
+    padding: 5px 7px;
+    font-weight: bold;
+    color: #606060;
 }

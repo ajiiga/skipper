@@ -11,6 +11,9 @@ import Reviews from "../../../components/UI/Reviews/Reviews";
 import publicProfileStore from "../../../store/publicProfileStore";
 import Preloader from "../../../components/UI/Preloader/Preloader";
 import {API_URL} from "../../../api/api_setting";
+import { useHistory } from "react-router-dom"
+import RateDisplay from "../../../components/UI/RateDisplay/RateDisplay";
+import ComplainModal from "../../../components/UI/ComplainModal/ComplainModal";
 
 const MenteeProfile = ({}) => {
     let params = useParams()
@@ -18,11 +21,16 @@ const MenteeProfile = ({}) => {
 
     let [isFetching, setIsFetching] = useState(true)
     let [user, setUser] = useState({})
+    let [active, setActive] = useState(false)
+
+    let history = useHistory()
 
     useEffect(() => {
         setIsFetching(true)
         publicProfileStore.getMenteeInfo(id).then(x => {
-            setUser(x)
+            if (!x.response)
+                history.push('/')
+            setUser(x.data)
             console.log(x)
             setIsFetching(false)
         })
@@ -62,7 +70,7 @@ const MenteeProfile = ({}) => {
                             </div>
 
                             <div className={s.rate}>
-                                <Rating num={4.5}/>
+                                <RateDisplay rate={4.2} />
                                 <div className={s.date}>На Skipper с {user.day} {monthName[user.month]} {user.year}</div>
                                 <div>248 занятий</div>
                             </div>
@@ -82,7 +90,7 @@ const MenteeProfile = ({}) => {
                         <LessonStatistics />
                     </div>
                     <div className={s.hate_buttons}>
-                        <div className={s.btn}>
+                        <div className={s.btn} onClick={() => setActive(true)}>
                             Пожаловаться
                         </div>
                         <div className={s.btn}>
@@ -97,8 +105,11 @@ const MenteeProfile = ({}) => {
                     </div>
                 </div>
             </div>
+            <ComplainModal active={active} setActive={setActive} />
         </div>
     );
 };
 
 export default withRouter(MenteeProfile);
+
+

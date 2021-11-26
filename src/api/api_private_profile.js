@@ -25,6 +25,8 @@ export let getMessengerListRequest = () => $api.get('api/communication/messenger
 
 export let getMyCommunicationsRequest = () => $api.get('api/communication/user-communications')
 
+export let getMyEducationRequest = () => $api.get('/api/education/user-education')
+
 export let changeProfileImageRequest = (file) => {
     let bodyFormData = new FormData()
     bodyFormData.set('file', file)
@@ -36,3 +38,5 @@ export let changeProfileImageRequest = (file) => {
         headers: {'Content-Type': 'multipart/form-data'},
     })
 }
+
+export let addEducationRequest = (name, first_year, second_year) => $api.post('/api/education/add-user-education', {name: name, first_year: first_year, second_year: second_year})

@@ -9,7 +9,7 @@
 }
 
 .head_container, .info_container {
-    width: 930px;
+    width: 88%;
     padding: 20px;
     background: #FFFFFF;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
@@ -95,6 +95,7 @@
     background: white;
     cursor: pointer;
     font-size: 12px;
+    user-select: none;
 }
 
 .reviews_block {

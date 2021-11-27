@@ -75,7 +75,7 @@ const CommunicationsForm = ({listMessengers, listMyCommunications, setListMyComm
                                     </div>
                                     <div className={s.form_block}>
                                         <div className={s.form_block_title}>Номер телефона / Почта / Никнейм</div>
-                                        <input type="text" name="login" onChange={handleChange} onBlur={handleBlur}
+                                        <input placeholder={'8 912 345 67 89'} type="text" name="login" onChange={handleChange} onBlur={handleBlur}
                                                value={values.login} className={s.form_input}/>
                                     </div>
                                 </div>

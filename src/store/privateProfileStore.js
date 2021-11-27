@@ -71,16 +71,16 @@ class PrivateProfileStore {
     async getMyEducations() {
         try {
             let r = await getMyEducationRequest()
-            console.log(r.data)
+            return r.data.education
         }
         catch (e) {
 
         }
     }
 
-    async addEducation(name, first_year, last_year) {
+    async addEducation(name, first_year, last_year, degree) {
         try {
-            let r = await addEducationRequest(name, first_year, last_year)
+            let r = await addEducationRequest(name, first_year, last_year, degree)
         }
         catch (e) {
 

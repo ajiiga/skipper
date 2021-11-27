@@ -39,4 +39,4 @@ export let changeProfileImageRequest = (file) => {
     })
 }
 
-export let addEducationRequest = (name, first_year, second_year) => $api.post('/api/education/add-user-education', {name: name, first_year: first_year, second_year: second_year})
+export let addEducationRequest = (name, first_year, second_year, degree) => $api.post('/api/education/add-user-education', {institution: name, start_year: first_year, end_year: second_year, degree: degree})

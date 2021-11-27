@@ -14,9 +14,13 @@ const EducationForm = () => {
 
     let [isFetching, setIsFetching] = useState(false)
     let [error, setError] = useState('')
+    let [educations, setEducations] = useState([])
 
     useEffect(() => {
-        privateProfileStore.getMyEducations()
+        privateProfileStore.getMyEducations().then(x => {
+            let json_data = JSON.parse(x)
+            setEducations(json_data)
+        })
     }, [])
 
     let [active, setActive] = useState(false)
@@ -60,25 +64,29 @@ const EducationForm = () => {
             </div>
             <div style={{width: '100%'}}>
                 <div className={s.education_title}>Мое образование</div>
-                <div className={s.education_items}>
+                {educations.map(x => <div className={s.education_items}>
                     <div className={s.education_item}>
                         <span className={s.education_name_title}>
-                            2001 - 2005 <br/>
-                            Магистр, Уральский Юридический Институт
+                            {x.StartYear} - {x.EndYear}<br/>
+                            {x.Degree}, {x.Institution}
                         </span>
                         <div className={s.delete}>Удалить</div>
                     </div>
-                </div>
+                </div>)}
             </div>
-            <ModalContainer title={'Добавление опыта работы'} setActive={setActive} active={active}>
+            <ModalContainer title={'Добавление новой информации об образовании'} setActive={setActive} active={active}>
                 <Formik
-                    initialValues={{name: ''}}
+                    initialValues={{name: '', degree: ''}}
                     onSubmit={(values) => {
                         setIsFetching(true)
-                        setTimeout(() => {
+                        privateProfileStore.addEducation(values.name, selectedFirstYear, selectedSecondYear, values.degree).then(x => {
+                            values.name = ''
+                            values.degree = ''
+                            setSelectedFirstYear('Начало')
+                            setSelectedSecondYear('Конец')
                             setIsFetching(false)
                             setActive(false)
-                        }, 3000)
+                        })
                     }}
                 >
                     {({
@@ -91,28 +99,39 @@ const EducationForm = () => {
                           isSubmitting,
                       }) => <form>
                         <div className={s.form_content}>
-                            <div className={s.form_block}><div className={s.error_status}>{error}</div></div>
-                            {isFetching && <div className={s.form_block}><Preloader /></div>}
+                            <div className={s.form_block}>
+                                <div className={s.error_status}>{error}</div>
+                            </div>
+                            {isFetching && <div className={s.form_block}><Preloader/></div>}
                             <div className={s.form_blocks}>
                                 <div className={s.form_block}>
                                     <div className={s.form_block_title}>
-                                        Название организации
+                                        Учебное заведение
                                     </div>
-                                    <input type="text" name={'name'} className={s.form_input} value={values.name} onChange={handleChange} onBlur={handleBlur}/>
+                                    <input placeholder={'Введите название'} type="text" name={'name'}
+                                           className={s.form_input} value={values.name} onChange={handleChange}
+                                           onBlur={handleBlur}/>
                                 </div>
 
                                 <div className={s.form_block}>
                                     <div className={s.form_block_title}>
-                                        Годы работы
+                                        Годы обучения
                                     </div>
                                     <div className={s.select_container}><CustomMiniSelect selected={selectedFirstYear}
                                                                                           setSelected={setSelectedFirstYear}
-                                                                                          list={range(1950, 2021, 1)}/>
+                                                                                          list={range(1950, 2021, 1).reverse()}/>
                                     </div>
                                     <div className={s.select_container}><CustomMiniSelect selected={selectedSecondYear}
                                                                                           setSelected={setSelectedSecondYear}
-                                                                                          list={range(1950, 2021, 1)}/>
+                                                                                          list={range(1950, 2021, 1).reverse()}/>
                                     </div>
+                                </div>
+                                <div className={s.form_block}>
+                                    <div className={s.form_block_title}>
+                                        Ученная степень
+                                    </div>
+                                    <input placeholder={'Магистр'} type="text" name={'degree'} className={s.form_input}
+                                           value={values.degree} onChange={handleChange} onBlur={handleBlur}/>
                                 </div>
 
                             </div>
@@ -121,10 +140,9 @@ const EducationForm = () => {
                         <Button title={'Сохранить'} onClick={() => {
                             setError('')
                             debugger
-                            if (selectedFirstYear === 'Начало' || selectedSecondYear === 'Конец' || selectedFirstYear > selectedSecondYear || values.name === '') {
+                            if (selectedFirstYear === 'Начало' || selectedSecondYear === 'Конец' || selectedFirstYear > selectedSecondYear || values.name === '' || values.degree === '') {
                                 setError('Правильно заполните форму')
-                            }
-                            else {
+                            } else {
                                 handleSubmit()
                             }
                         }}/>

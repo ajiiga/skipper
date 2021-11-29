@@ -9,7 +9,7 @@
 }
 
 .head_container, .info_container {
-    width: 88%;
+    width: 100%;
     padding: 20px;
     background: #FFFFFF;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
@@ -38,6 +38,7 @@
 .img_name {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 
@@ -67,6 +68,7 @@
     display: flex;
     margin-top: 20px;
     justify-content: right;
+    align-items: center;
 }
 
 .btn_container {
@@ -99,9 +101,63 @@
 }
 
 .reviews_block {
-    width: 430px;
+    width: 100%;
     padding: 20px;
     background: #FFFFFF;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
     border-radius: 8px;
+}
+
+.right_side {
+    width: 30%;
+}
+
+.left_side {
+    width: 65%;
+}
+
+.stat_count {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.mentor_info {
+    display: flex;
+    justify-content: space-between;
+    padding: 22px 0;
+    border-bottom: 1px solid #DADADA;
+    font-size: 14px;
+}
+
+.mentor_description, .mentor_skills {
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mentor_skills {
+    justify-content: right;
+}
+
+.tag_container {
+    padding: 2px;
+}
+
+.timezone {
+    font-size: 12px;
+    margin-right: auto;
+}
+
+.specialisation {
+    position: absolute;
+    bottom: 0;
+    font-size: 12px;
+    left: 120px;
+    color: #2C2C2C;
+}
+
+.btns {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
 }

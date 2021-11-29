@@ -4,8 +4,10 @@
     background: #F2F1F2;
     border-radius: 15px;
     padding: 4px 15px;
-    font-size: 14px;
-    border: 1px solid black;
+    font-size: 12px;
+    border: 1px solid #2c2c2c36;
+    width: fit-content;
+    white-space: nowrap;
 }
 
 .circle {

@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {withRouter, useParams} from "react-router-dom";
 import MiniNavBar from "../../../components/UI/MiniNavBar/MiniNavBar";
 import s from '../styles/PublicProfile.module.css'
-import default_img from '../../../static/img/PrivateProfile/profile.svg'
-import Rating from "../../../components/UI/Rating/Rating";
 import FollowButton from "../../../components/UI/FollowButton/FollowButton";
 import ChatButton from "../../../components/UI/ChatButton/ChatButton";
 import LessonStatistics from "../../../components/UI/LessonStatistics/LessonStatistics";
@@ -58,7 +56,7 @@ const MenteeProfile = ({}) => {
 
     return (
         <div className={s.container}>
-            <MiniNavBar child={`Профиль менти ${params.id}`}/>
+            <MiniNavBar child={`Профиль менти`}/>
             <div className={s.content_container}>
                 <div className={s.left_side}>
                     <div className={s.head_container}>
@@ -72,7 +70,7 @@ const MenteeProfile = ({}) => {
                             <div className={s.rate}>
                                 <RateDisplay rate={4.2} />
                                 <div className={s.date}>На Skipper с {user.day} {monthName[user.month]} {user.year}</div>
-                                <div>248 занятий</div>
+                                <div className={s.stat_count}>248 занятий</div>
                             </div>
                         </div>
                         <div className={s.buttons}>

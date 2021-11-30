@@ -10,6 +10,7 @@ import FollowButton from "../../../components/UI/FollowButton/FollowButton";
 import ChatButton from "../../../components/UI/ChatButton/ChatButton";
 import LessonStatistics from "../../../components/UI/LessonStatistics/LessonStatistics";
 import Tag from "../../../components/UI/Tag/Tag";
+import FreeTimeCalendar from "./FreeTimeCalendar/FreeTimeCalendar";
 
 const MentorProfile = () => {
     let params = useParams()
@@ -101,7 +102,12 @@ const MentorProfile = () => {
                         <div className={s.title}>Статистика занятий</div>
                         <LessonStatistics/>
                     </div>
-
+                </div>
+                <div className={s.right_side}>
+                    <div className={s.free_time_block}>
+                        <div className={s.title}>Свободное время</div>
+                        <FreeTimeCalendar />
+                    </div>
                 </div>
             </div>
         </div>

@@ -161,6 +161,7 @@
 .com_block {
     display: flex;
     align-items: center;
+    padding: 20px 0;
 }
 
 
@@ -178,7 +179,6 @@
 .com_items {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     height: 170px;
     width: 75%;
 }

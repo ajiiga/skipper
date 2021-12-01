@@ -27,6 +27,8 @@ export let getMyCommunicationsRequest = () => $api.get('api/communication/user-c
 
 export let getMyEducationRequest = () => $api.get('/api/education/user-education')
 
+export let getMyWorkExperienceRequest = () => $api.get('/api/work-experience/user-work-experience')
+
 export let changeProfileImageRequest = (file) => {
     let bodyFormData = new FormData()
     bodyFormData.set('file', file)
@@ -40,3 +42,5 @@ export let changeProfileImageRequest = (file) => {
 }
 
 export let addEducationRequest = (name, first_year, second_year, degree) => $api.post('/api/education/add-user-education', {institution: name, start_year: first_year, end_year: second_year, degree: degree})
+
+export let addWorkExperienceRequest = (name, first_year, second_year) => $api.post('/api/work-experience/add-user-work-experience', {organization: name, start_year: first_year, end_year: second_year})

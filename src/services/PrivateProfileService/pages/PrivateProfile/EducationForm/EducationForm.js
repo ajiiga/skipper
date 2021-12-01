@@ -139,7 +139,6 @@ const EducationForm = () => {
                         </div>
                         <Button title={'Сохранить'} onClick={() => {
                             setError('')
-                            debugger
                             if (selectedFirstYear === 'Начало' || selectedSecondYear === 'Конец' || selectedFirstYear > selectedSecondYear || values.name === '' || values.degree === '') {
                                 setError('Правильно заполните форму')
                             } else {

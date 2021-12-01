@@ -1,6 +1,6 @@
 import {
-    AddCommunicationRequest, addEducationRequest, changeProfileImageRequest,
-    getMessengerListRequest, getMyCommunicationsRequest, getMyEducationRequest,
+    AddCommunicationRequest, addEducationRequest, addWorkExperienceRequest, changeProfileImageRequest,
+    getMessengerListRequest, getMyCommunicationsRequest, getMyEducationRequest, getMyWorkExperienceRequest,
     makeVerifyEmailRequest,
     UpdateProfileDataRequest
 } from "../api/api_private_profile";
@@ -43,6 +43,26 @@ class PrivateProfileStore {
         return r.data?.communications
     }
 
+    async getMyEducations() {
+        try {
+            let r = await getMyEducationRequest()
+            return r.data.education
+        }
+        catch (e) {
+
+        }
+    }
+
+    async getMyWorkExperience() {
+        try {
+            let r = await getMyWorkExperienceRequest()
+            return r.data.work_experience
+        }
+        catch (e) {
+            return '[]'
+        }
+    }
+
     async AddCommunication(messenger_id, login) {
         let r = await AddCommunicationRequest(messenger_id, login)
     }
@@ -68,19 +88,20 @@ class PrivateProfileStore {
         }
     }
 
-    async getMyEducations() {
+
+
+    async addEducation(name, first_year, last_year, degree) {
         try {
-            let r = await getMyEducationRequest()
-            return r.data.education
+            let r = await addEducationRequest(name, first_year, last_year, degree)
         }
         catch (e) {
 
         }
     }
 
-    async addEducation(name, first_year, last_year, degree) {
+    async addWorkExperience(name, first_year, last_year) {
         try {
-            let r = await addEducationRequest(name, first_year, last_year, degree)
+            let r = await addWorkExperienceRequest(name, first_year, last_year)
         }
         catch (e) {
 

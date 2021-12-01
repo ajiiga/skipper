@@ -166,3 +166,51 @@
 .free_time_block {
     min-height: 100%;
 }
+
+.service_list {
+    box-sizing: border-box;
+}
+
+.service_container {
+    padding: 15px 0;
+    border-top: 1px solid #DADADA;
+}
+
+.service_container:first-child {
+    margin-top: 15px;
+}
+
+.summary_title {
+    display: flex;
+    margin-top: 15px;
+}
+
+.summary_content {
+    display: flex;
+}
+
+.summary_content div {
+    width: 25%;
+}
+
+.summary_title div {
+    width: 25%;
+    font-weight: bold;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid #DADADA;
+    color: rgba(44, 44, 44, 0.81);
+}
+
+.summary_block {
+    width: 100%;
+    line-height: 26px;
+    margin: 12px 0;
+}
+
+.summary_block:first-child {
+    margin-top: 20px;
+}
+
+.summary_title, .summary_content {
+    font-size: 14px;
+}

@@ -99,7 +99,7 @@ const MenteeProfile = ({}) => {
                 <div className={s.right_side}>
                     <div className={s.reviews_block}>
                         <div className={s.title}>Отзывы</div>
-                        <Reviews />
+                        <Reviews n={3} />
                     </div>
                 </div>
             </div>

@@ -1,0 +1,14 @@
+.container {
+    margin-top: 33px;
+}
+
+.content_container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left_side {
+    width: 28%;
+}
+

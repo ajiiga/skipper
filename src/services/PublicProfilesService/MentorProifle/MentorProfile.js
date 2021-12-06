@@ -144,7 +144,7 @@ const MentorProfile = () => {
                             <div className={s.summary_content}>
                                 <div>
                                     {
-                                        JSON.parse(user.work_experience).map(x => (
+                                        user.work_experience && JSON.parse(user.work_experience).map(x => (
                                             <main className={s.summary_block}>
                                                 <span className={s.year}>
                                                     {x.StartYear} - {x.EndYear}

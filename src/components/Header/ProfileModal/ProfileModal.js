@@ -14,7 +14,7 @@ const ProfileModal = ({open, setOpen}) => {
     }, [])
     return (
         <div className={`${s.container} ${open && s.show}`}>
-            <NavLink to={'/my-profile'}><div className={s.block}>Профиль</div></NavLink>
+            <NavLink to={'/my-profile'}><div className={s.block}>Личный кабинет</div></NavLink>
             <div className={s.block}>Техническая поддержка</div>
             <div className={`${s.block} ${s.exit}`} onClick={() => authStore.logout()}>Выйти</div>
         </div>

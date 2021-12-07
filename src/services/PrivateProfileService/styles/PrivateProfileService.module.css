@@ -40,7 +40,6 @@
     cursor: pointer;
     background-color: white;
     outline: none;
-    font-family: 'Montserrat', sans-serif;
     display: block;
 }
 
@@ -117,14 +116,12 @@
     outline: none;
     resize: none;
     width: 100%;
-    font-family: sans-serif;
     height: 72px;
 }
 
 
 .textarea::-webkit-input-placeholder { /* WebKit browsers */
     color: #8E8E8E;
-    font-family: 'Montserrat', sans-serif;
 }
 
 .description_counter {
@@ -151,7 +148,6 @@
 
 .email_input_display input::-webkit-input-placeholder { /* WebKit browsers */
     color: #8E8E8E;
-    font-family: 'Montserrat', sans-serif;
 }
 
 .com_container {
@@ -319,7 +315,6 @@
     width: 280px;
     padding: 6px 8px;
     outline: none;
-    font-family: 'Montserrat', sans-serif;
     font-size: 17px;
 }
 

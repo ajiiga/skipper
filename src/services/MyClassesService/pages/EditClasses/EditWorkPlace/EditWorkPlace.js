@@ -2,8 +2,13 @@ import React from 'react';
 import s from './EditWorkPlace.module.css'
 import Tag from "../../../../../components/UI/Tag/Tag";
 import Button from "../../../../../components/UI/Button/Button";
+import {Switch, Route, useLocation, NavLink, Redirect} from "react-router-dom";
+import authStore from "../../../../../store/authStore";
+import LessonWorkPlace from "./LessonWorkPlace/LessonWorkPlace";
+import TurnKeyWorkPlace from "./TurnKeyWorkPlace/TurnKeyWorkPlace";
 
 const EditWorkPlace = () => {
+    let location = useLocation()
     return (
         <div className={s.container}>
             <div className={s.display_container}>
@@ -29,25 +34,38 @@ const EditWorkPlace = () => {
 
 
             <div className={s.btns}>
-                <div className={`${s.mode_btn} ${s.active_mode_btn}`}>
-                    Теоретическая консультация
-                </div>
-                <div className={s.mode_btn}>
-                    Практическое решение текущих проблем
-                </div>
-                <div className={s.mode_btn}>
-                    Решение ‘под ключ’
-                </div>
+                <NavLink to={`/edit-classes/theory-classes`}>
+                    <div className={`${s.mode_btn} ${location.pathname === '/edit-classes/theory-classes'? s.active_mode_btn : ''}`}>
+                        Теоретическая консультация
+                    </div>
+                </NavLink>
+                <NavLink to={`/edit-classes/practice-classes`}>
+                    <div className={`${s.mode_btn} ${location.pathname === '/edit-classes/practice-classes'? s.active_mode_btn : ''}`}>
+                        Практическое решение текущих проблем
+                    </div>
+                </NavLink>
+                <NavLink to={`/edit-classes/turnkey-lesson`}>
+                    <div className={`${s.mode_btn} ${location.pathname === '/edit-classes/turnkey-lesson'? s.active_mode_btn : ''}`}>
+                        Решение ‘под ключ’
+                    </div>
+                </NavLink>
             </div>
 
             <div className={s.work_container}>
+                <Switch>
+                    <Route path={`/edit-classes/theory-classes`}>
+                        <LessonWorkPlace />
+                    </Route>
+                    <Route path={`/edit-classes/practice-classes`}>
+                        <LessonWorkPlace />
+                    </Route>
+                    <Route path={`/edit-classes/turnkey-lesson`}>
+                        <TurnKeyWorkPlace />
+                    </Route>
+                    <Redirect to={'/edit-classes/theory-classes'}/>
+                </Switch>
+            </div>
 
-            </div>
-            <div className={s.save_btn_container}>
-                <div className={s.save_btn}>
-                    <Button title={'Сохранить'}/>
-                </div>
-            </div>
         </div>
     );
 };

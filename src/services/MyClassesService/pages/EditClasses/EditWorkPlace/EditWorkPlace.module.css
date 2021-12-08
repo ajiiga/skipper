@@ -64,6 +64,9 @@
 .btns {
     display: flex;
 }
+.btns a {
+    width: 100%;
+}
 
 .mode_btn {
     width: 100%;
@@ -82,8 +85,7 @@
 }
 
 .work_container {
-    margin-top: 40px;
-    min-height: 380px;
+    min-height: 420px;
 }
 
 
@@ -93,8 +95,66 @@
     margin: auto;
 }
 
-.save_btn_container {
+.create_btn {
+    width: 50%;
+    margin: auto;
+    padding-top: 40px;
+}
 
+.save_btn_container {
     padding: 35px;
     border-top: 1px solid #DADADA;
+    margin-top: 20px;
+}
+
+.workplace_container {
+    padding: 0 50px;
+}
+
+.table {
+    width: 100%;
+    font-size: 14px;
+    border-collapse: collapse;
+}
+
+.title_table {
+    font-weight: bold;
+    font-size: 14px;
+    height: 60px;
+    line-height: 60px;
+    margin-right: 100px;
+    white-space: nowrap;
+}
+
+.table tr {
+
+}
+
+.table th {
+    text-align: left;
+}
+
+.table td {
+    text-align: center;
+}
+
+.price_input {
+    background: #FFFFFF;
+    border: 1px solid #AEAEAE;
+    border-radius: 5px;
+    padding: 2px 5px;
+    box-sizing: border-box;
+    width: 80%
+}
+
+.price_input::placeholder {
+    text-align: center;
+}
+
+.calendar_container {
+    display: flex;
+}
+
+.little_input {
+    width: 50%;
 }

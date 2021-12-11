@@ -1,0 +1,40 @@
+.container {
+    margin-top: 33px;
+}
+
+.content_container {
+    margin-top: 30px;
+}
+
+.title_buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.title_btn {
+    width: 20%;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #AFAFAF;
+    color: #AFAFAF;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.active_title_btn {
+    border-bottom: 1px solid #2C2C2C;
+    color: black;
+}
+
+.create_classes {
+    background: #FFDD2D;
+    border-radius: 32px;
+    padding: 13px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.link_container {
+    width: 18%;
+}

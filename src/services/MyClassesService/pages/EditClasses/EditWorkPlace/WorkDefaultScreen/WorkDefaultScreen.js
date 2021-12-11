@@ -5,7 +5,7 @@ import Button from "../../../../../../components/UI/Button/Button";
 const WorkDefaultScreen = ({setActive}) => {
     return (
         <div className={s.create_btn}>
-            <Button title={'Создать'} onClick={() => setActive(false)} />
+            <Button title={'Создать'} onClick={() => setActive(true)} />
         </div>
     );
 };

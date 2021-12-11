@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import s from "./CalendarPicker.module.css";
 
-const CalendarPicker = () => {
-    let [calendarState, setCalendarState] = useState(Array.from(Array(8), _ => Array(7).fill(0)))
+const CalendarPicker = ({calendarState, setCalendarState}) => {
     return (
         <div className={s.content_container}>
             <div className={s.times}>

@@ -73,7 +73,7 @@
     padding: 15px 0;
     border-bottom: 1px solid #AFAFAF;
     text-align: center;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     color: #AFAFAF;
     cursor: pointer;
@@ -144,7 +144,8 @@
     border-radius: 5px;
     padding: 2px 5px;
     box-sizing: border-box;
-    width: 80%
+    width: 80%;
+    text-align: center;
 }
 
 .price_input::placeholder {
@@ -157,4 +158,54 @@
 
 .little_input {
     width: 50%;
+}
+
+.submit_btn {
+    background-color: #FEDC2E;
+    padding: 10px 0;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    font-size: 22px;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.deactive {
+    background-color: #DADADA;
+}
+
+.relative {
+    position: relative;
+}
+
+.dropdown_container {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 3px 3px 10px 6px rgb(0 0 0 / 6%);
+    font-weight: 500;
+    color: #333;
+    width: 98%;
+    overflow-y: scroll;
+    max-height: 300px;
+}
+
+.dropdown_item {
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.active {
+    background:#f4f4f4;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
 }

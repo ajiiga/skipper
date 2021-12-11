@@ -36,6 +36,7 @@ function App() {
                         {authStore.isAuth && PrivateProfileService.urls.map(route => <Route key={route.path} exact={route.exact} path={route.path} component={route.component} />)}
                         {PublicProfilesService.map(route => <Route key={route.path} exact={route.exact} component={route.component} path={route.path}/>)}
                         {authStore.isAuth && authStore.user?.is_mentor && MyClassesService.filter(x => x.for_mentor).map(route => <Route key={route.path} exact={route.exact} component={route.component} path={route.path}/>)}
+                        {authStore.isAuth && MyClassesService.map(route => <Route key={route.path} exact={route.exact} component={route.component} path={route.path}/>)}
                         <Redirect to={authStore.isAuth ? '/' : '/login'}/>
                     </Switch>
                 </div>

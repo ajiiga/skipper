@@ -97,14 +97,3 @@
 .hidden_block {
     height: 60px;
 }
-
-.my_lessons {
-    font-size: 15px;
-    background: #FFDD2D;
-    border-radius: 32px;
-    cursor: pointer;
-    user-select: none;
-    padding: 5px 7px;
-    font-weight: bold;
-    color: #606060;
-}

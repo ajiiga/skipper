@@ -9,7 +9,7 @@ import EditWorkPlace from "./EditWorkPlace/EditWorkPlace";
 const EditClasses = () => {
     return (
         <div className={s.container}>
-            <MiniNavBar child={'Мои занятия'} secondChild={'Редактирование занятий'} secondUrl={'/my-classes'}/>
+            <MiniNavBar child={'Мои занятия'} secondChild={'Редактирование занятий'} secondUrl={'/my-classes-mentor'}/>
             <div className={s.content_container}>
                 <div className={s.left_side}>
                     <EditNavBar />

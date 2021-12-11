@@ -1,0 +1,32 @@
+.my_lessons, .btn {
+    font-size: 15px;
+    background: #FFDD2D;
+    border-radius: 32px;
+    cursor: pointer;
+    user-select: none;
+    padding: 5px 7px;
+    font-weight: bold;
+    color: #606060;
+    box-sizing: border-box;
+}
+
+.relative {
+    position: relative;
+}
+
+.dropdown {
+    position: absolute;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 30px;
+    width: 200px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+    justify-content: space-between;
+}
+
+

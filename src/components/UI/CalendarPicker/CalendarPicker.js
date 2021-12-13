@@ -43,9 +43,9 @@ const CalendarPicker = ({calendarState, setCalendarState}) => {
 
                         {
                             calendarState.map((week, i) =>
-                            (<div className={s.content_blocks}>
+                            (<div className={s.content_blocks} key={i}>
                                 {
-                                    week.map((day, j) => <div className={`${s.content_block} ${day === 1 ? s.free_content_block : ''}`} onClick={() => {
+                                    week.map((day, j) => <div key={j} className={`${s.content_block} ${day === 1 ? s.free_content_block : ''}`} onClick={() => {
                                         let deltaCalendarState = [...calendarState]
                                         deltaCalendarState[i][j] = deltaCalendarState[i][j]  === 1 ? 0 : 1
                                         setCalendarState(deltaCalendarState)

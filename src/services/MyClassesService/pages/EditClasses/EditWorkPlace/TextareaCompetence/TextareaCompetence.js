@@ -9,8 +9,7 @@ const TextareaCompetence = ({value, changeValue, tags, setTags, list, setValue})
 
 
 
-
-    let showList = list.filter(x => x.toLowerCase().includes(value.toLowerCase()) && !tags.includes(x))
+    let showList = list.filter(x => x.name3.toLowerCase().includes(value.toLowerCase()) && !tags.includes(x.ID))
 
     let _handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -21,12 +20,13 @@ const TextareaCompetence = ({value, changeValue, tags, setTags, list, setValue})
 
     let addTag = (tag) => {
         let deltaTags = [...tags]
-        deltaTags.push(tag)
+        let id = list.filter(x => x.name3 === tag)[0].ID
+        deltaTags.push(id)
         setTags(deltaTags)
     }
 
-    let deleteTag = (tag) => {
-        let deltaTags = tags.filter(x => x !== tag)
+    let deleteTag = (tagID) => {
+        let deltaTags = tags.filter(x => x !== tagID)
         setTags(deltaTags)
     }
 
@@ -38,7 +38,7 @@ const TextareaCompetence = ({value, changeValue, tags, setTags, list, setValue})
         <div className={s.relative}>
             <label htmlFor="competence">
             <div className={s.textarea_container}>
-                <div className={s.tags}>{tags.map(x => <Tag title={x} onClick={() => deleteTag(x)} />)}</div>
+                <div className={s.tags}>{tags.map(x => <Tag title={list.filter(y => y.ID === x)[0].name3} onClick={() => deleteTag(x)} />)}</div>
                 {tags.length < 3 && <input id={'competence'} className={s.textarea} placeholder={'Выберите то, чему будете учить'}
                            onChange={(event => {
                                changeValue(event.target.value)
@@ -60,6 +60,7 @@ const TextareaCompetence = ({value, changeValue, tags, setTags, list, setValue})
 let DropDownCompetence = ({list, setShow, addTag, canAddTag, setCanAddTag, setValue}) => {
     let [activeItem, setActiveItem] = useState(0)
     let closeModal = () => setShow(false)
+    debugger
     useEffect(() => {
         window.addEventListener('click', closeModal)
         return () => {
@@ -87,7 +88,7 @@ let DropDownCompetence = ({list, setShow, addTag, canAddTag, setCanAddTag, setVa
 
     return (
         <div className={s.dropdown_container}>
-            {list.map((x, i) => <div className={`${s.dropdown_item} ${i === activeItem? s.active : ''}`} onMouseEnter={() => setActiveItem(i)} onClick={() => addTag(x)}>{x}</div>)}
+            {list.map((x, i) => <div className={`${s.dropdown_item} ${i === activeItem? s.active : ''}`} onMouseEnter={() => setActiveItem(i)} onClick={() => addTag(x.name3)}>{x.name3}</div>)}
 
         </div>
     )

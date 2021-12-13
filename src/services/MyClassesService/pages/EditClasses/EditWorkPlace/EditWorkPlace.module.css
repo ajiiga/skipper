@@ -43,7 +43,7 @@
 }
 
 .title_block, .tag_block {
-    width: 25%;
+    width: 28%;
 }
 
 .textarea_container {
@@ -173,8 +173,9 @@
     transition: 0.5s;
 }
 
-.deactive {
+.submit_btn:disabled {
     background-color: #DADADA;
+
 }
 
 .relative {

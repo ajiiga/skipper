@@ -11,3 +11,7 @@ export let getCategoriesRequest = async () => {
 export let getMainSectionsRequest = async () => {
     return $api.get('/public-api/catalog/main-section')
 }
+
+export let getChildTagsRequest = () => {
+    return $api.get('/public-api/catalog/child')
+}

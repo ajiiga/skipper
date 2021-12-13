@@ -1,10 +1,29 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import WorkDefaultScreen from "../WorkDefaultScreen/WorkDefaultScreen";
 import s from "../EditWorkPlace.module.css";
 import CalendarPicker from "../../../../../../components/UI/CalendarPicker/CalendarPicker";
 import Button from "../../../../../../components/UI/Button/Button";
 
 const TurnKeyWorkPlace = ({state, setState}) => {
+
+
+    useEffect(() => {
+        if ((state['15_min'].status && state['15_min'].price > 0
+            || state.individual_term.status && state.individual_term.price > 0) && state.calendar.reduce((a,b) => a.concat(b) ) // flatten array
+            .reduce((a,b) => a + b ) > 0) {
+            if (!state.valid) {
+                let newState = {...state}
+                newState.valid = true
+                setState(newState)
+            }
+        } else {
+            if (state.valid) {
+                let newState = {...state}
+                newState.valid = false
+                setState(newState)
+            }
+        }
+    }, [state])
 
     let setDefaultScreen = (status) => {
         setState({...state, active: status})
@@ -38,10 +57,10 @@ const TurnKeyWorkPlace = ({state, setState}) => {
                     <tr>
                         <th className={s.title_table}>Длительность занятия</th>
                         <td><input type="checkbox" checked={state['15_min'].status}
-                                   onChange={() => changeCheckbox('15_min')}/> 15 минут (пробное)
+                                   onChange={() => changeCheckbox('15_min')} id={'15_min'} /><label htmlFor="15_min"> 15 минут (пробное)</label>
                         </td>
                         <td><input type="checkbox" checked={state.individual_term.status}
-                                   onChange={() => changeCheckbox('individual_term')}/> Индивидуальный срок
+                                   onChange={() => changeCheckbox('individual_term')} id={'individual_term'}/> <label htmlFor="individual_term"> Индивидуальный срок</label>
                         </td>
                     </tr>
                     <tr>

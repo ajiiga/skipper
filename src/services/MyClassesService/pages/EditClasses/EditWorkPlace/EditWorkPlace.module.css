@@ -170,13 +170,13 @@
     font-weight: bold;
     width: 100%;
     cursor: pointer;
-    transition: 0.5s;
+    transition: 0.25s;
 }
 
 .submit_btn:disabled {
     background-color: #DADADA;
-
 }
+
 
 .relative {
     position: relative;
@@ -200,6 +200,7 @@
     padding: 10px;
     cursor: pointer;
     transition: all 0.2s;
+    font-size: 14px;
 }
 
 .active {
@@ -209,4 +210,24 @@
 .tags {
     display: flex;
     flex-wrap: wrap;
+}
+
+.update_container .save_btn {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+}
+
+.update_container .submit_btn {
+    width: 50%;
+}
+
+.delete_btn {
+    background: #AFAFAF;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    width: 20%;
+    cursor: pointer;
 }

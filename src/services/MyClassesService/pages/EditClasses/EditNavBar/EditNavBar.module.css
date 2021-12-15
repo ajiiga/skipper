@@ -83,3 +83,7 @@
     font-size: 14px;
     color: #828282;
 }
+
+.active_item .item_block {
+    border: 1px solid #FEDC2E;
+}

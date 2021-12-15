@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import s from './EditWorkPlace.module.css'
 import Tag from "../../../../../components/UI/Tag/Tag";
 import Button from "../../../../../components/UI/Button/Button";
-import {Switch, Route, useLocation, NavLink, Redirect} from "react-router-dom";
+import {Switch, Route, useLocation, useParams, NavLink, Redirect} from "react-router-dom";
 import authStore from "../../../../../store/authStore";
 import LessonWorkPlace from "./LessonWorkPlace/LessonWorkPlace";
 import TurnKeyWorkPlace from "./TurnKeyWorkPlace/TurnKeyWorkPlace";
@@ -12,22 +12,10 @@ import TheoryWorkPlace from "./TheoryWorkPlace/TheoryWorkPlace";
 import TextareaCompetence from "./TextareaCompetence/TextareaCompetence";
 import publicStore from "../../../../../store/publicStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";
+import myClassesStore from "../../../../../store/myClassesStore";
 
-const EditWorkPlace = () => {
+const EditWorkPlace = ({list, setClasses, classes, activeItem}) => {
     let location = useLocation()
-
-    //Выкачка тэгов с сервера
-    useEffect(() => {
-        setFetching(true)
-        publicStore.getChildTags().then(x => {
-            let jsonList = JSON.parse(x)
-            setList(jsonList)
-            setFetching(false)
-        })
-    }, [])
-
-    //
-    let [fetching, setFetching] = useState(true)
 
     //
     let [practiceState, setPracticeState] = useState({
@@ -39,6 +27,7 @@ const EditWorkPlace = () => {
         '90_min': {status: false, price: ''},
         calendar: Array.from(Array(8), _ => Array(7).fill(0))
     })
+
     //
     let [theoryState, setTheoryState] = useState({
         active: false,
@@ -59,13 +48,121 @@ const EditWorkPlace = () => {
         calendar: Array.from(Array(8), _ => Array(7).fill(0))
     })
 
+    useEffect(() => {
+        if (activeItem === 0) {
+            setPracticeState({
+                active: false,
+                valid: false,
+                '15_min': {status: false, price: ''},
+                '30_min': {status: false, price: ''},
+                '60_min': {status: false, price: ''},
+                '90_min': {status: false, price: ''},
+                calendar: Array.from(Array(8), _ => Array(7).fill(0))
+            })
+            setTheoryState({
+                active: false,
+                valid: false,
+                '15_min': {status: false, price: ''},
+                '30_min': {status: false, price: ''},
+                '60_min': {status: false, price: ''},
+                '90_min': {status: false, price: ''},
+                calendar: Array.from(Array(8), _ => Array(7).fill(0))
+            })
+
+            setTurnkeyState({
+                active: false,
+                valid: false,
+                '15_min': {status: false, price: ''},
+                individual_term: {status: false, price: ''},
+                calendar: Array.from(Array(8), _ => Array(7).fill(0))
+            })
+
+            setForm({name: '', description: ''})
+            setTags([])
+        } else {
+            let classItem = classes.filter(x => x.ID === activeItem)[0]
+            setForm({name: classItem.ClassName, description: classItem.Description})
+            setTags(classItem.Tags.map(x => x.ID))
+            debugger
+            if (classItem.PracticClass.ClassParentId === 0)
+                setPracticeState({
+                    active: false,
+                    valid: false,
+                    '15_min': {status: false, price: ''},
+                    '30_min': {status: false, price: ''},
+                    '60_min': {status: false, price: ''},
+                    '90_min': {status: false, price: ''},
+                    calendar: Array.from(Array(8), _ => Array(7).fill(0))
+                })
+            else
+                setPracticeState({
+                    active: true,
+                    valid: true,
+                    '15_min': {status: classItem.PracticClass.Duration15, price: classItem.PracticClass.Price15},
+                    '30_min': {status: classItem.PracticClass.Duration30, price: classItem.PracticClass.Price30},
+                    '60_min': {status: classItem.PracticClass.Duration60, price: classItem.PracticClass.Price60},
+                    '90_min': {status: classItem.PracticClass.Duration90, price: classItem.PracticClass.Price90},
+                    calendar: decode(classItem.PracticClass.Time)
+                })
+            if (classItem.TheoreticClass.ClassParentId === 0)
+                setTheoryState({
+                    active: false,
+                    valid: false,
+                    '15_min': {status: false, price: ''},
+                    '30_min': {status: false, price: ''},
+                    '60_min': {status: false, price: ''},
+                    '90_min': {status: false, price: ''},
+                    calendar: Array.from(Array(8), _ => Array(7).fill(0))
+                })
+            else
+                setTheoryState({
+                    active: true,
+                    valid: true,
+                    '15_min': {status: classItem.TheoreticClass.Duration15, price: classItem.TheoreticClass.Price15},
+                    '30_min': {status: classItem.TheoreticClass.Duration30, price: classItem.TheoreticClass.Price30},
+                    '60_min': {status: classItem.TheoreticClass.Duration60, price: classItem.TheoreticClass.Price60},
+                    '90_min': {status: classItem.TheoreticClass.Duration90, price: classItem.TheoreticClass.Price90},
+                    calendar: decode(classItem.TheoreticClass.Time)
+                })
+
+            if (classItem.KeyClass.ClassParentId === 0)
+            setTurnkeyState({
+                active: false,
+                valid: false,
+                '15_min': {status: false, price: ''},
+                individual_term: {status: false, price: ''},
+                calendar: Array.from(Array(8), _ => Array(7).fill(0))
+            })
+            else {
+                setTurnkeyState({
+                    active: true,
+                    valid: true,
+                    '15_min': {status: classItem.KeyClass.Duration15, price: classItem.KeyClass.Price15},
+                    individual_term: {status: classItem.KeyClass.FullTime, price: classItem.KeyClass.PriceFullTime},
+                    calendar: decode(classItem.KeyClass.Time)
+                })
+            }
+        }
+
+    }, [activeItem])
+
+
+    let decode = (calendar_code) => {
+        let res = []
+        for (let i = 0; i < 8; i++) {
+            res.push(calendar_code.slice(i*7, (i+1)*7))
+        }
+        return res.map(x => x.split('').map(x => parseInt(x)))
+    }
+
     let [tags, setTags] = useState([])
 
     let [value, setValue] = useState('')
 
-    let [list, setList] = useState([])
 
     let [form, setForm] = useState({name: '', description: ''})
+
+    let [formFetching, setFormFetching] = useState(false)
 
     let changeForm = (key, value) => {
         let newForm = {...form}
@@ -75,9 +172,6 @@ const EditWorkPlace = () => {
 
     let validate = (practiceState.valid || theoryState.valid || turnkeyState.valid) && form.name !== '' && form.description !== '' && tags.length > 0
 
-    if (fetching) {
-        return <Preloader/>
-    }
 
     return (
         <div className={s.container}>
@@ -125,7 +219,7 @@ const EditWorkPlace = () => {
             <div className={s.work_container}>
                 {
                     <Switch>
-                        <Route path={`/edit-classes/theory-classes`}>
+                        <Route path={`/edit-classes/theory-classes/`}>
                             <TheoryWorkPlace state={theoryState} setState={setTheoryState}/>
                         </Route>
                         <Route path={`/edit-classes/practice-classes`}>
@@ -138,11 +232,64 @@ const EditWorkPlace = () => {
                     </Switch>
                 }
             </div>
-            {<div className={s.save_btn_container}>
+            {<div className={`${s.save_btn_container} ${activeItem !==0 ? s.update_container: ''}`}>
                 <div className={s.save_btn}>
-                    <button className={s.submit_btn} disabled={!validate}>
+                    {formFetching && <Preloader/>}
+                    <button className={s.submit_btn} disabled={!validate} onClick={() => {
+                        setFormFetching(true)
+                        myClassesStore.createClass(form.name, form.description, tags, theoryState, practiceState, turnkeyState).then(x => {
+                            setFormFetching(false)
+                            let newClasses = [...classes]
+                            newClasses.push({
+
+                                "ID": {x},
+                                "ParentId": authStore.user.id,
+                                "ClassName": form.name,
+                                "Description": form.description,
+                                "Tags": tags,
+                                "TheoreticClass": {
+                                    "ID": 0,
+                                    "ClassParentId": theoryState.valid ? x : 0,
+                                    "Duration15": theoryState["15_min"].status,
+                                    "Price15": theoryState["15_min"].price,
+                                    "Duration30": theoryState["30_min"].status,
+                                    "Price30": theoryState["30_min"].price,
+                                    "Duration60": theoryState["60_min"].status,
+                                    "Price60": theoryState["60_min"].price,
+                                    "Duration90": theoryState["90_min"].status,
+                                    "Price90": theoryState["90_min"].price,
+                                    "Time": [].concat(...theoryState.calendar).join('')
+                                },
+                                "PracticClass": {
+                                    "ID": 0,
+                                    "ClassParentId": practiceState.valid ? x : 0,
+                                    "Duration15": practiceState["15_min"].status,
+                                    "Price15": practiceState["15_min"].price,
+                                    "Duration30": practiceState["30_min"].status,
+                                    "Price30": practiceState["30_min"].price,
+                                    "Duration60": practiceState["60_min"].status,
+                                    "Price60": practiceState["60_min"].price,
+                                    "Duration90": practiceState["90_min"].status,
+                                    "Price90": practiceState["90_min"].price,
+                                    "Time": [].concat(...practiceState.calendar).join('')
+                                },
+                                "KeyClass": {
+                                    "ID": 0,
+                                    "ClassParentId": turnkeyState.valid ? x : 0,
+                                    "Duration15": turnkeyState["15_min"].status,
+                                    "Price15": turnkeyState["15_min"].price,
+                                    "FullTime": turnkeyState.individual_term.status,
+                                    "PriceFullTime": turnkeyState.individual_term.price,
+                                    "Time": [].concat(...turnkeyState.calendar).join('')
+                                }
+
+                            })
+                            setClasses(newClasses)
+                        })
+                    }}>
                         Сохранить
                     </button>
+                    {activeItem !== 0 && <button className={s.delete_btn}>Удалить занятие</button>}
                 </div>
             </div>}
         </div>

@@ -38,7 +38,7 @@ const TextareaCompetence = ({value, changeValue, tags, setTags, list, setValue})
         <div className={s.relative}>
             <label htmlFor="competence">
             <div className={s.textarea_container}>
-                <div className={s.tags}>{tags.map(x => <Tag title={list.filter(y => y.ID === x)[0].name3} onClick={() => deleteTag(x)} />)}</div>
+                <div className={s.tags}>{tags.map(x => <Tag key={x} title={list.filter(y => y.ID === x)[0].name3} onClick={() => deleteTag(x)} />)}</div>
                 {tags.length < 3 && <input id={'competence'} className={s.textarea} placeholder={'Выберите то, чему будете учить'}
                            onChange={(event => {
                                changeValue(event.target.value)
@@ -60,7 +60,6 @@ const TextareaCompetence = ({value, changeValue, tags, setTags, list, setValue})
 let DropDownCompetence = ({list, setShow, addTag, canAddTag, setCanAddTag, setValue}) => {
     let [activeItem, setActiveItem] = useState(0)
     let closeModal = () => setShow(false)
-    debugger
     useEffect(() => {
         window.addEventListener('click', closeModal)
         return () => {
@@ -88,8 +87,7 @@ let DropDownCompetence = ({list, setShow, addTag, canAddTag, setCanAddTag, setVa
 
     return (
         <div className={s.dropdown_container}>
-            {list.map((x, i) => <div className={`${s.dropdown_item} ${i === activeItem? s.active : ''}`} onMouseEnter={() => setActiveItem(i)} onClick={() => addTag(x.name3)}>{x.name3}</div>)}
-
+            {list.map((x, i) => <div key={x.name3} className={`${s.dropdown_item} ${i === activeItem? s.active : ''}`} onMouseEnter={() => setActiveItem(i)} onClick={() => addTag(x.name3)}>{x.name3}</div>)}
         </div>
     )
 }

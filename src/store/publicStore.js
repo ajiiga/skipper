@@ -35,7 +35,8 @@ class PublicStore {
 
     async getChildTags() {
         let r = await getChildTagsRequest()
-        return r.data.catalog_child
+        let jsonTags = JSON.parse(r.data.catalog_child)
+        return jsonTags
     }
 
     setActiveTheme = (id) => {

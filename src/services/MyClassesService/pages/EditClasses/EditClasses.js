@@ -32,7 +32,7 @@ const EditClasses = () => {
                     <EditNavBar classes={classes} setActiveItem={setActiveItem} activeItem={activeItem}/>
                 </div>
                 <div className={s.right_side}>
-                    <EditWorkPlace list={tags} setClasses={setClasses} classes={classes} activeItem={activeItem}/>
+                    <EditWorkPlace list={tags} setClasses={setClasses} classes={classes} activeItem={activeItem} setActiveItem={setActiveItem}/>
                 </div>
             </div>
 

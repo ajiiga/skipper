@@ -14,7 +14,7 @@ import publicStore from "../../../../../store/publicStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";
 import myClassesStore from "../../../../../store/myClassesStore";
 
-const EditWorkPlace = ({list, setClasses, classes, activeItem}) => {
+const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) => {
     let location = useLocation()
 
     //
@@ -81,6 +81,7 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem}) => {
             setTags([])
         } else {
             let classItem = classes.filter(x => x.ID === activeItem)[0]
+            debugger
             setForm({name: classItem.ClassName, description: classItem.Description})
             setTags(classItem.Tags.map(x => x.ID))
             debugger
@@ -242,11 +243,11 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem}) => {
                             let newClasses = [...classes]
                             newClasses.push({
 
-                                "ID": {x},
+                                "ID": x,
                                 "ParentId": authStore.user.id,
                                 "ClassName": form.name,
                                 "Description": form.description,
-                                "Tags": tags,
+                                "Tags": tags.map(x => {return {'ID': x}}),
                                 "TheoreticClass": {
                                     "ID": 0,
                                     "ClassParentId": theoryState.valid ? x : 0,
@@ -285,6 +286,7 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem}) => {
 
                             })
                             setClasses(newClasses)
+                            setActiveItem(x)
                         })
                     }}>
                         Сохранить

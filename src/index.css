@@ -29,3 +29,27 @@ a {
 h1 {
   margin: 0;
 }
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  padding: 0 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #DADADA;
+}

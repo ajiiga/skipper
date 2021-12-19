@@ -13,6 +13,8 @@ import TextareaCompetence from "./TextareaCompetence/TextareaCompetence";
 import publicStore from "../../../../../store/publicStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";
 import myClassesStore from "../../../../../store/myClassesStore";
+import {act} from "@testing-library/react";
+import MyClassesService from "../../../MyClassesService";
 
 const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) => {
     let location = useLocation()
@@ -81,10 +83,8 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
             setTags([])
         } else {
             let classItem = classes.filter(x => x.ID === activeItem)[0]
-            debugger
             setForm({name: classItem.ClassName, description: classItem.Description})
             setTags(classItem.Tags.map(x => x.ID))
-            debugger
             if (classItem.PracticClass.ClassParentId === 0)
                 setPracticeState({
                     active: false,
@@ -127,13 +127,13 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
                 })
 
             if (classItem.KeyClass.ClassParentId === 0)
-            setTurnkeyState({
-                active: false,
-                valid: false,
-                '15_min': {status: false, price: ''},
-                individual_term: {status: false, price: ''},
-                calendar: Array.from(Array(8), _ => Array(7).fill(0))
-            })
+                setTurnkeyState({
+                    active: false,
+                    valid: false,
+                    '15_min': {status: false, price: ''},
+                    individual_term: {status: false, price: ''},
+                    calendar: Array.from(Array(8), _ => Array(7).fill(0))
+                })
             else {
                 setTurnkeyState({
                     active: true,
@@ -151,7 +151,7 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
     let decode = (calendar_code) => {
         let res = []
         for (let i = 0; i < 8; i++) {
-            res.push(calendar_code.slice(i*7, (i+1)*7))
+            res.push(calendar_code.slice(i * 7, (i + 1) * 7))
         }
         return res.map(x => x.split('').map(x => parseInt(x)))
     }
@@ -233,61 +233,123 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
                     </Switch>
                 }
             </div>
-            {<div className={`${s.save_btn_container} ${activeItem !==0 ? s.update_container: ''}`}>
+            {<div className={`${s.save_btn_container} ${activeItem !== 0 ? s.update_container : ''}`}>
                 <div className={s.save_btn}>
                     {formFetching && <Preloader/>}
                     <button className={s.submit_btn} disabled={!validate} onClick={() => {
                         setFormFetching(true)
-                        myClassesStore.createClass(form.name, form.description, tags, theoryState, practiceState, turnkeyState).then(x => {
-                            setFormFetching(false)
-                            let newClasses = [...classes]
-                            newClasses.push({
+                        //Редактировать занятие
+                        if (activeItem !== 0) {
+                            //Занятие на сервере
+                            let classItem = classes.filter(x => x.ID === activeItem)[0]
 
-                                "ID": x,
-                                "ParentId": authStore.user.id,
-                                "ClassName": form.name,
-                                "Description": form.description,
-                                "Tags": tags.map(x => {return {'ID': x}}),
-                                "TheoreticClass": {
-                                    "ID": 0,
-                                    "ClassParentId": theoryState.valid ? x : 0,
-                                    "Duration15": theoryState["15_min"].status,
-                                    "Price15": theoryState["15_min"].price,
-                                    "Duration30": theoryState["30_min"].status,
-                                    "Price30": theoryState["30_min"].price,
-                                    "Duration60": theoryState["60_min"].status,
-                                    "Price60": theoryState["60_min"].price,
-                                    "Duration90": theoryState["90_min"].status,
-                                    "Price90": theoryState["90_min"].price,
-                                    "Time": [].concat(...theoryState.calendar).join('')
-                                },
-                                "PracticClass": {
-                                    "ID": 0,
-                                    "ClassParentId": practiceState.valid ? x : 0,
-                                    "Duration15": practiceState["15_min"].status,
-                                    "Price15": practiceState["15_min"].price,
-                                    "Duration30": practiceState["30_min"].status,
-                                    "Price30": practiceState["30_min"].price,
-                                    "Duration60": practiceState["60_min"].status,
-                                    "Price60": practiceState["60_min"].price,
-                                    "Duration90": practiceState["90_min"].status,
-                                    "Price90": practiceState["90_min"].price,
-                                    "Time": [].concat(...practiceState.calendar).join('')
-                                },
-                                "KeyClass": {
-                                    "ID": 0,
-                                    "ClassParentId": turnkeyState.valid ? x : 0,
-                                    "Duration15": turnkeyState["15_min"].status,
-                                    "Price15": turnkeyState["15_min"].price,
-                                    "FullTime": turnkeyState.individual_term.status,
-                                    "PriceFullTime": turnkeyState.individual_term.price,
-                                    "Time": [].concat(...turnkeyState.calendar).join('')
+                            myClassesStore.updateClass(classItem, form.name, form.description, tags, theoryState, practiceState, turnkeyState).then(x => {
+                                setFormFetching(false)
+                                let newClasses = [...classes]
+                                let redClassIndex = newClasses.findIndex(x => x.ID === activeItem)
+                                newClasses[redClassIndex] = {
+                                    "ID": activeItem,
+                                    "ParentId": authStore.user.id,
+                                    "ClassName": form.name,
+                                    "Description": form.description,
+                                    "Tags": tags.map(x => {
+                                        return {'ID': x}
+                                    }),
+                                    "TheoreticClass": {
+                                        "ID": newClasses[redClassIndex].TheoreticClass.ID,
+                                        "ClassParentId": theoryState.valid ? x : 0,
+                                        "Duration15": theoryState["15_min"].status,
+                                        "Price15": theoryState["15_min"].price,
+                                        "Duration30": theoryState["30_min"].status,
+                                        "Price30": theoryState["30_min"].price,
+                                        "Duration60": theoryState["60_min"].status,
+                                        "Price60": theoryState["60_min"].price,
+                                        "Duration90": theoryState["90_min"].status,
+                                        "Price90": theoryState["90_min"].price,
+                                        "Time": [].concat(...theoryState.calendar).join('')
+                                    },
+                                    "PracticClass": {
+                                        "ID": newClasses[redClassIndex].PracticClass.ID,
+                                        "ClassParentId": practiceState.valid ? x : 0,
+                                        "Duration15": practiceState["15_min"].status,
+                                        "Price15": practiceState["15_min"].price,
+                                        "Duration30": practiceState["30_min"].status,
+                                        "Price30": practiceState["30_min"].price,
+                                        "Duration60": practiceState["60_min"].status,
+                                        "Price60": practiceState["60_min"].price,
+                                        "Duration90": practiceState["90_min"].status,
+                                        "Price90": practiceState["90_min"].price,
+                                        "Time": [].concat(...practiceState.calendar).join('')
+                                    },
+                                    "KeyClass": {
+                                        "ID": newClasses[redClassIndex].KeyClass.ID,
+                                        "ClassParentId": turnkeyState.valid ? x : 0,
+                                        "Duration15": turnkeyState["15_min"].status,
+                                        "Price15": turnkeyState["15_min"].price,
+                                        "FullTime": turnkeyState.individual_term.status,
+                                        "PriceFullTime": turnkeyState.individual_term.price,
+                                        "Time": [].concat(...turnkeyState.calendar).join('')
+                                    }
                                 }
-
+                                setClasses(newClasses)
                             })
-                            setClasses(newClasses)
-                            setActiveItem(x)
-                        })
+
+                        }
+                        //Создание занятия
+                        else {
+                            myClassesStore.createClass(form.name, form.description, tags, theoryState, practiceState, turnkeyState).then(x => {
+                                setFormFetching(false)
+                                let newClasses = [...classes]
+                                newClasses.push({
+
+                                    "ID": x,
+                                    "ParentId": authStore.user.id,
+                                    "ClassName": form.name,
+                                    "Description": form.description,
+                                    "Tags": tags.map(x => {
+                                        return {'ID': x}
+                                    }),
+                                    "TheoreticClass": {
+                                        "ID": 0,
+                                        "ClassParentId": theoryState.valid ? x : 0,
+                                        "Duration15": theoryState["15_min"].status,
+                                        "Price15": theoryState["15_min"].price,
+                                        "Duration30": theoryState["30_min"].status,
+                                        "Price30": theoryState["30_min"].price,
+                                        "Duration60": theoryState["60_min"].status,
+                                        "Price60": theoryState["60_min"].price,
+                                        "Duration90": theoryState["90_min"].status,
+                                        "Price90": theoryState["90_min"].price,
+                                        "Time": [].concat(...theoryState.calendar).join('')
+                                    },
+                                    "PracticClass": {
+                                        "ID": 0,
+                                        "ClassParentId": practiceState.valid ? x : 0,
+                                        "Duration15": practiceState["15_min"].status,
+                                        "Price15": practiceState["15_min"].price,
+                                        "Duration30": practiceState["30_min"].status,
+                                        "Price30": practiceState["30_min"].price,
+                                        "Duration60": practiceState["60_min"].status,
+                                        "Price60": practiceState["60_min"].price,
+                                        "Duration90": practiceState["90_min"].status,
+                                        "Price90": practiceState["90_min"].price,
+                                        "Time": [].concat(...practiceState.calendar).join('')
+                                    },
+                                    "KeyClass": {
+                                        "ID": 0,
+                                        "ClassParentId": turnkeyState.valid ? x : 0,
+                                        "Duration15": turnkeyState["15_min"].status,
+                                        "Price15": turnkeyState["15_min"].price,
+                                        "FullTime": turnkeyState.individual_term.status,
+                                        "PriceFullTime": turnkeyState.individual_term.price,
+                                        "Time": [].concat(...turnkeyState.calendar).join('')
+                                    }
+
+                                })
+                                setClasses(newClasses)
+                                setActiveItem(x)
+                            })
+                        }
                     }}>
                         Сохранить
                     </button>

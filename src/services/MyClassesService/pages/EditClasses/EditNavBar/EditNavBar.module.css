@@ -48,10 +48,11 @@
     font-size: 18px;
     font-family: 'Montserrat', sans-serif;
     cursor: pointer;
+    margin-bottom: 20px;
 }
 
 .item_container {
-    padding: 8px 0;
+    padding: 8px 5px;
     border-top: 1px solid #DADADA;
 }
 
@@ -59,9 +60,6 @@
     border-bottom: 1px solid #DADADA;
 }
 
-.item_container:first-child {
-    margin-top: 20px;
-}
 
 .item_block {
     background: #FFFFFF;
@@ -87,3 +85,10 @@
 .active_item .item_block {
     border: 1px solid #FEDC2E;
 }
+
+.items {
+    overflow: hidden;
+    max-height: 572px;
+    overflow-y: scroll;
+}
+

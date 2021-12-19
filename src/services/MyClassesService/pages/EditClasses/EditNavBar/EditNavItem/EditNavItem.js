@@ -6,24 +6,12 @@ import {Link, useHistory} from "react-router-dom";
 
 const EditNavItem = ({name, type, setActiveItem, id, active}) => {
 
-    let history = useHistory()
 
-    let getUrl = (type) => {
-        switch (type) {
-            case 'Решение под ключ':
-                return '/edit-classes/turnkey-lesson'
-            case 'Практическое занятие':
-                return '/edit-classes/practice-classes'
-            case 'Теоретическое занятие':
-                return '/edit-classes/theory-classes'
-        }
-    }
 
     return (
 
             <div className={`${s.item_container} ${active ? s.active_item : ''}`} onClick={() => {
                 setActiveItem(id)
-                history.push(getUrl(type))
             }}>
                 <div className={s.item_block}>
                     <div className={s.text}>

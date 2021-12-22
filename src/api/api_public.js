@@ -15,3 +15,5 @@ export let getMainSectionsRequest = async () => {
 export let getChildTagsRequest = () => {
     return $api.get('/public-api/catalog/child')
 }
+
+export let getSearchClassesRequest = (search, page, limit) => $api.get('/public-api/catalog/classes', {params: {search: search, page: page, limit: limit}})

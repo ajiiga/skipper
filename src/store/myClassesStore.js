@@ -34,22 +34,18 @@ class MyClassesStore {
 
     async createTheoreticClass(parent_id, time, duration_15, price_15, duration_30, price_30, duration_60, price_60, duration_90, price_90) {
         let r = await createTheoreticClassRequest(parent_id, time, duration_15, price_15, duration_30, price_30, duration_60, price_60, duration_90, price_90)
-        return r.data
+        return r.data.class_id
     }
 
     async createPracticeClass(parent_id, time, duration_15, price_15, duration_30, price_30, duration_60, price_60, duration_90, price_90) {
         let r = await createPracticeClassRequest(parent_id, time, duration_15, price_15, duration_30, price_30, duration_60, price_60, duration_90, price_90)
-        return r.data
+        return r.data.class_id
     }
 
     async createTurnkeyClass(parent_id, time, duration_15, price_15, full_time, price_full_time) {
         let r = await createTurnkeyClassRequest(parent_id, time, duration_15, price_15, full_time, price_full_time)
-        return r.data
+        return r.data.class_id
     }
-
-
-
-
 
 
     async updateMainClass(class_id, class_name, description, tags) {
@@ -77,12 +73,10 @@ class MyClassesStore {
     }
 
 
-
-
-
-
     async createClass(class_name, description, tags, theory_class_state, practice_class_state, turnkey_state) {
         let parent_id = await this.createMainClass(class_name, description, tags)
+        let classes_ids = {theory: 0, practice: 0, key: 0}
+
         if (theory_class_state.valid) {
             let time = [].concat(...theory_class_state.calendar).join('')
             let r = await createTheoreticClassRequest(
@@ -96,6 +90,7 @@ class MyClassesStore {
                 theory_class_state['60_min'].price,
                 theory_class_state['90_min'].status,
                 theory_class_state['90_min'].price)
+            classes_ids.theory = r.data.class_id
         }
 
         if (practice_class_state.valid) {
@@ -111,6 +106,7 @@ class MyClassesStore {
                 practice_class_state['60_min'].price,
                 practice_class_state['90_min'].status,
                 practice_class_state['90_min'].price)
+            classes_ids.practice = r.data.class_id
         }
 
         if (turnkey_state.valid) {
@@ -122,15 +118,18 @@ class MyClassesStore {
                 turnkey_state['15_min'].price,
                 turnkey_state.individual_term.status,
                 turnkey_state.individual_term.price,
-                )
+            )
+            classes_ids.key = r.data.class_id
         }
 
-        return parent_id
+        return {ID: parent_id, ...classes_ids}
     }
 
     async updateClass(classItem, class_name, description, tags, theoryState, practiceState, turnkeyState) {
         //Меняем родитель занятий
-        let r = await this.updateMainClass(classItem.ID, class_name, description, tags)
+        let main_response = await this.updateMainClass(classItem.ID, class_name, description, tags)
+
+        let classes_ids = {theory: 0, practice: 0, key: 0}
 
         // Проверяем валидность состояния теоретического занятия
         if (theoryState.valid) {
@@ -147,9 +146,9 @@ class MyClassesStore {
                     theoryState["60_min"].price,
                     theoryState["90_min"].status,
                     theoryState["90_min"].price
-                )
-            }
-            else {
+                ).then(x =>
+                    classes_ids.theory = x)
+            } else {
                 let r = await this.updateTheoreticClass(
                     classItem.TheoreticClass.ID,
                     authStore.user.id,
@@ -180,9 +179,9 @@ class MyClassesStore {
                     practiceState["60_min"].price,
                     practiceState["90_min"].status,
                     practiceState["90_min"].price
-                )
-            }
-            else {
+                ).then(x =>
+                    classes_ids.practice = x)
+            } else {
                 let r = await this.updatePracticeClass(
                     classItem.PracticClass.ID,
                     authStore.user.id,
@@ -210,9 +209,9 @@ class MyClassesStore {
                     turnkeyState["15_min"].price,
                     turnkeyState.individual_term.status,
                     turnkeyState.individual_term.price
-                )
-            }
-            else {
+                ).then(x =>
+                    classes_ids.key = x)
+            } else {
                 let r = await this.updateTurnkeyClass(
                     classItem.KeyClass.ID,
                     authStore.user.id,
@@ -224,9 +223,9 @@ class MyClassesStore {
                 )
             }
         }
+
+        return classes_ids
     }
-
-
 
 
     async initializeEditClasses() {

@@ -2,24 +2,17 @@ import React, {useMemo, useState} from 'react';
 import s from './SearchInput.module.css'
 import search_icon from '../../../../../static/img/Main/search_icon.png'
 import DropItems from "./DropItems/DropItems";
-import publicStore from "../../../../../store/publicStore";
 import {observer} from "mobx-react-lite";
-import {computed} from "mobx";
 
-const SearchInput = ({value, changeValue, getList}) => {
+const SearchInput = ({value, changeValue, tags, addTag, tagList}) => {
 
     let [show, setShow] = useState(false)
     let [canAddTag, setCanAddTag] = useState(false)
 
-    let list = ['js', 'python', 'django', 'react', 'angular', 'vue', 'go', 'sql', 'postgresql', 'CSS', 'HTML', 'php', 'laravel', 'c#', 'ASP.NET', 'flask', 'nodejs']
+    let list = [...tagList.map(x => x.name3)]
 
 
-    let showList = list.filter(x => x.toLowerCase().includes(value.toLowerCase()) && !publicStore.tags.includes(x))
-
-    let closeAndAddItem = (item) => {
-        publicStore.addTag(item)
-        setShow(false)
-    }
+    let showList = useMemo(() => list.filter(x => x.toLowerCase().includes(value.toLowerCase()) && !tags.includes(x)), [value, tags])
 
     let _handleKeyDown =  (e) => {
         if (e.key === 'Enter') {
@@ -40,8 +33,8 @@ const SearchInput = ({value, changeValue, getList}) => {
                 <img src={search_icon} className={s.search_icon} alt=""/>
             </div>
             {show && (
-                <DropItems list={showList} setShow={setShow} addTag={(tag) => publicStore.addTag(tag)}
-                           setValue={changeValue} getList={getList} canAddTag={canAddTag} setCanAddTag={setCanAddTag} />
+                <DropItems list={showList} setShow={setShow} addTag={addTag}
+                           setValue={changeValue} canAddTag={canAddTag} setCanAddTag={setCanAddTag} />
             )}
         </div>
     );

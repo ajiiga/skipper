@@ -13,8 +13,6 @@ import TextareaCompetence from "./TextareaCompetence/TextareaCompetence";
 import publicStore from "../../../../../store/publicStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";
 import myClassesStore from "../../../../../store/myClassesStore";
-import {act} from "@testing-library/react";
-import MyClassesService from "../../../MyClassesService";
 
 const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) => {
     let location = useLocation()
@@ -174,6 +172,7 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
     let validate = (practiceState.valid || theoryState.valid || turnkeyState.valid) && form.name !== '' && form.description !== '' && tags.length > 0
 
 
+
     return (
         <div className={s.container}>
             <div className={s.display_container}>
@@ -256,7 +255,7 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
                                         return {'ID': x}
                                     }),
                                     "TheoreticClass": {
-                                        "ID": newClasses[redClassIndex].TheoreticClass.ID,
+                                        "ID": newClasses[redClassIndex].TheoreticClass.ID !== 0 ? newClasses[redClassIndex].TheoreticClass.ID : x.theory,
                                         "ClassParentId": theoryState.valid ? x : 0,
                                         "Duration15": theoryState["15_min"].status,
                                         "Price15": theoryState["15_min"].price,
@@ -269,7 +268,7 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
                                         "Time": [].concat(...theoryState.calendar).join('')
                                     },
                                     "PracticClass": {
-                                        "ID": newClasses[redClassIndex].PracticClass.ID,
+                                        "ID": newClasses[redClassIndex].PracticClass.ID !== 0? newClasses[redClassIndex].PracticClass.ID: x.practice,
                                         "ClassParentId": practiceState.valid ? x : 0,
                                         "Duration15": practiceState["15_min"].status,
                                         "Price15": practiceState["15_min"].price,
@@ -282,7 +281,7 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
                                         "Time": [].concat(...practiceState.calendar).join('')
                                     },
                                     "KeyClass": {
-                                        "ID": newClasses[redClassIndex].KeyClass.ID,
+                                        "ID": newClasses[redClassIndex].KeyClass.ID !== 0? newClasses[redClassIndex].KeyClass.ID:x.key,
                                         "ClassParentId": turnkeyState.valid ? x : 0,
                                         "Duration15": turnkeyState["15_min"].status,
                                         "Price15": turnkeyState["15_min"].price,
@@ -301,8 +300,7 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
                                 setFormFetching(false)
                                 let newClasses = [...classes]
                                 newClasses.push({
-
-                                    "ID": x,
+                                    "ID": x.ID,
                                     "ParentId": authStore.user.id,
                                     "ClassName": form.name,
                                     "Description": form.description,
@@ -310,7 +308,7 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
                                         return {'ID': x}
                                     }),
                                     "TheoreticClass": {
-                                        "ID": 0,
+                                        "ID": x.theory,
                                         "ClassParentId": theoryState.valid ? x : 0,
                                         "Duration15": theoryState["15_min"].status,
                                         "Price15": theoryState["15_min"].price,
@@ -323,7 +321,7 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
                                         "Time": [].concat(...theoryState.calendar).join('')
                                     },
                                     "PracticClass": {
-                                        "ID": 0,
+                                        "ID": x.practice,
                                         "ClassParentId": practiceState.valid ? x : 0,
                                         "Duration15": practiceState["15_min"].status,
                                         "Price15": practiceState["15_min"].price,
@@ -336,7 +334,7 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
                                         "Time": [].concat(...practiceState.calendar).join('')
                                     },
                                     "KeyClass": {
-                                        "ID": 0,
+                                        "ID": x.key,
                                         "ClassParentId": turnkeyState.valid ? x : 0,
                                         "Duration15": turnkeyState["15_min"].status,
                                         "Price15": turnkeyState["15_min"].price,
@@ -347,13 +345,15 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
 
                                 })
                                 setClasses(newClasses)
-                                setActiveItem(x)
+                                setActiveItem(x.ID)
                             })
                         }
                     }}>
                         Сохранить
                     </button>
-                    {activeItem !== 0 && <button className={s.delete_btn}>Удалить занятие</button>}
+                    {activeItem !== 0 && <button className={s.delete_btn} onClick={() => {
+
+                    }}>Удалить занятие</button>}
                 </div>
             </div>}
         </div>

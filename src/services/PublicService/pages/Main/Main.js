@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 import authStore from "../../../../store/authStore";
 import publicStore from "../../../../store/publicStore";
 import Preloader from "../../../../components/UI/Preloader/Preloader";
+import {motion} from 'framer-motion'
 
 const Main = () => {
     let [isFetching, setIsFetching] = useState(true)
@@ -24,10 +25,20 @@ const Main = () => {
     }, [])
 
     if (isFetching)
-        return <Preloader />
+        return <Preloader/>
 
     return (
-        <div className={s.container}>
+        <motion.div className={s.container}
+                    initial={{
+                        opacity: 0
+                    }}
+                    animate={{
+                        opacity: 1
+                    }}
+                    transition={{
+                        delay: 0.25
+                    }}
+                    exit="out">
             <div className={s.content_container}>
                 <div className={s.left_side}>
                     <h1 className={s.title}>Чему бы вы хотели <span className={s.yellow_text}>научиться</span> сегодня?
@@ -49,11 +60,12 @@ const Main = () => {
                                                                                               alt=""/></div>
                 </Link>
                 <Link to={'/mentor_registration'}>
-                    {!authStore.user?.is_mentor && <div className={s.to_mentor_btn}>Я хочу зарабывать на своих знаниях</div>}
+                    {!authStore.user?.is_mentor &&
+                    <div className={s.to_mentor_btn}>Я хочу зарабывать на своих знаниях</div>}
                 </Link>
             </div>
 
-        </div>
+        </motion.div>
     );
 };
 

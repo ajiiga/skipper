@@ -1,5 +1,10 @@
 import {makeAutoObservable} from "mobx";
-import {getCategoriesRequest, getChildTagsRequest, getMainSectionsRequest} from "../api/api_public";
+import {
+    getCategoriesRequest,
+    getChildTagsRequest,
+    getMainSectionsRequest,
+    getSearchClassesRequest
+} from "../api/api_public";
 
 class PublicStore {
     constructor() {
@@ -47,6 +52,10 @@ class PublicStore {
 
     setDefaultActiveTheme = () => this.setActiveTheme(1)
 
+    async getSearchClasses(search, page, limit) {
+        let r = await getSearchClassesRequest(search, page, limit)
+        return JSON.parse(r.data.catalog_of_mentors)
+    }
 
 }
 

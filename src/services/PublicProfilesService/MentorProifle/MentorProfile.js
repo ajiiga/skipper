@@ -23,14 +23,16 @@ const MentorProfile = () => {
     let [isFetching, setIsFetching] = useState(true)
     let [user, setUser] = useState({})
     let [active, setActive] = useState(false)
+    let [tags, setTags] = useState([])
 
     let history = useHistory()
 
     useEffect(() => {
-        publicProfileStore.getMentorInfo(id).then(x => {
-            if (!x.response)
+        publicProfileStore.initializeMentorInfo(id).then(x => {
+            if (!x.user.response)
                 history.push('/')
-            setUser(x.data)
+            setUser(x.user.data)
+            setTags(x.tags)
             setIsFetching(false)
         })
     }, [])
@@ -66,7 +68,7 @@ const MentorProfile = () => {
                                 <div className={s.img_name}>
                                     <img src={`${API_URL}${user.profile_picture}`} className={s.profile_img} alt=""/>
                                     <div className={s.name}>{`${user.first_name} ${user.second_name}`}</div>
-                                    <div className={s.specialisation}>Senior React Native</div>
+                                    <div className={s.specialisation}>{user.specialization}</div>
                                 </div>
 
                                 <div className={s.rate}>
@@ -119,15 +121,13 @@ const MentorProfile = () => {
                 <div className={`${s.info_container} ${s.service_list}`}>
                     <div className={s.title}>Занятия</div>
                     <div>
-                        <div className={s.service_container}>
-                            <SearchService/>
-                        </div>
-                        <div className={s.service_container}>
-                            <SearchService/>
-                        </div>
-                        <div className={s.service_container}>
-                            <SearchService/>
-                        </div>
+
+                        {   JSON.parse(user.classes).map(x =>
+                            <div className={s.service_container}>
+                                <SearchService name={x.ClassName} tags={(x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0].name3))}/>
+                            </div>)
+                        }
+
                     </div>
                 </div>
                 <div className={s.content_container}>
@@ -196,11 +196,11 @@ const MentorProfile = () => {
                     <div className={s.right_side}>
                         <div className={s.reviews_block}>
                             <div className={s.title}>Отзывы</div>
-                            <Reviews n={2} />
+                            <Reviews n={2}/>
                         </div>
                     </div>
                 </div>
-                <ComplainModal active={active} setActive={setActive} />
+                <ComplainModal active={active} setActive={setActive}/>
             </div>
             <Footer/>
         </>

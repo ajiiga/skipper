@@ -9,58 +9,79 @@ import Tag from "../../../../components/UI/Tag/Tag";
 import SearchItem from "./SearchItem/SearchItem";
 import {autorun} from "mobx";
 import Footer from "../../../../components/Footer/Footer";
+import useDebounce from "../../../../CustomHooks/useDebounce";
+import Preloader from "../../../../components/UI/Preloader/Preloader";
 
 const Search = () => {
 
     let list = ['до $5', '$5-$10', '$10-$50', 'больше $500', 'All']
 
+    let [tagList, setTagList] = useState([])
+
     let [searchText, setSearchText] = useState('')
 
-    let [range, setRange] = useState({min: 1, max: 5})
 
-    let [activeItem, setActiveItem] = useState(list[4])
+    let [searchInfo, setSearchInfo] = useState({
+        range: {min: 1, max: 5},
+        activeItem: list[4],
+        tags: [...publicStore.tags]
+    })
 
-    let getList = () => {
-        let request = {
-            price: activeItem,
-            rating: range,
-            tags: publicStore.tags
-        }
-        console.log(request)
+    let [isFetching, setIsFetching] = useState(true)
+
+
+    let setActiveItem = (newActiveItem) => setSearchInfo({...searchInfo, activeItem: newActiveItem})
+    let setTags = (newTags) => setSearchInfo({...searchInfo, tags: newTags})
+    let setRange = (newRange) => setSearchInfo({...searchInfo, range: newRange})
+
+    let deleteTag = (tag) => setTags([...searchInfo.tags].filter(x => x !== tag))
+
+    let addTag = (tag) => {
+        let deltaTags = [...searchInfo.tags]
+        deltaTags.push(tag)
+        setTags(deltaTags)
     }
 
+    let debounceQuery = useDebounce([searchInfo], 300)
+
     useEffect(() => {
-        return () => {
-            publicStore.clearTags()
+        let idTags = tagList.filter(x => searchInfo.tags.includes(x.name3)).map(x => x.ID)
+        let request = {
+            price: searchInfo.activeItem,
+            rating: searchInfo.range,
+            tags: idTags
         }
-    }, [])
-
+        publicStore.getSearchClasses(idTags, 1, 10).then(x => console.log(x))
+    }, debounceQuery)
 
     useEffect(() => {
-        getList()
-    }, [activeItem, range])
+        publicStore.getChildTags().then(x => {
+            setTagList(x)
+            setIsFetching(false)
+        })
+        return () => publicStore.clearTags()
+    },[])
+
+
+    if (isFetching)
+        return <Preloader />
 
     return (
         <>
             <div className={s.container}>
                 <div className={s.fixed_sidebar}>
                     <MiniNavBar child={'Поиск'}/>
-                    <SearchBar range={range} setRange={setRange} list={list} setActiveItem={setActiveItem}
-                               activeItem={activeItem}/>
+                    <SearchBar range={searchInfo.range} setRange={setRange} list={list} setActiveItem={setActiveItem}
+                               activeItem={searchInfo.activeItem}/>
                 </div>
                 <div className={s.fake_sidebar}/>
                 <div className={s.content_container}>
                     <div>7,618 специалистов найдено</div>
-                    <SearchInput value={searchText} changeValue={setSearchText} getList={getList}/>
-                    <div className={s.tags}>{publicStore.getTags().map(x => <div key={x} className={s.tag_container}>
+                    <SearchInput value={searchText} changeValue={setSearchText} tags={searchInfo.tags} addTag={addTag} tagList={tagList}/>
+                    <div className={s.tags}>{searchInfo.tags.map(x => <div key={x} className={s.tag_container}>
                         <Tag title={x} onClick={() => {
-                            publicStore.deleteTag(x)
-                            getList()
+                            deleteTag(x)
                         }}/></div>)}</div>
-                    <SearchItem/>
-                    <SearchItem/>
-                    <SearchItem/>
-                    <SearchItem/>
                     <SearchItem/>
                 </div>
             </div>

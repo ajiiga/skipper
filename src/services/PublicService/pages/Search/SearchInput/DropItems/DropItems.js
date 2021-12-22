@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import s from './DropItems.module.css';
 import {observer} from "mobx-react-lite";
 
-const DropItems = ({list, setShow, addTag, setValue, getList, canAddTag, setCanAddTag}) => {
+const DropItems = ({list, setShow, addTag, setValue, canAddTag, setCanAddTag}) => {
     let [activeItem, setActiveItem] = useState(0)
     let closeModal = () => setShow(false)
     useEffect(() => {
@@ -16,7 +16,6 @@ const DropItems = ({list, setShow, addTag, setValue, getList, canAddTag, setCanA
     useEffect(() => {
         if (list.length !== 0)
             setActiveItem(0)
-
     }, [list])
 
 
@@ -26,7 +25,6 @@ const DropItems = ({list, setShow, addTag, setValue, getList, canAddTag, setCanA
             addTag(list[activeItem])
             setShow(false)
             setValue('')
-            getList()
             setCanAddTag(false)
         }
     }, [canAddTag])
@@ -37,7 +35,6 @@ const DropItems = ({list, setShow, addTag, setValue, getList, canAddTag, setCanA
                 addTag(x)
                 setShow(false)
                 setValue('')
-                getList()
             }} onMouseEnter={() => setActiveItem(index)} className={`${s.item} ${activeItem === index ? s.active : ''}`}>{x}</div>) : 'Ничего не найдено'}
 
         </div>

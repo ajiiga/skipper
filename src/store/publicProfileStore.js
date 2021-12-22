@@ -1,5 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {getMenteeInfoRequest, getMentorInfoRequest} from "../api/api_public_profile";
+import authStore from "./authStore";
+import publicStore from "./publicStore";
 
 
 class publicProfileStore {
@@ -30,6 +32,14 @@ class publicProfileStore {
         catch (e) {
             return {response: false}
         }
+    }
+
+    async initializeMentorInfo(id) {
+        let res = await Promise.all([
+            await publicStore.getChildTags(),
+            await this.getMentorInfo(id)
+        ])
+        return {tags: res[0], user: res[1]}
     }
 }
 

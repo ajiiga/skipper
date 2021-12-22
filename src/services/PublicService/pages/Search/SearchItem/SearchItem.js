@@ -31,7 +31,7 @@ const SearchItem = () => {
                 </div>
             </div>
             <div className={s.services}>
-                <SearchService />
+                <SearchService name={'React'} tags={['React']} />
             </div>
         </div>
     );

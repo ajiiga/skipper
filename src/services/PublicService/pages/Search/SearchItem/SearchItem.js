@@ -6,32 +6,42 @@ import SearchService from "./SearchService/SearchService";
 import FollowButton from "../../../../../components/UI/FollowButton/FollowButton";
 import ChatButton from "../../../../../components/UI/ChatButton/ChatButton";
 import Rating from "../../../../../components/UI/Rating/Rating";
+import {API_URL} from "../../../../../api/api_setting";
+import {Link} from "react-router-dom";
 
-const SearchItem = () => {
+const SearchItem = ({id, first_name, second_name, specialization, description, picture, classes, tags}) => {
     return (
         <div className={s.container}>
             <div className={s.profile}>
-                <img src={profile_img} alt="" className={s.profile_img}/>
-                <div className={s.profile_info}>
-                    <div className={s.title}>Сергей Веснушкин</div>
-                    <div className={s.status}>Senior react developer</div>
-                    <div className={s.description}>
-                        Более 10 лет занимаюсь налогами, откатами и прочими бухгалтерскими штучками на производстве.
-                        Готов помочь с вопросами составления отчетности и прочих...
+                <Link to={`/mentor-profile/${id}`}><img src={`${API_URL}/public-api/user/profile-picture/${picture}`}
+                                                        alt="" className={s.profile_img}/></Link>
+                <Link  className={s.profile_info} to={`/mentor-profile/${id}`}>
+                    <div>
+                        <div className={s.title}>{first_name} {second_name}</div>
+                        <div className={s.status}>{specialization}</div>
+                        <div className={s.description}>
+                            {description}
+                        </div>
                     </div>
-                </div>
+                </Link>
                 <div className={s.display}>
-                    <Rating num={4.7} />
+                    <Rating num={4.7}/>
                     <div className={s.price_display}>
                         <div className={s.price}>$17</div>
                         <div className={s.price_description}>средняя цена занятия</div>
                     </div>
-                   <FollowButton />
-                    <ChatButton />
+                    <FollowButton/>
+                    <ChatButton/>
                 </div>
             </div>
             <div className={s.services}>
-                <SearchService name={'React'} tags={['React']} />
+                {
+                    classes.filter(x => {
+                        return x.Tags.length !== 0
+                    }).map(x => <SearchService id={id} name={x.ClassName} description={x.Description}
+                                               tags={x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0]?.name3)}/>
+                                               )
+                }
             </div>
         </div>
     );

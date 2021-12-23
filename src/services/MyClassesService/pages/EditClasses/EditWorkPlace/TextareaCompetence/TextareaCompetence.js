@@ -20,6 +20,7 @@ const TextareaCompetence = ({value, changeValue, tags, setTags, list, setValue})
 
     let addTag = (tag) => {
         let deltaTags = [...tags]
+        debugger
         let id = list.filter(x => x.name3 === tag)[0].ID
         deltaTags.push(id)
         setTags(deltaTags)
@@ -75,8 +76,8 @@ let DropDownCompetence = ({list, setShow, addTag, canAddTag, setCanAddTag, setVa
     }, [list])
 
     useEffect(() => {
-        if (canAddTag) {
-            addTag(list[activeItem])
+        if (canAddTag && list[activeItem]) {
+            addTag(list[activeItem].name3)
             setShow(false)
             setValue('')
         }

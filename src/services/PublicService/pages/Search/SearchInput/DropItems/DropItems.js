@@ -21,7 +21,7 @@ const DropItems = ({list, setShow, addTag, setValue, canAddTag, setCanAddTag}) =
 
 
     useEffect(() => {
-        if (canAddTag) {
+        if (canAddTag && list[activeItem]) {
             addTag(list[activeItem])
             setShow(false)
             setValue('')

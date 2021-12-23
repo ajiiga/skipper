@@ -99,4 +99,8 @@ export let updateTurnkeyClassRequest = (class_id, parent_id, time, duration_15, 
     })
 }
 
+export let deleteClassRequest = (id) => {
+    return $api.delete(`/api/class/class/${id}`)
+}
+
 

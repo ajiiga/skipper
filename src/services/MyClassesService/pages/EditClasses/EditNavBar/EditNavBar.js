@@ -10,7 +10,7 @@ const EditNavBar = ({classes, setActiveItem, activeItem}) => {
     useEffect(() => {
         let newList = []
         for (let classItem of classes.filter(x => x.ClassName.toLowerCase().includes(query.toLowerCase()))) {
-                newList.push(<EditNavItem name={classItem.ClassName} type={classItem.Description}
+                newList.push(<EditNavItem key={classItem.ID} name={classItem.ClassName} type={classItem.Description}
                                           setActiveItem={setActiveItem} id={classItem.ID}
                                           active={classItem.ID === activeItem}/>)
         }

@@ -29,6 +29,10 @@ const Search = () => {
 
     let [isFetching, setIsFetching] = useState(true)
 
+    let [searchIsFetching, setSearchIsFetching] = useState(true)
+
+    let [classes, setClasses] = useState([])
+
 
     let setActiveItem = (newActiveItem) => setSearchInfo({...searchInfo, activeItem: newActiveItem})
     let setTags = (newTags) => setSearchInfo({...searchInfo, tags: newTags})
@@ -45,13 +49,18 @@ const Search = () => {
     let debounceQuery = useDebounce([searchInfo], 300)
 
     useEffect(() => {
+        setSearchIsFetching(true)
         let idTags = tagList.filter(x => searchInfo.tags.includes(x.name3)).map(x => x.ID)
         let request = {
             price: searchInfo.activeItem,
             rating: searchInfo.range,
             tags: idTags
         }
-        publicStore.getSearchClasses(idTags, 1, 10).then(x => console.log(x))
+        let strTags = idTags.join(',')
+        publicStore.getSearchClasses(strTags === "" ? undefined : strTags, 1, 10).then(x => {
+            setClasses(x)
+            setSearchIsFetching(false)
+        })
     }, debounceQuery)
 
     useEffect(() => {
@@ -60,11 +69,11 @@ const Search = () => {
             setIsFetching(false)
         })
         return () => publicStore.clearTags()
-    },[])
+    }, [])
 
 
     if (isFetching)
-        return <Preloader />
+        return <Preloader/>
 
     return (
         <>
@@ -76,13 +85,27 @@ const Search = () => {
                 </div>
                 <div className={s.fake_sidebar}/>
                 <div className={s.content_container}>
-                    <div>7,618 специалистов найдено</div>
-                    <SearchInput value={searchText} changeValue={setSearchText} tags={searchInfo.tags} addTag={addTag} tagList={tagList}/>
+                    <div>{classes.filter(x => {
+                        let lenTags = x.classes.map(x => x.Tags.length)
+                        return lenTags.reduce((previousValue, currentValue) => previousValue + currentValue, 0) !== 0
+                    }).length} специалистов найдено</div>
+                    <SearchInput value={searchText} changeValue={setSearchText} tags={searchInfo.tags} addTag={addTag}
+                                 tagList={tagList}/>
                     <div className={s.tags}>{searchInfo.tags.map(x => <div key={x} className={s.tag_container}>
                         <Tag title={x} onClick={() => {
                             deleteTag(x)
                         }}/></div>)}</div>
-                    <SearchItem/>
+                    {
+                        // searchIsFetching ? <div/>:
+                        classes.filter(x => {
+                            let lenTags = x.classes.map(x => x.Tags.length)
+                            return lenTags.reduce((previousValue, currentValue) => previousValue + currentValue, 0) !== 0
+                        }).map(x => {
+                            return <SearchItem key={x.ID} id={x.ID} first_name={x.FirstName} second_name={x.SecondName}
+                                        specialization={x.Specialization} description={x.Description}
+                                        picture={x.ProfilePicture} classes={x.classes} tags={tagList}/>
+                        })
+                    }
                 </div>
             </div>
             <Footer/>

@@ -352,7 +352,13 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
                         Сохранить
                     </button>
                     {activeItem !== 0 && <button className={s.delete_btn} onClick={() => {
-
+                        setFormFetching(true)
+                        myClassesStore.deleteClass(activeItem).then(x => {
+                            setFormFetching(false)
+                            let deltaClasses = classes.filter(x => x.ID !== activeItem)
+                            setClasses(deltaClasses)
+                            setActiveItem(0)
+                        })
                     }}>Удалить занятие</button>}
                 </div>
             </div>}

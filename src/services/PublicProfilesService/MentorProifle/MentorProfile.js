@@ -124,7 +124,7 @@ const MentorProfile = () => {
 
                         {   JSON.parse(user.classes).map(x =>
                             <div className={s.service_container}>
-                                <SearchService name={x.ClassName} tags={(x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0].name3))}/>
+                                <SearchService name={x.ClassName} description={x.Description} tags={(x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0].name3))}/>
                             </div>)
                         }
 

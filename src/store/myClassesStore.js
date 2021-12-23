@@ -3,7 +3,7 @@ import {
     createClassRequest,
     createPracticeClassRequest,
     createTheoreticClassRequest,
-    createTurnkeyClassRequest,
+    createTurnkeyClassRequest, deleteClassRequest,
     getClassesRequest,
     updateClassRequest,
     updatePracticeClassRequest,
@@ -237,6 +237,17 @@ class MyClassesStore {
             childTags: res[0],
             myClasses: res[1]
         }
+    }
+
+    async deleteClass(id) {
+        try {
+            let r = await deleteClassRequest(id)
+            return {response: true}
+        }
+        catch (e) {
+            return {response: false}
+        }
+
     }
 
 }

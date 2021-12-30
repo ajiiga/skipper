@@ -61,20 +61,22 @@ const Search = () => {
 
 
     useEffect(() => {
-        setSearchIsFetching(true)
-        let idTags = tagList.filter(x => searchInfo.tags.includes(x.name3)).map(x => x.ID)
-        let request = {
-            price: searchInfo.activeItem,
-            rating: searchInfo.range,
-            tags: idTags
+        if (tagList.length !== 0)
+        {
+            setSearchIsFetching(true)
+            let idTags = tagList.filter(x => searchInfo.tags.includes(x.name3)).map(x => x.ID)
+            let request = {
+                price: searchInfo.activeItem,
+                rating: searchInfo.range,
+                tags: idTags
+            }
+            let strTags = idTags.join(',')
+            publicStore.getSearchClasses(strTags === "" ? undefined : strTags, 1, 10).then(x => {
+                setClasses(x)
+                setSearchIsFetching(false)
+            })
         }
-        let strTags = idTags.join(',')
-        debugger
-        publicStore.getSearchClasses(strTags === "" ? undefined : strTags, 1, 10).then(x => {
-            setClasses(x)
-            setSearchIsFetching(false)
-        })
-    }, debounceQuery)
+    }, [debounceQuery, tagList])
 
     if (isFetching)
         return <Preloader/>

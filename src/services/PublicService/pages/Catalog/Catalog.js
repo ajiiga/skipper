@@ -8,6 +8,7 @@ import {getCategoriesRequest} from "../../../../api/api_public";
 import publicStore from "../../../../store/publicStore";
 import Preloader from "../../../../components/UI/Preloader/Preloader";
 import {observer} from "mobx-react-lite";
+import {motion} from 'framer-motion'
 
 const Catalog = () => {
 
@@ -47,7 +48,19 @@ const Catalog = () => {
     }
 
     return (
-        <div className={s.container}>
+        <motion.div
+            initial={{
+                opacity: 0
+            }}
+
+            animate={{
+                opacity: 1
+            }}
+
+            transition={{
+                duration: 0.25
+            }}
+            className={s.container}>
             <div className={s.content_container}>
                 <div className={s.sidebar_container}>
                     <MiniNavBar child={'Каталог'}/>
@@ -55,7 +68,7 @@ const Catalog = () => {
                 </div>
                 <CatalogContent activeThemes={activeThemes}/>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

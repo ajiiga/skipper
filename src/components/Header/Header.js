@@ -70,7 +70,7 @@ const Header = ({isAuth, profile}) => {
                                 </div>
                                 <img src={`${API_URL}${profile.profile_picture}`} alt="" className={s.profile_img}/>
                             </div>
-                            {openModal && <ProfileModal open={true} setOpen={setOpenModal}/>}
+                            {openModal && <ProfileModal setOpen={setOpenModal}/>}
                         </div>
                     </div>
 

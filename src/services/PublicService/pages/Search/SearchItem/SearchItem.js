@@ -39,7 +39,7 @@ const SearchItem = ({id, first_name, second_name, specialization, description, p
                     classes.filter(x => {
                         return x.Tags.length !== 0
                     }).map(x => <SearchService id={id} name={x.ClassName} description={x.Description}
-                                               tags={x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0]?.name3)}/>
+                                               tags={x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0]?.name3)} service_id={x.ID}/>
                                                )
                 }
             </div>

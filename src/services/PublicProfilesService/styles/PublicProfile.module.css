@@ -191,11 +191,11 @@
 }
 
 .summary_content div {
-    width: 25%;
+    width: 33%;
 }
 
 .summary_title div {
-    width: 25%;
+    width: 33%;
     font-weight: bold;
     padding: 0 0 10px 0;
     border-bottom: 1px solid #DADADA;

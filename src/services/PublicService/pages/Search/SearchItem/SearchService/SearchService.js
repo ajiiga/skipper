@@ -4,10 +4,10 @@ import Tag from "../../../../../../components/UI/Tag/Tag";
 import arrow from '../../../../../../static/img/Search/arrow.svg'
 import {useHistory} from 'react-router-dom'
 
-const SearchService = ({name, description, tags, id}) => {
+const SearchService = ({name, description, tags, id, service_id}) => {
     let history=useHistory()
     return (
-        <div className={s.container} onClick={() => {history.push(`/mentor-profile/${id}`)}}>
+        <div className={s.container} onClick={() => {history.push(`/mentor-profile/${id}/${service_id}`)}}>
             <div>
                 <div className={s.title_container}>
                     <div className={s.title}>{name}</div>

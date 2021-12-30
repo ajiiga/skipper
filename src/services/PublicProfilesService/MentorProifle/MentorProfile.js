@@ -15,6 +15,8 @@ import SearchService from "../../PublicService/pages/Search/SearchItem/SearchSer
 import Footer from "../../../components/Footer/Footer";
 import Reviews from "../../../components/UI/Reviews/Reviews";
 import ComplainModal from "../../../components/UI/ComplainModal/ComplainModal";
+import {Route} from "react-router-dom";
+import ModalRegistrationLesson from "./ModalRegistrationLesson/ModalRegistartionLesson";
 
 const MentorProfile = () => {
     let params = useParams()
@@ -29,13 +31,14 @@ const MentorProfile = () => {
 
     useEffect(() => {
         publicProfileStore.initializeMentorInfo(id).then(x => {
+            setIsFetching(true)
             if (!x.user.response)
                 history.push('/')
             setUser(x.user.data)
             setTags(x.tags)
             setIsFetching(false)
         })
-    }, [])
+    }, [id])
 
     if (isFetching) {
         return <Preloader/>
@@ -122,9 +125,9 @@ const MentorProfile = () => {
                     <div className={s.title}>Занятия</div>
                     <div>
 
-                        {   JSON.parse(user.classes).map(x =>
-                            <div className={s.service_container}>
-                                <SearchService name={x.ClassName} description={x.Description} tags={(x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0].name3))}/>
+                        {   JSON.parse(user.classes).map((x, index) =>
+                            <div className={s.service_container} key={index}>
+                                <SearchService id={id} service_id={x.ID} name={x.ClassName} description={x.Description} tags={(x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0].name3))}/>
                             </div>)
                         }
 
@@ -137,15 +140,14 @@ const MentorProfile = () => {
                             <div className={s.summary_title}>
                                 <div>Опыт работы</div>
                                 <div>Образование</div>
-                                <div>Сертификаты</div>
                                 <div>Мои достижения</div>
                             </div>
 
                             <div className={s.summary_content}>
                                 <div>
                                     {
-                                        user.work_experience && JSON.parse(user.work_experience).map(x => (
-                                            <main className={s.summary_block}>
+                                        user.work_experience && JSON.parse(user.work_experience).map((x, index) => (
+                                            <main className={s.summary_block} key={index}>
                                                 <span className={s.year}>
                                                     {x.StartYear} - {x.EndYear}
                                                 </span>
@@ -159,8 +161,8 @@ const MentorProfile = () => {
                                 </div>
                                 <div>
                                     {
-                                        JSON.parse(user.education).map(x => (
-                                            <main className={s.summary_block}>
+                                        JSON.parse(user.education).map((x, index) => (
+                                            <main className={s.summary_block} key={index}>
                                                 <span className={s.year}>
                                                     {x.StartYear} - {x.EndYear}
                                                 </span>
@@ -171,11 +173,6 @@ const MentorProfile = () => {
                                             </main>
                                         ))
                                     }
-                                </div>
-                                <div>
-                                    <main className={s.summary_block}>
-                                        Сертификат юриста самой серьезной степени
-                                    </main>
                                 </div>
                                 <div>
                                     <main className={s.summary_block}>
@@ -201,6 +198,11 @@ const MentorProfile = () => {
                     </div>
                 </div>
                 <ComplainModal active={active} setActive={setActive}/>
+                {
+                    <Route path={`/mentor-profile/${id}/:service_id`}>
+                        <ModalRegistrationLesson classes={JSON.parse(user.classes)} communications={user.communications} />
+                    </Route>
+                }
             </div>
             <Footer/>
         </>

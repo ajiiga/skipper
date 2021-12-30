@@ -32,7 +32,7 @@ const MenteeProfile = ({}) => {
             console.log(x)
             setIsFetching(false)
         })
-    }, [])
+    }, [id])
 
     if (isFetching) {
         return <Preloader/>

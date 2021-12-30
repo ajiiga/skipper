@@ -8,12 +8,11 @@ const RateDisplay = ({rate}) => {
     let intRate = Math.round(rate)
     let fill_stars = Array.apply(fill_star, Array(intRate)).map(function () {})
     let empty_stars = Array.apply(fill_star, Array(5 - intRate)).map(function () {})
-    console.log(fill_stars)
     return (
         <div className={s.container}>
             <div className={s.stars}>
-                {fill_stars.map(x => <img src={fill_star} alt=""/>)}
-                {empty_stars.map(x => <img src={star} alt=""/>)}
+                {fill_stars.map((x, index) => <img key={index} src={fill_star} alt=""/>)}
+                {empty_stars.map((x, index) => <img key={index} src={star} alt=""/>)}
             </div>
             <Rating num={rate}/>
         </div>

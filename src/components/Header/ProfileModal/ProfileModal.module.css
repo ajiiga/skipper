@@ -1,5 +1,4 @@
 .container {
-    display: none;
     position: absolute;
     min-width: 210px;
     z-index: 1;
@@ -10,9 +9,6 @@
     padding: 10px;
 }
 
-.show {
-    display: block;
-}
 
 .block {
     cursor: pointer;

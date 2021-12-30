@@ -1,0 +1,27 @@
+.container {
+    position: absolute;
+    top: 67px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 210px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.empty_circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    border: 1px solid  #D8D8D8;
+    background: white;
+}
+
+.yellow_circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    border: 1px solid  black;
+    background: #FFDD2D;
+    position: absolute;
+    transition: 0.25s;
+}

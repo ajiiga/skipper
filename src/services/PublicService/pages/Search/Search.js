@@ -11,6 +11,7 @@ import {autorun} from "mobx";
 import Footer from "../../../../components/Footer/Footer";
 import useDebounce from "../../../../CustomHooks/useDebounce";
 import Preloader from "../../../../components/UI/Preloader/Preloader";
+import {motion} from 'framer-motion'
 
 const Search = () => {
 
@@ -48,20 +49,7 @@ const Search = () => {
 
     let debounceQuery = useDebounce([searchInfo], 300)
 
-    useEffect(() => {
-        setSearchIsFetching(true)
-        let idTags = tagList.filter(x => searchInfo.tags.includes(x.name3)).map(x => x.ID)
-        let request = {
-            price: searchInfo.activeItem,
-            rating: searchInfo.range,
-            tags: idTags
-        }
-        let strTags = idTags.join(',')
-        publicStore.getSearchClasses(strTags === "" ? undefined : strTags, 1, 10).then(x => {
-            setClasses(x)
-            setSearchIsFetching(false)
-        })
-    }, debounceQuery)
+
 
     useEffect(() => {
         publicStore.getChildTags().then(x => {
@@ -72,12 +60,38 @@ const Search = () => {
     }, [])
 
 
+    useEffect(() => {
+        setSearchIsFetching(true)
+        let idTags = tagList.filter(x => searchInfo.tags.includes(x.name3)).map(x => x.ID)
+        let request = {
+            price: searchInfo.activeItem,
+            rating: searchInfo.range,
+            tags: idTags
+        }
+        let strTags = idTags.join(',')
+        debugger
+        publicStore.getSearchClasses(strTags === "" ? undefined : strTags, 1, 10).then(x => {
+            setClasses(x)
+            setSearchIsFetching(false)
+        })
+    }, debounceQuery)
+
     if (isFetching)
         return <Preloader/>
 
     return (
         <>
-            <div className={s.container}>
+            <motion.div
+                initial={{
+                    opacity: 0
+                }}
+                animate={{
+                    opacity: 1
+                }}
+                transition={{
+                    duration: 0.25
+                }}
+                className={s.container}>
                 <div className={s.fixed_sidebar}>
                     <MiniNavBar child={'Поиск'}/>
                     <SearchBar range={searchInfo.range} setRange={setRange} list={list} setActiveItem={setActiveItem}
@@ -107,7 +121,7 @@ const Search = () => {
                         })
                     }
                 </div>
-            </div>
+            </motion.div>
             <Footer/>
         </>
     );

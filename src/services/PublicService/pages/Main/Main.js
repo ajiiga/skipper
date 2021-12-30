@@ -18,7 +18,6 @@ const Main = () => {
     useEffect(() => {
         publicStore.getMainSection().then(r => {
             let jsonItems = JSON.parse(r)
-            console.log('jsonItems', jsonItems)
             setItems(jsonItems)
             setIsFetching(false)
         })
@@ -36,7 +35,7 @@ const Main = () => {
                         opacity: 1
                     }}
                     transition={{
-                        delay: 0.25
+                        duration: 0.25
                     }}
                     exit="out">
             <div className={s.content_container}>

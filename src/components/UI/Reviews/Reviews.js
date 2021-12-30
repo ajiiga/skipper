@@ -16,7 +16,7 @@ const Reviews = ({n}) => {
     return (
         <div className={s.container}>
             <div className={s.review_blocks}>
-                {reviews.map(x => <ReviewBlock name={x.name} count={x.count} text={x.text} />)}
+                {reviews.map((x, index) => <ReviewBlock key={index} name={x.name} count={x.count} text={x.text} />)}
             </div>
             {arr.length > n && <div className={s.show_all_reviews} onClick={() => {
                 if (reviews.length === n) {

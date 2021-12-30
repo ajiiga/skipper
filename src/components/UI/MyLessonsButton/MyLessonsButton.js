@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import s from "./MyLessonsButton.module.css";
 import {Link} from "react-router-dom";
+import {motion} from 'framer-motion'
 
 const MyLessonsButton = ({isMentor}) => {
     let [active, setActive] = useState(false)
@@ -34,14 +35,25 @@ let DropDown = ({setActive}) => {
     }, [])
 
     return (
-        <div className={s.dropdown}>
+        <motion.div
+            initial={{
+                opacity: 0
+            }}
+            animate={{
+                opacity: 1
+            }}
+            transition={{
+                duration: 0.25
+            }}
+
+            className={s.dropdown}>
             <Link to={'/my-classes-mentor'}><div className={s.btn}>
                 Ментор
             </div></Link>
             <Link to={'/my-classes-mentee'}><div className={s.btn}>
                 Менти
             </div></Link>
-        </div>
+        </motion.div>
     )
 }
 

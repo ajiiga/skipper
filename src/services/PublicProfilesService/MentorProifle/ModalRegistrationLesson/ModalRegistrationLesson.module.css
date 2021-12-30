@@ -164,7 +164,7 @@
 .communication_item_text {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .communication_item_title {
@@ -182,4 +182,11 @@
 }
 
 .communication_logo {
+}
+
+.arrow {
+    width: 18px;
+    z-index: 1;
+    transform: rotate(180deg);
+    cursor: pointer;
 }

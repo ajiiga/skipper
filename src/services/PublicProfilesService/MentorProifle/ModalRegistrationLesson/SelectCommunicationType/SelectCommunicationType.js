@@ -9,8 +9,7 @@ const SelectCommunicationType = ({communications, activeItem, setActiveItem}) =>
             {communications.map(x => <div key={x.ID} className={`${s.communication_item} ${activeItem === x.ID ? s.communication_item_active : ''}`} onClick={() => setActiveItem(x.ID)}>
                 <div className={s.communication_item_text}>
                     <div className={s.communication_item_title}>{x.Messenger[0].Name}</div>
-                    <div>ID ментора:</div>
-                    <div>{x.Login}</div>
+
                 </div>
                 <img src={messengersIcons[x.Messenger[0].Name]} className={s.communication_logo} alt=""/>
             </div>)}

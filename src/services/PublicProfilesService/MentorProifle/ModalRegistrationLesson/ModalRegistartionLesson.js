@@ -10,6 +10,7 @@ import FreeTimeCalendar from "../FreeTimeCalendar/FreeTimeCalendar";
 import FreeCalendarPicker from "../../../../components/UI/FreeCalendarPicker/FreeCalendarPicker";
 import StageDisplay from "./StageDisplay/StageDisplay";
 import SelectCommunicationType from "./SelectCommunicationType/SelectCommunicationType";
+import arrow from '../../../../static/img/Main/pointer.png'
 
 
 const ModalRegistrationLesson = ({classes, communications}) => {
@@ -72,7 +73,25 @@ const ModalRegistrationLesson = ({classes, communications}) => {
     }
 
     let handleNextStageButton = (stage_num) => {
+        if (stage_num === 4) {
+            closeModal()
+        }
         setStage(stage_num + 1)
+    }
+
+    let handlePrevStageButton = (stage_num) => {
+        setStage(stage_num - 1)
+        if (stage_num === 2) {
+            setTimeLessons(defaultState)
+        }
+
+        if (stage_num === 3) {
+            setCalendarState(decode(service[types[selectedType]].Time))
+        }
+
+        if (stage_num === 4) {
+            setActiveCommunication(undefined)
+        }
     }
 
     let decode = (calendar_code) => {
@@ -91,8 +110,6 @@ const ModalRegistrationLesson = ({classes, communications}) => {
         if (selectedType !== -1) {
             setCalendarState(decode(service[types[selectedType]].Time))
         }
-
-
     }, [selectedType])
 
     return (
@@ -109,7 +126,7 @@ const ModalRegistrationLesson = ({classes, communications}) => {
                 onClick={() => closeModal()}>
                 <div className={s.block} onClick={e => e.stopPropagation()}>
                     <div className={s.title_container}>
-                        <div/>
+                        {stage > 1 ? <img src={arrow} onClick={() => handlePrevStageButton(stage)} alt="" className={s.arrow}/> : <div/>}
                         <div className={s.title}>Тип занятия</div>
                         <img src={close} className={s.close} alt="" onClick={() => closeModal()}/>
                         <StageDisplay num={stage} />
@@ -131,7 +148,7 @@ const ModalRegistrationLesson = ({classes, communications}) => {
                     </div>
                     <div className={s.btn_container}>
                         <button disabled={disableStatus(stage)} onClick={() => handleNextStageButton(stage)}
-                                className={s.next_btn}>Дальше
+                                className={s.next_btn}>{stage !== 4? 'Дальше' : 'Перейти к оплате'}
                         </button>
                     </div>
                 </div>

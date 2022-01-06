@@ -1,6 +1,13 @@
 import {
-    AddCommunicationRequest, addEducationRequest, addWorkExperienceRequest, changeProfileImageRequest,
-    getMessengerListRequest, getMyCommunicationsRequest, getMyEducationRequest, getMyWorkExperienceRequest,
+    AddCommunicationRequest,
+    addEducationRequest,
+    addWorkExperienceRequest,
+    changeProfileImageRequest,
+    changeSpecializationRequest,
+    getMessengerListRequest,
+    getMyCommunicationsRequest,
+    getMyEducationRequest,
+    getMyWorkExperienceRequest,
     makeVerifyEmailRequest,
     UpdateProfileDataRequest
 } from "../api/api_private_profile";
@@ -102,6 +109,15 @@ class PrivateProfileStore {
     async addWorkExperience(name, first_year, last_year) {
         try {
             let r = await addWorkExperienceRequest(name, first_year, last_year)
+        }
+        catch (e) {
+
+        }
+    }
+
+    async changeSpecialization(specialization) {
+        try {
+            let r = await changeSpecializationRequest(specialization)
         }
         catch (e) {
 

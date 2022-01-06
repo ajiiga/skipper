@@ -194,7 +194,7 @@ const EditForm = () => {
 
 
                         <EmailConfirm/>
-
+                        <ChangeSpecialization />
 
                         <div className={s.block}>
                             <div className={s.block_title}>Пароль</div>
@@ -255,6 +255,47 @@ const EmailConfirm = () => {
         </Formik>)
 }
 
+const ChangeSpecialization = ({specialization}) => {
+    let [status, setStatus] = useState('')
+    const validationSchema = yup.object({
+        specialization: yup.string().required('Заполните поле с специализацией'),
+    })
+    return (
+        <Formik
+            initialValues={{
+                specialization: ''
+            }}
+            onSubmit={(values) => {
+                setStatus('')
+                privateProfileStore.changeSpecialization(values.specialization).then(x => setStatus('Специализация изменена'))
+            }}
+            validationSchema={validationSchema}>
+            {({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  isSubmitting,
+              }) => <form onSubmit={handleSubmit}>
+                <div className={s.block}>
+                    <div className={s.block_title}>Специализация</div>
+                    <div className={s.email_input_display}>
+                        <input type="text" name="specialization" value={values.specialization} onChange={handleChange} onBlur={handleBlur}
+                               placeholder={'Ваша специализация'}/>
+                        <div className={s.btn} onClick={handleSubmit}>Подтвердить</div>
+                    </div>
+                </div>
+                {errors.specialization && <div
+                    className={`${s.error_status} ${s.email_error}`}>{errors.specialization && touched.specialization && errors.specialization}</div>}
+                {status && <div className={`${s.good_status} ${s.email_error}`}>{status}</div>}
+            </form>
+
+            }
+        </Formik>)
+}
+
 
 const SetPhoto = () => {
     const validationSchema = yup.object({
@@ -263,7 +304,7 @@ const SetPhoto = () => {
                 if (!value) return false
                 return value.size < 5000000
             }).required(),
-            type: yup.string().oneOf(['image/png', 'image/jpeg'], 'Добавьте файл с правильным форматов').required(),
+            type: yup.string().oneOf(['image/png', 'image/jpeg'], 'Добавьте файл с правильным форматом').required(),
             name: yup.string().required()
         }).typeError('Добавьте файл'))
     })

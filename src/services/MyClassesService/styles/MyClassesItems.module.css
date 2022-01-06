@@ -1,0 +1,136 @@
+.container {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+    border-radius: 8px;
+    padding: 12px;
+    width: 45%;
+}
+
+.title_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name_container, .schedule_container, .communication_name_container, .under_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cube {
+    width: 10px;
+    height: 10px;
+    border: 2px solid #FEDC2E;
+    border-radius: 2px;
+    margin-right: 10px;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.right_title_btn {
+    padding: 3px 10px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-size: 12px;
+    width: 110px;
+}
+
+.tag_container {
+    display: flex;
+    margin-top: 5px;
+}
+
+.text {
+    padding: 7px 0;
+    font-size: 12px;
+}
+
+.text:first-child {
+    /*margin-top: 10px;*/
+}
+
+.schedule {
+    display: flex;
+}
+
+.schedule_item {
+    padding: 5px 10px;
+    background: rgba(242, 241, 242, 0.5);
+    border: 1px solid #828282;
+    border-radius: 8px;
+    text-align: center;
+    margin: 5px 0;
+    font-size: 12px;
+}
+
+.schedule_item:not(:last-child) {
+    margin-right: 10px;
+}
+
+.communication_price_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.communication_container {
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    width: 47%;
+    justify-content: space-between;
+    padding: 5px 12px;
+    font-size: 12px;
+}
+
+.communication_image {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.communication_name {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 24px;
+}
+
+.under_container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.button_containers {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat_btn, .confirm_btn {
+    border-radius: 8px;
+    padding: 5px 40px;
+    border: none;
+    font-weight: bold;
+    width: 48%;
+}
+
+.chat_btn {
+    background: #DADADA;
+}
+
+.confirm_btn {
+    background-color: #FEDC2E;
+}
+

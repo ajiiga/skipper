@@ -41,6 +41,10 @@ export let changeProfileImageRequest = (file) => {
     })
 }
 
+export let changeSpecializationRequest = (specialization) => {
+    return $api.post('/api/user/update-specialization', {specialization: specialization})
+}
+
 export let addEducationRequest = (name, first_year, second_year, degree) => $api.post('/api/education/add-user-education', {institution: name, start_year: first_year, end_year: second_year, degree: degree})
 
 export let addWorkExperienceRequest = (name, first_year, second_year) => $api.post('/api/work-experience/add-user-work-experience', {organization: name, start_year: first_year, end_year: second_year})

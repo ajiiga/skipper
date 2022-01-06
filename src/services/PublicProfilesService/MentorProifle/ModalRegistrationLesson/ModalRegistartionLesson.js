@@ -49,7 +49,6 @@ const ModalRegistrationLesson = ({classes, communications}) => {
         }
 
         if (stage_num === 2) {
-            console.log(timeLessons)
             return !(timeLessons.min15.count1 ||
                 timeLessons.min30.count1 ||
                 timeLessons.min30.count3 ||

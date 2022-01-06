@@ -5,7 +5,6 @@ import publicStore from "../../../../../store/publicStore";
 import { useHistory } from "react-router-dom"
 
 const MainSlider = ({items}) => {
-    console.log('items', items)
     let changeWidth = 305
     let [currentTranslate, setCurrentTranslate] = useState(0)
     let track = useRef()

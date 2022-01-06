@@ -15,9 +15,7 @@ const WorkExperienceForm = () => {
     let [works, setWorks] = useState([])
     useEffect(() => {
         privateProfileStore.getMyWorkExperience().then(x => {
-            console.log(x)
             let json_data = JSON.parse(x)
-            console.log('work', json_data)
             setWorks(json_data)
         })
     }, [])

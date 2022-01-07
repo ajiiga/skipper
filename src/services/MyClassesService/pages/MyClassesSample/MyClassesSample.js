@@ -18,7 +18,7 @@ const MyClassesSample = ({children}) => {
                 </div>
             </div>
             <div className={s.item_containers}>
-                <ConsiderationItem />
+                {children}
             </div>
         </div>
     );

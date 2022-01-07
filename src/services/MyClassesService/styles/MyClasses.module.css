@@ -78,4 +78,7 @@
 
 .item_containers {
     margin-top: 65px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }

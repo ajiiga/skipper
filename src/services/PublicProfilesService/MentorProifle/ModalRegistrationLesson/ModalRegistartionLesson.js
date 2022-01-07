@@ -40,6 +40,7 @@ const ModalRegistrationLesson = ({classes, communications}) => {
     let [stage, setStage] = useState(1)
     let [timeLessons, setTimeLessons] = useState(defaultState)
 
+    let [activeCount, setActiveCount] = useState(0)
 
 
 
@@ -63,7 +64,7 @@ const ModalRegistrationLesson = ({classes, communications}) => {
         }
 
         if (stage_num === 3) {
-            return false
+            return dates.length !== activeCount
         }
 
         if (stage_num === 4) {
@@ -85,7 +86,7 @@ const ModalRegistrationLesson = ({classes, communications}) => {
         }
 
         if (stage_num === 3) {
-            setCalendarState(decode(service[types[selectedType]].Time))
+            setDates([])
         }
 
         if (stage_num === 4) {
@@ -104,6 +105,7 @@ const ModalRegistrationLesson = ({classes, communications}) => {
 
     let [calendarState, setCalendarState] = useState(Array.from(Array(8), _ => Array(7).fill(0)))
     let [activeCommunication, setActiveCommunication] = useState(undefined)
+    let [dates, setDates] = useState([])
 
     useEffect(() => {
         if (selectedType !== -1) {
@@ -139,9 +141,9 @@ const ModalRegistrationLesson = ({classes, communications}) => {
                             setSelectedType={setSelectedType}
                         />}
                         {stage === 2 &&
-                        <SelectCountLesson lesson={service[types[selectedType]]} defaultState={defaultState}
+                        <SelectCountLesson setActiveCount={setActiveCount} lesson={service[types[selectedType]]} defaultState={defaultState}
                                            setTimeLessons={setTimeLessons} timeLessons={timeLessons}/>}
-                        {stage === 3 && <FreeCalendarPicker calendarState={calendarState} setCalendarState={setCalendarState} />}
+                        {stage === 3 && <FreeCalendarPicker activeCount={activeCount} defaultState={decode(service[types[selectedType]].Time)} dates={dates} setDates={setDates} calendarState={calendarState} setCalendarState={setCalendarState} />}
                         {stage === 4 && <SelectCommunicationType communications={communications} setActiveItem={setActiveCommunication} activeItem={activeCommunication} />}
 
                     </div>

@@ -14,7 +14,7 @@
 
 }
 
-.next_arrow {
+.next_arrow, .next_arrow_date {
     transform: rotate(-180deg);
 }
 
@@ -136,4 +136,16 @@
     font-weight: bold;
     width: 70%;
     margin: auto auto 40px;
+}
+
+.next_arrow_date, .prev_arrow_date {
+    cursor: pointer;
+}
+
+.next_arrow_date {
+    margin-left: 10px;
+}
+
+.prev_arrow_date {
+    margin-right: 10px;
 }

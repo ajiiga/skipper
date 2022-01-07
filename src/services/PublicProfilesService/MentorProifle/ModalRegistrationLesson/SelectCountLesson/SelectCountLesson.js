@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import s from '../ModalRegistrationLesson.module.css'
 
-const SelectCountLesson = ({lesson, timeLessons, setTimeLessons, defaultState}) => {
+const SelectCountLesson = ({lesson, timeLessons, setTimeLessons, defaultState, setActiveCount}) => {
 
 
 
 
 
     let handleBtn = (min, count) => {
+        setActiveCount(count)
         let deltaTimeLessons = {...defaultState}
         deltaTimeLessons[`min${min}`][`count${count}`] = !deltaTimeLessons[`min${min}`][`count${count}`]
         setTimeLessons(deltaTimeLessons)

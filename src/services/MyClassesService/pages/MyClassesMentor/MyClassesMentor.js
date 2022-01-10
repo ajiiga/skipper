@@ -3,6 +3,10 @@ import s from '../../styles/MyClasses.module.css'
 import MiniNavBar from "../../../../components/UI/MiniNavBar/MiniNavBar";
 import {Link, useLocation, Switch, Route, Redirect} from "react-router-dom";
 import ConsiderationItems from "./ConsiderationItems/ConsiderationItems";
+import PlannedItem from "./PlannedItems/PlannedItem";
+import PlannedItems from "./PlannedItems/PlannedItems";
+import CompletedItems from "./ CompletedItems/CompletedItems";
+import CanceledItems from "./CanceledItems/CanceledItems";
 
 const MyClassesMentor = () => {
     let location = useLocation()
@@ -29,7 +33,16 @@ const MyClassesMentor = () => {
                     <Route path={'/my-classes-mentor/consideration'}>
                         <ConsiderationItems />
                     </Route>
-                    {/*<Redirect to={'/my-classes-mentor/consideration'}/>*/}
+                    <Route path={'/my-classes-mentor/planned'}>
+                        <PlannedItems />
+                    </Route>
+                    <Route path={'/my-classes-mentor/completed'}>
+                        <CompletedItems />
+                    </Route>
+                    <Route path={'/my-classes-mentor/canceled'}>
+                        <CanceledItems />
+                    </Route>
+                    <Redirect to={'/my-classes-mentor/consideration'}/>
                 </Switch>
             </div>
         </div>

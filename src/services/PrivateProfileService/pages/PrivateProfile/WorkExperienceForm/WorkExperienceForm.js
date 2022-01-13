@@ -62,11 +62,11 @@ const WorkExperienceForm = () => {
                 <div style={{width: '100%'}}>
                     <div className={s.education_title}>Мой опыт работы</div>
                     <div className={s.com_items}>
-                        {works.map(x => <div className={s.education_item}>
+                        {works.length > 0 ? works.map(x => <div className={s.education_item}>
                             <div className={s.work_title}>{x.StartYear} - {x.EndYear}</div>
                             <div>{x.Organization}</div>
                             <div className={s.delete}>Удалить</div>
-                        </div>)}
+                        </div>) : <div className={s.zero_status}>Нет опыта работы</div>}
                     </div>
                 </div>
             </div>
@@ -76,6 +76,7 @@ const WorkExperienceForm = () => {
                     onSubmit={(values) => {
                         setIsFetching(true)
                         privateProfileStore.addWorkExperience(values.name, selectedFirstYear, selectedSecondYear).then(x => {
+                            setWorks([...works, {Organization: values.name, StartYear: selectedFirstYear, EndYear: selectedSecondYear}])
                             values.name = ''
                             setSelectedFirstYear('Начало')
                             setSelectedSecondYear('Конец')

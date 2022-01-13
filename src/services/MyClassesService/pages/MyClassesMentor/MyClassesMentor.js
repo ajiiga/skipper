@@ -11,8 +11,6 @@ import CanceledItems from "./CanceledItems/CanceledItems";
 const MyClassesMentor = () => {
     let location = useLocation()
 
-    console.log('location', location)
-
 
     return (
         <div className={s.container}>

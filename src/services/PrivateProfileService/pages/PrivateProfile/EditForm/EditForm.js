@@ -59,7 +59,7 @@ const EditForm = () => {
         first_name: yup.string().required('Поле "Имя" не заполнено'),
         second_name: yup.string().required('Поле "Фамилия" не заполнено'),
         patronymic: yup.string().required('Поле "Отчество" не заполнено'),
-        description: yup.string().max(400, 'Не много ли о себе рассказали? Для кого 400 символов написано'),
+        description: yup.string().max(400, 'Слишком много символов в описании'),
     })
 
     return (
@@ -150,7 +150,7 @@ const EditForm = () => {
                             <div className={s.block}>
                                 <div className={s.block_title}>Часовой пояс</div>
                                 <div className={s.block_select_timezone_container}>
-                                    <CustomMiniSelect list={[1, 2, 3, 4]} setSelected={setTimezone}
+                                    <CustomMiniSelect list={['(GMT+5) Екатеринбург', '(GMT-3) Лондон', '(GMT+2) Сидней', '(GMT+4) Москва', '(GMT-10) Манчестер']} setSelected={setTimezone}
                                                       selected={timezone}/>
                                 </div>
                             </div>
@@ -194,7 +194,7 @@ const EditForm = () => {
 
 
                         <EmailConfirm/>
-                        <ChangeSpecialization />
+                        {authStore.user.is_mentor && <ChangeSpecialization/>}
 
                         <div className={s.block}>
                             <div className={s.block_title}>Пароль</div>

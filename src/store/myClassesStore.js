@@ -51,7 +51,6 @@ class MyClassesStore {
     async updateMainClass(class_id, class_name, description, tags) {
         try {
             let r = await updateClassRequest(class_id, class_name, description, tags)
-            console.log('updateMainCLass', r.data)
         } catch (e) {
 
         }

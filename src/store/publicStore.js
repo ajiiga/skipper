@@ -35,7 +35,7 @@ class PublicStore {
 
     async getMainSection() {
         let r = await getMainSectionsRequest()
-        return r.data?.Main_catalog
+        return JSON.parse(r.data?.Main_catalog)
     }
 
     async getChildTags() {
@@ -55,6 +55,14 @@ class PublicStore {
     async getSearchClasses(search, page, limit) {
         let r = await getSearchClassesRequest(search, page, limit)
         return JSON.parse(r.data.catalog_of_mentors)
+    }
+
+    async initialMainPage() {
+        let r = await Promise.all([
+            await this.getChildTags(),
+            await this.getMainSection()
+        ])
+        return {tags: r[0], categories: r[1]}
     }
 
 }

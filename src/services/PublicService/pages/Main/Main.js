@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import s from '../../styles/Main.module.css'
 import img from '../../../../static/img/Main/main.svg'
 import search_icon from '../../../../static/img/Main/search_icon.png'
@@ -9,19 +9,26 @@ import authStore from "../../../../store/authStore";
 import publicStore from "../../../../store/publicStore";
 import Preloader from "../../../../components/UI/Preloader/Preloader";
 import {motion} from 'framer-motion'
+import MainInput from "./MainInput/MainInput";
 
 const Main = () => {
     let [isFetching, setIsFetching] = useState(true)
     let [items, setItems] = useState('')
+    let [tags, setTags] = useState([])
     let [searchQuery, setSearchQuery] = useState('')
 
     useEffect(() => {
-        publicStore.getMainSection().then(r => {
-            let jsonItems = JSON.parse(r)
-            setItems(jsonItems)
+        publicStore.initialMainPage().then(r => {
+            setItems(r.categories)
+            setTags(r.tags)
             setIsFetching(false)
         })
     }, [])
+
+    let showList = useMemo(() =>  {
+        return tags.filter(x => x.name3.toLowerCase().includes(searchQuery.toLowerCase()))
+    }, [searchQuery, tags])
+
 
     if (isFetching)
         return <Preloader/>
@@ -42,11 +49,7 @@ const Main = () => {
                 <div className={s.left_side}>
                     <h1 className={s.title}>Чему бы вы хотели <span className={s.yellow_text}>научиться</span> сегодня?
                     </h1>
-                    <div className={s.input_container}>
-                        <input value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} type="text"
-                               className={s.input} placeholder={'Тема консультации'}/>
-                        <img className={s.search_icon} src={search_icon} alt=""/>
-                    </div>
+                    <MainInput tags={showList} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
                     <MainSlider
                         items={items}/>
                 </div>

@@ -75,6 +75,7 @@ class AuthService {
     async registrationMenteeMentor(specialization, description, time, file) {
         try {
             let r = await registrationMenteeMentorRequest(specialization, description, time, file)
+            this.setTokensAndUser(r)
             return {response: true}
         } catch (e) {
             return {response: false, message: e?.response?.data?.error}

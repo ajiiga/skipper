@@ -31,11 +31,11 @@ const CommunicationsForm = ({listMessengers, listMyCommunications, setListMyComm
             </div>
 
             <div className={s.com_items}>
-                {listMyCommunications.length !== 0 && listMyCommunications.map(x => <div className={s.com_block}>
+                {listMyCommunications.length > 0 ? listMyCommunications.map(x => <div className={s.com_block}>
                     <div className={s.block_title}>{x.messenger}</div>
                     <input type="text" value={x.login}/>
                     <div className={s.delete}>Удалить</div>
-                </div>)}
+                </div>) : <div className={s.zero_status}>Нет способов коммуникаций</div>}
             </div>
             <ModalContainer active={active} setActive={setActive} title={'Добавление нового вида связи'}>
                 <Formik

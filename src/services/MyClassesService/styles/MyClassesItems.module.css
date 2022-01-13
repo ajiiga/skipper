@@ -103,6 +103,10 @@
     font-size: 12px;
 }
 
+.communication_container_mentee {
+    width: fit-content;
+}
+
 .communication_image {
     width: 30px;
     height: 30px;
@@ -141,7 +145,7 @@
 
 .chat_btn, .confirm_btn {
     border-radius: 8px;
-    padding: 5px 40px;
+    padding: 5px 0px;
     border: none;
     font-weight: bold;
     width: 48%;

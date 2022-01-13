@@ -112,7 +112,6 @@ const Search = () => {
                             deleteTag(x)
                         }}/></div>)}</div>
                     {
-                        // searchIsFetching ? <div/>:
                         classes.filter(x => {
                             let lenTags = x.classes.map(x => x.Tags.length)
                             return lenTags.reduce((previousValue, currentValue) => previousValue + currentValue, 0) !== 0

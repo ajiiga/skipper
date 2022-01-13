@@ -12,7 +12,7 @@
     align-items: center;
 }
 
-.title_btn {
+.title_btn, .title_btn_mentee {
     width: 20%;
     padding-bottom: 15px;
     border-bottom: 1px solid #AFAFAF;
@@ -20,6 +20,10 @@
     text-align: center;
     font-weight: bold;
     cursor: pointer;
+}
+
+.title_btn_mentee {
+    width: 25%;
 }
 
 .active_title_btn {

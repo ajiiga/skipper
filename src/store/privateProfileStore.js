@@ -1,12 +1,12 @@
 import {
     AddCommunicationRequest,
-    addEducationRequest,
+    addEducationRequest, addOtherInfoRequest,
     addWorkExperienceRequest,
     changeProfileImageRequest,
     changeSpecializationRequest,
     getMessengerListRequest,
     getMyCommunicationsRequest,
-    getMyEducationRequest,
+    getMyEducationRequest, getMyOtherInfoRequest,
     getMyWorkExperienceRequest,
     makeVerifyEmailRequest,
     UpdateProfileDataRequest
@@ -70,6 +70,16 @@ class PrivateProfileStore {
         }
     }
 
+    async getMyOtherInfo() {
+        try {
+            let r = await getMyOtherInfoRequest()
+            return JSON.parse(r.data.otherInfo)
+        }
+        catch (e) {
+            return []
+        }
+    }
+
     async AddCommunication(messenger_id, login) {
         let r = await AddCommunicationRequest(messenger_id, login)
     }
@@ -91,7 +101,6 @@ class PrivateProfileStore {
             authStore.setUser({...authStore.user, profile_picture: r.data.profile_picture})
         }
         catch (e) {
-            console.log(e)
         }
     }
 
@@ -109,6 +118,15 @@ class PrivateProfileStore {
     async addWorkExperience(name, first_year, last_year) {
         try {
             let r = await addWorkExperienceRequest(name, first_year, last_year)
+        }
+        catch (e) {
+
+        }
+    }
+
+    async addOtherInfo(data) {
+        try {
+            let r = await addOtherInfoRequest(data)
         }
         catch (e) {
 

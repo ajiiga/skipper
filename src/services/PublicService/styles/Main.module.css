@@ -20,10 +20,15 @@
     right: -80px;
 }
 
-.yellow_text {
+.yellow_text, .yellow_text_categorie {
     background-color: #FFDD2D;
     border-radius: 40px;
     padding: 2px 10px;
+    padding-bottom: 10px;
+}
+
+.yellow_text_categorie {
+    padding: 10px;
 }
 
 .search_icon {
@@ -71,6 +76,7 @@
     font-weight: bold;
     display: flex;
     align-items: center;
+    padding: 10px 15px;
 }
 
 .to_mentor_btn {
@@ -85,6 +91,36 @@
     width: 30px;
     margin-left: 10px;
 }
+
+.relative_container {
+    position: relative;
+}
+
+.dropdown_menu {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 3px 3px 10px 6px rgb(0 0 0 / 6%);
+    font-weight: 500;
+    color: #333;
+    width: 98%;
+    overflow-y: scroll;
+    max-height: 300px;
+    z-index: 1;
+}
+
+.dropdown_item {
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dropdown_item_active {
+    background: #f4f4f4;
+}
+
 
 @media (max-width: 1680px) {
     .main_img {

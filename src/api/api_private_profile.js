@@ -29,6 +29,8 @@ export let getMyEducationRequest = () => $api.get('/api/education/user-education
 
 export let getMyWorkExperienceRequest = () => $api.get('/api/work-experience/user-work-experience')
 
+export let getMyOtherInfoRequest = () => $api.get('/api/other-info/user-other-info')
+
 export let changeProfileImageRequest = (file) => {
     let bodyFormData = new FormData()
     bodyFormData.set('file', file)
@@ -48,3 +50,5 @@ export let changeSpecializationRequest = (specialization) => {
 export let addEducationRequest = (name, first_year, second_year, degree) => $api.post('/api/education/add-user-education', {institution: name, start_year: first_year, end_year: second_year, degree: degree})
 
 export let addWorkExperienceRequest = (name, first_year, second_year) => $api.post('/api/work-experience/add-user-work-experience', {organization: name, start_year: first_year, end_year: second_year})
+
+export let addOtherInfoRequest = (data) => $api.post('/api/other-info/add-user-other-info', {data: data})

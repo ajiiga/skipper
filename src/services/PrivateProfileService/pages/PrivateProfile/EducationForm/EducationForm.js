@@ -64,7 +64,8 @@ const EducationForm = () => {
             </div>
             <div style={{width: '100%'}}>
                 <div className={s.education_title}>Мое образование</div>
-                {educations.map(x => <div className={s.education_items}>
+                <div className={s.com_items}>
+                {educations.length > 0 ? educations.map(x => <div>
                     <div className={s.education_item}>
                         <span className={s.education_name_title}>
                             {x.StartYear} - {x.EndYear}<br/>
@@ -72,7 +73,8 @@ const EducationForm = () => {
                         </span>
                         <div className={s.delete}>Удалить</div>
                     </div>
-                </div>)}
+                </div>) : <div className={s.zero_status}>Нет образования</div>}
+                </div>
             </div>
             <ModalContainer title={'Добавление новой информации об образовании'} setActive={setActive} active={active}>
                 <Formik
@@ -80,6 +82,7 @@ const EducationForm = () => {
                     onSubmit={(values) => {
                         setIsFetching(true)
                         privateProfileStore.addEducation(values.name, selectedFirstYear, selectedSecondYear, values.degree).then(x => {
+                            setEducations([...educations, {Degree: values.degree, EndYear: selectedSecondYear, Institution: values.name, StartYear: selectedFirstYear}])
                             values.name = ''
                             values.degree = ''
                             setSelectedFirstYear('Начало')

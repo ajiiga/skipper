@@ -66,7 +66,7 @@ const WorkExperienceForm = () => {
                             <div className={s.work_title}>{x.StartYear} - {x.EndYear}</div>
                             <div>{x.Organization}</div>
                             <div className={s.delete}>Удалить</div>
-                        </div>) : <div className={s.zero_status}>Нет опыта работы</div>}
+                        </div>) : <div className={s.zero_status}>Нет данных об опыте работы</div>}
                     </div>
                 </div>
             </div>

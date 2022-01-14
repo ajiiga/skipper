@@ -39,7 +39,7 @@ const AchievementsForm = () => {
                         {achievements.length > 0 ? achievements.map(x => <div className={s.achievement_item}>
                             <div className={s.achievement_title}>{x.Data}</div>
                             <div className={s.delete}>Удалить</div>
-                        </div>) : <div className={s.zero_status}>У вас нет достижений</div>}
+                        </div>) : <div className={s.zero_status}>Нет данных об достижениях</div>}
                     </div>
                 </div>
             </div>

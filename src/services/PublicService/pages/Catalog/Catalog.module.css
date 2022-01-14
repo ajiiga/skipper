@@ -9,6 +9,7 @@
 
 .sidebar_container {
     height: fit-content;
+    width: 20%;
 }
 
 .fake_sidebar {

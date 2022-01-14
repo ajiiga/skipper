@@ -9,7 +9,7 @@ import Reviews from "../../../components/UI/Reviews/Reviews";
 import publicProfileStore from "../../../store/publicProfileStore";
 import Preloader from "../../../components/UI/Preloader/Preloader";
 import {API_URL} from "../../../api/api_setting";
-import { useHistory } from "react-router-dom"
+import {useHistory} from "react-router-dom"
 import RateDisplay from "../../../components/UI/RateDisplay/RateDisplay";
 import ComplainModal from "../../../components/UI/ComplainModal/ComplainModal";
 
@@ -51,7 +51,7 @@ const MenteeProfile = ({}) => {
         10: 'октября',
         11: 'ноября',
         12: 'декабря'
-}
+    }
 
 
     return (
@@ -68,8 +68,9 @@ const MenteeProfile = ({}) => {
                             </div>
 
                             <div className={s.rate}>
-                                <RateDisplay rate={4.2} />
-                                <div className={s.date}>На Skipper с {user.day} {monthName[user.month]} {user.year}</div>
+                                <RateDisplay rate={4.2}/>
+                                <div className={s.date}>На Skipper
+                                    с {user.day} {monthName[parseInt(user.month)]} {user.year}</div>
                                 <div className={s.stat_count}>248 занятий</div>
                             </div>
                         </div>
@@ -85,25 +86,27 @@ const MenteeProfile = ({}) => {
 
                     <div className={s.info_container}>
                         <div className={s.title}>Статистика занятий</div>
-                        <LessonStatistics />
+                        <LessonStatistics/>
                     </div>
-                    <div className={s.hate_buttons}>
-                        <div className={s.btn} onClick={() => setActive(true)}>
-                            Пожаловаться
-                        </div>
-                        <div className={s.btn}>
-                            Заблокировать профиль
+                    <div className={s.mentee_hate_buttons}>
+                        <div className={s.hate_buttons}>
+                            <div className={s.btn} onClick={() => setActive(true)}>
+                                Пожаловаться
+                            </div>
+                            <div className={s.btn}>
+                                Заблокировать профиль
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className={s.right_side}>
                     <div className={s.reviews_block}>
                         <div className={s.title}>Отзывы</div>
-                        <Reviews n={3} />
+                        <Reviews n={3}/>
                     </div>
                 </div>
             </div>
-            <ComplainModal active={active} setActive={setActive} />
+            <ComplainModal active={active} setActive={setActive}/>
         </div>
     );
 };

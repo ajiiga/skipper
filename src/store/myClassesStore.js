@@ -109,7 +109,7 @@ class MyClassesStore {
         }
 
         if (turnkey_state.valid) {
-            let time = [].concat(...practice_class_state.calendar).join('')
+            let time = [].concat(...turnkey_state.calendar).join('')
             let r = await createTurnkeyClassRequest(
                 parent_id,
                 time,

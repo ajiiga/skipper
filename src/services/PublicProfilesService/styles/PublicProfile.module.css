@@ -88,7 +88,8 @@
     display: flex;
     width: 400px;
     justify-content: space-between;
-    margin-top: 162px;
+    position: absolute;
+    bottom: 0;
 }
 
 .btn {
@@ -110,12 +111,21 @@
     box-sizing: border-box;
 }
 
+.reviews_block {
+    height: 100%;
+}
+
+.mentee_hate_buttons .hate_buttons {
+    bottom: -80px;
+}
+
 .right_side {
     width: 28%;
 }
 
 .left_side {
     width: 67%;
+    position: relative;
 }
 
 .stat_count {

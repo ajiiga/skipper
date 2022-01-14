@@ -73,7 +73,7 @@ const EducationForm = () => {
                         </span>
                         <div className={s.delete}>Удалить</div>
                     </div>
-                </div>) : <div className={s.zero_status}>Нет образования</div>}
+                </div>) : <div className={s.zero_status}>Нет данных об образовании</div>}
                 </div>
             </div>
             <ModalContainer title={'Добавление новой информации об образовании'} setActive={setActive} active={active}>

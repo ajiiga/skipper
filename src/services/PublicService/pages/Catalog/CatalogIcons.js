@@ -12,16 +12,16 @@ import i_11 from '../../../../static/img/Catalog/CatalogIcons/11.svg'
 import i_12 from '../../../../static/img/Catalog/CatalogIcons/12.svg'
 
 export let icons = {
-    1: i_1,
-    2: i_2,
-    3: i_3,
-    4: i_4,
-    5: i_5,
-    6: i_6,
-    7: i_7,
-    8: i_8,
-    9: i_9,
-    10: i_10,
-    11: i_11,
-    12: i_12
+    0: i_1,
+    1: i_2,
+    2: i_3,
+    3: i_4,
+    4: i_5,
+    5: i_6,
+    6: i_7,
+    7: i_8,
+    8: i_9,
+    9: i_10,
+    10: i_11,
+    11: i_12
 }

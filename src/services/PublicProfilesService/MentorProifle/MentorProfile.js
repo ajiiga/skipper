@@ -125,9 +125,10 @@ const MentorProfile = () => {
                     <div className={s.title}>Занятия</div>
                     <div>
 
-                        {   JSON.parse(user.classes).map((x, index) =>
+                        {JSON.parse(user.classes).map((x, index) =>
                             <div className={s.service_container} key={index}>
-                                <SearchService id={id} service_id={x.ID} name={x.ClassName} description={x.Description} tags={(x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0].name3))}/>
+                                <SearchService id={id} service_id={x.ID} name={x.ClassName} description={x.Description}
+                                               tags={(x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0].name3))}/>
                             </div>)
                         }
 
@@ -175,9 +176,9 @@ const MentorProfile = () => {
                                     }
                                 </div>
                                 <div>
-                                    <main className={s.summary_block}>
-                                        Место №3 во всероссийском конкурсе “Алло, мы ищем таланты”
-                                    </main>
+                                    {JSON.parse(user.other_info).map(x => <main className={s.summary_block}>
+                                        {x.Data}
+                                    </main>)}
                                 </div>
                             </div>
                         </div>
@@ -200,7 +201,8 @@ const MentorProfile = () => {
                 <ComplainModal active={active} setActive={setActive}/>
                 {
                     <Route path={`/mentor-profile/${id}/:service_id`}>
-                        <ModalRegistrationLesson classes={JSON.parse(user.classes)} communications={user.communications} />
+                        <ModalRegistrationLesson classes={JSON.parse(user.classes)}
+                                                 communications={user.communications}/>
                     </Route>
                 }
             </div>

@@ -194,7 +194,7 @@ const EditForm = () => {
 
 
                         <EmailConfirm/>
-                        {authStore.user.is_mentor && <ChangeSpecialization/>}
+                        {authStore.user.is_mentor && <ChangeSpecialization specialization={authStore.user.specialization}/>}
 
                         <div className={s.block}>
                             <div className={s.block_title}>Пароль</div>
@@ -263,7 +263,7 @@ const ChangeSpecialization = ({specialization}) => {
     return (
         <Formik
             initialValues={{
-                specialization: ''
+                specialization: specialization
             }}
             onSubmit={(values) => {
                 setStatus('')

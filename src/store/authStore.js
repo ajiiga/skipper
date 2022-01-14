@@ -32,8 +32,13 @@ class AuthService {
     }
 
     async checkStatus() {
-        let r = await getStatusRequest()
-        this.setUser(r.data)
+        try {
+            let r = await getStatusRequest()
+            this.setUser(r.data)
+        }
+        catch (e) {
+            this.logout()
+        }
     }
 
     setTokensAndUser = (response) => {

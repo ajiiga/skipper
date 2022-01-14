@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './SearchItem.module.css'
 import profile_img from '../../../../../static/img/profile-img.jpg'
 import black_heart from '../../../../../static/img/Search/black_heart.svg'
@@ -10,6 +10,10 @@ import {API_URL} from "../../../../../api/api_setting";
 import {Link} from "react-router-dom";
 
 const SearchItem = ({id, first_name, second_name, specialization, description, picture, classes, tags}) => {
+    let [price, setPrice] = useState(Math.round(Math.random() * (5000 - 500) + 500))
+
+
+
     return (
         <div className={s.container}>
             <div className={s.profile}>
@@ -27,7 +31,7 @@ const SearchItem = ({id, first_name, second_name, specialization, description, p
                 <div className={s.display}>
                     <Rating num={4.7}/>
                     <div className={s.price_display}>
-                        <div className={s.price}>$17</div>
+                        <div className={s.price}>{price}₽</div>
                         <div className={s.price_description}>средняя цена занятия</div>
                     </div>
                     <FollowButton/>

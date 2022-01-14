@@ -2,14 +2,42 @@ import React from 'react';
 import s from './FreeTimeCalendar.module.css'
 import arrow from '../../../../static/img/FreeTimeCalendar/arrow.svg'
 
-const FreeTimeCalendar = () => {
+const FreeTimeCalendar = ({classes}) => {
+
+    let allTimes = []
+    classes.forEach(x => {
+        allTimes.push(x.KeyClass.Time)
+        allTimes.push(x.PracticClass.Time)
+        allTimes.push(x.TheoreticClass.Time)
+    })
+
+    let result = "00000000000000000000000000000000000000000000000000000000".split('')
+    allTimes.filter(x => x !== '').forEach((x, index) => {
+        x.split('').forEach((y, index) => {
+            if (y == 1) {
+                result[index] = '1'
+            }
+        })
+    })
+    result = result.join('')
+
+    let decode = (calendar_code) => {
+        let res = []
+        for (let i = 0; i < 8; i++) {
+            res.push(calendar_code.slice(i * 7, (i + 1) * 7))
+        }
+        return res.map(x => x.split('').map(x => parseInt(x)))
+    }
+
+
+
     return (
         <div className={s.container}>
-            <div className={s.change_week_display}>
-                <img src={arrow} className={s.prev_arrow} alt=""/>
-                <div className={s.change_week_text}>май, 18 - май, 24</div>
-                <img src={arrow} className={s.next_arrow} alt=""/>
-            </div>
+            {/*<div className={s.change_week_display}>*/}
+            {/*    <img src={arrow} className={s.prev_arrow} alt=""/>*/}
+            {/*    <div className={s.change_week_text}>май, 18 - май, 24</div>*/}
+            {/*    <img src={arrow} className={s.next_arrow} alt=""/>*/}
+            {/*</div>*/}
             <div className={s.content_container}>
                 <div className={s.times}>
                     <div className={s.time}>00:00-03:00</div>
@@ -47,78 +75,10 @@ const FreeTimeCalendar = () => {
                     </div>
                     <div>
                         <div className={s.calendar}>
-                            <div className={s.content_blocks}>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                            </div>
-                            <div className={s.content_blocks}>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                            </div>
-                            <div className={s.content_blocks}>
-                                <div className={`${s.content_block} ${s.free_content_block}`}/>
-                                <div className={`${s.content_block} ${s.free_content_block}`}/>
-                                <div className={s.content_block}/>
-                                <div className={`${s.content_block} ${s.free_content_block}`}/>
-                                <div className={`${s.content_block} ${s.free_content_block}`}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                            </div>
-                            <div className={s.content_blocks}>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                            </div>
-                            <div className={s.content_blocks}>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                            </div>
-                            <div className={s.content_blocks}>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                            </div>
-                            <div className={s.content_blocks}>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                            </div>
-                            <div className={s.content_blocks}>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                                <div className={s.content_block}/>
-                            </div>
+                            {decode(result).map(x => <div className={s.content_blocks}>
+                                {x.map(y => <div className={`${s.content_block} ${y == 1 ? s.free_content_block : ''}`}/>)}
+                            </div>)}
+
                         </div>
                         <div className={s.example_display}>
                             <span className={s.free_example}/> - есть возможность записи <span

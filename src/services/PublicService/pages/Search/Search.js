@@ -15,7 +15,7 @@ import {motion} from 'framer-motion'
 
 const Search = () => {
 
-    let list = ['до $5', '$5-$10', '$10-$50', 'больше $500', 'All']
+    let list = ['до 500₽', '500₽ - 1000₽', '1000₽ - 2000₽', '2000₽ - 5000₽', 'Все']
 
     let [tagList, setTagList] = useState([])
 
@@ -71,7 +71,7 @@ const Search = () => {
                 tags: idTags
             }
             let strTags = idTags.join(',')
-            publicStore.getSearchClasses(strTags === "" ? undefined : strTags, 1, 10).then(x => {
+            publicStore.getSearchClasses(strTags === "" ? undefined : strTags, 1, 100).then(x => {
                 setClasses(x)
                 setSearchIsFetching(false)
             })

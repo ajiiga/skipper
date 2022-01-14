@@ -77,7 +77,7 @@ const MentorProfile = () => {
                                 <div className={s.rate}>
                                     <RateDisplay rate={4.2}/>
                                     <div className={s.date}>На Skipper
-                                        с {user.day} {monthName[user.month]} {user.year}</div>
+                                        с {user.day} {monthName[parseInt(user.month)]} {user.year}</div>
                                     <div className={s.stat_count}>248 занятий 46 студентов</div>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@ const MentorProfile = () => {
                     <div className={s.right_side}>
                         <div className={s.free_time_block}>
                             <div className={s.title}>Свободное время</div>
-                            <FreeTimeCalendar/>
+                            <FreeTimeCalendar classes={JSON.parse(user.classes)}/>
                         </div>
                     </div>
                 </div>

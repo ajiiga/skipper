@@ -74,6 +74,13 @@ const ModalRegistrationLesson = ({classes, communications}) => {
 
     let handleNextStageButton = (stage_num) => {
         if (stage_num === 4) {
+            console.log({
+                class_type: types[selectedType],
+                class_id: params.service_id,
+                mentor_id: service?.ParentId,
+                time: dates,
+                communication: activeCommunication
+            })
             closeModal()
         }
         setStage(stage_num + 1)

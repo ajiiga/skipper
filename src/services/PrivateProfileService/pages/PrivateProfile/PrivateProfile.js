@@ -38,7 +38,7 @@ const PrivateProfile = () => {
 
     return (
         <div className={s.container}>
-            <MiniNavBar child={'Личный профиль'}/>
+            <MiniNavBar child={'Личный кабинет'}/>
             <div className={s.content}>
                 <div className={s.title}>Общая информация</div>
                 <EditForm />

@@ -16,7 +16,7 @@ const CatalogLinkSearch = ({name, count}) => {
     return (
             <div className={s.container} onClick={() => toSearch()}>
                 <div className={s.name}>{name}</div>
-                <div className={s.count}>{count}</div>
+                <div className={s.count}></div>
                 <div className={s.arrow}><img src={arrow} alt=""/></div>
             </div>
     );

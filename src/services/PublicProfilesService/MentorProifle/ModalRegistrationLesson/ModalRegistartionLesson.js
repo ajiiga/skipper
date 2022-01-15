@@ -23,6 +23,21 @@ const ModalRegistrationLesson = ({classes, communications}) => {
         minIndividualTerm: {count1: false}
     }
 
+    let getTrueKey = (state) => {
+        let keys = Object.keys(state)
+        let res = []
+        keys.forEach(key => {
+            let childKeys = Object.keys(state[key])
+            childKeys.forEach(childKey => {
+                if (state[key][childKey]) {
+                    res = [key.replace('min', ''), childKey.replace('count', '')]
+                }
+            })
+        })
+        return res
+    }
+
+
     let types = ['TheoreticClass', 'PracticClass', 'KeyClass']
     let params = useParams()
     let history = useHistory()
@@ -74,13 +89,24 @@ const ModalRegistrationLesson = ({classes, communications}) => {
 
     let handleNextStageButton = (stage_num) => {
         if (stage_num === 4) {
-            console.log({
-                class_type: types[selectedType],
+            debugger
+            let [time, count] =getTrueKey(timeLessons)
+            let service_type_key = types[selectedType]
+            let request = {
+                class_type: service_type_key,
                 class_id: params.service_id,
                 mentor_id: service?.ParentId,
                 time: dates,
                 communication: activeCommunication
-            })
+
+            }
+
+            request[`duration_${time}_${count}`] = true
+
+            request[`price_${time}_${count}`] = service[service_type_key][`Price${time}`] * parseInt(count)
+
+            console.log(request)
+
             closeModal()
         }
         setStage(stage_num + 1)

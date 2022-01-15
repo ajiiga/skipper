@@ -7,7 +7,7 @@ const ThemeBlock = ({name, img, index, setActiveTheme, isActiveTheme}) => {
         <div className={s.container} onClick={() => setActiveTheme(index)}>
             <div className={`${s.left_side} ${isActiveTheme ? s.active: ''}`}>
                 <img src={img} alt=""/>
-                {name.length > 15? `${name.slice(0, 15)}...` : name}
+                {name.length > 20? `${name.slice(0, 20)}...` : name}
             </div>
             <img src={arrow} alt=""/>
         </div>

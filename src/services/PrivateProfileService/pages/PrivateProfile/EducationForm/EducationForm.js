@@ -71,7 +71,11 @@ const EducationForm = () => {
                             {x.StartYear} - {x.EndYear}<br/>
                             {x.Degree}, {x.Institution}
                         </span>
-                        <div className={s.delete}>Удалить</div>
+                        <div className={s.delete} onClick={() => {
+                            privateProfileStore.deleteEducation(x.ID).then(r => {
+                                setEducations([...educations].filter(el => el.ID !== x.ID))
+                            })
+                        }}>Удалить</div>
                     </div>
                 </div>) : <div className={s.zero_status}>Нет данных об образовании</div>}
                 </div>
@@ -82,7 +86,7 @@ const EducationForm = () => {
                     onSubmit={(values) => {
                         setIsFetching(true)
                         privateProfileStore.addEducation(values.name, selectedFirstYear, selectedSecondYear, values.degree).then(x => {
-                            setEducations([...educations, {Degree: values.degree, EndYear: selectedSecondYear, Institution: values.name, StartYear: selectedFirstYear}])
+                            setEducations([...educations, {ID: x, Degree: values.degree, EndYear: selectedSecondYear, Institution: values.name, StartYear: selectedFirstYear}])
                             values.name = ''
                             values.degree = ''
                             setSelectedFirstYear('Начало')

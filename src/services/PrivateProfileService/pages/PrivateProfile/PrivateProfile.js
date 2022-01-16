@@ -22,6 +22,7 @@ const PrivateProfile = () => {
             setListMessengers(r.messengers)
             let deltaMyCommunications = r.myCommunications.map(x => {
                 return {
+                    ID: x.ID,
                     login: x.Login,
                     messenger: x.Messenger[0].Name
                 }

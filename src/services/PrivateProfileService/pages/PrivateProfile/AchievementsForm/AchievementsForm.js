@@ -38,7 +38,11 @@ const AchievementsForm = () => {
                     <div className={s.com_items}>
                         {achievements.length > 0 ? achievements.map(x => <div className={s.achievement_item}>
                             <div className={s.achievement_title}>{x.Data}</div>
-                            <div className={s.delete}>Удалить</div>
+                            <div className={s.delete} onClick={() => {
+                                privateProfileStore.deleteOtherInfo(x.ID).then(r => {
+                                    setAchievements([...achievements].filter(el => el.ID !== x.ID))
+                                })
+                            }}>Удалить</div>
                         </div>) : <div className={s.zero_status}>Нет данных об достижениях</div>}
                     </div>
                 </div>
@@ -49,7 +53,7 @@ const AchievementsForm = () => {
                     onSubmit={(values) => {
                         setIsFetching(true)
                         privateProfileStore.addOtherInfo(values.name).then(x => {
-                            setAchievements([...achievements, {Data: values.name}])
+                            setAchievements([...achievements, {ID: x, Data: values.name}])
                             values.name = ''
                             setIsFetching(false)
                             setActive(false)

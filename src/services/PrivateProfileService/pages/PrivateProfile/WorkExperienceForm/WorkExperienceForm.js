@@ -65,7 +65,11 @@ const WorkExperienceForm = () => {
                         {works.length > 0 ? works.map(x => <div className={s.education_item}>
                             <div className={s.work_title}>{x.StartYear} - {x.EndYear}</div>
                             <div>{x.Organization}</div>
-                            <div className={s.delete}>Удалить</div>
+                            <div className={s.delete} onClick={() => {
+                                privateProfileStore.deleteWorkExperience(x.ID).then(r => {
+                                    setWorks([...works].filter(el => el.ID !== x.ID))
+                                })
+                            }}>Удалить</div>
                         </div>) : <div className={s.zero_status}>Нет данных об опыте работы</div>}
                     </div>
                 </div>
@@ -75,11 +79,12 @@ const WorkExperienceForm = () => {
                     initialValues={{name: ''}}
                     onSubmit={(values) => {
                         setIsFetching(true)
-                        privateProfileStore.addWorkExperience(values.name, selectedFirstYear, selectedSecondYear).then(x => {
+                        privateProfileStore.addWorkExperience(values.name, selectedFirstYear.toString(), selectedSecondYear.toString()).then(x => {
                             setWorks([...works, {
+                                ID: x,
                                 Organization: values.name,
-                                StartYear: selectedFirstYear,
-                                EndYear: selectedSecondYear
+                                StartYear: selectedFirstYear.toString(),
+                                EndYear: selectedSecondYear.toString()
                             }])
                             values.name = ''
                             setSelectedFirstYear('Начало')

@@ -1,18 +1,25 @@
 import {
     AddCommunicationRequest,
-    addEducationRequest, addOtherInfoRequest,
+    addEducationRequest,
+    addOtherInfoRequest,
     addWorkExperienceRequest,
     changeProfileImageRequest,
     changeSpecializationRequest,
+    deleteCommunicationRequest,
+    deleteEducationRequest,
+    deleteOtherInfoRequest,
+    deleteWorkExperienceRequest,
     getMessengerListRequest,
     getMyCommunicationsRequest,
-    getMyEducationRequest, getMyOtherInfoRequest,
+    getMyEducationRequest,
+    getMyOtherInfoRequest,
     getMyWorkExperienceRequest,
     makeVerifyEmailRequest,
     UpdateProfileDataRequest
 } from "../api/api_private_profile";
 import {makeAutoObservable} from "mobx";
 import authStore from "./authStore";
+import {deleteClassRequest} from "../api/api_my_classes";
 
 
 class PrivateProfileStore {
@@ -80,8 +87,14 @@ class PrivateProfileStore {
         }
     }
 
-    async AddCommunication(messenger_id, login) {
+    async addCommunication(messenger_id, login) {
         let r = await AddCommunicationRequest(messenger_id, login)
+        return r.data.id
+    }
+
+    async deleteCommunication(id) {
+        let r = await deleteCommunicationRequest(id)
+        return r.data
     }
 
     async initializationPrivateProfile() {
@@ -109,6 +122,16 @@ class PrivateProfileStore {
     async addEducation(name, first_year, last_year, degree) {
         try {
             let r = await addEducationRequest(name, first_year, last_year, degree)
+            return r.data.id
+        }
+        catch (e) {
+
+        }
+    }
+
+    async deleteEducation(id) {
+        try {
+            let r = await deleteEducationRequest(id)
         }
         catch (e) {
 
@@ -118,29 +141,42 @@ class PrivateProfileStore {
     async addWorkExperience(name, first_year, last_year) {
         try {
             let r = await addWorkExperienceRequest(name, first_year, last_year)
+            return r.data.id
         }
         catch (e) {
 
         }
+    }
+
+    async deleteWorkExperience(id) {
+        let r = await deleteWorkExperienceRequest(id)
+        return r.data
     }
 
     async addOtherInfo(data) {
         try {
             let r = await addOtherInfoRequest(data)
+            return r.data.id
         }
         catch (e) {
 
         }
+    }
+
+    async deleteOtherInfo(id) {
+        let r = deleteOtherInfoRequest(id)
     }
 
     async changeSpecialization(specialization) {
         try {
             let r = await changeSpecializationRequest(specialization)
+            return r.data.id
         }
         catch (e) {
 
         }
     }
+
 
 }
 

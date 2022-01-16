@@ -34,7 +34,12 @@ const CommunicationsForm = ({listMessengers, listMyCommunications, setListMyComm
                 {listMyCommunications.length > 0 ? listMyCommunications.map(x => <div className={s.com_block}>
                     <div className={s.block_title}>{x.messenger}</div>
                     <input type="text" value={x.login}/>
-                    <div className={s.delete}>Удалить</div>
+                    <div className={s.delete} onClick={() => {
+                        debugger
+                        privateProfileStore.deleteCommunication(x.ID).then(r => {
+                            setListMyCommunications([...listMyCommunications].filter(el => el.ID !== x.ID))
+                        })
+                    }}>Удалить</div>
                 </div>) : <div className={s.zero_status}>Нет способов коммуникаций</div>}
             </div>
             <ModalContainer active={active} setActive={setActive} title={'Добавление нового вида связи'}>
@@ -45,9 +50,9 @@ const CommunicationsForm = ({listMessengers, listMyCommunications, setListMyComm
                     onSubmit={(values) => {
                         setIsFetching(true)
                         let messenger_id = listMessengers.filter(x => x.Name === selected)[0].ID
-                        privateProfileStore.AddCommunication(messenger_id, values.login).then(x =>{
+                        privateProfileStore.addCommunication(messenger_id, values.login).then(x =>{
                             setIsFetching(false)
-                            setListMyCommunications([...listMyCommunications, {login: values.login, messenger: selected}])
+                            setListMyCommunications([...listMyCommunications, {ID: x, login: values.login, messenger: selected}])
                             setActive(false)
                         })
                     }}

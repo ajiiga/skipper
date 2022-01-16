@@ -21,6 +21,10 @@ export let AddCommunicationRequest = (messenger_id, login) => {
     return $api.post('/api/communication/create-user-communication', {messenger_id: messenger_id, login: login})
 }
 
+export let deleteCommunicationRequest = (id) => {
+    return $api.delete(`/api/communication/user-communication/${id}`)
+}
+
 export let getMessengerListRequest = () => $api.get('api/communication/messenger-list')
 
 export let getMyCommunicationsRequest = () => $api.get('api/communication/user-communications')
@@ -49,6 +53,12 @@ export let changeSpecializationRequest = (specialization) => {
 
 export let addEducationRequest = (name, first_year, second_year, degree) => $api.post('/api/education/add-user-education', {institution: name, start_year: first_year, end_year: second_year, degree: degree})
 
+export let deleteEducationRequest = (id) => $api.delete(`/api/education/user-education/${id}`)
+
 export let addWorkExperienceRequest = (name, first_year, second_year) => $api.post('/api/work-experience/add-user-work-experience', {organization: name, start_year: first_year, end_year: second_year})
 
+export let deleteWorkExperienceRequest = (id) => $api.delete(`/api/work-experience/user-work-experience/${id}`)
+
 export let addOtherInfoRequest = (data) => $api.post('/api/other-info/add-user-other-info', {data: data})
+
+export let deleteOtherInfoRequest = (id) => $api.delete(`/api/other-info/user-other-info/${id}`)

@@ -335,7 +335,15 @@
     width: 130px;
 }
 
+.select_container_work {
+    width: 180px;
+}
+
 .select_container:not(:last-child) {
+    margin-right: 20px;
+}
+
+.select_container_work:not(:last-child) {
     margin-right: 20px;
 }
 

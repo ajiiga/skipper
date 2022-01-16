@@ -53,7 +53,7 @@ const WorkExperienceForm = () => {
                 <div className={s.set_photo_display}>
                     <img src={default_img} alt=""/>
                     <div className={s.btn_container}>
-                        <div className={s.btn}  onClick={() => setActive(true)}>Добавить</div>
+                        <div className={s.btn} onClick={() => setActive(true)}>Добавить</div>
                     </div>
                     <div className={s.description}>
                         Добавить новый опыт работы
@@ -76,7 +76,11 @@ const WorkExperienceForm = () => {
                     onSubmit={(values) => {
                         setIsFetching(true)
                         privateProfileStore.addWorkExperience(values.name, selectedFirstYear, selectedSecondYear).then(x => {
-                            setWorks([...works, {Organization: values.name, StartYear: selectedFirstYear, EndYear: selectedSecondYear}])
+                            setWorks([...works, {
+                                Organization: values.name,
+                                StartYear: selectedFirstYear,
+                                EndYear: selectedSecondYear
+                            }])
                             values.name = ''
                             setSelectedFirstYear('Начало')
                             setSelectedSecondYear('Конец')
@@ -113,13 +117,13 @@ const WorkExperienceForm = () => {
                                     <div className={s.form_block_title}>
                                         Годы работы
                                     </div>
-                                    <div className={s.select_container}><CustomMiniSelect selected={selectedFirstYear}
+                                    <div className={s.select_container_work}><CustomMiniSelect selected={selectedFirstYear}
                                                                                           setSelected={setSelectedFirstYear}
                                                                                           list={range(1950, 2021, 1).reverse()}/>
                                     </div>
-                                    <div className={s.select_container}><CustomMiniSelect selected={selectedSecondYear}
+                                    <div className={s.select_container_work}><CustomMiniSelect selected={selectedSecondYear}
                                                                                           setSelected={setSelectedSecondYear}
-                                                                                          list={range(1950, 2021, 1).reverse()}/>
+                                                                                          list={['По настоящее время', ...range(1950, 2021, 1).reverse()]}/>
                                     </div>
                                 </div>
 
@@ -128,7 +132,7 @@ const WorkExperienceForm = () => {
                         </div>
                         <Button title={'Сохранить'} onClick={() => {
                             setError('')
-                            if (selectedFirstYear === 'Начало' || selectedSecondYear === 'Конец' || selectedFirstYear > selectedSecondYear || values.name === '' || values.degree === '') {
+                            if (selectedFirstYear === 'Начало' || selectedSecondYear === 'Конец' || (selectedSecondYear !== 'По настоящее время' && selectedFirstYear > selectedSecondYear) || values.name === '' || values.degree === '') {
                                 setError('Правильно заполните форму')
                             } else {
                                 handleSubmit()

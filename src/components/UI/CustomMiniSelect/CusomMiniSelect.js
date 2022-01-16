@@ -6,10 +6,12 @@ const CustomMiniSelect = ({list, selected, setSelected}) => {
 
     const [isActive, setIsActive] = useState(false);
 
+    let showSelected = `${(selected).toString().slice(0, 15)}${selected.length > 15 ? '...' : ''}`
+
     return (
         <div className={s.dropdown}>
             <div className={s.dropdown_btn} onClick={(e) => setIsActive(!isActive)}>
-                {`${selected.slice(0, 15)}${selected.length > 15 ? '...' : ''}`}
+                {showSelected}
                 <img src={right_arrow} className={s.arrow} alt=""/>
             </div>
             {isActive && (

@@ -1,0 +1,72 @@
+.container {
+    background: #FFFFFF;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 5px;
+    display: flex;
+}
+
+.content_container {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.profile {
+    width: 60px;
+    height: 60px;
+    border-radius: 32px;
+    object-fit: cover;
+}
+
+.info_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12px;
+    position: relative;
+}
+
+.time_and_notification {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+}
+
+.time {
+    color: #828282;
+    font-size: 14px;
+}
+
+.name {
+    margin-bottom: 15px;
+}
+
+.close {
+    position: absolute;
+    right: -10px;
+    cursor: pointer;
+}
+
+.notification {
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    background-color: #FEDC2E;
+    color: white;
+    border-radius: 15px;
+    font-size: 8px;
+    margin-left: 10px;
+    padding: 4px;
+}
+
+.notification_status {
+    margin-left: 10px;
+
+}
+
+.border {
+    border-bottom: 1px solid #DADADA;
+    margin: 10px 0;
+}

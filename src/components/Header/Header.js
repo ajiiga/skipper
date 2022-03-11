@@ -49,7 +49,7 @@ const Header = ({isAuth, profile}) => {
                         <Link to={'/'}><span className={s.logo}>Skipper</span></Link>
                         <div className={s.icons}>
                             <Link to={profile.is_mentor? `/mentor-profile/${profile.id}` : `/mentee-profile/${profile.id}`}><div className={s.icon}><img src={profile_img} alt=""/></div></Link>
-                            <div className={s.icon}><img src={message} alt=""/></div>
+                            <Link to={'/messages'}><div className={s.icon}><img src={message} alt=""/></div></Link>
                             <Link to={'/search'}><div className={s.icon}><img src={search_img} alt=""/></div></Link>
                             <div className={s.icon}><img src={star_img} alt=""/></div>
                             <MyLessonsButton isMentor={profile.is_mentor} />

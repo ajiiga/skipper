@@ -46,10 +46,17 @@ h1 {
 ::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
-
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #DADADA;
+}
+
+::selection {
+  background: rgba(255,221,45,.32)
+}
+
+::-moz-selection {
+  background: rgba(255,221,45,.32)
 }

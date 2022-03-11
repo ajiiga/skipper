@@ -8,6 +8,7 @@ import ChatButton from "../../../../../components/UI/ChatButton/ChatButton";
 import Rating from "../../../../../components/UI/Rating/Rating";
 import {API_URL} from "../../../../../api/api_setting";
 import {Link} from "react-router-dom";
+import authStore from "../../../../../store/authStore";
 
 const SearchItem = ({id, first_name, second_name, specialization, description, picture, classes, tags}) => {
     let [price, setPrice] = useState(Math.round(Math.random() * (5000 - 500) + 500))
@@ -43,7 +44,8 @@ const SearchItem = ({id, first_name, second_name, specialization, description, p
                     classes.filter(x => {
                         return x.Tags.length !== 0
                     }).map((x, index) => <SearchService key={index} id={id} name={x.ClassName} description={x.Description}
-                                               tags={x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0]?.name3)} service_id={x.ID}/>
+                                               tags={x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0]?.name3)} service_id={x.ID}
+                                                blocked={id == authStore.user.id} />
                                                )
                 }
             </div>

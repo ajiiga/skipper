@@ -11,6 +11,7 @@ import Preloader from "./components/UI/Preloader/Preloader";
 import PrivateProfileService from "./services/PrivateProfileService/PrivateProfileService";
 import PublicProfilesService from "./services/PublicProfilesService/PublicProfilesService";
 import MyClassesService from "./services/MyClassesService/MyClassesService";
+import {MessagesService} from "./services/MessagesService/MessagesService";
 
 function App() {
     useEffect(() => {
@@ -37,6 +38,7 @@ function App() {
                         {PublicProfilesService.map(route => <Route key={route.path} exact={route.exact} component={route.component} path={route.path}/>)}
                         {authStore.isAuth && authStore.user?.is_mentor && MyClassesService.filter(x => x.for_mentor).map(route => <Route key={route.path} exact={route.exact} component={route.component} path={route.path}/>)}
                         {authStore.isAuth && MyClassesService.map(route => <Route key={route.path} exact={route.exact} component={route.component} path={route.path}/>)}
+                        {authStore.isAuth && MessagesService.urls.map(route => <Route key={route.path} exact={route.exact} component={route.component} path={route.path}/>)}
                         <Redirect to={authStore.isAuth ? '/' : '/login'}/>
                     </Switch>
                 </div>

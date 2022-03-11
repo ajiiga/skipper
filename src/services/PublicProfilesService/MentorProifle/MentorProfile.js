@@ -17,6 +17,7 @@ import Reviews from "../../../components/UI/Reviews/Reviews";
 import ComplainModal from "../../../components/UI/ComplainModal/ComplainModal";
 import {Route} from "react-router-dom";
 import ModalRegistrationLesson from "./ModalRegistrationLesson/ModalRegistartionLesson";
+import authStore from "../../../store/authStore";
 
 const MentorProfile = () => {
     let params = useParams()
@@ -128,7 +129,7 @@ const MentorProfile = () => {
                         {JSON.parse(user.classes).map((x, index) =>
                             <div className={s.service_container} key={index}>
                                 <SearchService id={id} service_id={x.ID} name={x.ClassName} description={x.Description}
-                                               tags={(x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0].name3))}/>
+                                               tags={(x.Tags.map(x => tags.filter(y => y.ID === x.ID)[0].name3))} blocked={id == authStore.user.id}/>
                             </div>)
                         }
 

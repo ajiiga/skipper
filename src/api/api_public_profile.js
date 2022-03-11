@@ -8,3 +8,11 @@ export let getMenteeInfoRequest = (id) => {
 export let getMentorInfoRequest = (id) => {
     return $api.get(`/public-api/public-user/mentor/${id}`)
 }
+
+export let getBookingListRequest = (status) => {
+    return $api.get('/api/class/booking/to-me', {params: {status: status}})
+}
+
+export let registrationLessonRequest = (data) => {
+    return $api.post('/api/class/booking', {...data})
+}

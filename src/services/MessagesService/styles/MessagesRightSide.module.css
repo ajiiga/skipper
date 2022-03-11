@@ -1,0 +1,134 @@
+.container {
+    background: #FFFFFF;
+    box-shadow: 0px 2px 8px rgb(0 0 0 / 14%);
+    border-radius: 8px;
+    box-sizing: border-box;
+    width: 70%;
+    margin-left: 33px;
+    position: relative;
+    overflow: hidden;
+}
+
+.title_container {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #DADADA;
+}
+
+.name {
+    margin-left: 10px;
+}
+
+.profile_img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.content_container {
+    margin: 20px;
+}
+
+.companion_message_container, .my_message_container {
+    display: flex;
+    position: relative;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: 7.5px;
+}
+
+
+.my_message_container {
+    margin-left: auto;
+    margin-right: 7.5px;
+}
+
+.companion_message_container {
+    margin-right: auto;
+    margin-left: 7.5px;
+}
+
+
+.my_message, .companion_message {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.my_message {
+    margin-left: auto;
+    background: #FEDC2E;
+}
+
+.companion_message {
+    margin-right: auto;
+    background: #CFCFCF;
+}
+
+.my_message_triangle, .companion_message_triangle {
+    bottom: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    position: absolute;
+}
+
+.my_message_triangle {
+    right: -7.5px;
+    border-bottom: 15px solid #FEDC2E;
+
+}
+
+.companion_message_triangle {
+    left: -7.5px;
+    border-bottom: 15px solid #CFCFCF;
+}
+
+
+.my_time, .companion_time {
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+    width: fit-content;
+    margin: 5px 0 15px 0;
+}
+
+.my_time {
+    margin-left: auto;
+}
+
+.companion_time {
+    margin-right: auto;
+}
+
+.input_container {
+    border-top: 1px solid #DADADA;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 50px;
+    padding: 10px 50px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    background: white;
+}
+
+.input {
+    width: 90%;
+    padding: 5px 10px;
+    background: #FFFFFF;
+    border: 1px solid #AEAEAE;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.arrow_image {
+    cursor: pointer;
+}
+
+.scroll_container {
+    overflow: hidden;
+    max-height: 572px;
+    overflow-y: scroll;
+}

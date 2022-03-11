@@ -12,11 +12,22 @@ import {
 } from "../api/api_my_classes";
 import publicStore from "./publicStore";
 import authStore from "./authStore";
+import {getBookingListRequest} from "../api/api_public_profile";
 
 class MyClassesStore {
     constructor() {
         makeAutoObservable(this)
     }
+
+    typeNames = {
+        theoretic_class: 'Теоретическая консультация',
+        practic_class: 'Практическое решение текущих проблем',
+        key_class: 'Решение "под ключ"'
+    }
+
+    timesArray = ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00']
+
+    monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", ""]
 
     async getClasses() {
         let r = await getClassesRequest()
@@ -242,11 +253,28 @@ class MyClassesStore {
         try {
             let r = await deleteClassRequest(id)
             return {response: true}
-        }
-        catch (e) {
+        } catch (e) {
             return {response: false}
         }
 
+    }
+
+    async getBookingList(status) {
+        let r = await getBookingListRequest(status)
+        let items = JSON.parse(r.data)
+        items.map(x => {
+            let trueKey = Object.keys(x).filter(key => x[key] === true)[0]
+            let [time, count] = trueKey.slice(8).split('_')
+            x.details = `${count} занятий по ${time} минут`
+            x.Price = x[`Price${trueKey.slice(8)}`]
+            x.typeName = this.typeNames[x.ClassType]
+            x.fixedTime = x.Time.map(y => {
+                let [date, time] = y.Time.split(' ')
+                date = new Date(date)
+                return {name: `${this.monthNames[date.getMonth()].toLowerCase()} ${date.getDate()} `, time: this.timesArray[parseInt(time)]}
+            })
+        })
+        return items
     }
 
 }

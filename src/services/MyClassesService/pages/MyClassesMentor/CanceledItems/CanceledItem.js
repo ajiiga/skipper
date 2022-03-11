@@ -11,7 +11,7 @@ const CanceledItem = () => {
                     <div className={s.cube}/>
                     <div className={s.name}>Илья Мерлицкий</div>
                 </div>
-                <button className={s.right_title_btn}>Отклонить</button>
+                <button className={s.right_title_btn}>Удалить</button>
             </div>
             <div className={s.tag_container}>
                 <Tag title={'React'}/>

@@ -29,7 +29,6 @@ const MenteeProfile = ({}) => {
             if (!x.response)
                 history.push('/')
             setUser(x.data)
-            console.log(x)
             setIsFetching(false)
         })
     }, [id])

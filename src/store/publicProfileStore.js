@@ -1,5 +1,10 @@
 import {makeAutoObservable} from "mobx";
-import {getMenteeInfoRequest, getMentorInfoRequest} from "../api/api_public_profile";
+import {
+    getBookingListRequest,
+    getMenteeInfoRequest,
+    getMentorInfoRequest,
+    registrationLessonRequest
+} from "../api/api_public_profile";
 import authStore from "./authStore";
 import publicStore from "./publicStore";
 
@@ -40,6 +45,16 @@ class publicProfileStore {
             await this.getMentorInfo(id)
         ])
         return {tags: res[0], user: res[1]}
+    }
+
+    async registrationLesson(data) {
+        try {
+            let r = await registrationLessonRequest(data)
+
+        }
+        catch (e) {
+
+        }
     }
 }
 

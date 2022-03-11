@@ -11,6 +11,7 @@ import FreeCalendarPicker from "../../../../components/UI/FreeCalendarPicker/Fre
 import StageDisplay from "./StageDisplay/StageDisplay";
 import SelectCommunicationType from "./SelectCommunicationType/SelectCommunicationType";
 import arrow from '../../../../static/img/Main/pointer.png'
+import publicProfileStore from "../../../../store/publicProfileStore";
 
 
 const ModalRegistrationLesson = ({classes, communications}) => {
@@ -39,6 +40,8 @@ const ModalRegistrationLesson = ({classes, communications}) => {
 
 
     let types = ['TheoreticClass', 'PracticClass', 'KeyClass']
+    let typesForRequest = {TheoreticClass: 'theoretic_class', PracticClass: 'practic_class', KeyClass: 'key_class'}
+
     let params = useParams()
     let history = useHistory()
     let parent_id = classes[0].ParentId
@@ -50,13 +53,11 @@ const ModalRegistrationLesson = ({classes, communications}) => {
     let [isVisible, setIsVisible] = useState(true)
 
 
-
     let [selectedType, setSelectedType] = useState(-1)
     let [stage, setStage] = useState(1)
     let [timeLessons, setTimeLessons] = useState(defaultState)
 
     let [activeCount, setActiveCount] = useState(0)
-
 
 
     let disableStatus = (stage_num) => {
@@ -89,14 +90,20 @@ const ModalRegistrationLesson = ({classes, communications}) => {
 
     let handleNextStageButton = (stage_num) => {
         if (stage_num === 4) {
-            debugger
-            let [time, count] =getTrueKey(timeLessons)
+            let [time, count] = getTrueKey(timeLessons)
             let service_type_key = types[selectedType]
+            let sortedDates = dates.sort((a, b) => {
+                let aDate = new Date(a.split(' ')[0])
+                let bDate = new Date(b.split(' ')[0])
+                let deltaDate = aDate - bDate
+                return aDate - bDate
+            })
+            debugger
             let request = {
-                class_type: service_type_key,
-                class_id: params.service_id,
+                class_type: typesForRequest[service_type_key],
+                class_id: parseInt(params.service_id),
                 mentor_id: service?.ParentId,
-                time: dates,
+                time: sortedDates,
                 communication: activeCommunication
 
             }
@@ -107,7 +114,7 @@ const ModalRegistrationLesson = ({classes, communications}) => {
 
             console.log(request)
 
-            closeModal()
+            //publicProfileStore.registrationLesson(request).then(x => closeModal())
         }
         setStage(stage_num + 1)
     }
@@ -160,10 +167,12 @@ const ModalRegistrationLesson = ({classes, communications}) => {
                 onClick={() => closeModal()}>
                 <div className={s.block} onClick={e => e.stopPropagation()}>
                     <div className={s.title_container}>
-                        {stage > 1 ? <img src={arrow} onClick={() => handlePrevStageButton(stage)} alt="" className={s.arrow}/> : <div/>}
+                        {stage > 1 ?
+                            <img src={arrow} onClick={() => handlePrevStageButton(stage)} alt="" className={s.arrow}/> :
+                            <div/>}
                         <div className={s.title}>Тип занятия</div>
                         <img src={close} className={s.close} alt="" onClick={() => closeModal()}/>
-                        <StageDisplay num={stage} />
+                        <StageDisplay num={stage}/>
                     </div>
                     <div className={s.content_container}>
                         {stage === 1 && <SelectTypeLesson
@@ -174,15 +183,22 @@ const ModalRegistrationLesson = ({classes, communications}) => {
                             setSelectedType={setSelectedType}
                         />}
                         {stage === 2 &&
-                        <SelectCountLesson setActiveCount={setActiveCount} lesson={service[types[selectedType]]} defaultState={defaultState}
+                        <SelectCountLesson setActiveCount={setActiveCount} lesson={service[types[selectedType]]}
+                                           defaultState={defaultState}
                                            setTimeLessons={setTimeLessons} timeLessons={timeLessons}/>}
-                        {stage === 3 && <FreeCalendarPicker activeCount={activeCount} defaultState={decode(service[types[selectedType]].Time)} dates={dates} setDates={setDates} calendarState={calendarState} setCalendarState={setCalendarState} />}
-                        {stage === 4 && <SelectCommunicationType communications={communications} setActiveItem={setActiveCommunication} activeItem={activeCommunication} />}
+                        {stage === 3 && <FreeCalendarPicker activeCount={activeCount}
+                                                            defaultState={decode(service[types[selectedType]].Time)}
+                                                            dates={dates} setDates={setDates}
+                                                            calendarState={calendarState}
+                                                            setCalendarState={setCalendarState}/>}
+                        {stage === 4 &&
+                        <SelectCommunicationType communications={communications} setActiveItem={setActiveCommunication}
+                                                 activeItem={activeCommunication}/>}
 
                     </div>
                     <div className={s.btn_container}>
                         <button disabled={disableStatus(stage)} onClick={() => handleNextStageButton(stage)}
-                                className={s.next_btn}>{stage !== 4? 'Дальше' : 'Перейти к оплате'}
+                                className={s.next_btn}>{stage !== 4 ? 'Дальше' : 'Записаться'}
                         </button>
                     </div>
                 </div>

@@ -121,6 +121,7 @@
     box-sizing: border-box;
     border-radius: 5px;
     font-size: 16px;
+    transition: 0.25s;
 }
 
 .arrow_image {
@@ -131,4 +132,11 @@
     overflow: hidden;
     max-height: 572px;
     overflow-y: scroll;
+    transition: 1s;
+    scroll-behavior: smooth;
+}
+
+.input:focus {
+    border: 1px solid #FEDC2E;
+    box-shadow: 0px 2px 8px rgb(0 0 0 / 10%);
 }

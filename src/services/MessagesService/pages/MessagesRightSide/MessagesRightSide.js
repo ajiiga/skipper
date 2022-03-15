@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import s from '../../styles/MessagesRightSide.module.css'
 import profile from '../../../../static/img/profile.jfif'
 import arrow from '../../../../static/img/Messages/send_message_arrow.svg'
@@ -26,8 +26,15 @@ const MessagesRightSideTitle = () => {
 }
 
 const MessagesRightSideContent = () => {
+
+    let el = useRef()
+
+    useEffect(() => {
+        el.current.scrollTo(0, el.current.scrollHeight)
+    }, [])
+
     return (
-        <div className={s.scroll_container}>
+        <div className={s.scroll_container} ref={el}>
             <div className={s.content_container}>
                 <MyMessage text={'Давайте обсудим сегодня React'}/>
                 <CompanionMessage text={'Хорошо, давайте обсудим его'}/>

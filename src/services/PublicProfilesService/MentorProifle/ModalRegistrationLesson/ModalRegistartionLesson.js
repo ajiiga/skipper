@@ -95,10 +95,8 @@ const ModalRegistrationLesson = ({classes, communications}) => {
             let sortedDates = dates.sort((a, b) => {
                 let aDate = new Date(a.split(' ')[0])
                 let bDate = new Date(b.split(' ')[0])
-                let deltaDate = aDate - bDate
                 return aDate - bDate
             })
-            debugger
             let request = {
                 class_type: typesForRequest[service_type_key],
                 class_id: parseInt(params.service_id),
@@ -107,16 +105,18 @@ const ModalRegistrationLesson = ({classes, communications}) => {
                 communication: activeCommunication
 
             }
+            if (time == 15) {
+                request[`duration_${time}`] = true
+                request[`price_${time}`] = service[service_type_key][`Price${time}`] * parseInt(count)
+            } else {
+                request[`duration_${time}_${count}`] = true
 
-            request[`duration_${time}_${count}`] = true
-
-            request[`price_${time}_${count}`] = service[service_type_key][`Price${time}`] * parseInt(count)
-
-            console.log(request)
-
-            //publicProfileStore.registrationLesson(request).then(x => closeModal())
-        }
-        setStage(stage_num + 1)
+                request[`price_${time}_${count}`] = service[service_type_key][`Price${time}`] * parseInt(count)
+            }
+            
+            publicProfileStore.registrationLesson(request).then(x => closeModal())
+        } else
+            setStage(stage_num + 1)
     }
 
     let handlePrevStageButton = (stage_num) => {

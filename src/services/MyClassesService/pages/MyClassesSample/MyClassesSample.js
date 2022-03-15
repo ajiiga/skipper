@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import s from '../../styles/MyClasses.module.css'
 import ConsiderationItem from "../MyClassesMentor/ConsiderationItems/ConsiderationItem";
 
-const MyClassesSample = ({children}) => {
+const MyClassesSample = ({children, activeSort, setActiveSort}) => {
     let keyList = ['signDate', 'dateEvent', 'expensive', 'cheap']
-    let [activeSort, setActiveSort] = useState(keyList[0])
 
     return (
         <div className={s.sample_container}>

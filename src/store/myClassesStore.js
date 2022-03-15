@@ -265,7 +265,7 @@ class MyClassesStore {
         items.map(x => {
             let trueKey = Object.keys(x).filter(key => x[key] === true)[0]
             let [time, count] = trueKey.slice(8).split('_')
-            x.details = `${count} занятий по ${time} минут`
+            x.details = `${count || 1} занятий по ${time} минут`
             x.Price = x[`Price${trueKey.slice(8)}`]
             x.typeName = this.typeNames[x.ClassType]
             x.fixedTime = x.Time.map(y => {

@@ -1,10 +1,12 @@
 import {makeAutoObservable} from "mobx";
 import {
+    changeStatusClassRequest,
+    confirmClassRequest,
     createClassRequest,
     createPracticeClassRequest,
     createTheoreticClassRequest,
     createTurnkeyClassRequest, deleteClassRequest,
-    getClassesRequest,
+    getClassesRequest, rejectClassRequest,
     updateClassRequest,
     updatePracticeClassRequest,
     updateTheoreticClassRequest,
@@ -12,7 +14,7 @@ import {
 } from "../api/api_my_classes";
 import publicStore from "./publicStore";
 import authStore from "./authStore";
-import {getBookingListRequest} from "../api/api_public_profile";
+import {getBookingListRequest, getMyBookingListRequest} from "../api/api_public_profile";
 
 class MyClassesStore {
     constructor() {
@@ -259,9 +261,8 @@ class MyClassesStore {
 
     }
 
-    async getBookingList(status) {
-        let r = await getBookingListRequest(status)
-        let items = JSON.parse(r.data)
+
+    fixBookingList(items) {
         items.map(x => {
             let trueKey = Object.keys(x).filter(key => x[key] === true)[0]
             let [time, count] = trueKey.slice(8).split('_')
@@ -277,6 +278,29 @@ class MyClassesStore {
         return items
     }
 
+
+    async getBookingList(status) {
+        let r = await getBookingListRequest(status)
+        let items = JSON.parse(r.data)
+        return this.fixBookingList(items)
+    }
+
+    async getMyBookingList(status) {
+        let r = await getMyBookingListRequest(status)
+        let items = JSON.parse(r.data === 'null' ? '[]' : r.data)
+        debugger
+        return this.fixBookingList(items)
+    }
+
+    async changeStatusClass(id, status) {
+        try {
+            let r = await changeStatusClassRequest(id, status)
+            return r.data
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
 }
 
 export default new MyClassesStore()

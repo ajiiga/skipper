@@ -103,4 +103,7 @@ export let deleteClassRequest = (id) => {
     return $api.delete(`/api/class/class/${id}`)
 }
 
+export let changeStatusClassRequest = (id, status) => {
+    return $api.put(`/api/class/booking/?new_status=${status}&booking_id=${id}`)
+}
 

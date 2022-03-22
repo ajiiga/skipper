@@ -13,6 +13,10 @@ export let getBookingListRequest = (status) => {
     return $api.get('/api/class/booking/to-me', {params: {status: status}})
 }
 
+export let getMyBookingListRequest = (status) => {
+    return $api.get('/api/class/booking/my', {params: {status: status}})
+}
+
 export let registrationLessonRequest = (data) => {
     return $api.post('/api/class/booking', {...data})
 }

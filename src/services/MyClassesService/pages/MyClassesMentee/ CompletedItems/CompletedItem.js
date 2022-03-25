@@ -3,8 +3,14 @@ import s from '../../../styles/MyClassesItems.module.css'
 import Tag from "../../../../../components/UI/Tag/Tag";
 import zoom from "../../../../../static/img/messenger_icons/zoom.png";
 import {messengersIcons} from "../../../../PublicProfilesService/MentorProifle/ModalRegistrationLesson/MessengersIcons";
+import myClassesStore from "../../../../../store/myClassesStore";
 
-const CompletedItem = ({data}) => {
+const CompletedItem = ({data, deleteItem}) => {
+
+    let archiveItem = () => {
+        myClassesStore.changeStatusClass(data.ID, 'archived').then(x => deleteItem())
+    }
+
     return (
         <div className={s.container}>
             <div className={s.title_container}>
@@ -12,7 +18,7 @@ const CompletedItem = ({data}) => {
                     <div className={s.cube}/>
                     <div className={s.name}>{data.menti_first_name} {data.menti_second_name}</div>
                 </div>
-                <button className={s.right_title_btn_v2}>Удалить</button>
+                <button className={s.right_title_btn_v2} onClick={() => archiveItem()}>Удалить</button>
             </div>
             <div className={s.tag_container}>
                 <Tag title={'React'}/>

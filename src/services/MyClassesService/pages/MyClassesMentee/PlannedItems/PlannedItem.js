@@ -3,8 +3,14 @@ import s from '../../../styles/MyClassesItems.module.css'
 import Tag from "../../../../../components/UI/Tag/Tag";
 import zoom from "../../../../../static/img/messenger_icons/zoom.png";
 import {messengersIcons} from "../../../../PublicProfilesService/MentorProifle/ModalRegistrationLesson/MessengersIcons";
+import myClassesStore from "../../../../../store/myClassesStore";
 
 const PlannedItem = ({data, deleteItem}) => {
+
+    let cancelItem = () => {
+        myClassesStore.changeStatusClass(data.ID, 'canceled').then(x => deleteItem())
+    }
+
     return (
         <div className={s.container}>
             <div className={s.title_container}>
@@ -12,7 +18,7 @@ const PlannedItem = ({data, deleteItem}) => {
                     <div className={s.cube}/>
                     <div className={s.name}>{data.menti_first_name} {data.menti_second_name}</div>
                 </div>
-                <button className={s.right_title_btn_v2}>Прекратить занятия</button>
+                <button className={s.right_title_btn_v2} onClick={() => cancelItem()}>Прекратить занятия</button>
             </div>
             <div className={s.tag_container}>
                 <Tag title={'React'}/>

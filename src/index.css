@@ -4,7 +4,7 @@ html {
 }
 
 * {
-    font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 body {
@@ -17,7 +17,8 @@ textarea {
   resize: none;
 }
 
-input, textarea {
+input,
+textarea {
   outline: none;
 }
 
@@ -29,7 +30,6 @@ a {
 h1 {
   margin: 0;
 }
-
 
 /* width */
 ::-webkit-scrollbar {
@@ -50,13 +50,19 @@ h1 {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #DADADA;
+  background: #dadada;
 }
 
 ::selection {
-  background: rgba(255,221,45,.32)
+  background: rgba(255, 221, 45, 0.32);
 }
 
 ::-moz-selection {
-  background: rgba(255,221,45,.32)
+  background: rgba(255, 221, 45, 0.32);
+}
+
+@media (-webkit-device-pixel-ratio: 1.25) {
+  :root {
+    zoom: 0.8;
+  }
 }

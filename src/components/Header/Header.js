@@ -24,7 +24,6 @@ const Header = ({isAuth, profile}) => {
                 <div className={s.header_container}>
                     <Link to={'/'}><span className={s.logo}>Skipper</span></Link>
                     <div className={s.right_container}>
-                        <div>Change language</div>
                         <Link to={'/registration'}>
                             <div className={s.to_auth}>Регистрация</div>
                         </Link>
@@ -51,12 +50,11 @@ const Header = ({isAuth, profile}) => {
                             <Link to={profile.is_mentor? `/mentor-profile/${profile.id}` : `/mentee-profile/${profile.id}`}><div className={s.icon}><img src={profile_img} alt=""/></div></Link>
                             <Link to={'/messages'}><div className={s.icon}><img src={message} alt=""/></div></Link>
                             <Link to={'/search'}><div className={s.icon}><img src={search_img} alt=""/></div></Link>
-                            <div className={s.icon}><img src={star_img} alt=""/></div>
+                            <Link to={'/favorites'}><div className={s.icon}><img src={star_img} alt=""/></div></Link>
                             <MyLessonsButton isMentor={profile.is_mentor} />
                         </div>
                     </div>
                     <div className={`${s.right_container} ${s.right_container_is_auth}`}>
-                        <div>Change language</div>
 
 
 

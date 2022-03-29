@@ -265,15 +265,18 @@ class MyClassesStore {
     fixBookingList(items) {
         items.map(x => {
             let trueKey = Object.keys(x).filter(key => x[key] === true)[0]
-            let [time, count] = trueKey.slice(8).split('_')
+            trueKey = trueKey ? trueKey : 'Duration0_0'
+            let deltaArr = trueKey.slice(8).split('_')
+            let [time, count] = deltaArr
             x.details = `${count || 1} занятий по ${time} минут`
-            x.Price = x[`Price${trueKey.slice(8)}`]
+            x.Price = trueKey === 'FullTime' ? x.PriceFullTime : x[`Price${trueKey.slice(8)}`]
             x.typeName = this.typeNames[x.ClassType]
             x.fixedTime = x.Time.map(y => {
                 let [date, time] = y.Time.split(' ')
                 date = new Date(date)
                 return {name: `${this.monthNames[date.getMonth()].toLowerCase()} ${date.getDate()} `, time: this.timesArray[parseInt(time)]}
             })
+            x.tags = x.Class.Tags.map(x => x.name3)
         })
         return items
     }
@@ -288,7 +291,6 @@ class MyClassesStore {
     async getMyBookingList(status) {
         let r = await getMyBookingListRequest(status)
         let items = JSON.parse(r.data === 'null' ? '[]' : r.data)
-        debugger
         return this.fixBookingList(items)
     }
 

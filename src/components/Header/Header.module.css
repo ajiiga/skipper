@@ -14,14 +14,14 @@
 }
 
 .right_container {
-    min-width: 500px;
+    min-width: 260px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .right_container_is_auth {
-    min-width: 450px;
+    min-width: 250px;
 }
 
 .to_auth {

@@ -1,5 +1,5 @@
 import React from 'react';
-import MyClassesSample from "../../MyClassesSample/MyClassesSample";
+import MyClassesSample from "../../../MyClassesSample/MyClassesSample";
 import CompletedItem from "./CompletedItem";
 import useMyClassesItems from "../../../../../CustomHooks/useMyClassesItems";
 import myClassesStore from "../../../../../store/myClassesStore";

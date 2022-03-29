@@ -21,9 +21,7 @@ const ConsiderationItem = ({data, deleteItem}) => {
                 <button className={s.right_title_btn_v2} onClick={() => canceledClass()}>Отменить заявку</button>
             </div>
             <div className={s.tag_container}>
-                <Tag title={'React'}/>
-                <Tag title={'Angular'}/>
-                <Tag title={'Мобильная разработка'}/>
+                {data.tags.map(x => <Tag title={x} />)}
             </div>
             <div>
                 <div className={s.text}>Тип занятия: {data.typeName}</div>

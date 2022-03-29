@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import s from '../../styles/MyClasses.module.css'
-import ConsiderationItem from "../MyClassesMentor/ConsiderationItems/ConsiderationItem";
+import s from '../styles/MyClasses.module.css'
+import ConsiderationItem from "../pages/MyClassesMentor/ConsiderationItems/ConsiderationItem";
 
 const MyClassesSample = ({children, activeSort, setActiveSort}) => {
     let keyList = ['signDate', 'dateEvent', 'expensive', 'cheap']

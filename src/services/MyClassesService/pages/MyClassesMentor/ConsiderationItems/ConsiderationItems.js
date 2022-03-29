@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import MyClassesSample from "../../MyClassesSample/MyClassesSample";
+import MyClassesSample from "../../../MyClassesSample/MyClassesSample";
 import ConsiderationItem from "./ConsiderationItem";
 import myClassesStore from "../../../../../store/myClassesStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";

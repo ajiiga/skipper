@@ -108,12 +108,17 @@ const ModalRegistrationLesson = ({classes, communications}) => {
             if (time == 15) {
                 request[`duration_${time}`] = true
                 request[`price_${time}`] = service[service_type_key][`Price${time}`] * parseInt(count)
-            } else {
+            }
+            else if (time === 'IndividualTerm') {
+                request[`full_time`] = true
+                request[`price_full_time`] = service[service_type_key][`PriceFullTime`] * parseInt(count)
+            }
+            else {
                 request[`duration_${time}_${count}`] = true
 
                 request[`price_${time}_${count}`] = service[service_type_key][`Price${time}`] * parseInt(count)
             }
-            
+
             publicProfileStore.registrationLesson(request).then(x => closeModal())
         } else
             setStage(stage_num + 1)

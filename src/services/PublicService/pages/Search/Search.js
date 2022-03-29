@@ -73,6 +73,7 @@ const Search = () => {
             let strTags = idTags.join(',')
             publicStore.getSearchClasses(strTags === "" ? undefined : strTags, 1, 100).then(x => {
                 setClasses(x)
+                debugger
                 setSearchIsFetching(false)
             })
         }

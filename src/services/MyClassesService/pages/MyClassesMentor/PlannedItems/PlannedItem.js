@@ -11,6 +11,9 @@ const PlannedItem = ({data, deleteItem}) => {
         myClassesStore.changeStatusClass(data.ID, 'canceled').then(x => deleteItem())
     }
 
+
+
+
     return (
         <div className={s.container}>
             <div className={s.title_container}>
@@ -21,9 +24,7 @@ const PlannedItem = ({data, deleteItem}) => {
                 <button className={s.right_title_btn_v2} onClick={() => rejectClass()}>Прекратить занятия</button>
             </div>
             <div className={s.tag_container}>
-                <Tag title={'React'}/>
-                <Tag title={'Angular'}/>
-                <Tag title={'Мобильная разработка'}/>
+                {data.tags.map(x => <Tag title={x} />)}
             </div>
             <div>
                 <div className={s.text}>Тип занятия: {data.typeName}</div>

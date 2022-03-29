@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import MyClassesSample from "../../MyClassesSample/MyClassesSample";
+import MyClassesSample from "../../../MyClassesSample/MyClassesSample";
 import PlannedItem from "./PlannedItem";
 import myClassesStore from "../../../../../store/myClassesStore";
 import useMyClassesItems from "../../../../../CustomHooks/useMyClassesItems";

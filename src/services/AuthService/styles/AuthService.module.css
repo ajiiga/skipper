@@ -44,6 +44,7 @@
 .description {
   color: rgba(44, 44, 44, 0.56);
   font-size: 14px;
+  text-align: center;
 }
 
 .one_display {
@@ -62,16 +63,30 @@
   .items_container {
     flex-wrap: wrap;
   }
+  .form_container {
+    padding: 20px 25px;
+  }
 
   .main_img {
-    /* display: none; */
-    zoom: 0.8;
+    zoom: 0.75;
+    top: 20%;
   }
 
-  .networks img {
-    display: block;
-  }
   .container {
     margin-top: 30px;
+  }
+  .one_display {
+    padding-top: 30px;
+  }
+  .networks {
+    padding: 20px 20px 5px 20px;
+    justify-content: space-evenly;
+  }
+  .description {
+    margin-top: 7px;
+  }
+  .network {
+    width: 40px;
+    height: 40px;
   }
 }

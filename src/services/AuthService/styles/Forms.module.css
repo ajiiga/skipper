@@ -1,99 +1,108 @@
 .form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-
 .low_container {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .lost_password {
-    color: rgba(44, 44, 44, 0.56);
+  color: rgba(44, 44, 44, 0.56);
 }
 
 .btn_container {
-    margin-top: 40px;
-    display: grid;
+  margin-top: 40px;
+  display: grid;
 }
 
 .to_reg {
-    text-align: center;
-    margin-top: 20px;
-    color: rgba(44, 44, 44, 0.56);;
+  text-align: center;
+  margin-top: 20px;
+  color: rgba(44, 44, 44, 0.56);
 }
 
 .input_tel {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
-
 
 .num_in_input {
-    width: 100px;
-    text-align: center;
-    padding: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    box-sizing: border-box;
-    border-radius: 5px;
-    height: fit-content;
-    margin-right: 20px;
+  width: 100px;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: fit-content;
+  margin-right: 20px;
 }
-
 
 .input_container {
-    margin-bottom: 24px;
+  margin-bottom: 24px;
 }
-
 
 .error {
-    color: red;
-    margin: 5px 0 0 0;
+  color: red;
+  margin: 5px 0 0 0;
 }
 
-
 .photo {
-    width: 86px;
-    height: 86px;
-    border-radius: 52px;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    margin-right: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+  width: 86px;
+  height: 86px;
+  border-radius: 52px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .photo_description {
-    height: 60px;
-    width: 100%;
-    border-radius: 5px;
-    box-sizing: border-box;
-    padding: 0 15px;
-    display: flex;
-    align-items: center;
-    color: rgba(0, 0, 0, 0.4);
+  height: 60px;
+  width: 100%;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .photo_img {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 .preview_image {
-    width: 86px;
-    height: 86px;
-    border-radius: 52px;
-    margin-right: 20px;
-    cursor: pointer;
-    object-fit: cover;
-    border: 1px solid rgba(0, 0, 0, 0.4);
+  width: 86px;
+  height: 86px;
+  border-radius: 52px;
+  margin-right: 20px;
+  cursor: pointer;
+  object-fit: cover;
+  border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .status_error {
-    color: red;
-    margin: 10px 0;
+  color: red;
+  margin: 10px 0;
+}
+
+@media (max-width: 1680px) and (-webkit-min-device-pixel-ratio: 1) {
+  .num_in_input {
+    padding: 10px;
+  }
+  .input_container {
+    margin-bottom: 14px;
+  }
+  .btn_container {
+    margin-top: 30px;
+  }
+  .to_reg {
+    margin-top: 10px;
+  }
 }

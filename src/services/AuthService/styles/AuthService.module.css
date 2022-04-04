@@ -74,6 +74,8 @@
 
   .container {
     margin-top: 30px;
+    min-height: 600px;
+    align-items: center;
   }
   .one_display {
     padding-top: 30px;

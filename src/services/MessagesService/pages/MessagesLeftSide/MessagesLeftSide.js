@@ -4,16 +4,13 @@ import SearchBar from "../../../../components/UI/SearchBar/SearchBar";
 import MessagesBlock from "./MessagesBlock/MessagesBlock";
 
 const MessagesLeftSide = ({query, setQuery}) => {
-    let statusSent = {
-        code: 0
-    }
+
 
     let statusRead = {
-        code: 1
+        count: 0
     }
 
     let statusNoRead = {
-        code: 2,
         count: 3
     }
 
@@ -27,7 +24,7 @@ const MessagesLeftSide = ({query, setQuery}) => {
                     <MessagesBlock status={statusRead}/>
                     <MessagesBlock status={statusRead}/>
                     <MessagesBlock status={statusRead}/>
-                    <MessagesBlock status={statusSent}/>
+                    <MessagesBlock status={statusRead}/>
                 </div>
             </div>
         </div>

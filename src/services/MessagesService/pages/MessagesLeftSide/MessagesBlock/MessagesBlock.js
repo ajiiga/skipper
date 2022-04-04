@@ -4,32 +4,25 @@ import profile from '../../../../../static/img/profile.jfif'
 import close from '../../../../../static/img/delete.svg'
 import read from '../../../../../static/img/Messages/coolicon.svg'
 import sent from '../../../../../static/img/Messages/coolicon_2.svg'
+import {NavLink} from "react-router-dom";
 
 const MessagesBlock = ({status}) => {
-    let statusCode = status?.code
-    let notificationBlock = <div/>
-
-    switch (statusCode) {
-        case 0:
-            notificationBlock = <img src={sent} className={s.notification_status} alt=""/>
-            break;
-        case 1:
-            notificationBlock = <img src={read} className={s.notification_status} alt=""/>
-            break;
-        case 2:
-            notificationBlock = <div className={s.notification}>{status.count}</div>
-    }
-
     return (
-        <>
+        <NavLink to={`/messages/${12}`}>
             <div className={s.container}>
                 <div className={s.content_container}>
                     <img src={profile} className={s.profile}/>
-                    <div className={s.info_container}>
-                        <div className={s.name}>Сергей Веснушкин</div>
-                        <div className={s.time_and_notification}>
-                            <div className={s.time}>19:46</div>
-                            {notificationBlock}
+                    <div className={s.info_and_notification}>
+                        <div className={s.info_container}>
+                            <div className={s.name}>Сергей Веснушкин</div>
+                            <div className={s.time_and_notification}>
+                                <div className={s.time}>19:46</div>
+                            </div>
+                        </div>
+                        <div className={s.notification}>
+                            {status.count > 0 ? <div>
+                                {status.count}
+                            </div> : ''}
                         </div>
                     </div>
                     <img src={close} className={s.close} alt=""/>
@@ -37,7 +30,7 @@ const MessagesBlock = ({status}) => {
                 </div>
             </div>
             <div className={s.border}/>
-        </>
+        </NavLink>
     );
 };
 

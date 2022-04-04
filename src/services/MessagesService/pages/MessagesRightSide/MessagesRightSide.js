@@ -2,13 +2,15 @@ import React, {useEffect, useRef} from 'react';
 import s from '../../styles/MessagesRightSide.module.css'
 import profile from '../../../../static/img/profile.jfif'
 import arrow from '../../../../static/img/Messages/send_message_arrow.svg'
+import navigator from '../../../../static/img/Messages/navigator.svg'
+import set_review from '../../../../static/img/Messages/set_review.svg'
 
-const MessagesRightSide = () => {
+const MessagesRightSide = ({value, setValue}) => {
     return (
         <div className={s.container}>
             <MessagesRightSideTitle/>
             <MessagesRightSideContent/>
-            <MessagesRightSideInput/>
+            <MessagesRightSideInput value={value} setValue={setValue}/>
         </div>
     );
 };
@@ -77,11 +79,33 @@ const CompanionMessage = ({text}) => {
     )
 }
 
-const MessagesRightSideInput = () => {
+const MessagesRightSideInput = ({value, setValue}) => {
     return (
         <div className={s.input_container}>
-            <input type="text" className={s.input} placeholder={'Напишите сообщение...'}/>
+            <MessagesNavigator/>
+            <input type="text" value={value} onChange={e => setValue(e.target.value)} className={s.input} placeholder={'Напишите сообщение...'}/>
             <img src={arrow} alt="" className={s.arrow_image}/>
         </div>
+    )
+}
+
+const MessagesNavigator = () => {
+
+    let emptyNavigator = <img src={navigator} alt=""/>
+
+    let navigatorWithNotification = (
+        <div className={s.navigator_with_notification}>
+            {emptyNavigator}
+            <div className={s.navigator_notification}/>
+        </div>
+    )
+
+    let setReview = (
+        <img src={set_review} alt=""/>
+    )
+
+
+    return (
+        setReview
     )
 }

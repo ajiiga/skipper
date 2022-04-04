@@ -39,9 +39,6 @@ const Messages = () => {
             console.log('disconnect')
         });
 
-        // socket.current.onAny((event, ...args) => {
-        //     console.log('onAny')
-        // });
 
     }
 

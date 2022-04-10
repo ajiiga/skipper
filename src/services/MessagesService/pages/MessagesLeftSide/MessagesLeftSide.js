@@ -3,7 +3,7 @@ import s from "../../styles/MessagesLeftSide.module.css";
 import SearchBar from "../../../../components/UI/SearchBar/SearchBar";
 import MessagesBlock from "./MessagesBlock/MessagesBlock";
 
-const MessagesLeftSide = ({query, setQuery}) => {
+const MessagesLeftSide = ({query, setQuery, users}) => {
 
 
     let statusRead = {
@@ -19,12 +19,7 @@ const MessagesLeftSide = ({query, setQuery}) => {
             <SearchBar query={query} setQuery={setQuery}/>
             <div className={s.content_container}>
                 <div className={s.messengers_items}>
-                    <MessagesBlock status={statusRead}/>
-                    <MessagesBlock status={statusNoRead}/>
-                    <MessagesBlock status={statusRead}/>
-                    <MessagesBlock status={statusRead}/>
-                    <MessagesBlock status={statusRead}/>
-                    <MessagesBlock status={statusRead}/>
+                    {users.map(x => <MessagesBlock key={x.ID} status={statusRead} data={x}/>)}
                 </div>
             </div>
         </div>

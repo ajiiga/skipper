@@ -6,8 +6,9 @@ import MessagesRightSide from "./MessagesRightSide/MessagesRightSide";
 import {Switch, Route} from "react-router-dom";
 import MessagesRightSideEmpty from "./MessagesRightSideEmpty/MessagesRightSideEmpty";
 import {API_URL} from "../../../api/api_setting";
+import messagesStore from "../../../store/messagesStore";
+import Preloader from "../../../components/UI/Preloader/Preloader";
 
-const io = require("socket.io-client");
 
 const Messages = () => {
     //Значение в инпуте в левом меню
@@ -16,57 +17,30 @@ const Messages = () => {
     //текст сообщения
     let [valueMessage, setValueMessage] = useState('')
 
-    const socket = useRef()
+    let [chatList, setChatList] = useState([])
 
-    //websocket connect
-    const connect = () => {
-        socket.current = io(API_URL, {
-            transports: ['websocket'],
-            query: {
-                roomId: 5
-            }
-        })
-
-        socket.current.on("connect", () => {
-            console.log('connect')
-        });
-
-        socket.current.on("connect_error", (err) => {
-            console.log(`connect_error ${err?.data}`)
-        });
-
-        socket.current.on("disconnect", (reason) => {
-            console.log('disconnect')
-        });
-
-
-    }
-
-    //Функция отправки сообщения
-    const sendMessage = async () => {
-        const message = {
-            message: valueMessage,
-            id: Date.now(),
-            event: 'message'
-        }
-        socket.current.send(JSON.stringify(message));
-        setValueMessage('')
-    }
-
+    let [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        connect()
+        messagesStore.getChatList().then(x => {
+            setChatList(x)
+            setIsLoading(false)
+        })
     }, [])
 
+
+    if (isLoading) {
+        return <Preloader />
+    }
 
     return (
         <div className={s.container}>
             <MiniNavBar child={'Сообщения'}/>
             <div className={s.content_container}>
-                <MessagesLeftSide query={query} setQuery={setQuery}/>
+                <MessagesLeftSide query={query} setQuery={setQuery} users={chatList}/>
                 <Switch>
                     <Route path={'/messages/:id'}>
-                        <MessagesRightSide/>
+                        <MessagesRightSide value={valueMessage} setValue={setValueMessage}/>
                     </Route>
                     <Route path={'/messages'} exact={true}>
                         <MessagesRightSideEmpty/>

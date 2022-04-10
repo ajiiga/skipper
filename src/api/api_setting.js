@@ -1,7 +1,7 @@
 import axios from "axios";
 import authStore from "../store/authStore";
 
-export let API_URL = 'https://buroroll.cf'
+export let API_URL = 'http://152.70.189.77:8000'
 
 let $api = axios.create({
     baseURL: API_URL

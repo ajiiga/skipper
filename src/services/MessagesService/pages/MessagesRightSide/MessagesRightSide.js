@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import s from '../../styles/MessagesRightSide.module.css'
 import profile from '../../../../static/img/profile.jfif'
 import arrow from '../../../../static/img/Messages/send_message_arrow.svg'
@@ -25,7 +25,7 @@ const MessagesRightSide = ({value, setValue}) => {
         socket.current = io(API_URL, {
             transports: ['websocket'],
             query: {
-                roomId: info?.chat?.ID
+                roomId: info?.chat?.roomID
             }
         })
 
@@ -42,17 +42,24 @@ const MessagesRightSide = ({value, setValue}) => {
         });
 
         socket.current.on("message", (data) => {
-            console.log(data)
+            setChatInfo((chatInfo) => {
+                console.log(Object.keys(chatInfo))
+                let newMessages = [...chatInfo['messages'], JSON.parse(data)]
+                return {chat: chatInfo.chat, messages: newMessages}
+            })
+
         });
     }
 
     let sendMessage = (text) => {
-        socket.current.emit('message', JSON.stringify({
-            senderId: authStore.user.ID,
-            receiverID: parseInt(id),
-            message: text,
-            chatId: chatInfo?.chat?.ID
-        }))
+        if (text !== '') {
+            socket.current.emit('message', JSON.stringify({
+                senderId: authStore.user.id.toString(),
+                receiverID: id,
+                message: text,
+                chatId: chatInfo?.chat?.roomID.toString()
+            }))
+        }
     }
 
 
@@ -60,12 +67,13 @@ const MessagesRightSide = ({value, setValue}) => {
     useEffect(() => {
         socket.current?.close()
         messagesStore.getCurrentChat(params.id).then(x => {
-            console.log(x)
             setChatInfo(x)
             connect(x)
             setIsLoading(false)
         })
     }, [params.id])
+
+
 
     if (isLoading) {
         return <Preloader />
@@ -74,7 +82,7 @@ const MessagesRightSide = ({value, setValue}) => {
     return (
         <div className={s.container}>
             <MessagesRightSideTitle firstName={chatInfo.chat.FirstName} secondName={chatInfo.chat.SecondName} img={chatInfo.chat.ProfilePicture}/>
-            <MessagesRightSideContent/>
+            <MessagesRightSideContent messages={chatInfo.messages}/>
             <MessagesRightSideInput value={value} setValue={setValue} sendMessage={sendMessage}/>
         </div>
     );
@@ -92,29 +100,23 @@ const MessagesRightSideTitle = ({firstName, secondName, img}) => {
     )
 }
 
-const MessagesRightSideContent = () => {
+const MessagesRightSideContent = ({messages}) => {
 
     let el = useRef()
 
     useEffect(() => {
         el.current.scrollTo(0, el.current.scrollHeight)
-    }, [])
+    }, [messages])
 
     return (
         <div className={s.scroll_container} ref={el}>
             <div className={s.content_container}>
-                {/*<MyMessage text={'Давайте обсудим сегодня React'}/>*/}
-                {/*<CompanionMessage text={'Хорошо, давайте обсудим его'}/>*/}
-                {/*<CompanionMessage text={'Установите его тогда заранее'}/>*/}
-                {/*<MyMessage text={'Хорошо'}/>*/}
-                {/*<CompanionMessage text={'А какие есть особенности этих блоков?'}/>*/}
-                {/*<MyMessage text={'Да, их максимальная и минимальная ширина составляет 400 и 150 соответственно. \n' +*/}
-                {/*'Минимальная высота 50. \n' +*/}
-                {/*'Отступы от текста сверху и снизу по 15, слева и справа по 10 \n' +*/}
-                {/*'potenti pretium. Sed maecenas integer scelerisque cras in tortor fringilla. Libero, quis '}/>*/}
-                {/*<MyMessage text={'Хорошо'}/>*/}
-                {/*<MyMessage text={'Хорошо'}/>*/}
-                {/*<MyMessage text={'Хорошо'}/>*/}
+                {messages.map(x => {
+                    if (authStore.user.id == x.SenderID){
+                        return <MyMessage text={x.Body} />
+                    }
+                    return <CompanionMessage text={x.Body}/>
+                })}
             </div>
         </div>
     )
@@ -145,6 +147,11 @@ const CompanionMessage = ({text}) => {
 }
 
 const MessagesRightSideInput = ({value, setValue, sendMessage}) => {
+    let _handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+
+        }
+    }
     return (
         <div className={s.input_container}>
             <MessagesNavigator/>

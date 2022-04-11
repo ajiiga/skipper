@@ -28,12 +28,14 @@ class MessagesStore {
         let data = r.data
         let myId = authStore.user.id
         let chat = JSON.parse(data.chat)
-
+        let roomId = chat.ID
         if (chat.ReceiverID != myId) {
             chat = chat.Receiver
         } else {
             chat = chat.Sender
         }
+
+        chat.roomID = roomId
 
         return {chat: chat, messages: JSON.parse(data.messages)}
     }

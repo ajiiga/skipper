@@ -1,11 +1,14 @@
 import React from 'react';
 import s from './ChatButton.module.css'
+import {Link} from "react-router-dom";
 
-const ChatButton = () => {
+const ChatButton = ({id}) => {
     return (
-        <div className={s.chat_btn}>
-            Чат
-        </div>
+        <Link to={`messages/${id}`}>
+            <div className={s.chat_btn}>
+                Чат
+            </div>
+        </Link>
     );
 };
 

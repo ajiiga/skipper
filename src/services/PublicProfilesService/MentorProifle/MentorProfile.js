@@ -103,7 +103,7 @@ const MentorProfile = () => {
                                         <FollowButton/>
                                     </div>
                                     <div className={s.btn_container}>
-                                        <ChatButton/>
+                                        <ChatButton id={id}/>
                                     </div>
                                 </div>
                             </div>

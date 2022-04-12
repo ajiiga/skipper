@@ -11,7 +11,7 @@ import Preloader from "../../../../components/UI/Preloader/Preloader";
 import authStore from "../../../../store/authStore";
 const io = require("socket.io-client");
 
-const MessagesRightSide = ({value, setValue}) => {
+const MessagesRightSide = ({value, setValue, setActiveUser}) => {
     const socket = useRef()
     let params = useParams()
 
@@ -22,7 +22,7 @@ const MessagesRightSide = ({value, setValue}) => {
     let [isLoading, setIsLoading] = useState(true)
 
     const connect = (info) => {
-        socket.current = io(API_URL, {
+        socket.current = io('http://152.70.189.77:8000', {
             transports: ['websocket'],
             query: {
                 roomId: info?.chat?.roomID
@@ -43,7 +43,6 @@ const MessagesRightSide = ({value, setValue}) => {
 
         socket.current.on("message", (data) => {
             setChatInfo((chatInfo) => {
-                console.log(Object.keys(chatInfo))
                 let newMessages = [...chatInfo['messages'], JSON.parse(data)]
                 return {chat: chatInfo.chat, messages: newMessages}
             })
@@ -59,6 +58,7 @@ const MessagesRightSide = ({value, setValue}) => {
                 message: text,
                 chatId: chatInfo?.chat?.roomID.toString()
             }))
+            setValue('')
         }
     }
 
@@ -71,6 +71,8 @@ const MessagesRightSide = ({value, setValue}) => {
             connect(x)
             setIsLoading(false)
         })
+        setActiveUser(parseInt(params.id))
+        return () => socket.current?.close()
     }, [params.id])
 
 
@@ -147,15 +149,26 @@ const CompanionMessage = ({text}) => {
 }
 
 const MessagesRightSideInput = ({value, setValue, sendMessage}) => {
+
+    let [messageIsReady, setMessageIsReady] = useState(false)
+
     let _handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-
+            setMessageIsReady(true)
         }
     }
+
+    useEffect(() => {
+        if (messageIsReady) {
+            sendMessage(value)
+        }
+        setMessageIsReady(false)
+    }, [messageIsReady])
+
     return (
         <div className={s.input_container}>
             <MessagesNavigator/>
-            <input type="text" value={value} onChange={e => setValue(e.target.value)} className={s.input} placeholder={'Напишите сообщение...'}/>
+            <input type="text" value={value} onChange={e => setValue(e.target.value)} onKeyDown={_handleKeyDown} className={s.input} placeholder={'Напишите сообщение...'}/>
             <img onClick={() => sendMessage(value)} src={arrow} alt="" className={s.arrow_image}/>
         </div>
     )

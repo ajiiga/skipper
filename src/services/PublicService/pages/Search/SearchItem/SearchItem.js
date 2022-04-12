@@ -36,7 +36,7 @@ const SearchItem = ({id, first_name, second_name, specialization, description, p
                         <div className={s.price_description}>средняя цена занятия</div>
                     </div>
                     <FollowButton/>
-                    <ChatButton/>
+                    <ChatButton id={id}/>
                 </div>
             </div>
             <div className={s.services}>

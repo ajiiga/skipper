@@ -136,7 +136,7 @@
   max-height: 572px;
   overflow-y: scroll;
   transition: 1s;
-  scroll-behavior: smooth;
+  /*scroll-behavior: smooth;*/
 }
 
 .input:focus {

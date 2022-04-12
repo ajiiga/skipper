@@ -1,16 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from '../../../styles/MessageBlock.module.css'
 import profile from '../../../../../static/img/profile.jfif'
 import close from '../../../../../static/img/delete.svg'
 import read from '../../../../../static/img/Messages/coolicon.svg'
 import sent from '../../../../../static/img/Messages/coolicon_2.svg'
-import {NavLink} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
 import {API_URL} from "../../../../../api/api_setting";
 
-const MessagesBlock = ({status, data}) => {
+const MessagesBlock = ({status, data, isActive}) => {
+    let params = useParams()
+
+    let [id, setId] = useState(params.id)
+
+    console.log(params.id)
     return (
         <NavLink to={`/messages/${data.ID}`}>
-            <div className={s.container}>
+            <div className={`${s.container} ${isActive ? s.active_container : ''}`}>
                 <div className={s.content_container}>
                     <img src={`${API_URL}/public-api/user/profile-picture/${data.ProfilePicture}`} className={s.profile}/>
                     <div className={s.info_and_notification}>

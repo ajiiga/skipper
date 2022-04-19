@@ -30,6 +30,7 @@
 }
 
 .icon {
+    position: relative;
     width: 20px;
     height: 20px;
 }
@@ -96,4 +97,15 @@
 
 .hidden_block {
     height: 60px;
+}
+
+.notification_circle {
+    position: absolute;
+    top: -4px;
+    right: -8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid #606060;
+    background-color: #fedc2e;
 }

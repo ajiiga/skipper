@@ -17,8 +17,7 @@ const MessagesLeftSide = ({query, setQuery, users, activeUser}) => {
     let sortedUser = useMemo(() => {
         let lowCaseQuery = query.toLowerCase()
         return users.filter(x => x.FirstName.toLowerCase().includes(lowCaseQuery) || x.SecondName.toLowerCase().includes(lowCaseQuery))
-    }, [query])
-
+    }, [query, users])
 
     return (
         <div className={s.container}>

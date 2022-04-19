@@ -4,9 +4,10 @@
     border: 1px solid rgba(0, 0, 0, 0.135216);
     border-radius: 8px;
     padding: 10px 20px;
-    margin: 5px;
     display: flex;
     cursor: pointer;
+    margin: 5px 5px 20px;
+
 }
 
 .container:hover {
@@ -36,6 +37,7 @@
     justify-content: center;
     margin-left: 12px;
     position: relative;
+    width: 100%;
 }
 
 .time_and_notification {
@@ -86,4 +88,5 @@
 .info_and_notification {
     display: flex;
     justify-content: space-between;
+    width: 75%;
 }

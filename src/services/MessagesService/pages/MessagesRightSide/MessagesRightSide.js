@@ -9,9 +9,11 @@ import {useParams} from "react-router-dom";
 import messagesStore from "../../../../store/messagesStore";
 import Preloader from "../../../../components/UI/Preloader/Preloader";
 import authStore from "../../../../store/authStore";
+import myClassesStore from "../../../../store/myClassesStore";
+
 const io = require("socket.io-client");
 
-const MessagesRightSide = ({value, setValue, setActiveUser}) => {
+const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatList}) => {
     const socket = useRef()
     let params = useParams()
 
@@ -43,7 +45,7 @@ const MessagesRightSide = ({value, setValue, setActiveUser}) => {
 
         socket.current.on("message", (data) => {
             setChatInfo((chatInfo) => {
-                let newMessages = [...chatInfo['messages'], JSON.parse(data)]
+                let newMessages = [...chatInfo['messages'], {...JSON.parse(data), stringDateAndTime: messagesStore.refactorDate((new Date()).toString())}]
                 return {chat: chatInfo.chat, messages: newMessages}
             })
 
@@ -63,27 +65,32 @@ const MessagesRightSide = ({value, setValue, setActiveUser}) => {
     }
 
 
-
     useEffect(() => {
         socket.current?.close()
         messagesStore.getCurrentChat(params.id).then(x => {
             setChatInfo(x)
             connect(x)
+            if (chatList.filter(chats => chats.ID === x.chat.ID).length === 0) {
+                setChatList([...chatList, x.chat])
+            }
             setIsLoading(false)
         })
         setActiveUser(parseInt(params.id))
-        return () => socket.current?.close()
+        return () => {
+            socket.current?.close()
+            setActiveUser(-1)
+        }
     }, [params.id])
 
 
-
     if (isLoading) {
-        return <Preloader />
+        return <Preloader/>
     }
 
     return (
         <div className={s.container}>
-            <MessagesRightSideTitle firstName={chatInfo.chat.FirstName} secondName={chatInfo.chat.SecondName} img={chatInfo.chat.ProfilePicture}/>
+            <MessagesRightSideTitle firstName={chatInfo.chat.FirstName} secondName={chatInfo.chat.SecondName}
+                                    img={chatInfo.chat.ProfilePicture}/>
             <MessagesRightSideContent messages={chatInfo.messages}/>
             <MessagesRightSideInput value={value} setValue={setValue} sendMessage={sendMessage}/>
         </div>
@@ -110,40 +117,46 @@ const MessagesRightSideContent = ({messages}) => {
         el.current.scrollTo(0, el.current.scrollHeight)
     }, [messages])
 
+    let today = new Date()
+    let yesterday = new Date(today.valueOf() - 86400000);
+
     return (
         <div className={s.scroll_container} ref={el}>
             <div className={s.content_container}>
                 {messages.map(x => {
-                    if (authStore.user.id == x.SenderID){
-                        return <MyMessage text={x.Body} />
+
+
+                    if (authStore.user.id == x.SenderID) {
+                        return <MyMessage text={x.Body} time={x.stringDateAndTime}/>
                     }
-                    return <CompanionMessage text={x.Body}/>
+                    return <CompanionMessage text={x.Body} time={x.stringDateAndTime}/>
                 })}
             </div>
         </div>
     )
 }
 
-const MyMessage = ({text}) => {
+const MyMessage = ({text, time}) => {
     return (
         <>
             <div className={s.my_message_container}>
                 <div className={s.my_message}>{text}</div>
                 <div className={s.my_message_triangle}/>
             </div>
-            <div className={s.my_time}>Сегодня, 19:46</div>
+            {/*<div className={s.my_time}>Сегодня, 19:46</div>*/}
+            <div className={s.my_time}>{time}</div>
         </>
     )
 }
 
-const CompanionMessage = ({text}) => {
+const CompanionMessage = ({text, time}) => {
     return (
         <>
             <div className={s.companion_message_container}>
                 <div className={s.companion_message}>{text}</div>
                 <div className={s.companion_message_triangle}/>
             </div>
-            <div className={s.companion_time}>Сегодня, 19:46</div>
+            <div className={s.companion_time}>{time}</div>
         </>
     )
 }
@@ -168,7 +181,8 @@ const MessagesRightSideInput = ({value, setValue, sendMessage}) => {
     return (
         <div className={s.input_container}>
             <MessagesNavigator/>
-            <input type="text" value={value} onChange={e => setValue(e.target.value)} onKeyDown={_handleKeyDown} className={s.input} placeholder={'Напишите сообщение...'}/>
+            <input type="text" value={value} onChange={e => setValue(e.target.value)} onKeyDown={_handleKeyDown}
+                   className={s.input} placeholder={'Напишите сообщение...'}/>
             <img onClick={() => sendMessage(value)} src={arrow} alt="" className={s.arrow_image}/>
         </div>
     )

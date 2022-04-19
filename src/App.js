@@ -12,15 +12,19 @@ import PrivateProfileService from "./services/PrivateProfileService/PrivateProfi
 import PublicProfilesService from "./services/PublicProfilesService/PublicProfilesService";
 import MyClassesService from "./services/MyClassesService/MyClassesService";
 import {MessagesService} from "./services/MessagesService/MessagesService";
+import messagesStore from "./store/messagesStore";
 
 function App() {
     useEffect(() => {
         if (localStorage.getItem('token')) {
-            authStore.initializationApp()
+            authStore.initializationApp().then(x => {
+                messagesStore.startEvents()
+            })
         }
         else {
             authStore.setIsInitialisation(false)
         }
+
     }, [])
 
     if (authStore.isInitialisation)

@@ -24,10 +24,12 @@ const Messages = () => {
     let [activeUser, setActiveUser] = useState(-1)
 
     useEffect(() => {
+        messagesStore.setNewMessage(false)
         messagesStore.getChatList().then(x => {
             setChatList(x)
             setIsLoading(false)
         })
+
     }, [])
 
 
@@ -42,7 +44,7 @@ const Messages = () => {
                 <MessagesLeftSide query={query} setQuery={setQuery} users={chatList} activeUser={activeUser}/>
                 <Switch>
                     <Route path={'/messages/:id'}>
-                        <MessagesRightSide value={valueMessage} setValue={setValueMessage} setActiveUser={setActiveUser}/>
+                        <MessagesRightSide value={valueMessage} setValue={setValueMessage} setActiveUser={setActiveUser} chatList={chatList} setChatList={setChatList}/>
                     </Route>
                     <Route path={'/messages'} exact={true}>
                         <MessagesRightSideEmpty/>

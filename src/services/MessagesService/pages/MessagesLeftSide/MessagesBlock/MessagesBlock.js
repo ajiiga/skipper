@@ -12,7 +12,6 @@ const MessagesBlock = ({status, data, isActive}) => {
 
     let [id, setId] = useState(params.id)
 
-    console.log(params.id)
     return (
         <NavLink to={`/messages/${data.ID}`}>
             <div className={`${s.container} ${isActive ? s.active_container : ''}`}>
@@ -22,7 +21,7 @@ const MessagesBlock = ({status, data, isActive}) => {
                         <div className={s.info_container}>
                             <div className={s.name}>{data.FirstName} {data.SecondName}</div>
                             <div className={s.time_and_notification}>
-                                <div className={s.time}>19:46</div>
+                                <div className={s.time}>{data.lastMessageDate}</div>
                             </div>
                         </div>
                         <div className={s.notification}>
@@ -35,7 +34,7 @@ const MessagesBlock = ({status, data, isActive}) => {
 
                 </div>
             </div>
-            <div className={s.border}/>
+            {/*<div className={s.border}/>*/}
         </NavLink>
     );
 };

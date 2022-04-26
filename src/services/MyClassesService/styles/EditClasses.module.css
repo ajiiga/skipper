@@ -1,19 +1,28 @@
 .container {
-    margin-top: 33px;
-    padding-bottom: 20px;
+  margin-top: 33px;
+  padding-bottom: 20px;
 }
 
 .content_container {
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .left_side {
-    width: 28%;
+  width: 28%;
 }
 
 .right_side {
-    width: 69%;
+  width: 69%;
 }
 
+@media (max-width: 1680px) and (-webkit-min-device-pixel-ratio: 1) {
+  .left_side {
+    width: 25%;
+  }
+
+  .right_side {
+    width: 72%;
+  }
+}

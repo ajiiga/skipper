@@ -173,3 +173,20 @@
   border: 1px solid black;
   background-color: #fedc2e;
 }
+
+@media (max-width: 1680px) and (-webkit-device-pixel-ratio: 1) {
+  .scroll_container {
+    max-height: 480px;
+  }
+  .container {
+    height: 570px;
+  }
+}
+@media (max-width: 1344px) and (-webkit-min-device-pixel-ratio: 1.25) {
+  .scroll_container {
+    max-height: 480px;
+  }
+  .container {
+    height: 570px;
+  }
+}

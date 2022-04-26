@@ -3,7 +3,7 @@ import {
     getChatListRequest,
     getCurrentChatInfoRequest,
     getNotificationsRequest,
-    getNotificationsUrl
+    getNotificationsUrl, sendReviewUrl
 } from "../api/api_messages";
 import authStore from "./authStore";
 import myClassesStore from "./myClassesStore";
@@ -18,8 +18,14 @@ class MessagesStore {
 
     newMessage = false;
 
+    newMessages = []
+
     setNewMessage = (status) => {
         this.newMessage = status
+    }
+
+    setNewMessages = (messages) => {
+        this.newMessages = messages
     }
 
     async getChatList() {
@@ -30,14 +36,15 @@ class MessagesStore {
         let result = jsonData.map(x => {
 
             let refactoredDate = x.LastMessage.CreatedAt === '0001-01-01T00:00:00Z'? '' : this.refactorDate(x.LastMessage.CreatedAt)
-
             if (x.ReceiverID != myId) {
                 let delta = x.Receiver
                 delta.lastMessageDate = refactoredDate
+                delta.count_unread_messages = x.count_unread_messages
                 return delta
             } else {
                 let delta = x.Sender
                 delta.lastMessageDate = refactoredDate
+                delta.count_unread_messages = x.count_unread_messages
                 return delta
             }
         })
@@ -71,6 +78,15 @@ class MessagesStore {
         return {chat: chat, messages: jsonMessages}
     }
 
+    async sendReview(sender_id, recipien_id, text, rating, anonymous, lessons_count) {
+        try {
+            let r = await sendReviewUrl(sender_id, recipien_id, text, rating, anonymous, lessons_count)
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
     refactorDate(strDate) {
         let today = new Date()
         let yesterday = new Date(today.valueOf() - 86400000);
@@ -93,6 +109,14 @@ class MessagesStore {
         return stringDateAndTime
     }
 
+    clearReadMessages(id) {
+        let deltaMessages = this.newMessages.filter(message => {
+            return message.SenderID != id
+        })
+        this.setNewMessages(deltaMessages)
+    }
+
+
     changeDisplay() {
 
     }
@@ -103,8 +127,9 @@ class MessagesStore {
 
 
         this.eventSource.addEventListener('message', e => {
+            let newMessage = JSON.parse(e.data)
             this.setNewMessage(true)
-            console.log(JSON.parse(e.data))
+            this.setNewMessages([...this.newMessages, newMessage])
         })
     }
 

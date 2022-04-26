@@ -195,7 +195,7 @@ const MentorProfile = () => {
                     <div className={s.right_side}>
                         <div className={s.reviews_block}>
                             <div className={s.title}>Отзывы</div>
-                            <Reviews n={2}/>
+                            <Reviews n={2} allReviews={JSON.parse(user.comments)}/>
                         </div>
                     </div>
                 </div>

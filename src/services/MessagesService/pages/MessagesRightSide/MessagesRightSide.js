@@ -5,11 +5,12 @@ import arrow from '../../../../static/img/Messages/send_message_arrow.svg'
 import navigator from '../../../../static/img/Messages/navigator.svg'
 import set_review from '../../../../static/img/Messages/set_review.svg'
 import {API_URL} from "../../../../api/api_setting";
-import {useParams} from "react-router-dom";
+import {useParams, Switch, Route, Redirect} from "react-router-dom";
 import messagesStore from "../../../../store/messagesStore";
 import Preloader from "../../../../components/UI/Preloader/Preloader";
 import authStore from "../../../../store/authStore";
 import myClassesStore from "../../../../store/myClassesStore";
+import SendReviewModal from "./SendReviewModal/SendReviewModal";
 
 const io = require("socket.io-client");
 
@@ -27,8 +28,9 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
         socket.current = io('http://152.70.189.77:8000', {
             transports: ['websocket'],
             query: {
-                roomId: info?.chat?.roomID
-            }
+                roomId: info?.chat?.roomID,
+                token: `Bearer ${localStorage.getItem('token')}`
+            },
         })
 
         socket.current.on("connect", () => {
@@ -93,6 +95,12 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
                                     img={chatInfo.chat.ProfilePicture}/>
             <MessagesRightSideContent messages={chatInfo.messages}/>
             <MessagesRightSideInput value={value} setValue={setValue} sendMessage={sendMessage}/>
+            <Switch>
+                <Route path={`/messages/${params.id}/review`}>
+                    <SendReviewModal id={params.id} title={'Отзыв о пользователе'}  />
+                </Route>
+                <Redirect to={`/messages/${params.id}`} />
+            </Switch>
         </div>
     );
 };

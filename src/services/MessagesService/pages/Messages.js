@@ -41,7 +41,7 @@ const Messages = () => {
         <div className={s.container}>
             <MiniNavBar child={'Сообщения'}/>
             <div className={s.content_container}>
-                <MessagesLeftSide query={query} setQuery={setQuery} users={chatList} activeUser={activeUser}/>
+                <MessagesLeftSide query={query} setQuery={setQuery} users={chatList} setUsers={setChatList} activeUser={activeUser}/>
                 <Switch>
                     <Route path={'/messages/:id'}>
                         <MessagesRightSide value={valueMessage} setValue={setValueMessage} setActiveUser={setActiveUser} chatList={chatList} setChatList={setChatList}/>

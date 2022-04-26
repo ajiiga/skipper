@@ -16,6 +16,11 @@
   overflow-y: scroll;
 }
 
+.empty_messages_items {
+  text-align: center;
+  color: #606060;
+}
+
 @media (max-width: 1680px) and (-webkit-min-device-pixel-ratio: 1) {
   .messengers_items {
     max-height: 480px;

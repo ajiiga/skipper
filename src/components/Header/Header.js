@@ -55,7 +55,7 @@ const Header = ({isAuth, profile}) => {
                             <Link to={'/messages'}>
                                 <div className={s.icon}>
                                     <img src={message} alt=""/>
-                                    {messagesStore.newMessage && <div className={s.notification_circle}/>}
+                                    {messagesStore.newMessages.length > 0 && <div className={s.notification_circle}/>}
                                 </div>
                             </Link>
                             <Link to={'/search'}>

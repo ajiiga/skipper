@@ -5,7 +5,7 @@ import arrow from '../../../../static/img/Messages/send_message_arrow.svg'
 import navigator from '../../../../static/img/Messages/navigator.svg'
 import set_review from '../../../../static/img/Messages/set_review.svg'
 import {API_URL} from "../../../../api/api_setting";
-import {useParams, Switch, Route, Redirect} from "react-router-dom";
+import {useParams, Switch, Route, Redirect, Link} from "react-router-dom";
 import messagesStore from "../../../../store/messagesStore";
 import Preloader from "../../../../components/UI/Preloader/Preloader";
 import authStore from "../../../../store/authStore";
@@ -29,7 +29,7 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
             transports: ['websocket'],
             query: {
                 roomId: info?.chat?.roomID,
-                token: `Bearer ${localStorage.getItem('token')}`
+                token: `${localStorage.getItem('token')}`
             },
         })
 
@@ -47,7 +47,10 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
 
         socket.current.on("message", (data) => {
             setChatInfo((chatInfo) => {
-                let newMessages = [...chatInfo['messages'], {...JSON.parse(data), stringDateAndTime: messagesStore.refactorDate((new Date()).toString())}]
+                let newMessages = [...chatInfo['messages'], {
+                    ...JSON.parse(data),
+                    stringDateAndTime: messagesStore.refactorDate((new Date()).toString())
+                }]
                 return {chat: chatInfo.chat, messages: newMessages}
             })
 
@@ -92,14 +95,14 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
     return (
         <div className={s.container}>
             <MessagesRightSideTitle firstName={chatInfo.chat.FirstName} secondName={chatInfo.chat.SecondName}
-                                    img={chatInfo.chat.ProfilePicture}/>
+                                    img={chatInfo.chat.ProfilePicture} id={chatInfo.chat.ID}/>
             <MessagesRightSideContent messages={chatInfo.messages}/>
             <MessagesRightSideInput value={value} setValue={setValue} sendMessage={sendMessage}/>
             <Switch>
                 <Route path={`/messages/${params.id}/review`}>
-                    <SendReviewModal id={params.id} title={'Отзыв о пользователе'}  />
+                    <SendReviewModal id={params.id} title={'Отзыв о пользователе'}/>
                 </Route>
-                <Redirect to={`/messages/${params.id}`} />
+                <Redirect to={`/messages/${params.id}`}/>
             </Switch>
         </div>
     );
@@ -108,11 +111,13 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
 export default MessagesRightSide;
 
 
-const MessagesRightSideTitle = ({firstName, secondName, img}) => {
+const MessagesRightSideTitle = ({firstName, secondName, img, id}) => {
     return (
         <div className={s.title_container}>
-            <img src={`${API_URL}/public-api/user/profile-picture/${img}`} className={s.profile_img} alt=""/>
-            <div className={s.name}>{firstName} {secondName}</div>
+            <Link to={`/mentor-profile/${id}`} className={s.link_container}>
+                <img src={`${API_URL}/public-api/user/profile-picture/${img}`} className={s.profile_img} alt=""/>
+                <div className={s.name}>{firstName} {secondName}</div>
+            </Link>
         </div>
     )
 }

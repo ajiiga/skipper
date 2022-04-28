@@ -8,10 +8,9 @@ import {NavLink, useParams} from "react-router-dom";
 import {API_URL} from "../../../../../api/api_setting";
 import messagesStore from "../../../../../store/messagesStore";
 
-const MessagesBlock = ({data, isActive, changeCountUnreadMessages}) => {
+const MessagesBlock = ({data, isActive}) => {
 
     const onClickHandler = () => {
-        changeCountUnreadMessages(data.ID, 0)
         messagesStore.clearReadMessages(data.ID)
     }
 

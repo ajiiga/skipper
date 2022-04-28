@@ -74,7 +74,7 @@ class MessagesStore {
             return {...x, stringDateAndTime: this.refactorDate(x.CreatedAt)}
         })
 
-        console.log('current chat', chat)
+        console.log('messages', jsonMessages)
         return {chat: chat, messages: jsonMessages}
     }
 

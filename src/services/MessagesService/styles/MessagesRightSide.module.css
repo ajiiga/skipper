@@ -13,10 +13,13 @@
 }
 
 .title_container {
+  border-bottom: 1px solid #dadada;
+}
+
+.link_container {
   padding: 10px 20px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #dadada;
 }
 
 .name {

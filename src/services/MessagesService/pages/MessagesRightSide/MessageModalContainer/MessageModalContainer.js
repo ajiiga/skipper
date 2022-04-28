@@ -9,7 +9,6 @@ const MessageModalContainer = ({title, id, children}) => {
     const history = useHistory()
 
     const closeModal = () => {
-        debugger
         history.push(`/messages/${id}`)
     }
 

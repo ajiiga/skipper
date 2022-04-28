@@ -3,14 +3,23 @@ import s from './../../../styles/MessageModals.module.css'
 import MessageModalContainer from "../MessageModalContainer/MessageModalContainer";
 import messagesStore from "../../../../../store/messagesStore";
 import authStore from "../../../../../store/authStore";
+import {useHistory} from "react-router-dom";
 
 const SendReviewModal = ({id, title}) => {
 
     let [textReview, setTextReview] = useState('')
     let [isAnonymous, setIsAnonymous] = useState(false)
 
+    const history = useHistory()
+
+    const closeModal = () => {
+        history.push(`/messages/${id}`)
+    }
+
     const sendReview = () => {
-        messagesStore.sendReview(authStore.user.id, parseInt(id), textReview, 5, isAnonymous, 3)
+        if (textReview !== '') {
+            messagesStore.sendReview(authStore.user.id, parseInt(id), textReview, 5, isAnonymous, 3).then(req => closeModal())
+        }
     }
 
     return (

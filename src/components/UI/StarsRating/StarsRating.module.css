@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+}
+
+.container img {
+    padding-right: 5px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.active_star {
+    filter: grayscale(1);
+}

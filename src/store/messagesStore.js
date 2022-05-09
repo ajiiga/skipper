@@ -1,7 +1,8 @@
 import {makeAutoObservable} from "mobx";
 import {
+    changeDateRequest,
     getChatListRequest,
-    getCurrentChatInfoRequest,
+    getCurrentChatInfoRequest, getDataForChangeDateRequest,
     getNotificationsRequest,
     getNotificationsUrl, sendReviewUrl
 } from "../api/api_messages";
@@ -81,6 +82,26 @@ class MessagesStore {
     async sendReview(sender_id, recipien_id, text, rating, anonymous, lessons_count) {
         try {
             let r = await sendReviewUrl(sender_id, recipien_id, text, rating, anonymous, lessons_count)
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
+    async getDataForChangeDate(id) {
+        try {
+            let r = await getDataForChangeDateRequest(id)
+            let result = {class_time: JSON.parse(r.data.class_time), class_time_mask: r.data.class_time_mask}
+            return result
+        }
+        catch (e) {
+
+        }
+    }
+
+    async changeDate(class_id, time) {
+        try {
+            let r = await changeDateRequest(class_id, time)
         }
         catch (e) {
             console.log(e)

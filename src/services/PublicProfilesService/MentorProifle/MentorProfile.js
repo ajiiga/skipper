@@ -76,7 +76,7 @@ const MentorProfile = () => {
                                 </div>
 
                                 <div className={s.rate}>
-                                    <RateDisplay rate={4.2}/>
+                                    <RateDisplay rate={user.rating}/>
                                     <div className={s.date}>На Skipper
                                         с {user.day} {monthName[parseInt(user.month)]} {user.year}</div>
                                     <div className={s.stat_count}>248 занятий 46 студентов</div>
@@ -87,13 +87,7 @@ const MentorProfile = () => {
                                     {user.description}
                                 </div>
                                 <div className={s.mentor_skills}>
-                                    <div className={s.tag_container}><Tag title={'React'}/></div>
-                                    <div className={s.tag_container}><Tag title={'Angular'}/></div>
-                                    <div className={s.tag_container}><Tag title={'Мобильная разработка'}/></div>
-                                    <div className={s.tag_container}><Tag title={'React Native'}/></div>
-                                    <div className={s.tag_container}><Tag title={'JavaScript'}/></div>
-                                    <div className={s.tag_container}><Tag title={'HTML'}/></div>
-                                    <div className={s.tag_container}><Tag title={'CSS'}/></div>
+                                    {user.tags.map(tag => <div className={s.tag_container}><Tag title={tag}/></div>)}
                                 </div>
                             </div>
                             <div className={s.buttons}>

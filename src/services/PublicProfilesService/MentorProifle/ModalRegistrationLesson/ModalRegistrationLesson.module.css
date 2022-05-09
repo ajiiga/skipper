@@ -156,6 +156,7 @@
   justify-content: space-between;
   transition: 0.25s;
   cursor: pointer;
+  align-items: center;
 }
 
 .communication_item_text {
@@ -179,6 +180,8 @@
 }
 
 .communication_logo {
+  width: 75px;
+  height: 75px;
 }
 
 .arrow {
@@ -186,6 +189,15 @@
   z-index: 1;
   transform: rotate(180deg);
   cursor: pointer;
+}
+
+.communication_item_input {
+  height: 25px;
+  background: #ffffff;
+  border: 1px solid #aeaeae;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 8px 12px;
 }
 
 @media (max-width: 1680px) and (-webkit-min-device-pixel-ratio: 1) {

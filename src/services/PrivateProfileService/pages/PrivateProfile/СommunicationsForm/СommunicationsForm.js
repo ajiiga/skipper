@@ -35,7 +35,6 @@ const CommunicationsForm = ({listMessengers, listMyCommunications, setListMyComm
                     <div className={s.block_title}>{x.messenger}</div>
                     <input type="text" value={x.login}/>
                     <div className={s.delete} onClick={() => {
-                        debugger
                         privateProfileStore.deleteCommunication(x.ID).then(r => {
                             setListMyCommunications([...listMyCommunications].filter(el => el.ID !== x.ID))
                         })
@@ -53,6 +52,7 @@ const CommunicationsForm = ({listMessengers, listMyCommunications, setListMyComm
                         privateProfileStore.addCommunication(messenger_id, values.login).then(x =>{
                             setIsFetching(false)
                             setListMyCommunications([...listMyCommunications, {ID: x, login: values.login, messenger: selected}])
+                            values.login = ''
                             setActive(false)
                         })
                     }}

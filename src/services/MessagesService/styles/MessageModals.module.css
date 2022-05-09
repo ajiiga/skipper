@@ -31,8 +31,13 @@
     align-items: center;
 }
 
+.title_container {
+    display: flex;
+}
+
 .title {
     font-weight: bold;
+    margin-right: 10px;
 }
 
 .close {
@@ -79,6 +84,6 @@
     border: 0;
     font-size: 18px;
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 55px;
     cursor: pointer;
 }

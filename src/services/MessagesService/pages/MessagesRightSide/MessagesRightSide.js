@@ -11,6 +11,7 @@ import Preloader from "../../../../components/UI/Preloader/Preloader";
 import authStore from "../../../../store/authStore";
 import myClassesStore from "../../../../store/myClassesStore";
 import SendReviewModal from "./SendReviewModal/SendReviewModal";
+import ChangeLessonsDatesModal from "./ChangeLessonsDatesModal/ChangeLessonsDatesModal";
 
 const io = require("socket.io-client");
 
@@ -100,7 +101,10 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
             <MessagesRightSideInput value={value} setValue={setValue} sendMessage={sendMessage}/>
             <Switch>
                 <Route path={`/messages/${params.id}/review`}>
-                    <SendReviewModal id={params.id} title={'Отзыв о пользователе'}/>
+                    <SendReviewModal id={params.id}/>
+                </Route>
+                <Route path={`/messages/${params.id}/change-lessons-dates`}>
+                    <ChangeLessonsDatesModal id={params.id} />
                 </Route>
                 <Redirect to={`/messages/${params.id}`}/>
             </Switch>

@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './FreeTimeCalendar.module.css'
 import arrow from '../../../../static/img/FreeTimeCalendar/arrow.svg'
+import publicProfileStore from "../../../../store/publicProfileStore";
 
 const FreeTimeCalendar = ({classes}) => {
 
@@ -21,13 +22,7 @@ const FreeTimeCalendar = ({classes}) => {
     })
     result = result.join('')
 
-    let decode = (calendar_code) => {
-        let res = []
-        for (let i = 0; i < 8; i++) {
-            res.push(calendar_code.slice(i * 7, (i + 1) * 7))
-        }
-        return res.map(x => x.split('').map(x => parseInt(x)))
-    }
+    let decode = publicProfileStore.decode
 
 
 

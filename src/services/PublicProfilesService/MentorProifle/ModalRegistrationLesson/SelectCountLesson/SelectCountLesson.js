@@ -3,10 +3,6 @@ import s from '../ModalRegistrationLesson.module.css'
 
 const SelectCountLesson = ({lesson, timeLessons, setTimeLessons, defaultState, setActiveCount}) => {
 
-
-
-
-
     let handleBtn = (min, count) => {
         setActiveCount(count)
         let deltaTimeLessons = {...defaultState}

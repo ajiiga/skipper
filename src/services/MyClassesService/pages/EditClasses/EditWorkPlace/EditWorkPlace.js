@@ -13,6 +13,7 @@ import TextareaCompetence from "./TextareaCompetence/TextareaCompetence";
 import publicStore from "../../../../../store/publicStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";
 import myClassesStore from "../../../../../store/myClassesStore";
+import publicProfileStore from "../../../../../store/publicProfileStore";
 
 const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) => {
     let location = useLocation()
@@ -146,13 +147,7 @@ const EditWorkPlace = ({list, setClasses, classes, activeItem, setActiveItem}) =
     }, [activeItem])
 
 
-    let decode = (calendar_code) => {
-        let res = []
-        for (let i = 0; i < 8; i++) {
-            res.push(calendar_code.slice(i * 7, (i + 1) * 7))
-        }
-        return res.map(x => x.split('').map(x => parseInt(x)))
-    }
+    let decode = publicProfileStore.decode
 
     let [tags, setTags] = useState([])
 

@@ -20,10 +20,6 @@ class PublicStore {
             this.tags.push(tag)
     }
 
-    deleteTag = (tag) => {
-        this.tags = this.tags.filter(x => x !== tag)
-    }
-
     clearTags = () => {
         this.tags = []
     }

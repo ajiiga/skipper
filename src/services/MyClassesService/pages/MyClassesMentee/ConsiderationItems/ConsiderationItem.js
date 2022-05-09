@@ -4,6 +4,7 @@ import Tag from "../../../../../components/UI/Tag/Tag";
 import zoom from '../../../../../static/img/messenger_icons/zoom.png'
 import {messengersIcons} from "../../../../PublicProfilesService/MentorProifle/ModalRegistrationLesson/MessengersIcons";
 import myClassesStore from "../../../../../store/myClassesStore";
+import {Link} from "react-router-dom";
 
 const ConsiderationItem = ({data, deleteItem}) => {
 
@@ -35,7 +36,7 @@ const ConsiderationItem = ({data, deleteItem}) => {
                         <div>{x.time}</div>
                     </div>)}
                 </div>
-                <button className={s.right_title_btn}>Предложить другое время</button>
+                <Link to={`/messages/${data.UserID}/change-lessons-dates?id=${data.ID}`}><button className={s.right_title_btn}>Предложить другое время</button></Link>
             </div>
             <div className={s.text}>Способ связи:</div>
             <div className={s.communication_price_container}>

@@ -73,7 +73,6 @@ const Search = () => {
             let strTags = idTags.join(',')
             publicStore.getSearchClasses(strTags === "" ? undefined : strTags, 1, 100).then(x => {
                 setClasses(x)
-                debugger
                 setSearchIsFetching(false)
             })
         }
@@ -119,7 +118,7 @@ const Search = () => {
                         }).map(x => {
                             return <SearchItem key={x.ID} id={x.ID} first_name={x.FirstName} second_name={x.SecondName}
                                         specialization={x.Specialization} description={x.Description}
-                                        picture={x.ProfilePicture} classes={x.classes} tags={tagList}/>
+                                        picture={x.ProfilePicture} classes={x.classes} tags={tagList} rating={x.rating}/>
                         })
                     }
                 </div>

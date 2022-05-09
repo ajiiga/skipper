@@ -15,3 +15,7 @@ export let sendReviewUrl = (sender_id, recipien_id, text, rating, anonymous, les
     anonymous: anonymous,
     lessons_count: lessons_count
 })
+
+export let getDataForChangeDateRequest = (id) => $api.get(`/api/class/booking/change-time/${id}`)
+
+export let changeDateRequest = (class_id, time) => $api.put(`/api/class/booking/change-time/`, {class_id: class_id, time: time})

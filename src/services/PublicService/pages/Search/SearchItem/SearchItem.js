@@ -10,7 +10,7 @@ import {API_URL} from "../../../../../api/api_setting";
 import {Link} from "react-router-dom";
 import authStore from "../../../../../store/authStore";
 
-const SearchItem = ({id, first_name, second_name, specialization, description, picture, classes, tags}) => {
+const SearchItem = ({id, first_name, second_name, specialization, description, picture, classes, tags, rating}) => {
     let [price, setPrice] = useState(Math.round(Math.random() * (5000 - 500) + 500))
 
 
@@ -30,7 +30,7 @@ const SearchItem = ({id, first_name, second_name, specialization, description, p
                     </div>
                 </Link>
                 <div className={s.display}>
-                    <Rating num={4.7}/>
+                    <Rating num={rating}/>
                     <div className={s.price_display}>
                         <div className={s.price}>{price}₽</div>
                         <div className={s.price_description}>средняя цена занятия</div>

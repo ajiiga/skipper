@@ -12,9 +12,18 @@ import StageDisplay from "./StageDisplay/StageDisplay";
 import SelectCommunicationType from "./SelectCommunicationType/SelectCommunicationType";
 import arrow from '../../../../static/img/Main/pointer.png'
 import publicProfileStore from "../../../../store/publicProfileStore";
+import privateProfileStore from "../../../../store/privateProfileStore";
 
 
 const ModalRegistrationLesson = ({classes, communications}) => {
+
+
+    let [isFetching, setIsFetching] = useState(true)
+    let [myCommunications, setMyCommunications] = useState([])
+
+
+
+
 
     let defaultState = {
         min15: {count1: false},
@@ -84,7 +93,14 @@ const ModalRegistrationLesson = ({classes, communications}) => {
         }
 
         if (stage_num === 4) {
-            return activeCommunication === undefined
+            if (activeCommunication === undefined) return true
+
+            if (activeCommunication.sendRequest) {
+                return activeCommunication.loginText === ''
+            }
+            else {
+                return false
+            }
         }
     }
 
@@ -102,7 +118,7 @@ const ModalRegistrationLesson = ({classes, communications}) => {
                 class_id: parseInt(params.service_id),
                 mentor_id: service?.ParentId,
                 time: sortedDates,
-                communication: activeCommunication
+                communication: activeCommunication.loginId
 
             }
             if (time == 15) {
@@ -119,7 +135,14 @@ const ModalRegistrationLesson = ({classes, communications}) => {
                 request[`price_${time}_${count}`] = service[service_type_key][`Price${time}`] * parseInt(count)
             }
 
-            publicProfileStore.registrationLesson(request).then(x => closeModal())
+            if (activeCommunication.sendRequest) {
+                privateProfileStore.addCommunication(activeCommunication.messengerId, activeCommunication.loginText).then(r => {
+                    publicProfileStore.registrationLesson(request).then(x => closeModal())
+                })
+            }
+            else {
+                publicProfileStore.registrationLesson(request).then(x => closeModal())
+            }
         } else
             setStage(stage_num + 1)
     }
@@ -139,24 +162,35 @@ const ModalRegistrationLesson = ({classes, communications}) => {
         }
     }
 
-    let decode = (calendar_code) => {
-        let res = []
-        for (let i = 0; i < 8; i++) {
-            res.push(calendar_code.slice(i * 7, (i + 1) * 7))
-        }
-        return res.map(x => x.split('').map(x => parseInt(x)))
-    }
+    let decode = publicProfileStore.decode
 
 
     let [calendarState, setCalendarState] = useState(Array.from(Array(8), _ => Array(7).fill(0)))
+
     let [activeCommunication, setActiveCommunication] = useState(undefined)
     let [dates, setDates] = useState([])
+
+    useEffect(() => {
+        privateProfileStore.getMyCommunications().then(data => {
+            let communicationList = data.map(com => com.Messenger[0].ID)
+            let communicationListNoRepeat = [...new Set(communicationList)]
+            setMyCommunications(communicationListNoRepeat)
+            setIsFetching(false)
+        })
+    }, [])
+
+
 
     useEffect(() => {
         if (selectedType !== -1) {
             setCalendarState(decode(service[types[selectedType]].Time))
         }
     }, [selectedType])
+
+
+    if (isFetching) {
+        return <></>
+    }
 
     return (
         <AnimatePresence>
@@ -197,7 +231,7 @@ const ModalRegistrationLesson = ({classes, communications}) => {
                                                             calendarState={calendarState}
                                                             setCalendarState={setCalendarState}/>}
                         {stage === 4 &&
-                        <SelectCommunicationType communications={communications} setActiveItem={setActiveCommunication}
+                        <SelectCommunicationType communications={communications} myCommunications={myCommunications} setActiveItem={setActiveCommunication}
                                                  activeItem={activeCommunication}/>}
 
                     </div>

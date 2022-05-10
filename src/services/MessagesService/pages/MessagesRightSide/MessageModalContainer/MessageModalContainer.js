@@ -24,7 +24,7 @@ const MessageModalContainer = ({title, id, children}) => {
                         }} onClick={() => closeModal()}>
                 <div className={s.modal_container} onClick={e => e.stopPropagation()}>
                     <div className={s.modal_upper_container}>
-                        <div/>
+                        <div style={{width: '27px'}}/>
                         <div className={s.title}>{title}</div>
                         <img src={closeImg} className={s.close} onClick={() => closeModal()} alt=""/>
                     </div>

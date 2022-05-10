@@ -12,6 +12,9 @@ import authStore from "../../../../store/authStore";
 import myClassesStore from "../../../../store/myClassesStore";
 import SendReviewModal from "./SendReviewModal/SendReviewModal";
 import ChangeLessonsDatesModal from "./ChangeLessonsDatesModal/ChangeLessonsDatesModal";
+import StopLessonModal from "./StopLessonModal/StopLessonModal";
+import ResumeLessonModal from "./ResumeLessonModal/ResumeLessonModal";
+import ChangeCommunicationModal from "./ChangeCommunicationModal/ChangeCommunicationModal";
 
 const io = require("socket.io-client");
 
@@ -105,6 +108,18 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
                 </Route>
                 <Route path={`/messages/${params.id}/change-lessons-dates`}>
                     <ChangeLessonsDatesModal id={params.id} />
+                </Route>
+                <Route path={`/messages/${params.id}/stop-lesson`}>
+                    <StopLessonModal title={'Прекратить занятия'} id={params.id} />
+                </Route>
+                <Route path={`/messages/${params.id}/reject-lesson`}>
+                    <StopLessonModal title={'Отклонить занятия'} id={params.id} />
+                </Route>
+                <Route path={`/messages/${params.id}/resume-lesson`}>
+                    <ResumeLessonModal id={params.id}/>
+                </Route>
+                <Route path={`/messages/${params.id}/change-communication`}>
+                    <ChangeCommunicationModal id={params.id} />
                 </Route>
                 <Redirect to={`/messages/${params.id}`}/>
             </Switch>

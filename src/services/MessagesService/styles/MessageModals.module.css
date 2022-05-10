@@ -75,7 +75,7 @@
     text-align: center;
 }
 
-.submit_btn {
+.show_content__btn, .submit_btn {
     width: 400px;
     background: #FFDD2D;
     border-radius: 6px;
@@ -86,4 +86,75 @@
     font-weight: bold;
     margin-top: 55px;
     cursor: pointer;
+    transition: 0.25s;
+}
+
+.submit_btn:disabled {
+    background-color: #8e8e8e;
+}
+
+.show_content__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.show_content__btn {
+    margin: 230px 0;
+}
+
+.resume_lesson_content {
+    margin: 230px 0;
+    background-color: black;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.communication_items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.communication_item {
+    padding: 25px;
+    display: flex;
+    width: 380px;
+    height: 120px;
+    border: 1px solid #d1d1d1;
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    justify-content: space-between;
+    transition: 0.25s;
+    cursor: pointer;
+    align-items: center;
+}
+
+.communication_item:hover {
+    border: 1px solid #FFDD2D
+}
+
+.communication_item_active {
+    border: 1px solid #FFDD2D
+}
+
+.communication_item__information {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.communication_item__information div:first-child {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.communication_item img {
+    width: 65px;
 }

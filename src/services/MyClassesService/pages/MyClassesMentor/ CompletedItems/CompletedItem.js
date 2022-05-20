@@ -3,6 +3,7 @@ import s from '../../../styles/MyClassesItems.module.css'
 import Tag from "../../../../../components/UI/Tag/Tag";
 import zoom from "../../../../../static/img/messenger_icons/zoom.png";
 import {messengersIcons} from "../../../../PublicProfilesService/MentorProifle/ModalRegistrationLesson/MessengersIcons";
+import {Link} from "react-router-dom";
 
 const CompletedItem = ({data}) => {
     return (
@@ -46,7 +47,7 @@ const CompletedItem = ({data}) => {
             <div className={s.under_container}>
                 <div>{data.user_time}</div>
                 <div className={`${s.button_containers} ${s.button_containers_v3}`}>
-                    <button className={s.chat_btn}>Чат</button>
+                    <Link className={s.chat_btn} to={`/messages/${data.UserID}`}><button style={{border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Чат</button></Link>
                     <button className={s.confirm_btn}>Оставить отзыв</button>
                 </div>
             </div>

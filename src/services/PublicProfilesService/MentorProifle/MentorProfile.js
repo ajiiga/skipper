@@ -74,7 +74,6 @@ const MentorProfile = () => {
                                     <div className={s.name}>{`${user.first_name} ${user.second_name}`}</div>
                                     <div className={s.specialisation}>{user.specialization}</div>
                                 </div>
-
                                 <div className={s.rate}>
                                     <RateDisplay rate={user.rating}/>
                                     <div className={s.date}>На Skipper

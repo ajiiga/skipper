@@ -101,7 +101,7 @@ const MenteeProfile = ({}) => {
                 <div className={s.right_side}>
                     <div className={s.reviews_block}>
                         <div className={s.title}>Отзывы</div>
-                        <Reviews n={3}/>
+                        <Reviews n={3} allReviews={JSON.parse(user.comments)}/>
                     </div>
                 </div>
             </div>

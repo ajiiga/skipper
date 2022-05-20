@@ -154,10 +154,13 @@
   border: none;
   font-weight: bold;
   width: 48%;
+  cursor: pointer;
 }
 
 .chat_btn {
   background: #dadada;
+  display: flex;
+  justify-content: center;
 }
 
 .confirm_btn {

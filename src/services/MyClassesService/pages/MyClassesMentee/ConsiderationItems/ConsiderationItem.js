@@ -54,7 +54,7 @@ const ConsiderationItem = ({data, deleteItem}) => {
             <div className={s.under_container}>
                 <div>Время пользователя {data.user_time}</div>
                 <div className={`${s.button_containers} ${s.button_containers_v2}`}>
-                    <button className={s.chat_btn}>Чат</button>
+                    <Link className={s.chat_btn} to={`/messages/${data.UserID}`}><button style={{cursor: 'pointer',border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Чат</button></Link>
                 </div>
             </div>
         </div>

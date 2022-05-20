@@ -4,6 +4,7 @@ import Tag from "../../../../../components/UI/Tag/Tag";
 import zoom from "../../../../../static/img/messenger_icons/zoom.png";
 import myClassesStore from "../../../../../store/myClassesStore";
 import {messengersIcons} from "../../../../PublicProfilesService/MentorProifle/ModalRegistrationLesson/MessengersIcons";
+import {Link} from "react-router-dom";
 
 const CanceledItem = ({data, deleteItem}) => {
 
@@ -39,7 +40,7 @@ const CanceledItem = ({data, deleteItem}) => {
                         <div>{x.time}</div>
                     </div>)}
                 </div>
-                <button className={s.right_title_btn}>Предложить другое время</button>
+                <Link to={`/messages/${data.UserID}/change-lessons-dates?id=${data.ID}`}><button className={s.right_title_btn}>Предложить другое время</button></Link>
             </div>
             <div className={s.text}>Способ связи:</div>
             <div className={s.communication_price_container}>
@@ -57,7 +58,7 @@ const CanceledItem = ({data, deleteItem}) => {
             <div className={s.under_container}>
                 <div>Время пользователя {data.user_time}</div>
                 <div className={s.button_containers}>
-                    <button className={s.chat_btn}>Чат</button>
+                    <Link className={s.chat_btn} to={`/messages/${data.UserID}`}><button style={{border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Чат</button></Link>
                     <button className={s.confirm_btn} onClick={() => resumeClass()}>Возобновить</button>
                 </div>
             </div>

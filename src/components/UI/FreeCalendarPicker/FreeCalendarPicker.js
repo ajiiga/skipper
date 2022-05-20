@@ -54,7 +54,7 @@ const FreeCalendarPicker = ({calendarState, setCalendarState, dates, setDates, d
     let sunday = getSunday(new Date(monday))
 
     useEffect(() => {
-        let defState = [...defaultState]
+        let defState = Object.assign([], defaultState);
 
         if (numWeek === 0) {
             let yBorder = todayDate.getDay()
@@ -70,6 +70,7 @@ const FreeCalendarPicker = ({calendarState, setCalendarState, dates, setDates, d
             let xDate = splitDate[0]
             let date = new Date(xDate)
             if (date >= monday && date <= sunday) {
+
                 let yIndex = date.getDay() == 0? 7 : date.getDay()
                 defState[y][yIndex - 1] = 2
             }

@@ -158,3 +158,116 @@
 .communication_item img {
     width: 65px;
 }
+
+.lesson_information_container {
+    display: flex;
+    flex-direction: column;
+    margin: 80px 0;
+    align-items: center;
+    justify-content: space-between;
+    height: 230px;
+}
+
+.second_submit_btn {
+    width: 300px;
+    height: 33px;
+    background: #AFAFAF;
+    border-radius: 6px;
+    border: 0;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.terminate_lesson_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.terminate_lesson_title {
+    color: white;
+    background: #979797;
+    border: 1px solid #FFFFFF;
+    border-radius: 8px;
+    padding: 11px 20px;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.terminate_lesson_container .resume_lesson_content {
+    margin: 25px 0 0 0;
+}
+
+.mentor_resume_lesson__container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.mentor_resume_lesson__show_title {
+    width: 500px;
+    height: 48.08px;
+    color: white;
+    background: #2C2C2C;
+    border: 1px solid #FFFFFF;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: auto;
+}
+
+.mentor_resume_lesson__select_buttons_container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 65px;
+}
+
+.mentor_resume_lesson__submit_btn, .mentor_resume_lesson__close_btn {
+    width: 250px;
+    height: 33px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.mentor_resume_lesson__submit_btn {
+    background: #FEDC2E;
+}
+
+.mentor_resume_lesson__close_btn {
+    background: #AFAFAF;
+}
+
+.mentor_change_lesson_dates__buttons_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.mentor_change_lesson_dates__submit_button {
+    width: 300px;
+    height: 33px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    background: #FEDC2E;
+}
+
+.mentor_change_lesson_dates__change_button {
+    width: 400px;
+    height: 33px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    background: #AFAFAF;
+}
+

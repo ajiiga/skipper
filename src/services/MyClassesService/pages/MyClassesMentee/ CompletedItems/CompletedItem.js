@@ -4,6 +4,7 @@ import Tag from "../../../../../components/UI/Tag/Tag";
 import zoom from "../../../../../static/img/messenger_icons/zoom.png";
 import {messengersIcons} from "../../../../PublicProfilesService/MentorProifle/ModalRegistrationLesson/MessengersIcons";
 import myClassesStore from "../../../../../store/myClassesStore";
+import {Link} from "react-router-dom";
 
 const CompletedItem = ({data, deleteItem}) => {
 
@@ -52,7 +53,7 @@ const CompletedItem = ({data, deleteItem}) => {
             <div className={s.under_container}>
                 <div>Время пользователя {data.user_time}</div>
                 <div className={`${s.button_containers} ${s.button_containers_v3}`}>
-                    <button className={s.chat_btn}>Чат</button>
+                    <Link className={s.chat_btn} to={`/messages/${data.UserID}`}><button style={{cursor: 'pointer',border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Чат</button></Link>
                     <button className={s.confirm_btn}>Оставить отзыв</button>
                 </div>
             </div>

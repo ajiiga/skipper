@@ -1,32 +1,61 @@
-.my_lessons, .btn {
-    font-size: 15px;
-    background: #FFDD2D;
-    border-radius: 32px;
-    cursor: pointer;
-    user-select: none;
-    padding: 5px 7px;
-    font-weight: bold;
-    color: #606060;
-    box-sizing: border-box;
+.my_lessons,
+.btn {
+  font-size: 15px;
+  background: #ffdd2d;
+  border-radius: 32px;
+  cursor: pointer;
+  user-select: none;
+  padding: 5px 7px;
+  font-weight: bold;
+  color: #606060;
+  box-sizing: border-box;
 }
 
 .relative {
-    position: relative;
+  position: relative;
 }
 
 .dropdown {
-    position: absolute;
-    background: #FFFFFF;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
-    border-radius: 8px;
-    padding: 10px;
-    margin-top: 30px;
-    width: 200px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    height: 80px;
-    justify-content: space-between;
+  position: absolute;
+  background: #ffffff;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 30px;
+  width: 200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  justify-content: space-between;
 }
 
-
+@media only screen and (max-width: 500px) {
+  .my_lessons {
+    font-size: 16px;
+    background: transparent;
+    padding: 0;
+    font-weight: 700;
+    color: white;
+    box-sizing: border-box;
+  }
+  .btn {
+    font-size: 16px;
+    background: transparent;
+    padding: 0;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+  }
+  .dropdown {
+    position: static;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 20px;
+    width: 200px;
+    text-align: left;
+    padding-left: 30px;
+    height: 50px;
+  }
+}

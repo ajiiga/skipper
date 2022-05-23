@@ -14,3 +14,14 @@
     max-width: 90%;
   }
 }
+
+/* Mobile */
+@media only screen and (max-width: 425px) {
+  .app {
+    min-height: 100vh;
+  }
+  .container {
+    height: calc(100vh - 120px);
+    max-width: 95%;
+  }
+}

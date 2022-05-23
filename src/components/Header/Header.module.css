@@ -1,111 +1,177 @@
 .header_container {
-    max-width: 80%;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-    background: white;
+  max-width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background: white;
 }
 
 .logo {
-    font-size: 24px;
-    letter-spacing: 3px;
+  font-size: 24px;
+  letter-spacing: 3px;
 }
 
 .right_container {
-    min-width: 260px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  min-width: 260px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .right_container_is_auth {
-    min-width: 250px;
+  min-width: 250px;
 }
 
 .to_auth {
-    font-weight: bold;
-    text-transform: uppercase;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .icon {
-    position: relative;
-    width: 20px;
-    height: 20px;
+  position: relative;
+  width: 20px;
+  height: 20px;
 }
 
 .profile_img {
-    width: 33px;
-    height: 33px;
-    border-radius: 16px;
-    object-fit: cover;
+  width: 33px;
+  height: 33px;
+  border-radius: 16px;
+  object-fit: cover;
 }
 
 .profile_block {
-    display: flex;
-    align-items: center;
-    user-select: none;
-    min-width: 230px;
-    justify-content: right;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  min-width: 230px;
+  justify-content: right;
+  cursor: pointer;
 }
 
 .left_container .icons {
-    width: 400px;
-    display: flex;
-    justify-content: space-between;
-    margin-left: 50px;
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 50px;
 }
 
 .right_container .icons {
-    width: 70px;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 20px;
+  width: 70px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
 }
 
-
-
 .status {
-    font-size: 13px;
-    color: #2C2C2C;
-    text-align: right;
+  font-size: 13px;
+  color: #2c2c2c;
+  text-align: right;
 }
 
 .profile_content {
-    margin-right: 10px;
-    cursor: pointer;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .header {
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
 }
 
 .left_container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .header_fixed {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-    background: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  background: white;
 }
 
 .hidden_block {
-    height: 60px;
+  height: 60px;
 }
 
 .notification_circle {
-    position: absolute;
-    top: -4px;
-    right: -8px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1px solid #606060;
-    background-color: #fedc2e;
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid #606060;
+  background-color: #fedc2e;
+}
+
+/* Mobile */
+@media only screen and (max-width: 450px) {
+  .header_container {
+    max-width: 90%;
+  }
+  .logo {
+    font-size: 22px;
+  }
+  .to_auth {
+    margin-right: 15px;
+  }
+  .to_auth:nth-child(2) {
+    margin-right: 0;
+  }
+  .hidden_on_mobile {
+    display: none;
+  }
+  .left_container {
+    width: 130px;
+  }
+  .left_container .icons {
+    width: 40px;
+    margin-left: 10px;
+  }
+  .right_container_is_auth {
+    min-width: 90px;
+  }
+  .right_container .icons {
+    width: 30px;
+    margin: 0;
+  }
+  .right_container {
+    min-width: 90px;
+  }
+  .icon {
+    zoom: 0.8;
+    margin-right: 20px;
+  }
+  .profile_block {
+    min-width: 150px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .left_container .icons {
+    margin-left: 20px;
+  }
+  .icon {
+    margin-right: 30px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .left_container .icons {
+    margin-left: 20px;
+  }
+  .icon {
+    margin-right: 40px;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .left_container .icons {
+    margin-left: 20px;
+  }
+  .icon {
+    margin-right: 15px;
+  }
 }

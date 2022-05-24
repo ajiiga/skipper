@@ -14,6 +14,7 @@ import authStore from "../../store/authStore";
 import MyLessonsButton from "../UI/MyLessonsButton/MyLessonsButton";
 import MobileMenu from "./MobileMenu/MobileMenu";
 import messagesStore from "../../store/messagesStore";
+import NotificationModal from "./NotificationModal/NotificationModal";
 
 const Header = ({isAuth, profile}) => {
 

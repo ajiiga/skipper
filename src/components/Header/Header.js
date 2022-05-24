@@ -13,10 +13,13 @@ import bell_img from '../../static/img/header_icons/bell.svg'
 import authStore from "../../store/authStore";
 import MyLessonsButton from "../UI/MyLessonsButton/MyLessonsButton";
 import messagesStore from "../../store/messagesStore";
+import NotificationModal from "./NotificationModal/NotificationModal";
 
 const Header = ({isAuth, profile}) => {
 
     let [openModal, setOpenModal] = useState(false)
+
+    let [openNotification, setOpenNotification] = useState(false)
 
     //Хэдэр для не аутенфицированных пользователей
     if (!isAuth) return (
@@ -70,7 +73,10 @@ const Header = ({isAuth, profile}) => {
                     <div className={`${s.right_container} ${s.right_container_is_auth}`}>
 
 
-                        <div className={s.icon}><img src={bell_img} alt=""/></div>
+                        <div className={s.icon}>
+                            <img style={{cursor: 'pointer'}} onClick={() => setOpenNotification(true)} src={bell_img} alt=""/>
+                            {openNotification && <NotificationModal setOpen={setOpenNotification} />}
+                        </div>
 
                         <div>
                             <div className={s.profile_block} onClick={() => setOpenModal(true)}>

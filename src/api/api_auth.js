@@ -55,3 +55,7 @@ export let registrationMenteeMentorRequest = (specialization, description, time,
                     Authorization: `Bearer ${localStorage.getItem('token')}`}
     })
 }
+
+export let getNotificationsClassRequest = () => {
+    return $api.get('/notifications/class')
+}

@@ -6,6 +6,7 @@ export let getChatListRequest = () => $api.get('/api/chat/')
 export let getCurrentChatInfoRequest = (id) => $api.get(`/api/chat/${id}`)
 
 export let getNotificationsUrl = (myId) => `${API_URL}/notifications/message/${myId}`
+export let getNotificationsClassUrl = (myId) => `${API_URL}/notifications/class/${myId}`
 
 export let sendReviewUrl = (sender_id, recipien_id, text, rating, anonymous, lessons_count) => $api.post(`/api/comments/`, {
     sender_id: sender_id,

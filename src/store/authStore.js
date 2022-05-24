@@ -1,5 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {
+    getNotificationsClassRequest,
     getStatusRequest,
     loginRequest,
     registrationMenteeMentorRequest,
@@ -14,6 +15,12 @@ class AuthService {
     isInitialisation = true
 
     user = {}
+
+    notifications = []
+
+    deleteNotification(id) {
+        this.notifications = this.notifications.filter(notification => notification.ID !== id)
+    }
 
     constructor() {
         makeAutoObservable(this)
@@ -105,10 +112,21 @@ class AuthService {
         }
     }
 
+    async getNotificationClass() {
+        try {
+            let r = await getNotificationsClassRequest()
+            this.notifications = JSON.parse(r.data)
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
     async initializationApp() {
         let res = await Promise.all([
             await this.checkAuth(),
-            await this.checkStatus()
+            await this.checkStatus(),
+            await this.getNotificationClass()
         ]).then((x) => {
             this.setIsInitialisation(false)
         })

@@ -2,7 +2,7 @@ import {makeAutoObservable} from "mobx";
 import {
     changeDateRequest,
     getChatListRequest,
-    getCurrentChatInfoRequest, getDataForChangeDateRequest,
+    getCurrentChatInfoRequest, getDataForChangeDateRequest, getNotificationsClassUrl,
     getNotificationsRequest,
     getNotificationsUrl, sendReviewUrl
 } from "../api/api_messages";
@@ -145,6 +145,7 @@ class MessagesStore {
     startEvents() {
         // создаем экземпляр для получения данных по запросу на указанный адрес
         this.eventSource = new EventSource(getNotificationsUrl(authStore.user.id))
+        this.eventSourceClass = new EventSource(getNotificationsClassUrl(authStore.user.id))
 
 
         this.eventSource.addEventListener('message', e => {
@@ -152,10 +153,15 @@ class MessagesStore {
             this.setNewMessage(true)
             this.setNewMessages([...this.newMessages, newMessage])
         })
+
+        this.eventSourceClass.addEventListener('message', e => {
+            authStore.notifications = [...authStore.notifications, JSON.parse(e.data)]
+        })
     }
 
     stopEvents() {
         this.eventSource.close()
+        this.eventSourceClass.close()
     }
 
 

@@ -92,3 +92,15 @@
     height: 40px;
   }
 }
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+  .main_img {
+    position: static;
+    zoom: 0.4;
+  }
+  .container {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

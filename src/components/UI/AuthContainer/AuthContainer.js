@@ -1,16 +1,8 @@
-import React from 'react';
+import React from "react";
+import s from "./AuthContainer.module.css";
 
-const AuthContainer = ({children}) => {
-    return (
-        <div
-            style={{boxShadow: 'inset 0px 0px 13px rgba(207, 205, 205, 0.4)',
-                borderRadius: '8px',
-                'width':'484px',
-                'overflow': 'hidden',
-                'height': 'fit-content'}}>
-            {children}
-        </div>
-    );
+const AuthContainer = ({ children }) => {
+  return <div className={s.container}>{children}</div>;
 };
 
 export default AuthContainer;

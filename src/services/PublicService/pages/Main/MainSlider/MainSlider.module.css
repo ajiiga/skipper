@@ -162,13 +162,14 @@
   }
 }
 
+/* iphone x, xs */
 @media only screen and (min-height: 780px) and (min-width: 370px) and (max-width: 450px) {
   .container {
     margin-top: 40px;
   }
   .item {
     height: 130px;
-    font-size: 18px;
+    font-size: 17px;
     margin-right: 0;
     width: 203px;
   }

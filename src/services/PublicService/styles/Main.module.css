@@ -228,15 +228,16 @@
   }
   .to_mentor_btn {
     font-size: 16px;
-    position: fixed;
-    bottom: 30px;
-    right: 85px;
+    position: static;
+    margin-top: 270px;
+    margin-bottom: 40px;
   }
 }
 
 @media only screen and (max-width: 400px) {
   .to_mentor_btn {
-    right: 60px;
+    margin-top: 250px;
+    margin-bottom: 40px;
   }
   .main_img {
     left: 150px;
@@ -249,7 +250,7 @@
 
 @media only screen and (max-width: 365px) {
   .to_mentor_btn {
-    right: 70px;
+    margin-top: 160px;
     font-size: 14px;
   }
   .main_img {
@@ -259,7 +260,7 @@
 }
 @media only screen and (max-width: 325px) {
   .to_mentor_btn {
-    right: 40px;
+    margin-top: 160px;
     font-size: 14px;
   }
   .main_img {
@@ -294,11 +295,12 @@
     margin-top: 40px;
   }
   .to_mentor_btn {
-    right: 80px;
-    bottom: 40px;
+    margin-top: 280px;
+    margin-bottom: 40px;
   }
 }
 
+/* iphone x, xs */
 @media only screen and (min-height: 780px) and (min-width: 370px) and (max-width: 450px) {
   .title {
     font-size: 26px;
@@ -316,10 +318,12 @@
     margin-top: 40px;
   }
   .to_mentor_btn {
-    right: 60px;
+    margin-top: 300px;
+    margin-bottom: 40px;
   }
 }
 
+/* iphone xr */
 @media only screen and (min-height: 850px) and (max-width: 450px) and (min-width: 390px) {
   .title {
     font-size: 28px;
@@ -337,6 +341,7 @@
     margin-top: 40px;
   }
   .to_mentor_btn {
-    right: 70px;
+    margin-top: 350px;
+    margin-bottom: 40px;
   }
 }

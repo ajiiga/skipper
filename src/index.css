@@ -2,6 +2,9 @@ html {
   width: 100%;
   height: 100%;
   margin: 0;
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
 * {
@@ -12,7 +15,6 @@ body {
   width: 100%;
   height: 100%;
   margin: 0;
-  -webkit-text-size-adjust: 100%;
 }
 
 textarea {

@@ -1,17 +1,37 @@
-.container, .content_container {
-    margin-top: 33px;
+.container,
+.content_container {
+  margin-top: 33px;
 }
 
 .content_container {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .sidebar_container {
-    height: fit-content;
-    width: 20%;
+  height: fit-content;
+  width: 20%;
 }
 
 .fake_sidebar {
-    width: 270px;
+  width: 270px;
+}
+
+/* Mobile */
+@media only screen and (max-width: 450px) {
+  .sidebar_container {
+    height: 100%;
+    width: 40%;
+  }
+  .container,
+  .content_container {
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+}
+@media only screen and (max-width: 350px) {
 }

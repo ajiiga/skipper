@@ -1,11 +1,25 @@
 .container {
-    margin: 20px 10px;
-    display: flex;
-    color: #2C2C2C;
-    cursor: pointer;
+  margin: 20px 10px;
+  display: flex;
+  color: #2c2c2c;
+  cursor: pointer;
 }
 
-.name, .count {
-    margin-right: 10px;
+.name,
+.count {
+  margin-right: 10px;
 }
 
+/* Mobile */
+@media only screen and (max-width: 500px) {
+  .container {
+    justify-content: space-between;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+}
+@media only screen and (max-width: 350px) {
+}

@@ -1,10 +1,25 @@
 .rating {
-    background: #7FC936;
-    border-radius: 3px;
-    color: white;
-    padding: 1px 35px;
-    margin-left: auto;
-    width: fit-content;
-    font-weight: bold;
-    font-size: 14px;
+  background: #7fc936;
+  border-radius: 3px;
+  color: white;
+  padding: 1px 35px;
+  margin-left: auto;
+  width: fit-content;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+  .rating {
+    padding: 2px 20px;
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+}
+@media only screen and (max-width: 350px) {
 }

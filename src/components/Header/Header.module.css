@@ -89,7 +89,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 5;
   background: white;
 }
 
@@ -112,6 +112,7 @@
 @media only screen and (max-width: 450px) {
   .header_container {
     max-width: 90%;
+    z-index: 3;
   }
   .logo {
     font-size: 22px;

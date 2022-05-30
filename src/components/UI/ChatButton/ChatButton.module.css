@@ -1,10 +1,29 @@
 .chat_btn {
-    font-weight: bold;
-    border-radius: 8px;
-    text-align: center;
-    padding: 5px 0;
+  font-weight: bold;
+  border-radius: 8px;
+  text-align: center;
+  padding: 5px 0;
+  margin-top: 8px;
+  background: #fedc2e;
+  font-size: 14px;
+  width: 100%;
+}
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+  .chat_btn {
+    padding: 5px 2px;
     margin-top: 8px;
-    background: #FEDC2E;
-    font-size: 14px;
-    width: 100%;
+    background: #fedc2e;
+    font-size: 12px;
+    /* width: 85%; */
+    margin-left: auto;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+}
+@media only screen and (max-width: 350px) {
 }

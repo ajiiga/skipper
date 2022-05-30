@@ -36,3 +36,31 @@
     width: 280px;
   }
 }
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+  .container {
+    flex-direction: column;
+  }
+  .fixed_sidebar {
+    width: 100%;
+    position: static;
+  }
+
+  .fake_sidebar {
+    width: 100%;
+  }
+
+  .content_container {
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+}
+@media only screen and (max-width: 350px) {
+}

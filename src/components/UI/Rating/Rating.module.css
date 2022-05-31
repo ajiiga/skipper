@@ -1,3 +1,4 @@
+.no_rating,
 .rating {
   background: #7fc936;
   border-radius: 3px;
@@ -9,17 +10,35 @@
   font-size: 14px;
 }
 
+.no_rating {
+  padding: 2px 10px;
+}
+
 /* Mobile */
 @media only screen and (max-width: 500px) {
   .rating {
-    padding: 2px 20px;
-    font-size: 12px;
+    padding: 2px 25px;
+    font-size: 10px;
+  }
+
+  .no_rating {
+    padding: 2px 5px;
+    font-size: 10px;
   }
 }
 
 @media only screen and (max-width: 425px) {
+  .no_rating {
+    padding: 2px 11px;
+  }
 }
 @media only screen and (max-width: 400px) {
+  .no_rating {
+    padding: 2px 6px;
+  }
 }
 @media only screen and (max-width: 350px) {
+  .no_rating {
+    padding: 2px 4px;
+  }
 }

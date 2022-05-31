@@ -19,7 +19,7 @@
   border-bottom: 1px solid #afafaf;
   color: #afafaf;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -37,7 +37,7 @@
   border-radius: 32px;
   padding: 13px 0;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .link_container {
@@ -111,7 +111,7 @@
   border-bottom: 1px solid #afafaf;
   color: #afafaf;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;

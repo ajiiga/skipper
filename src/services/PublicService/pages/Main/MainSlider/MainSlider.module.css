@@ -9,7 +9,7 @@
 .item {
   height: 129px;
   color: white;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 23px;
   display: flex;
   align-items: center;

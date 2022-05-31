@@ -31,7 +31,7 @@
 }
 
 .title {
-  font-weight: bold;
+  font-weight: 600;
   width: 1155px;
   text-align: center;
   position: absolute;
@@ -82,7 +82,7 @@
   border: none;
   border-radius: 6px;
   font-size: 22px;
-  font-weight: bold;
+  font-weight: 600;
   width: 50%;
   cursor: pointer;
   transition: 0.25s;
@@ -109,7 +109,7 @@
 
 .count_lesson_block_title {
   margin-bottom: 30px;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -166,7 +166,7 @@
 }
 
 .communication_item_title {
-  font-weight: bold;
+  font-weight: 600;
   text-transform: uppercase;
 }
 

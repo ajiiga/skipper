@@ -1,273 +1,274 @@
 .modal_background {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: 1;
-    overflow: auto;
-    left: 0;
-    top: 0;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    transition: 0.5s;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  transition: 0.5s;
 }
 
 .modal_container {
-    margin-top: 205px;
-    background: white;
-    width: 900px;
-    height: -moz-fit-content;
-    height: fit-content;
-    border-radius: 15px;
-    padding: 15px;
+  margin-top: 205px;
+  background: white;
+  width: 900px;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 15px;
+  padding: 15px;
 }
 
 .modal_upper_container {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #DADADA;
-    padding-bottom: 15px;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #dadada;
+  padding-bottom: 15px;
+  align-items: center;
 }
 
 .title_container {
-    display: flex;
+  display: flex;
 }
 
 .title {
-    font-weight: bold;
-    margin-right: 10px;
+  font-weight: 600;
+  margin-right: 10px;
 }
 
 .close {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .content {
-    padding: 30px;
+  padding: 30px;
 }
 
 .textarea {
-    resize: none;
-    width: 100%;
-    background: #fff;
-    border: 1px solid #d1d1d1;
-    box-sizing: border-box;
-    border-radius: 8px;
-    outline: none;
-    font-family: "Montserrat",sans-serif;
-    padding: 15px;
-    margin-top: 15px;
-    height: 300px;
+  resize: none;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #d1d1d1;
+  box-sizing: border-box;
+  border-radius: 8px;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+  padding: 15px;
+  margin-top: 15px;
+  height: 300px;
 }
 
 .checkbox_container {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .checkbox_container label {
-    margin-left: 15px;
-    user-select: none;
+  margin-left: 15px;
+  user-select: none;
 }
 
 .submit_btn_container {
-    text-align: center;
+  text-align: center;
 }
 
-.show_content__btn, .submit_btn {
-    width: 400px;
-    background: #FFDD2D;
-    border-radius: 6px;
-    box-sizing: border-box;
-    padding: 5px;
-    border: 0;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 55px;
-    cursor: pointer;
-    transition: 0.25s;
+.show_content__btn,
+.submit_btn {
+  width: 400px;
+  background: #ffdd2d;
+  border-radius: 6px;
+  box-sizing: border-box;
+  padding: 5px;
+  border: 0;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 55px;
+  cursor: pointer;
+  transition: 0.25s;
 }
 
 .submit_btn:disabled {
-    background-color: #8e8e8e;
+  background-color: #8e8e8e;
 }
 
 .show_content__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .show_content__btn {
-    margin: 230px 0;
+  margin: 230px 0;
 }
 
 .resume_lesson_content {
-    margin: 230px 0;
-    background-color: black;
-    color: white;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
+  margin: 230px 0;
+  background-color: black;
+  color: white;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .communication_items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .communication_item {
-    padding: 25px;
-    display: flex;
-    width: 380px;
-    height: 120px;
-    border: 1px solid #d1d1d1;
-    box-sizing: border-box;
-    border-radius: 8px;
-    margin-bottom: 40px;
-    justify-content: space-between;
-    transition: 0.25s;
-    cursor: pointer;
-    align-items: center;
+  padding: 25px;
+  display: flex;
+  width: 380px;
+  height: 120px;
+  border: 1px solid #d1d1d1;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  justify-content: space-between;
+  transition: 0.25s;
+  cursor: pointer;
+  align-items: center;
 }
 
 .communication_item:hover {
-    border: 1px solid #FFDD2D
+  border: 1px solid #ffdd2d;
 }
 
 .communication_item_active {
-    border: 1px solid #FFDD2D
+  border: 1px solid #ffdd2d;
 }
 
 .communication_item__information {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .communication_item__information div:first-child {
-    font-weight: bold;
-    text-transform: uppercase;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .communication_item img {
-    width: 65px;
+  width: 65px;
 }
 
 .lesson_information_container {
-    display: flex;
-    flex-direction: column;
-    margin: 80px 0;
-    align-items: center;
-    justify-content: space-between;
-    height: 230px;
+  display: flex;
+  flex-direction: column;
+  margin: 80px 0;
+  align-items: center;
+  justify-content: space-between;
+  height: 230px;
 }
 
 .second_submit_btn {
-    width: 300px;
-    height: 33px;
-    background: #AFAFAF;
-    border-radius: 6px;
-    border: 0;
-    font-weight: bold;
-    font-size: 18px;
+  width: 300px;
+  height: 33px;
+  background: #afafaf;
+  border-radius: 6px;
+  border: 0;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .terminate_lesson_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .terminate_lesson_title {
-    color: white;
-    background: #979797;
-    border: 1px solid #FFFFFF;
-    border-radius: 8px;
-    padding: 11px 20px;
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 30px;
+  color: white;
+  background: #979797;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  padding: 11px 20px;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 30px;
 }
 
 .terminate_lesson_container .resume_lesson_content {
-    margin: 25px 0 0 0;
+  margin: 25px 0 0 0;
 }
 
 .mentor_resume_lesson__container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .mentor_resume_lesson__show_title {
-    width: 500px;
-    height: 48.08px;
-    color: white;
-    background: #2C2C2C;
-    border: 1px solid #FFFFFF;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    margin: auto;
+  width: 500px;
+  height: 48.08px;
+  color: white;
+  background: #2c2c2c;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  margin: auto;
 }
 
 .mentor_resume_lesson__select_buttons_container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 65px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 65px;
 }
 
-.mentor_resume_lesson__submit_btn, .mentor_resume_lesson__close_btn {
-    width: 250px;
-    height: 33px;
-    font-size: 18px;
-    border-radius: 6px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
+.mentor_resume_lesson__submit_btn,
+.mentor_resume_lesson__close_btn {
+  width: 250px;
+  height: 33px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .mentor_resume_lesson__submit_btn {
-    background: #FEDC2E;
+  background: #fedc2e;
 }
 
 .mentor_resume_lesson__close_btn {
-    background: #AFAFAF;
+  background: #afafaf;
 }
 
 .mentor_change_lesson_dates__buttons_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 35px;
 }
 
 .mentor_change_lesson_dates__submit_button {
-    width: 300px;
-    height: 33px;
-    font-size: 18px;
-    border-radius: 6px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    background: #FEDC2E;
+  width: 300px;
+  height: 33px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: #fedc2e;
 }
 
 .mentor_change_lesson_dates__change_button {
-    width: 400px;
-    height: 33px;
-    font-size: 18px;
-    border-radius: 6px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    background: #AFAFAF;
+  width: 400px;
+  height: 33px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: #afafaf;
 }
-

@@ -12,6 +12,8 @@
 
 .no_rating {
   padding: 2px 10px;
+  /* margin-left: 5px; */
+  margin-left: 10px;
 }
 
 /* Mobile */
@@ -19,11 +21,18 @@
   .rating {
     padding: 2px 25px;
     font-size: 10px;
+    display: flex;
+    align-items: center;
   }
 
   .no_rating {
     padding: 2px 5px;
     font-size: 10px;
+    display: flex;
+    align-items: center;
+    width: 50px;
+    text-align: center;
+    margin-left: 0;
   }
 }
 
@@ -34,11 +43,15 @@
 }
 @media only screen and (max-width: 400px) {
   .no_rating {
-    padding: 2px 6px;
+    padding: 4px 8px;
   }
 }
 @media only screen and (max-width: 350px) {
   .no_rating {
-    padding: 2px 4px;
+    padding: 4px 6px;
+  }
+  .rating {
+    padding: 2px 15px;
+    font-size: 10px;
   }
 }

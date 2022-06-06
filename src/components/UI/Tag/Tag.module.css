@@ -1,25 +1,44 @@
 .tag {
-    display: flex;
-    align-items: center;
-    background: #F2F1F2;
-    border-radius: 15px;
-    padding: 4px 15px;
-    font-size: 12px;
-    border: 1px solid #2c2c2c36;
-    width: fit-content;
-    white-space: nowrap;
+  display: flex;
+  align-items: center;
+  background: #f2f1f2;
+  border-radius: 15px;
+  padding: 4px 15px;
+  font-size: 12px;
+  border: 1px solid #2c2c2c36;
+  width: fit-content;
+  white-space: nowrap;
 }
 
 .circle {
-    background: #FEDC2E;
-    border-radius: 15px;
-    width: 10px;
-    height: 10px;
-    margin-right: 5px;
+  background: #fedc2e;
+  border-radius: 15px;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
 }
 
 .delete_icon {
-    margin-left: 10px;
-    width: 10px;
-    height: 10px;
+  margin-left: 10px;
+  width: 10px;
+  height: 10px;
+}
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+}
+@media only screen and (max-width: 350px) {
+  .tag {
+    display: flex;
+    align-items: center;
+    background: #f2f1f2;
+    border-radius: 15px;
+    padding: 4px 12px;
+    font-size: 11px;
+  }
 }

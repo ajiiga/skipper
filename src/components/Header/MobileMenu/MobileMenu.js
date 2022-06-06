@@ -42,6 +42,19 @@ const MobileMenu = ({ setOpenMobileMenu, profile }) => {
               />
               <img className={s.icon} src={arrow_img} alt="" />
             </div>
+            <Link
+              onClick={() => setOpenMobileMenu(false)}
+              to={
+                profile.is_mentor
+                  ? `/mentor-profile/${profile.id}`
+                  : `/mentee-profile/${profile.id}`
+              }
+            >
+              <div className={s.link}>
+                Профиль
+                <img className={s.icon} src={arrow_img} alt="" />
+              </div>
+            </Link>
             <Link to={"/messages"} onClick={() => setOpenMobileMenu(false)}>
               <div className={s.link}>
                 Сообщения

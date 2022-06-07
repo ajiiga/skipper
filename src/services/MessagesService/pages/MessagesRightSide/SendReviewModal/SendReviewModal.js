@@ -6,12 +6,14 @@ import authStore from "../../../../../store/authStore";
 import {useHistory} from "react-router-dom";
 import useQuery from "../../../../../CustomHooks/useQuery";
 import StarsRating from "../../../../../components/UI/StarsRating/StarsRating";
+import img from '../../../../../static/img/Messages/picture_after_review.svg'
 
 const SendReviewModal = ({id}) => {
 
     let [textReview, setTextReview] = useState('')
     let [isAnonymous, setIsAnonymous] = useState(false)
     let [selectedStar, setSelected] = useState(undefined)
+    let [showPicture, setShowPicture] = useState(false)
 
     const history = useHistory()
     const query = useQuery()
@@ -23,29 +25,44 @@ const SendReviewModal = ({id}) => {
 
     const sendReview = () => {
         if (textReview !== '' && selectedStar !== undefined) {
-            messagesStore.sendReview(authStore.user.id, parseInt(id), textReview, selectedStar + 1, isAnonymous, parseInt(query.get("lessons_count"))).then(req => closeModal())
+            messagesStore.sendReview(authStore.user.id, parseInt(id), textReview, selectedStar + 1, isAnonymous, parseInt(query.get("lessons_count")))
+                .then(req => {
+                    setShowPicture(true)
+                })
         }
     }
 
+
     return (
         <MessageModalContainer id={id} title={`Отзыв о пользователе`}>
-            <div className={s.title_container}>
-                <div className={s.title}>
-                    Ваша оценка
+            {
+                showPicture?
+                    <div className={s.image_container}>
+                        <img src={img} alt=""/>
+                        <button className={s.submit_after_review_btn} onClick={closeModal}>
+                            Спасибо за Ваш отзыв
+                        </button>
+                    </div>
+                :
+                <>
+                <div className={s.title_container}>
+                    <div className={s.title}>
+                        Ваша оценка
+                    </div>
+                    <StarsRating setSelected={setSelected} selectedStar={selectedStar}/>
                 </div>
-                <StarsRating setSelected={setSelected} selectedStar={selectedStar}/>
-            </div>
-            <textarea className={s.textarea} value={textReview} onChange={e => setTextReview(e.target.value)}/>
-            <div className={s.checkbox_container}>
-                <input type="checkbox" id={'checkbox'} value={isAnonymous}
-                       onChange={e => setIsAnonymous(e.target.checked)}/>
-                <label htmlFor={'checkbox'}>Анонимный отзыв</label>
-            </div>
-            <div className={s.submit_btn_container}>
-                <button className={s.submit_btn} onClick={() => sendReview()}>
-                    Отправить отзыв
-                </button>
-            </div>
+                <textarea className={s.textarea} value={textReview} onChange={e => setTextReview(e.target.value)}/>
+                <div className={s.checkbox_container}>
+                    <input type="checkbox" id={'checkbox'} value={isAnonymous}
+                           onChange={e => setIsAnonymous(e.target.checked)}/>
+                    <label htmlFor={'checkbox'}>Анонимный отзыв</label>
+                </div>
+                <div className={s.submit_btn_container}>
+                    <button className={s.submit_btn} onClick={() => sendReview()}>
+                        Отправить отзыв
+                    </button>
+                </div>
+            </>}
         </MessageModalContainer>
     );
 };

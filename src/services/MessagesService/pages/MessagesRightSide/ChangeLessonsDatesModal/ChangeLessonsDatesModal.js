@@ -7,12 +7,12 @@ import s from "../../../styles/MessageModals.module.css";
 import messagesStore from "../../../../../store/messagesStore";
 import {useHistory} from "react-router-dom";
 
-const ChangeLessonsDatesModal = ({id, isMentor}) => {
+const ChangeLessonsDatesModal = ({id}) => {
     let query = useQuery()
     const history = useHistory()
 
     let lessonId = query.get("id")
-
+    let imReceiver = query.get("im_receiver") === 'true'
 
 
     let [isFetching, setIsFetching] = useState(true)
@@ -28,7 +28,7 @@ const ChangeLessonsDatesModal = ({id, isMentor}) => {
 
     const changeLessonDates = () => {
         if (dates.length === activeCount) {
-            messagesStore.changeDate(parseInt(lessonId), dates).then(x => closeModal())
+            messagesStore.changeDate(parseInt(lessonId), dates, parseInt(id)).then(x => closeModal())
         }
     }
 
@@ -49,13 +49,13 @@ const ChangeLessonsDatesModal = ({id, isMentor}) => {
             <FreeCalendarPicker setCalendarState={setCalendarState} calendarState={calendarState}
                                 defaultState={publicProfileStore.decode(dataLesson.class_time_mask)} activeCount={activeCount} dates={dates}
                                 setDates={setDates}/>
-            {isMentor? <div className={s.mentor_change_lesson_dates__buttons_container}>
-                    <button className={s.mentor_change_lesson_dates__submit_button}>Принять изменения</button>
-                    <button className={s.mentor_change_lesson_dates__change_button}>Предложить другое время</button>
+            {imReceiver? <div className={s.mentor_change_lesson_dates__buttons_container}>
+                    <button className={s.mentor_change_lesson_dates__submit_button} onClick={closeModal}>Принять изменения</button>
+                    <button className={s.mentor_change_lesson_dates__change_button} onClick={changeLessonDates}>Предложить другое время</button>
                 </div>
                 :
                 (<div className={s.submit_btn_container}>
-                <button className={s.submit_btn} onClick={() => changeLessonDates()}>
+                <button className={s.submit_btn} onClick={changeLessonDates}>
                     Предложить время занятий
                 </button>
             </div>)}

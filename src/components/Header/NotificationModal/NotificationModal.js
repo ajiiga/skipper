@@ -34,7 +34,7 @@ const NotificationModal = ({setOpen}) => {
             }}
             exit={{
                 opacity: 0,
-                transition: { duration: 0.25 }
+                transition: {duration: 0.25}
             }}
             className={s.container}>
             <div className={s.title}>
@@ -42,7 +42,9 @@ const NotificationModal = ({setOpen}) => {
             </div>
             <div className={s.header}/>
             {
-                authStore.notifications.map(notification => <NotificationBlock data={notification} />)
+                <div className={s.notifications_container}>
+                    {authStore.notifications.map(notification => <NotificationBlock data={notification}/>)}
+                </div>
             }
             <div className={s.footer}/>
         </motion.div>

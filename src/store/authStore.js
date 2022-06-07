@@ -9,6 +9,7 @@ import {
 } from "../api/api_auth";
 import axios from "axios";
 import {API_URL} from "../api/api_setting";
+import messagesStore from "./messagesStore";
 
 class AuthService {
     isAuth = false
@@ -31,6 +32,9 @@ class AuthService {
     }
 
     setUser = (user) => {
+        if (user.unread_messages_count > 0) {
+            messagesStore.setNewMessage(true)
+        }
         this.user = user
     }
 
@@ -97,6 +101,8 @@ class AuthService {
     logout = () => {
         localStorage.removeItem('token')
         localStorage.removeItem('refreshToken')
+        messagesStore.setNewMessage(false)
+        this.notifications = []
         this.setAuth(false)
         this.setUser({})
     }

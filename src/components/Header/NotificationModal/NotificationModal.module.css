@@ -68,3 +68,8 @@
     top: 15px;
     cursor: pointer;
 }
+
+.notifications_container {
+    max-height: 500px;
+    overflow-y: scroll;
+}

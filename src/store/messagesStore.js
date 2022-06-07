@@ -21,6 +21,13 @@ class MessagesStore {
 
     newMessages = []
 
+    notificationTypes = {
+        consideration: 'на рассмотрении',
+        planned: 'запланированное',
+        completed: 'завершенное',
+        canceled: 'отмененное'
+    }
+
     setNewMessage = (status) => {
         this.newMessage = status
     }
@@ -99,9 +106,9 @@ class MessagesStore {
         }
     }
 
-    async changeDate(class_id, time) {
+    async changeDate(class_id, time, receiver_id) {
         try {
-            let r = await changeDateRequest(class_id, time)
+            let r = await changeDateRequest(class_id, time, receiver_id)
         }
         catch (e) {
             console.log(e)
@@ -145,6 +152,7 @@ class MessagesStore {
     startEvents() {
         // создаем экземпляр для получения данных по запросу на указанный адрес
         this.eventSource = new EventSource(getNotificationsUrl(authStore.user.id))
+
         this.eventSourceClass = new EventSource(getNotificationsClassUrl(authStore.user.id))
 
 

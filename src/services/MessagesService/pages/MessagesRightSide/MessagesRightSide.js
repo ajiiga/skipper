@@ -57,13 +57,14 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
                     ...JSON.parse(data),
                     stringDateAndTime: messagesStore.refactorDate((new Date()).toString())
                 }]
+                readMessages(chatInfo)
                 return {chat: chatInfo.chat, messages: newMessages}
             })
 
         });
     }
 
-    let sendMessage = (text) => {
+    const sendMessage = (text) => {
         if (text !== '') {
             socket.current.emit('message', JSON.stringify({
                 senderId: authStore.user.id.toString(),
@@ -73,6 +74,13 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
             }))
             setValue('')
         }
+    }
+
+    const readMessages = (chatInfo) => {
+        socket.current.emit('read_messages', JSON.stringify({
+            chat_id: chatInfo?.chat?.roomID,
+            user_id: authStore.user.id
+        }))
     }
 
 
@@ -101,7 +109,7 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
     return (
         <div className={s.container}>
             <MessagesRightSideTitle firstName={chatInfo.chat.FirstName} secondName={chatInfo.chat.SecondName}
-                                    img={chatInfo.chat.ProfilePicture} id={chatInfo.chat.ID}/>
+                                    img={chatInfo.chat.ProfilePicture} id={chatInfo.chat.ID} isMentor={chatInfo.chat.IsMentor}/>
             <MessagesRightSideContent messages={chatInfo.messages}/>
             <MessagesRightSideInput value={value} setValue={setValue} sendMessage={sendMessage}/>
             <Switch>
@@ -109,7 +117,7 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
                     <SendReviewModal id={params.id}/>
                 </Route>
                 <Route path={`/messages/${params.id}/change-lessons-dates`}>
-                    <ChangeLessonsDatesModal id={params.id} isMentor={true}/>
+                    <ChangeLessonsDatesModal id={params.id}/>
                 </Route>
                 <Route path={`/messages/${params.id}/stop-lesson`}>
                     <StopLessonModal title={'Прекратить занятия'} id={params.id} />
@@ -118,7 +126,7 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
                     <StopLessonModal title={'Отклонить занятия'} id={params.id} />
                 </Route>
                 <Route path={`/messages/${params.id}/resume-lesson`}>
-                    <ResumeLessonModal id={params.id} isMentor={true}/>
+                    <ResumeLessonModal id={params.id}/>
                 </Route>
                 <Route path={`/messages/${params.id}/change-communication`}>
                     <ChangeCommunicationModal id={params.id} />
@@ -127,7 +135,10 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
                     <LessonInformationModal id={params.id} />
                 </Route>
                 <Route path={`/messages/${params.id}/termination-lesson`}>
-                    <TerminationLessonModal id={params.id} />
+                    <TerminationLessonModal title={"Прекращение занятий"} id={params.id} />
+                </Route>
+                <Route path={`/messages/${params.id}/rejected-lesson`}>
+                    <TerminationLessonModal title={"Отклонение занятий"} id={params.id} />
                 </Route>
                 <Redirect to={`/messages/${params.id}`}/>
             </Switch>
@@ -138,10 +149,10 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
 export default MessagesRightSide;
 
 
-const MessagesRightSideTitle = ({firstName, secondName, img, id}) => {
+const MessagesRightSideTitle = ({firstName, secondName, img, id, isMentor}) => {
     return (
         <div className={s.title_container}>
-            <Link to={`/mentor-profile/${id}`} className={s.link_container}>
+            <Link to={isMentor? `/mentor-profile/${id}` : `/mentee-profile/${id}`} className={s.link_container}>
                 <img src={`${API_URL}/public-api/user/profile-picture/${img}`} className={s.profile_img} alt=""/>
                 <div className={s.name}>{firstName} {secondName}</div>
             </Link>

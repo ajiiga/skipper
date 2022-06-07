@@ -12,7 +12,6 @@ const StarsRating = ({selectedStar, setSelected}) => {
         }
         return selectedStar >= index ? '' : s.active_star
     }
-
     return (
         <div className={s.container}>
             {(Array(5).fill("")).map((star, index) => (

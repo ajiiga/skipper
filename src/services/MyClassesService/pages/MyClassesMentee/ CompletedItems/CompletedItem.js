@@ -54,7 +54,7 @@ const CompletedItem = ({data, deleteItem}) => {
                 <div>Время пользователя {data.user_time}</div>
                 <div className={`${s.button_containers} ${s.button_containers_v3}`}>
                     <Link className={s.chat_btn} to={`/messages/${data.UserID}`}><button style={{cursor: 'pointer',border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Чат</button></Link>
-                    <button className={s.confirm_btn}>Оставить отзыв</button>
+                    <Link to={`/messages/${data.UserID}/review&lessons_count=${data.fixedTime.length}`} className={s.confirm_btn}><button style={{cursor: "pointer", border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Оставить отзыв</button></Link>
                 </div>
             </div>
         </div>

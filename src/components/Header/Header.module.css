@@ -46,7 +46,6 @@
   display: flex;
   align-items: center;
   user-select: none;
-  min-width: 230px;
   justify-content: right;
   cursor: pointer;
 }

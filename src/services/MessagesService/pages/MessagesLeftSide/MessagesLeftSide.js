@@ -20,7 +20,11 @@ const MessagesLeftSide = ({query, setQuery, users, setUsers, activeUser}) => {
         messagesStore.getChatList().then(chats => setUsers(chats.map(chat => {
             return {...chat, count_unread_messages: chat.ID == activeUser ? 0 : chat.count_unread_messages}
         })))
-    }, [messagesStore.newMessages])
+    }, [messagesStore.newMessages, activeUser])
+
+    // useEffect(() => {
+    //
+    // }, [activeUser])
 
     return (
         <div className={s.container}>

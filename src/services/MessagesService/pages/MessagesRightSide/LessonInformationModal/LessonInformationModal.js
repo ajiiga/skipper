@@ -2,10 +2,25 @@ import React, {useState} from 'react';
 import MessageModalContainer from "../MessageModalContainer/MessageModalContainer";
 import s from "../../../styles/MessageModals.module.css";
 import StarsRating from "../../../../../components/UI/StarsRating/StarsRating";
+import messagesStore from "../../../../../store/messagesStore";
+import authStore from "../../../../../store/authStore";
+import {useHistory} from "react-router-dom";
 
 const LessonInformationModal = ({id}) => {
 
-    let [setSelected, selectedStar] = useState(undefined)
+    let [selectedStar, setSelected] = useState(undefined)
+
+    const history = useHistory()
+
+
+    const closeModal = () => {
+        history.push(`/messages/${id}`)
+    }
+
+    const submitHandler = () => {
+        if (selectedStar !== undefined)
+            messagesStore.sendReview(authStore.user.id, parseInt(id), '', selectedStar + 1, true).then(response => closeModal())
+    }
 
     return (
         <MessageModalContainer id={id} title={'Информация по занятию'}>
@@ -16,10 +31,10 @@ const LessonInformationModal = ({id}) => {
                     </div>
                     <StarsRating setSelected={setSelected} selectedStar={selectedStar}/>
                 </div>
-                <button className={s.submit_btn} style={{marginTop: '0px'}}>
+                <button className={s.submit_btn} style={{marginTop: '0px'}} onClick={submitHandler}>
                     Отправить
                 </button>
-                <button className={s.second_submit_btn}>
+                <button className={s.second_submit_btn} onClick={closeModal}>
                     Занятие не состоялость
                 </button>
 

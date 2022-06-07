@@ -22,7 +22,7 @@ const PlannedItem = ({data, deleteItem}) => {
                     <div className={s.cube}/>
                     <div className={s.name}>{data.menti_first_name} {data.menti_second_name}</div>
                 </div>
-                <button className={s.right_title_btn_v2} onClick={() => rejectClass()}>Прекратить занятия</button>
+                <Link to={`/messages/${data.MentiId}/stop-lesson?id=${data.ID}`}><button className={s.right_title_btn}>Прекратить занятия</button></Link>
             </div>
             <div className={s.tag_container}>
                 {data.tags.map(x => <Tag title={x} />)}
@@ -73,7 +73,7 @@ const PlannedItem = ({data, deleteItem}) => {
             <div className={s.under_container}>
                 <div>Время пользователя {data.user_time}</div>
                 <div className={`${s.button_containers} ${s.button_containers_v2}`}>
-                    <Link className={s.chat_btn} to={`/messages/${data.UserID}`}><button style={{cursor: 'pointer',border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Чат</button></Link>
+                    <Link className={s.chat_btn} to={`/messages/${data.MentiId}`}><button style={{cursor: 'pointer',border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Чат</button></Link>
                 </div>
             </div>
         </div>

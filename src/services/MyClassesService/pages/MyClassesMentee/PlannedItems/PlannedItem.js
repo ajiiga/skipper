@@ -19,7 +19,7 @@ const PlannedItem = ({data, deleteItem}) => {
                     <div className={s.cube}/>
                     <div className={s.name}>{data.menti_first_name} {data.menti_second_name}</div>
                 </div>
-                <button className={s.right_title_btn_v2} onClick={() => cancelItem()}>Прекратить занятия</button>
+                <Link to={`/messages/${data.UserID}/stop-lesson?id=${data.ID}`}><button className={s.right_title_btn}>Прекратить занятия</button></Link>
             </div>
             <div className={s.tag_container}>
                 {data.tags.map(x => <Tag title={x} />)}

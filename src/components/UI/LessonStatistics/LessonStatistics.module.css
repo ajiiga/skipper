@@ -1,14 +1,30 @@
 .info_table {
-    border-collapse: collapse;
-    margin-top: 15px;
-    font-size: 14px;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 14px;
 }
 
 .td_head {
-    width: 300px;
+  width: 300px;
 }
 
 .info_table td {
-    padding: 12px 0;
-    border-top: 1px solid #DADADA;;
+  padding: 12px 0;
+  border-top: 1px solid #dadada;
+}
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+}
+@media only screen and (max-width: 350px) {
+  .info_table {
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 13px;
+  }
 }

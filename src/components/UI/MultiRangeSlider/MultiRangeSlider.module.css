@@ -109,3 +109,23 @@
     width: 280px;
   }
 }
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+  .slider {
+    width: 100%;
+  }
+  .thumb {
+    width: calc(100% - 40px);
+  }
+  .container {
+    margin-inline: 10px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+}
+@media only screen and (max-width: 350px) {
+}

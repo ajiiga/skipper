@@ -1,10 +1,29 @@
 .container {
-    width: 78%;
-    height: fit-content;
-    background: #FFFFFF;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
-    border-radius: 8px;
-    margin-top: 52px;
-    padding: 30px;
-    box-sizing: border-box;
+  width: 78%;
+  height: fit-content;
+  background: #ffffff;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+  border-radius: 8px;
+  margin-top: 52px;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+/* Mobile */
+@media only screen and (max-width: 450px) {
+  .container {
+    width: 58%;
+    height: 100%;
+    padding: 22px 5px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+}
+@media only screen and (max-width: 350px) {
+  .container {
+    margin-top: 32px;
+  }
 }

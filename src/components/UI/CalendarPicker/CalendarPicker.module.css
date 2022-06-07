@@ -19,7 +19,7 @@
 .change_week_text {
   color: #828282;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .content_container {
@@ -59,7 +59,7 @@
   color: rgba(36, 26, 54, 0.53);
   width: 67px;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .content {
@@ -115,7 +115,7 @@
   padding: 8px 0;
   background: #ededed;
   border: 0;
-  font-weight: bold;
+  font-weight: 600;
   border-radius: 3px;
   font-family: "Montserrat", sans-serif;
   margin-top: 70px;

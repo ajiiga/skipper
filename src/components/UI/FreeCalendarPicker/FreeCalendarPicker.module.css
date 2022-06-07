@@ -20,7 +20,7 @@
 .change_week_text {
   color: #828282;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .content_container {
@@ -61,7 +61,7 @@
   color: rgba(36, 26, 54, 0.53);
   width: 92px;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .content {
@@ -118,7 +118,7 @@
   padding: 8px 0;
   background: #ededed;
   border: 0;
-  font-weight: bold;
+  font-weight: 600;
   border-radius: 3px;
   font-family: "Montserrat", sans-serif;
   margin-top: 70px;
@@ -132,7 +132,7 @@
 .date {
   color: #828282;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 600;
   width: 70%;
   margin: auto auto 40px;
 }
@@ -153,5 +153,71 @@
 @media (max-width: 1680px) and (-webkit-min-device-pixel-ratio: 1) {
   .date {
     width: 91%;
+  }
+}
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+  .content_block {
+    width: 45px;
+    height: 30px;
+  }
+
+  .calendar {
+    border: none;
+  }
+  .title_content {
+    font-size: 13px;
+  }
+
+  .title_content div {
+    width: 48px;
+  }
+  .times {
+    margin-right: 10px;
+  }
+
+  .time {
+    padding: 0 5px;
+    height: 25px;
+  }
+
+  .busy_example {
+    margin-left: 20px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+  .content_block {
+    width: 38px;
+    height: 25px;
+  }
+  .title_content div {
+    width: 35px;
+  }
+  .free_example,
+  .busy_example {
+    margin-right: 5px;
+  }
+  .busy_example {
+    margin-left: 10px;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .content_block {
+    width: 32px;
+    height: 23px;
+  }
+  .title_content div {
+    width: 35px;
+  }
+  .free_example,
+  .busy_example {
+    margin-right: 5px;
+  }
+  .busy_example {
+    margin-left: 10px;
   }
 }

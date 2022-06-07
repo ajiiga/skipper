@@ -6,6 +6,7 @@ import {messengersIcons} from "../../../../PublicProfilesService/MentorProifle/M
 import {Link} from "react-router-dom";
 import myClassesStore from "../../../../../store/myClassesStore";
 
+
 const CompletedItem = ({data, deleteItem}) => {
 
     const deleteClass = () => {

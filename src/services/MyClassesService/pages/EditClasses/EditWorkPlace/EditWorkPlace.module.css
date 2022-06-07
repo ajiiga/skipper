@@ -24,7 +24,7 @@
   background: #fedc2e;
   border-radius: 18px;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 30px;
 }
 
@@ -75,7 +75,7 @@
   border-bottom: 1px solid #afafaf;
   text-align: center;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 600;
   color: #afafaf;
   cursor: pointer;
 }
@@ -117,7 +117,7 @@
 }
 
 .title_table {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 14px;
   height: 60px;
   line-height: 60px;
@@ -165,7 +165,7 @@
   border: none;
   border-radius: 6px;
   font-size: 22px;
-  font-weight: bold;
+  font-weight: 600;
   width: 100%;
   cursor: pointer;
   transition: 0.25s;
@@ -223,7 +223,7 @@
 .delete_btn {
   background: #afafaf;
   border-radius: 5px;
-  font-weight: bold;
+  font-weight: 600;
   border: none;
   width: 20%;
   cursor: pointer;

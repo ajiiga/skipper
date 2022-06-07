@@ -21,7 +21,8 @@
     min-height: 100vh;
   }
   .container {
-    height: calc(100vh - 120px);
-    max-width: 95%;
+    /* height: calc(100vh - 120px); */
+    height: 100vh;
+    max-width: 90%;
   }
 }

@@ -6,7 +6,7 @@
   cursor: pointer;
   user-select: none;
   padding: 5px 7px;
-  font-weight: bold;
+  font-weight: 600;
   color: #606060;
   box-sizing: border-box;
 }
@@ -32,7 +32,7 @@
 
 @media only screen and (max-width: 500px) {
   .my_lessons {
-    font-size: 16px;
+    font-size: 18px;
     background: transparent;
     padding: 0;
     font-weight: 700;

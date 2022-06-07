@@ -1,14 +1,47 @@
 .follow_btn {
-    font-weight: bold;
-    border-radius: 8px;
-    text-align: center;
-    padding: 5px 0;
-    margin-top: 8px;
-    background: #EDEDED;
-    font-size: 12px;
-    width: 100%;
+  font-weight: 600;
+  border-radius: 8px;
+  text-align: center;
+  padding: 5px 0;
+  margin-top: 8px;
+  background: #ededed;
+  font-size: 12px;
+  width: 100%;
 }
 
 .heart {
+  margin-right: 10px;
+}
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+  .follow_btn {
+    padding: 6px 13px;
+    font-size: 10px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+  }
+  .heart {
     margin-right: 10px;
+    zoom: 0.96;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+}
+@media only screen and (max-width: 350px) {
+  .follow_btn {
+    padding: 6px 10px;
+    font-size: 10px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+  }
 }

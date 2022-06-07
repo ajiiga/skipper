@@ -30,7 +30,7 @@
 }
 
 .name {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .right_title_btn,
@@ -119,7 +119,7 @@
 
 .communication_name {
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .price {
@@ -152,7 +152,7 @@
   border-radius: 8px;
   padding: 5px 0px;
   border: none;
-  font-weight: bold;
+  font-weight: 600;
   width: 48%;
   cursor: pointer;
 }

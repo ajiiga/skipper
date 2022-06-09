@@ -19,11 +19,6 @@ export default SelectCommunicationType;
 
 const CommunicationType = ({data, activeItem, setActiveItem, myCommunications, sendRequest}) => {
 
-
-    /*Проблема в том, что реакт должен понимать, когда отправлять запрос, а когда нет,
-     а по пустом инпуту это не понять (т.к пустой инпут может означать как то, что тип коммуникации пользователю подходит,
-     так и то, что он не подходит и инпут пустой, а так нельзя) Надеюсь ты меня понял, я их будущего :) (смайлик перебор, согласен)*/
-
     let [textInput, setTextInput] = useState('')
 
     useEffect(() => {

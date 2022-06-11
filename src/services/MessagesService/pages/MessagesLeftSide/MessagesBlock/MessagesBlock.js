@@ -12,6 +12,7 @@ const MessagesBlock = ({data, isActive}) => {
 
     const onClickHandler = () => {
         messagesStore.clearReadMessages(data.ID)
+        messagesStore.setCountMessage(messagesStore.countUnreadMessages - data.count_unread_messages)
     }
 
     return (

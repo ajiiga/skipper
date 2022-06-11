@@ -1,5 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {
+    changeCommunicationRequest,
     changeDateRequest,
     getChatListRequest,
     getCurrentChatInfoRequest, getDataForChangeDateRequest, getNotificationsClassUrl,
@@ -19,6 +20,8 @@ class MessagesStore {
 
     newMessage = false;
 
+    countUnreadMessages = 0
+
     newMessages = []
 
     notificationTypes = {
@@ -30,6 +33,10 @@ class MessagesStore {
 
     setNewMessage = (status) => {
         this.newMessage = status
+    }
+
+    setCountMessage = (count) => {
+        this.countUnreadMessages = count
     }
 
     setNewMessages = (messages) => {
@@ -109,6 +116,15 @@ class MessagesStore {
     async changeDate(class_id, time, receiver_id) {
         try {
             let r = await changeDateRequest(class_id, time, receiver_id)
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
+    async changeCommunication(class_id, communication_id) {
+        try {
+            let r = await changeCommunicationRequest(class_id, communication_id)
         }
         catch (e) {
             console.log(e)

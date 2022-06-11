@@ -8,7 +8,7 @@ const TerminationLessonModal = ({ id, title }) => {
 
     let query = useQuery()
 
-    let isMentor = query.get("is_mentor")
+    let isMentor = query.get("is_mentor") === 'true'
 
   return (
     <MessageModalContainer id={id} title={title}>

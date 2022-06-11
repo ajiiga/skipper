@@ -10,11 +10,7 @@ import {API_URL} from "../../../../../api/api_setting";
 import {Link} from "react-router-dom";
 import authStore from "../../../../../store/authStore";
 
-const SearchItem = ({id, first_name, second_name, specialization, description, picture, classes, tags, rating}) => {
-    let [price, setPrice] = useState(Math.round(Math.random() * (5000 - 500) + 500))
-
-
-
+const SearchItem = ({id, first_name, second_name, specialization, description, picture, classes, tags, rating, averagePrice}) => {
     return (
         <div className={s.container}>
             <div className={s.profile}>
@@ -32,7 +28,7 @@ const SearchItem = ({id, first_name, second_name, specialization, description, p
                 <div className={s.display}>
                     <Rating num={rating}/>
                     <div className={s.price_display}>
-                        <div className={s.price}>{price}₽</div>
+                        <div className={s.price}>{averagePrice}₽</div>
                         <div className={s.price_description}>средняя цена занятия</div>
                     </div>
                     <FollowButton/>

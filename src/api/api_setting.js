@@ -1,7 +1,7 @@
 import axios from "axios";
 import authStore from "../store/authStore";
 
-export let API_URL = 'http://152.70.189.77/backend'
+export let API_URL = 'https://skipper.ga'
 
 let $api = axios.create({
     baseURL: API_URL
@@ -16,7 +16,7 @@ $api.interceptors.response.use((config) => {
     return config
 }, (error => {
     let originalRequest = error.config
-    if (error.response.status === 401 && error.config && !error.config._isRetry) {
+    if (error.response?.status === 401 && error.config && !error.config._isRetry) {
         originalRequest._isRetry = true
         try {
             let r = axios.get(`${API_URL}/refresh-token`, {withCredentials: true})

@@ -31,6 +31,7 @@
   align-items: flex-start;
   border: 1px solid white;
   transition: 0.25s;
+  cursor: pointer;
 }
 
 .notification_block__container:hover {

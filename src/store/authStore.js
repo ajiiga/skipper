@@ -1,8 +1,9 @@
 import {makeAutoObservable} from "mobx";
 import {
+    deleteNotificationRequest,
     getNotificationsClassRequest,
     getStatusRequest,
-    loginRequest,
+    loginRequest, readNotificationRequest,
     registrationMenteeMentorRequest,
     registrationMentorRequest,
     registrationRequest
@@ -19,8 +20,29 @@ class AuthService {
 
     notifications = []
 
-    deleteNotification(id) {
-        this.notifications = this.notifications.filter(notification => notification.ID !== id)
+    async deleteNotification(id) {
+        try {
+            let r = await deleteNotificationRequest(id)
+            this.notifications = this.notifications.filter(notification => notification.ID !== id)
+        }
+        catch (e) {
+
+        }
+    }
+
+    async readNotification(id) {
+        try {
+            let r = await readNotificationRequest(id)
+            this.notifications = this.notifications.map(n => {
+                if (n.ID === id) {
+                    return {...n, IsRead: true}
+                }
+                return n
+            })
+        }
+        catch (e) {
+
+        }
     }
 
     constructor() {
@@ -34,6 +56,7 @@ class AuthService {
     setUser = (user) => {
         if (user.unread_messages_count > 0) {
             messagesStore.setNewMessage(true)
+            messagesStore.setCountMessage(user.unread_messages_count)
         }
         this.user = user
     }
@@ -56,6 +79,7 @@ class AuthService {
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('refreshToken', response.data.refreshToken)
         this.setAuth(true)
+        this.getNotificationClass()
         return {response: true}
     }
 

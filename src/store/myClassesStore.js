@@ -6,7 +6,7 @@ import {
     createPracticeClassRequest,
     createTheoreticClassRequest,
     createTurnkeyClassRequest, deleteClassRequest,
-    getClassesRequest, rejectClassRequest,
+    getClassesRequest, getCommunicationsRequest, rejectClassRequest,
     updateClassRequest,
     updatePracticeClassRequest,
     updateTheoreticClassRequest,
@@ -268,7 +268,7 @@ class MyClassesStore {
             trueKey = trueKey ? trueKey : 'Duration0_0'
             let deltaArr = trueKey.slice(8).split('_')
             let [time, count] = deltaArr
-            x.details = `${count || 1} занятий по ${time} минут`
+            x.details = trueKey === 'FullTime'? 'Индивидуальный срок' : `${count || 1} занятий по ${time} минут`
             x.Price = trueKey === 'FullTime' ? x.PriceFullTime : x[`Price${trueKey.slice(8)}`]
             x.typeName = this.typeNames[x.ClassType]
             x.fixedTime = x.Time.map(y => {
@@ -302,6 +302,17 @@ class MyClassesStore {
         catch (e) {
             console.log(e)
         }
+    }
+
+    async getCommunication(class_id) {
+        try {
+            let r = await getCommunicationsRequest(class_id)
+            return r.data.class_mentor_communications
+        }
+        catch (e) {
+            console.log(e)
+        }
+
     }
 }
 

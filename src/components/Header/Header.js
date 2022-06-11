@@ -79,7 +79,7 @@ const Header = ({ isAuth, profile }) => {
                   <Link to={"/messages"}>
                     <div className={s.icon}>
                       <img src={message} alt="" />
-                      {messagesStore.newMessage && (
+                      {messagesStore.countUnreadMessages > 0 && (
                           <div className={s.notification_circle} />
                       )}
                     </div>
@@ -114,6 +114,7 @@ const Header = ({ isAuth, profile }) => {
                 src={bell_img}
                 alt=""
               />
+              {authStore.notifications.filter(n => !n.IsRead).length > 0 && <div className={s.notification_circle}/>}
               {openNotification && (
                 <NotificationModal setOpen={setOpenNotification} />
               )}

@@ -41,7 +41,7 @@ const ConsiderationItem = ({data, deleteItem}) => {
                         <div>{x.time}</div>
                     </div>)}
                 </div>
-                <Link to={`/messages/${data.UserID}/change-lessons-dates?id=${data.ID}`}><button className={s.right_title_btn}>Предложить другое время</button></Link>
+                <Link to={`/messages/${data.MentiId}/change-lessons-dates?id=${data.ID}`}><button className={s.right_title_btn}>Предложить другое время</button></Link>
             </div>
             <div className={s.text}>Способ связи:</div>
             <div className={s.communication_price_container}>
@@ -59,7 +59,7 @@ const ConsiderationItem = ({data, deleteItem}) => {
             <div className={s.under_container}>
                 <div>Время пользователя {data.user_time}</div>
                 <div className={s.button_containers}>
-                    <Link className={s.chat_btn} to={`/messages/${data.UserID}`}><button style={{cursor: 'pointer',border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Чат</button></Link>
+                    <Link className={s.chat_btn} to={`/messages/${data.MentiId}`}><button style={{cursor: 'pointer',border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Чат</button></Link>
                     <button className={s.confirm_btn} onClick={() => confirmClass()}>Принять</button>
                 </div>
             </div>

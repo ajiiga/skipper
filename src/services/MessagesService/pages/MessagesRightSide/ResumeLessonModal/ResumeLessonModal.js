@@ -3,18 +3,21 @@ import MessageModalContainer from "../MessageModalContainer/MessageModalContaine
 import s from "../../../styles/MessageModals.module.css";
 import useQuery from "../../../../../CustomHooks/useQuery";
 import myClassesStore from "../../../../../store/myClassesStore";
+import {useHistory} from "react-router-dom";
 
 const ResumeLessonModal = ({id}) => {
     let [showContent, setShowContent] = useState(false)
 
     let query = useQuery()
 
+    const history = useHistory()
+
     let isMentor = query.get("is_mentor") === 'true'
 
     let classId = parseInt(query.get("id"))
 
     const closeModal = () => {
-        setShowContent(false)
+        history.push(`/messages/${id}`)
     }
 
     const mentorSubmitClick = () => {

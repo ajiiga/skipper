@@ -20,7 +20,6 @@ const TextareaCompetence = ({value, changeValue, tags, setTags, list, setValue})
 
     let addTag = (tag) => {
         let deltaTags = [...tags]
-        debugger
         let id = list.filter(x => x.name3 === tag)[0].ID
         deltaTags.push(id)
         setTags(deltaTags)

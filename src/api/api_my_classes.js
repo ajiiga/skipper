@@ -107,3 +107,7 @@ export let changeStatusClassRequest = (id, status) => {
     return $api.put(`/api/class/booking/?new_status=${status}&booking_id=${id}`)
 }
 
+export let getCommunicationsRequest = (class_id) => {
+    return $api.get(`/api/class/booking/change-communication/${class_id}`)
+}
+

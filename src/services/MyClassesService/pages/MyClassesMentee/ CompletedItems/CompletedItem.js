@@ -22,7 +22,7 @@ const CompletedItem = ({data, deleteItem}) => {
                 <button className={s.right_title_btn_v2} onClick={() => archiveItem()}>Удалить</button>
             </div>
             <div className={s.tag_container}>
-                {data.tags.map(x => <Tag title={x} />)}
+                {data.tags.map(x => <Tag title={x}/>)}
             </div>
             <div>
                 <div className={s.text}>Тип занятия: {data.typeName}</div>
@@ -39,13 +39,13 @@ const CompletedItem = ({data, deleteItem}) => {
             </div>
             <div className={s.text}>Способ связи:</div>
             <div className={s.communication_price_container}>
-                <div className={`${s.communication_container} ${s.communication_container_mentee}`}>
-                    <div className={s.communication_name_container}>
-                        <img src={messengersIcons[data.messenger_name]} className={s.communication_image} alt=""/>
-                        <div className={s.communication_name}>{data.messenger_name}</div>
+                    <div className={`${s.communication_container} ${s.communication_container_mentee}`}>
+                        <div className={s.communication_name_container}>
+                            <img src={messengersIcons[data.messenger_name]} className={s.communication_image} alt=""/>
+                            <div className={s.communication_name}>{data.messenger_name}</div>
+                        </div>
+                        <div className={s.communication_user_id}/>
                     </div>
-                    <div className={s.communication_user_id}/>
-                </div>
                 <div className={s.price}>
                     {data.Price} руб.
                 </div>
@@ -53,8 +53,25 @@ const CompletedItem = ({data, deleteItem}) => {
             <div className={s.under_container}>
                 <div>Время пользователя {data.user_time}</div>
                 <div className={`${s.button_containers} ${s.button_containers_v3}`}>
-                    <Link className={s.chat_btn} to={`/messages/${data.UserID}`}><button style={{cursor: 'pointer',border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Чат</button></Link>
-                    <Link to={`/messages/${data.UserID}/review&lessons_count=${data.fixedTime.length}`} className={s.confirm_btn}><button style={{cursor: "pointer", border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Оставить отзыв</button></Link>
+                    <Link className={s.chat_btn} to={`/messages/${data.UserID}`}>
+                        <button style={{
+                            cursor: 'pointer',
+                            border: 0,
+                            background: 'rgba(0, 0, 0, 0)',
+                            fontWeight: 'bold'
+                        }}>Чат
+                        </button>
+                    </Link>
+                    <Link to={`/messages/${data.UserID}/review&lessons_count=${data.fixedTime.length}`}
+                          className={s.confirm_btn}>
+                        <button style={{
+                            cursor: "pointer",
+                            border: 0,
+                            background: 'rgba(0, 0, 0, 0)',
+                            fontWeight: 'bold'
+                        }}>Оставить отзыв
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

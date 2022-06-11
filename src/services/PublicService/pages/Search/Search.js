@@ -118,7 +118,8 @@ const Search = () => {
                         }).map(x => {
                             return <SearchItem key={x.ID} id={x.ID} first_name={x.FirstName} second_name={x.SecondName}
                                         specialization={x.Specialization} description={x.Description}
-                                        picture={x.ProfilePicture} classes={x.classes} tags={tagList} rating={x.rating}/>
+                                        picture={x.ProfilePicture} classes={x.classes} tags={tagList} rating={x.rating}
+                                        averagePrice={x.AverageClassPrice}/>
                         })
                     }
                 </div>

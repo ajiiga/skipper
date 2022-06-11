@@ -53,7 +53,13 @@ const RegistrationForm = ({isFetching, setIsFetching}) => {
                   handleSubmit,
                   isSubmitting,
               }) => (
-                <form onSubmit={handleSubmit} className={s.form}>
+                <form
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            handleSubmit();
+                        }
+                    }}
+                    onSubmit={handleSubmit} className={s.form}>
                     {status && <div className={s.status_error}>{status}</div>}
                     <div className={s.input_container}>
                         <div className={s.input_tel}>

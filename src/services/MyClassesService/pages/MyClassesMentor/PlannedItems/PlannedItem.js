@@ -55,7 +55,7 @@ const PlannedItem = ({data, deleteItem}) => {
                         </div>
                     })}
                 </div>
-                <Link to={`/messages/${data.UserID}/change-lessons-dates?id=${data.ID}`}><button className={s.right_title_btn}>Предложить другое время</button></Link>
+                <Link to={`/messages/${data.MentiId}/change-lessons-dates?id=${data.ID}`}><button className={s.right_title_btn}>Предложить другое время</button></Link>
             </div>
             <div className={s.text}>Способ связи:</div>
             <div className={s.communication_price_container}>

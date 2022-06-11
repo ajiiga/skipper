@@ -57,5 +57,13 @@ export let registrationMenteeMentorRequest = (specialization, description, time,
 }
 
 export let getNotificationsClassRequest = () => {
-    return $api.get('/notifications/class')
+    return $api.get('/notifications/class/')
+}
+
+export let deleteNotificationRequest = (id) => {
+    return $api.delete(`/notifications/?notification_id=${id}`)
+}
+
+export let readNotificationRequest = (id) => {
+    return $api.put(`/notifications/?notification_id=${id}`)
 }

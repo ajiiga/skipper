@@ -144,6 +144,10 @@
   justify-content: space-between;
 }
 
+.communication_container_for_change {
+  padding: 0;
+}
+
 .communication_item {
   padding: 20px;
   display: flex;
@@ -157,6 +161,10 @@
   transition: 0.25s;
   cursor: pointer;
   align-items: center;
+}
+
+.communication_item_for_change {
+  width: 380px;
 }
 
 .communication_item_text {
@@ -198,6 +206,10 @@
   box-sizing: border-box;
   border-radius: 5px;
   padding: 8px 12px;
+}
+
+.communication_item_input_for_change {
+  width: 150px;
 }
 
 @media (max-width: 1680px) and (-webkit-min-device-pixel-ratio: 1) {

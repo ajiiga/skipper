@@ -24,7 +24,6 @@ const Messages = () => {
     let [activeUser, setActiveUser] = useState(-1)
 
     useEffect(() => {
-        messagesStore.setNewMessage(false)
         messagesStore.getChatList().then(x => {
             setChatList(x)
             setIsLoading(false)

@@ -33,11 +33,16 @@ const NotificationBlock = ({data}) => {
             case "status change":
                 if (jsonData.old_status === 'consideration')
                     setText(`Ментор отклонил ваше предложение о занятии по "${jsonData.class_name}"`)
+                else if (jsonData.old_status === 'planned')
+                    setText(`Пользователь прекратил занятия по "${jsonData.class_name}"`)
                 else
                     setText(`У занятия по "${jsonData.class_name}" изменился статус на "${messagesStore.notificationTypes[jsonData.new_status]}"`)
                 break;
             case "offer to change status":
                 setText(`Вам предложили возобновить занятия по "${jsonData.class_name}"`)
+                break;
+            case "communication change":
+                setText(`Вам предложили поменять способ коммуникации занятия "${jsonData.class_name}"`)
                 break;
         }
     }, [])
@@ -45,14 +50,13 @@ const NotificationBlock = ({data}) => {
     const clickHandler = () => {
         switch (data["Type"]) {
             case "lesson complete":
-                history.push(`/messages/${notificationData.comment_recipient}/lesson-information`)
+                history.push(`/messages/${notificationData.chat_user_id}/lesson-information`)
                 break;
             case "class completed":
-                history.push(`/messages/${notificationData.comment_recipient}/review?lessons_count=${notificationData.lesson_count}`)
+                history.push(`/messages/${notificationData.chat_user_id}/review?lessons_count=${notificationData.lesson_count}`)
                 break;
             case "time change":
-                debugger
-                history.push(`/messages/${notificationData.comment_recipient}/change-lessons-dates?id=${notificationData.ClassId}&im_receiver=${true}`)
+                history.push(`/messages/${notificationData.chat_user_id}/change-lessons-dates?id=${notificationData.ClassId}&im_receiver=${true}`)
                 break;
             case "status change":
                 switch (notificationData["new_status"]) {
@@ -64,21 +68,29 @@ const NotificationBlock = ({data}) => {
                         break;
                     case "canceled":
                         if (notificationData.old_status === 'planned')
-                            history.push(`/messages/${notificationData.comment_recipient}/termination-lesson?is_mentor=${notificationData.is_mentor}`)
+                            history.push(`/messages/${notificationData.chat_user_id}/termination-lesson?is_mentor=${notificationData.is_mentor}`)
                         else
-                            history.push(`/messages/${notificationData.comment_recipient}/rejected-lesson?is_mentor=${notificationData.is_mentor}`)
+                            history.push(`/messages/${notificationData.chat_user_id}/rejected-lesson?is_mentor=${notificationData.is_mentor}`)
                         break;
                 }
                 break;
             case "offer to change status":
                 history.push(`/messages/${notificationData.chat_user_id}/resume-lesson?id=${notificationData.class_id}&is_mentor=${false}`)
                 break;
+            case "communication change":
+                history.push(`/messages/${notificationData.chat_user_id}/change-communication?class_id=${notificationData.class_id}&is_notification=${true}&active_item=${notificationData.new_communication_id}`)
+                break;
         }
-        authStore.deleteNotification(data.ID)
+        if (!data.IsRead) {
+            authStore.readNotification(data.ID)
+        }
 
     }
 
-    let isMentor = authStore.user.id === notificationData.mentor_id
+    const deleteNotification = (e) => {
+        e.stopPropagation()
+        authStore.deleteNotification(data.ID)
+    }
 
     return (
         <div className={s.notification_block__container} onClick={clickHandler}>
@@ -91,7 +103,7 @@ const NotificationBlock = ({data}) => {
                 </div>
                 <div className={s.notification_block__time}>{refactorDate}</div>
             </div>
-            <img src={closeImg} className={s.notification_block__close} alt=""/>
+            <img onClick={e => deleteNotification(e)} src={closeImg} className={s.notification_block__close} alt=""/>
         </div>
     );
 };

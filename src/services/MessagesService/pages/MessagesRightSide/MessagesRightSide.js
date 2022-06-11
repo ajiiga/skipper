@@ -31,7 +31,7 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
     let [isLoading, setIsLoading] = useState(true)
 
     const connect = (info) => {
-        socket.current = io('http://152.70.189.77:8000', {
+        socket.current = io(API_URL, {
             transports: ['websocket'],
             query: {
                 roomId: info?.chat?.roomID,
@@ -139,6 +139,9 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
                 </Route>
                 <Route path={`/messages/${params.id}/rejected-lesson`}>
                     <TerminationLessonModal title={"Отклонение занятий"} id={params.id} />
+                </Route>
+                <Route path={`/messages/${params.id}/change-communication`}>
+                    <ChangeCommunicationModal id={params.id} />
                 </Route>
                 <Redirect to={`/messages/${params.id}`}/>
             </Switch>

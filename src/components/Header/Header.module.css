@@ -161,17 +161,26 @@
 }
 @media only screen and (max-width: 400px) {
   .left_container .icons {
-    margin-left: 20px;
+    margin-left: 17px;
   }
   .icon {
-    margin-right: 40px;
+    margin-right: 35px;
   }
 }
 @media only screen and (max-width: 350px) {
   .left_container .icons {
-    margin-left: 20px;
+    margin-left: 12px;
   }
   .icon {
-    margin-right: 15px;
+    margin-right: 22px;
+  }
+  .profile_content {
+    font-size: 14px;
+  }
+  .logo {
+    font-size: 18px;
+  }
+  .profile_content div {
+    font-size: 13px;
   }
 }

@@ -27,3 +27,17 @@
     margin-top: 15px;
   }
 }
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+  .container {
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+}
+@media only screen and (max-width: 350px) {
+}

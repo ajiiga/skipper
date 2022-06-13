@@ -33,3 +33,18 @@
     width: 24%;
   }
 }
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+  .container {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+}
+@media only screen and (max-width: 400px) {
+}
+@media only screen and (max-width: 350px) {
+}

@@ -176,6 +176,7 @@ class MessagesStore {
             let newMessage = JSON.parse(e.data)
             this.setNewMessage(true)
             this.setNewMessages([...this.newMessages, newMessage])
+            this.setCountMessage(this.countUnreadMessages + 1)
         })
 
         this.eventSourceClass.addEventListener('message', e => {

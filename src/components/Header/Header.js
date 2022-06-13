@@ -25,7 +25,6 @@ const Header = ({ isAuth, profile }) => {
     window.innerWidth ||
     document.documentElement.clientWidth ||
     document.body.clientWidth;
-
   //Хэдэр для не аутенфицированных пользователей
   if (!isAuth)
     return (

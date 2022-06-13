@@ -17,6 +17,7 @@ import ResumeLessonModal from "./ResumeLessonModal/ResumeLessonModal";
 import ChangeCommunicationModal from "./ChangeCommunicationModal/ChangeCommunicationModal";
 import LessonInformationModal from "./LessonInformationModal/LessonInformationModal";
 import TerminationLessonModal from "./TerminationLessonModal/TerminationLessonModal";
+import MessagesNavigator from "./MessagesNavigator/MessagesNavigator";
 
 const io = require("socket.io-client");
 
@@ -60,7 +61,7 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
                 readMessages(chatInfo)
                 return {chat: chatInfo.chat, messages: newMessages}
             })
-
+            messagesStore.setCountMessage(messagesStore.countUnreadMessages - 1)
         });
     }
 
@@ -111,7 +112,7 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
             <MessagesRightSideTitle firstName={chatInfo.chat.FirstName} secondName={chatInfo.chat.SecondName}
                                     img={chatInfo.chat.ProfilePicture} id={chatInfo.chat.ID} isMentor={chatInfo.chat.IsMentor}/>
             <MessagesRightSideContent messages={chatInfo.messages}/>
-            <MessagesRightSideInput value={value} setValue={setValue} sendMessage={sendMessage}/>
+            <MessagesRightSideInput value={value} setValue={setValue} sendMessage={sendMessage} id={id}/>
             <Switch>
                 <Route path={`/messages/${params.id}/review`}>
                     <SendReviewModal id={params.id}/>
@@ -215,7 +216,7 @@ const CompanionMessage = ({text, time}) => {
     )
 }
 
-const MessagesRightSideInput = ({value, setValue, sendMessage}) => {
+const MessagesRightSideInput = ({value, setValue, sendMessage, id}) => {
 
     let [messageIsReady, setMessageIsReady] = useState(false)
 
@@ -234,31 +235,10 @@ const MessagesRightSideInput = ({value, setValue, sendMessage}) => {
 
     return (
         <div className={s.input_container}>
-            <MessagesNavigator/>
+            <MessagesNavigator id={id}/>
             <input type="text" value={value} onChange={e => setValue(e.target.value)} onKeyDown={_handleKeyDown}
                    className={s.input} placeholder={'Напишите сообщение...'}/>
             <img onClick={() => sendMessage(value)} src={arrow} alt="" className={s.arrow_image}/>
         </div>
-    )
-}
-
-const MessagesNavigator = () => {
-
-    let emptyNavigator = <img src={navigator} alt=""/>
-
-    let navigatorWithNotification = (
-        <div className={s.navigator_with_notification}>
-            {emptyNavigator}
-            <div className={s.navigator_notification}/>
-        </div>
-    )
-
-    let setReview = (
-        <img src={set_review} alt=""/>
-    )
-
-
-    return (
-        navigatorWithNotification
     )
 }

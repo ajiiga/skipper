@@ -109,8 +109,11 @@ const ModalRegistrationLesson = ({classes, communications}) => {
             let [time, count] = getTrueKey(timeLessons)
             let service_type_key = types[selectedType]
             let sortedDates = dates.sort((a, b) => {
-                let aDate = new Date(a.split(' ')[0])
-                let bDate = new Date(b.split(' ')[0])
+                let aTime = a.split(' ')
+                let bTime = b.split(' ')
+                let aDate = new Date(aTime[0])
+                let bDate = new Date(bTime[0])
+                if (aDate.getTime() === bDate.getTime()) return parseInt(aTime[1]) - parseInt(bTime[1])
                 return aDate - bDate
             })
             let request = {

@@ -28,7 +28,15 @@ const ChangeLessonsDatesModal = ({id}) => {
 
     const changeLessonDates = () => {
         if (dates.length === activeCount) {
-            messagesStore.changeDate(parseInt(lessonId), dates, parseInt(id)).then(x => closeModal())
+            let sortedDates = dates.sort((a, b) => {
+                let aTime = a.split(' ')
+                let bTime = b.split(' ')
+                let aDate = new Date(aTime[0])
+                let bDate = new Date(bTime[0])
+                if (aDate.getTime() === bDate.getTime()) return parseInt(aTime[1]) - parseInt(bTime[1])
+                return aDate - bDate
+            })
+            messagesStore.changeDate(parseInt(lessonId), sortedDates, parseInt(id)).then(x => closeModal())
         }
     }
 
@@ -47,18 +55,22 @@ const ChangeLessonsDatesModal = ({id}) => {
     return (
         <MessageModalContainer id={id} title={`Изменить время занятий`}>
             <FreeCalendarPicker setCalendarState={setCalendarState} calendarState={calendarState}
-                                defaultState={publicProfileStore.decode(dataLesson.class_time_mask)} activeCount={activeCount} dates={dates}
+                                defaultState={publicProfileStore.decode(dataLesson.class_time_mask)}
+                                activeCount={activeCount} dates={dates}
                                 setDates={setDates}/>
-            {imReceiver? <div className={s.mentor_change_lesson_dates__buttons_container}>
-                    <button className={s.mentor_change_lesson_dates__submit_button} onClick={closeModal}>Принять изменения</button>
-                    <button className={s.mentor_change_lesson_dates__change_button} onClick={changeLessonDates}>Предложить другое время</button>
+            {imReceiver ? <div className={s.mentor_change_lesson_dates__buttons_container}>
+                    <button className={s.mentor_change_lesson_dates__submit_button} onClick={closeModal}>Принять изменения
+                    </button>
+                    <button className={s.mentor_change_lesson_dates__change_button} onClick={changeLessonDates}>Предложить
+                        другое время
+                    </button>
                 </div>
                 :
                 (<div className={s.submit_btn_container}>
-                <button className={s.submit_btn} onClick={changeLessonDates}>
-                    Предложить время занятий
-                </button>
-            </div>)}
+                    <button className={s.submit_btn} onClick={changeLessonDates}>
+                        Предложить время занятий
+                    </button>
+                </div>)}
         </MessageModalContainer>
     );
 };

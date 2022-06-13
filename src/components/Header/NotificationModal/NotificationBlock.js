@@ -31,16 +31,20 @@ const NotificationBlock = ({data}) => {
                 setText(`Предлагает вам изменить время занятий`)
                 break;
             case "status change":
-                if (jsonData.old_status === 'consideration')
-                    if (jsonData.is_mentor)
-                    setText(`Менти отменил заявку по занятию "${jsonData.class_name}"`)
+                switch (jsonData.old_status) {
+                    case 'consideration':
+                        if (jsonData.new_status === 'canceled')
+                            setText(jsonData.is_mentor? `Менти отменил заявку по занятию "${jsonData.class_name}"` : `Ментор отклонил ваше предложение о занятии по "${jsonData.class_name}"`)
                         else
-                    setText(`Ментор отклонил ваше предложение о занятии по "${jsonData.class_name}"`)
-                else if (jsonData.old_status === 'planned')
-                    setText(`Пользователь прекратил занятия по "${jsonData.class_name}"`)
-                else
-                    setText(`У занятия по "${jsonData.class_name}" изменился статус на "${messagesStore.notificationTypes[jsonData.new_status]}"`)
-                break;
+                            setText(`Ментор принял вашу заявку на занятие "${jsonData.class_name}"`)
+                        break;
+                    case 'planned':
+                        setText(`Пользователь прекратил занятия "${jsonData.class_name}"`)
+                        break;
+                    default:
+                        setText(`У занятия "${jsonData.class_name}" поменялся статус с "${messagesStore.notificationTypes[jsonData.old_status]}" на "${messagesStore.notificationTypes[jsonData.new_status]}"`)
+                }
+               break;
             case "offer to change status":
                 setText(`Вам предложили возобновить занятия по "${jsonData.class_name}"`)
                 break;

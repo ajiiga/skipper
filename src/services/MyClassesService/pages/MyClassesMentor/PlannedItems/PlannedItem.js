@@ -59,13 +59,13 @@ const PlannedItem = ({data, deleteItem}) => {
             </div>
             <div className={s.text}>Способ связи:</div>
             <div className={s.communication_price_container}>
-                <div className={s.communication_container}>
+                <Link className={s.communication_container} to={`/messages/${data.MentiId}/change-communication?class_id=${data.ID}&active_item=${data.Communication}`}>
                     <div className={s.communication_name_container}>
                         <img src={messengersIcons[data.messenger_name]} className={s.communication_image} alt=""/>
                         <div className={s.communication_name}>{data.messenger_name}</div>
                     </div>
                     <div className={s.communication_user_id}>User id: {data.communication_login}</div>
-                </div>
+                </Link>
                 <div className={s.price}>
                     {data.Price} руб.
                 </div>

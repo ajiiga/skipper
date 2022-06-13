@@ -31,7 +31,7 @@
 /* Mobile */
 @media only screen and (max-width: 500px) {
   .container {
-    height: calc(100% - 80px);
+    height: calc(100% - 100px);
   }
 }
 

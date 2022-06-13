@@ -50,7 +50,6 @@ const Search = () => {
     let debounceQuery = useDebounce([searchInfo], 300)
 
 
-
     useEffect(() => {
         publicStore.getChildTags().then(x => {
             setTagList(x)
@@ -61,8 +60,7 @@ const Search = () => {
 
 
     useEffect(() => {
-        if (tagList.length !== 0)
-        {
+        if (tagList.length !== 0) {
             setSearchIsFetching(true)
             let idTags = tagList.filter(x => searchInfo.tags.includes(x.name3)).map(x => x.ID)
             let request = {
@@ -71,12 +69,28 @@ const Search = () => {
                 tags: idTags
             }
             let strTags = idTags.join(',')
-            publicStore.getSearchClasses(strTags === "" ? undefined : strTags, 1, 100).then(x => {
+            let price = {}
+
+            if (searchInfo.activeItem.includes('до'))
+                price = {high_price: parseInt(searchInfo.activeItem.slice(3, -1))}
+            if (searchInfo.activeItem.includes('-')) {
+                let [low, high] = searchInfo.activeItem.split(' - ').map(p => parseInt(p))
+                price = {down_price: low, high_price: high}
+            }
+            publicStore.getSearchClasses(strTags === "" ? undefined : strTags, 1, 100, searchInfo.range.min, searchInfo.range.max, price).then(x => {
                 setClasses(x)
                 setSearchIsFetching(false)
             })
         }
     }, [debounceQuery, tagList])
+
+    const resetFilters = () => {
+        setSearchInfo({
+            range: {min: 1, max: 5},
+            activeItem: list[4],
+            tags: []
+        })
+    }
 
     if (isFetching)
         return <Preloader/>
@@ -97,14 +111,15 @@ const Search = () => {
                 <div className={s.fixed_sidebar}>
                     <MiniNavBar child={'Поиск'}/>
                     <SearchBar range={searchInfo.range} setRange={setRange} list={list} setActiveItem={setActiveItem}
-                               activeItem={searchInfo.activeItem}/>
+                               activeItem={searchInfo.activeItem} resetFilters={resetFilters}/>
                 </div>
                 <div className={s.fake_sidebar}/>
                 <div className={s.content_container}>
                     <div>{classes.filter(x => {
                         let lenTags = x.classes.map(x => x.Tags.length)
                         return lenTags.reduce((previousValue, currentValue) => previousValue + currentValue, 0) !== 0
-                    }).length} специалистов найдено</div>
+                    }).length} специалистов найдено
+                    </div>
                     <SearchInput value={searchText} changeValue={setSearchText} tags={searchInfo.tags} addTag={addTag}
                                  tagList={tagList}/>
                     <div className={s.tags}>{searchInfo.tags.map(x => <div key={x} className={s.tag_container}>
@@ -117,9 +132,10 @@ const Search = () => {
                             return lenTags.reduce((previousValue, currentValue) => previousValue + currentValue, 0) !== 0
                         }).map(x => {
                             return <SearchItem key={x.ID} id={x.ID} first_name={x.FirstName} second_name={x.SecondName}
-                                        specialization={x.Specialization} description={x.Description}
-                                        picture={x.ProfilePicture} classes={x.classes} tags={tagList} rating={x.rating}
-                                        averagePrice={x.AverageClassPrice}/>
+                                               specialization={x.Specialization} description={x.Description}
+                                               picture={x.ProfilePicture} classes={x.classes} tags={tagList}
+                                               rating={x.rating}
+                                               averagePrice={x.AverageClassPrice}/>
                         })
                     }
                 </div>

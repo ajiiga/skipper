@@ -32,6 +32,9 @@ const NotificationBlock = ({data}) => {
                 break;
             case "status change":
                 if (jsonData.old_status === 'consideration')
+                    if (jsonData.is_mentor)
+                    setText(`Менти отменил заявку по занятию "${jsonData.class_name}"`)
+                        else
                     setText(`Ментор отклонил ваше предложение о занятии по "${jsonData.class_name}"`)
                 else if (jsonData.old_status === 'planned')
                     setText(`Пользователь прекратил занятия по "${jsonData.class_name}"`)

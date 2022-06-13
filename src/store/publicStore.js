@@ -48,8 +48,8 @@ class PublicStore {
 
     setDefaultActiveTheme = () => this.setActiveTheme(1)
 
-    async getSearchClasses(search, page, limit) {
-        let r = await getSearchClassesRequest(search, page, limit)
+    async getSearchClasses(search, page, limit, down_rating, high_rating, price) {
+        let r = await getSearchClassesRequest(search, page, limit, down_rating, high_rating, price)
         return JSON.parse(r.data.catalog_of_mentors)
     }
 

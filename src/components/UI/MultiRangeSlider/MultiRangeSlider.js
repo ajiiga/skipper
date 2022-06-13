@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import s from './MultiRangeSlider.module.css'
 
-const MultiRangeSlider = ({ min, max, onChange }) => {
-    const [minVal, setMinVal] = useState(min);
-    const [maxVal, setMaxVal] = useState(max);
+const MultiRangeSlider = ({ min, max, onChange, minVal, setMinVal, maxVal, setMaxVal }) => {
+    // const [minVal, setMinVal] = useState(min);
+    // const [maxVal, setMaxVal] = useState(max);
     //
     const [isStart, setStart] = useState(true)
     //

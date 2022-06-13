@@ -8,7 +8,7 @@ const MyLessonsButton = ({ isMentor, setOpenMobileMenu }) => {
 
   if (!isMentor)
     return (
-      <Link to={"/my-classes-mentee"}>
+      <Link to={"/my-classes-mentee"} onClick={() => setOpenMobileMenu(false)}>
         <div className={s.my_lessons}>Мои занятия</div>
       </Link>
     );

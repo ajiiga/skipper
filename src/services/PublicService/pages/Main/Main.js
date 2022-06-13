@@ -1,21 +1,22 @@
-import React, { useEffect, useMemo, useState } from "react";
-import s from "../../styles/Main.module.css";
-import img from "../../../../static/img/Main/main.svg";
-import search_icon from "../../../../static/img/Main/search_icon.png";
-import MainSlider from "./MainSlider/MainSlider";
-import right_arrow from "../../../../static/img/Main/right-arrow.png";
-import { Link } from "react-router-dom";
-import authStore from "../../../../store/authStore";
-import publicStore from "../../../../store/publicStore";
-import Preloader from "../../../../components/UI/Preloader/Preloader";
-import { motion } from "framer-motion";
-import MainInput from "./MainInput/MainInput";
+import React, { useEffect, useMemo, useState } from 'react';
+import s from '../../styles/Main.module.css';
+import img from '../../../../static/img/Main/main.svg';
+import search_icon from '../../../../static/img/Main/search_icon.png';
+import MainSlider from './MainSlider/MainSlider';
+import right_arrow from '../../../../static/img/Main/right-arrow.png';
+import { Link } from 'react-router-dom';
+import authStore from '../../../../store/authStore';
+import publicStore from '../../../../store/publicStore';
+import Preloader from '../../../../components/UI/Preloader/Preloader';
+import { motion } from 'framer-motion';
+import MainInput from './MainInput/MainInput';
+import Footer from '../../../../components/Footer/Footer';
 
 const Main = () => {
   let [isFetching, setIsFetching] = useState(true);
-  let [items, setItems] = useState("");
+  let [items, setItems] = useState('');
   let [tags, setTags] = useState([]);
-  let [searchQuery, setSearchQuery] = useState("");
+  let [searchQuery, setSearchQuery] = useState('');
   const width =
     window.innerWidth ||
     document.documentElement.clientWidth ||
@@ -67,13 +68,13 @@ const Main = () => {
         <img className={s.main_img} src={img} alt="" />
       </div>
       <div className={s.lower_display}>
-        <Link to={"/catalog"}>
+        <Link to={'/catalog'}>
           <div className={`${s.yellow_text} ${s.full_catalog}`}>
             Полный каталог
             <img src={right_arrow} className={s.right_arrow} alt="" />
           </div>
         </Link>
-        <Link to={"/mentor_registration"}>
+        <Link to={'/mentor_registration'}>
           {!authStore.user?.is_mentor && (
             <div className={s.to_mentor_btn}>
               Я хочу зарабывать на своих знаниях
@@ -81,6 +82,7 @@ const Main = () => {
           )}
         </Link>
       </div>
+      <Footer />
     </motion.div>
   );
 };

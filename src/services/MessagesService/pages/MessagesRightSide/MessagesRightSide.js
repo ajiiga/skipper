@@ -19,6 +19,7 @@ import LessonInformationModal from "./LessonInformationModal/LessonInformationMo
 import TerminationLessonModal from "./TerminationLessonModal/TerminationLessonModal";
 import MessagesNavigator from "./MessagesNavigator/MessagesNavigator";
 
+
 const io = require("socket.io-client");
 
 const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatList}) => {
@@ -112,7 +113,7 @@ const MessagesRightSide = ({value, setValue, setActiveUser, chatList, setChatLis
             <MessagesRightSideTitle firstName={chatInfo.chat.FirstName} secondName={chatInfo.chat.SecondName}
                                     img={chatInfo.chat.ProfilePicture} id={chatInfo.chat.ID} isMentor={chatInfo.chat.IsMentor}/>
             <MessagesRightSideContent messages={chatInfo.messages}/>
-            <MessagesRightSideInput value={value} setValue={setValue} sendMessage={sendMessage} id={id}/>
+            <MessagesRightSideInput value={value} setValue={setValue} sendMessage={sendMessage}/>
             <Switch>
                 <Route path={`/messages/${params.id}/review`}>
                     <SendReviewModal id={params.id}/>
@@ -154,11 +155,37 @@ export default MessagesRightSide;
 
 
 const MessagesRightSideTitle = ({firstName, secondName, img, id, isMentor}) => {
+    const width =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth;
+
     return (
         <div className={s.title_container}>
-            <Link to={isMentor? `/mentor-profile/${id}` : `/mentee-profile/${id}`} className={s.link_container}>
-                <img src={`${API_URL}/public-api/user/profile-picture/${img}`} className={s.profile_img} alt=""/>
-                <div className={s.name}>{firstName} {secondName}</div>
+            {width <= 500 && (
+                <Link to="/messages" className={s.link_container}>
+                    <img
+                        src={arrow_back_img}
+                        alt=""
+                        className={s.arrow_back_image}
+                    />
+                </Link>
+            )}
+
+            <Link
+                to={
+                    isMentor ? `/mentor-profile/${id}` : `/mentee-profile/${id}`
+                }
+                className={s.link_container}
+            >
+                <img
+                    src={`${API_URL}/public-api/user/profile-picture/${img}`}
+                    className={s.profile_img}
+                    alt=""
+                />
+                <div className={s.name}>
+                    {firstName} {secondName}
+                </div>
             </Link>
         </div>
     )
@@ -216,7 +243,7 @@ const CompanionMessage = ({text, time}) => {
     )
 }
 
-const MessagesRightSideInput = ({value, setValue, sendMessage, id}) => {
+const MessagesRightSideInput = ({value, setValue, sendMessage}) => {
 
     let [messageIsReady, setMessageIsReady] = useState(false)
 

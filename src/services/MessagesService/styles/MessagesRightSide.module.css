@@ -1,225 +1,225 @@
 .container {
-    background: #ffffff;
-    box-shadow: 0px 2px 8px rgb(0 0 0 / 14%);
-    border-radius: 8px;
-    box-sizing: border-box;
-    width: 70%;
-    margin-left: 33px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    height: 700px;
+  background: #ffffff;
+  box-shadow: 0px 2px 8px rgb(0 0 0 / 14%);
+  border-radius: 8px;
+  box-sizing: border-box;
+  width: 70%;
+  margin-left: 33px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 700px;
 }
 
 .title_container {
-    border-bottom: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
 }
 
 .link_container {
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
 }
 
 .name {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .profile_img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .content_container {
-    margin: 20px;
+  margin: 20px;
 }
 
 .companion_message_container,
 .my_message_container {
-    display: flex;
-    position: relative;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: 7.5px;
+  display: flex;
+  position: relative;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: 7.5px;
 }
 
 .my_message_container {
-    margin-left: auto;
-    margin-right: 7.5px;
+  margin-left: auto;
+  margin-right: 7.5px;
 }
 
 .companion_message_container {
-    margin-right: auto;
-    margin-left: 7.5px;
+  margin-right: auto;
+  margin-left: 7.5px;
 }
 
 .my_message,
 .companion_message {
-    padding: 10px;
-    border-radius: 10px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .my_message {
-    margin-left: auto;
-    background: #fedc2e;
+  margin-left: auto;
+  background: #fedc2e;
 }
 
 .companion_message {
-    margin-right: auto;
-    background: #cfcfcf;
+  margin-right: auto;
+  background: #cfcfcf;
 }
 
 .my_message_triangle,
 .companion_message_triangle {
-    bottom: 0;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    position: absolute;
+  bottom: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  position: absolute;
 }
 
 .my_message_triangle {
-    right: -7.5px;
-    border-bottom: 15px solid #fedc2e;
+  right: -7.5px;
+  border-bottom: 15px solid #fedc2e;
 }
 
 .companion_message_triangle {
-    left: -7.5px;
-    border-bottom: 15px solid #cfcfcf;
+  left: -7.5px;
+  border-bottom: 15px solid #cfcfcf;
 }
 
 .my_time,
 .companion_time {
-    color: rgba(0, 0, 0, 0.25);
-    font-size: 12px;
-    width: fit-content;
-    margin: 5px 0 15px 0;
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 12px;
+  width: fit-content;
+  margin: 5px 0 15px 0;
 }
 
 .my_time {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .companion_time {
-    margin-right: auto;
+  margin-right: auto;
 }
 
 .input_container {
-    border-top: 1px solid #dadada;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    height: 50px;
-    padding: 10px 50px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    background: white;
+  border-top: 1px solid #dadada;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+  padding: 10px 50px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  background: white;
 }
 
 .input {
-    width: 90%;
-    padding: 5px 10px;
-    background: #ffffff;
-    border: 1px solid #aeaeae;
-    box-sizing: border-box;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: 0.25s;
+  width: 90%;
+  padding: 5px 10px;
+  background: #ffffff;
+  border: 1px solid #aeaeae;
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: 0.25s;
 }
 
 .arrow_image {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .scroll_container {
-    overflow: hidden;
-    max-height: 572px;
-    overflow-y: scroll;
-    transition: 1s;
-    /*scroll-behavior: smooth;*/
+  overflow: hidden;
+  max-height: 572px;
+  overflow-y: scroll;
+  transition: 1s;
+  /*scroll-behavior: smooth;*/
 }
 
 .input:focus {
-    border: 1px solid #fedc2e;
-    box-shadow: 0px 2px 8px rgb(0 0 0 / 10%);
+  border: 1px solid #fedc2e;
+  box-shadow: 0px 2px 8px rgb(0 0 0 / 10%);
 }
 
 .empty_messages_block {
-    margin: auto;
-    text-align: center;
+  margin: auto;
+  text-align: center;
 }
 
 .empty_messages_block div {
-    font-size: 28px;
-    margin-top: 40px;
+  font-size: 28px;
+  margin-top: 40px;
 }
 
 .container_empty_messages {
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .navigator_with_notification {
-    position: relative;
+  position: relative;
 }
 
 .navigator_notification {
-    position: absolute;
-    top: -3px;
-    right: -3px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1px solid black;
-    background-color: #fedc2e;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: #fedc2e;
 }
 
 @media (max-width: 1680px) and (-webkit-device-pixel-ratio: 1) {
-    .scroll_container {
-        max-height: 480px;
-    }
-    .container {
-        height: 570px;
-    }
+  .scroll_container {
+    max-height: 480px;
+  }
+  .container {
+    height: 570px;
+  }
 }
 @media (max-width: 1344px) and (-webkit-min-device-pixel-ratio: 1.25) {
-    .scroll_container {
-        max-height: 480px;
-    }
-    .container {
-        height: 570px;
-    }
+  .scroll_container {
+    max-height: 480px;
+  }
+  .container {
+    height: 570px;
+  }
 }
 
 /* Mobile */
 @media only screen and (max-width: 500px) {
-    .container {
-        width: 100%;
-        margin: 10px 0 0;
-        height: 100%;
-    }
-    .scroll_container {
-        max-height: calc(100% - 120px);
-    }
-    .arrow_back_image {
-        filter: brightness(0) saturate(100%) invert(93%) sepia(0%)
-            saturate(309%) hue-rotate(170deg) brightness(80%) contrast(74%);
-        transform: rotate(180deg);
-    }
-    .title_container {
-        display: flex;
-        padding: 5px 0 5px 20px;
-    }
-    .link_container:first-child {
-        padding: 10px;
-    }
-    .input_container {
-        padding: 10px;
-        gap: 10px;
-    }
+  .container {
+    width: 100%;
+    margin: 10px 0 0;
+    height: calc(100% - 50px);
+  }
+  .scroll_container {
+    max-height: calc(100% - 130px);
+  }
+  .arrow_back_image {
+    filter: brightness(0) saturate(100%) invert(93%) sepia(0%) saturate(309%)
+      hue-rotate(170deg) brightness(80%) contrast(74%);
+    transform: rotate(180deg);
+  }
+  .title_container {
+    display: flex;
+    padding: 5px 0 5px 20px;
+  }
+  .link_container:first-child {
+    padding: 10px;
+  }
+  .input_container {
+    padding: 10px;
+    gap: 10px;
+  }
 }
 
 @media only screen and (max-width: 425px) {

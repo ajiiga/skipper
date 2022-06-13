@@ -180,7 +180,7 @@ class MessagesStore {
         })
 
         this.eventSourceClass.addEventListener('message', e => {
-            authStore.notifications = [...authStore.notifications, JSON.parse(e.data)]
+            authStore.notifications = [JSON.parse(e.data), ...authStore.notifications]
         })
     }
 

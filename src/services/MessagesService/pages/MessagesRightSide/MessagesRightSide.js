@@ -164,11 +164,11 @@ const MessagesRightSideTitle = ({firstName, secondName, img, id, isMentor}) => {
         <div className={s.title_container}>
             {width <= 500 && (
                 <Link to="/messages" className={s.link_container}>
-                    <img
-                        src={arrow_back_img}
-                        alt=""
-                        className={s.arrow_back_image}
-                    />
+                    {/*<img*/}
+                    {/*    src={arrow_back_img}*/}
+                    {/*    alt=""*/}
+                    {/*    className={s.arrow_back_image}*/}
+                    {/*/>*/}
                 </Link>
             )}
 
@@ -262,7 +262,7 @@ const MessagesRightSideInput = ({value, setValue, sendMessage}) => {
 
     return (
         <div className={s.input_container}>
-            <MessagesNavigator id={id}/>
+            <MessagesNavigator/>
             <input type="text" value={value} onChange={e => setValue(e.target.value)} onKeyDown={_handleKeyDown}
                    className={s.input} placeholder={'Напишите сообщение...'}/>
             <img onClick={() => sendMessage(value)} src={arrow} alt="" className={s.arrow_image}/>

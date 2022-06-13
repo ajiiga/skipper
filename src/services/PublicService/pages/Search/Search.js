@@ -86,7 +86,7 @@ const Search = () => {
 
     const resetFilters = () => {
         setSearchInfo({
-            range: {min: 1, max: 5},
+            range: {min: 0, max: 5},
             activeItem: list[4],
             tags: []
         })

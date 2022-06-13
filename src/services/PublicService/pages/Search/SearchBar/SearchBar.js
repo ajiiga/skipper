@@ -21,9 +21,9 @@ const SearchBar = ({range, setRange, list, setActiveItem, activeItem, resetFilte
             <div className={s.slider_container}>
                 <div className={s.slider_display}>
                     <div className={s.title}>Рейтинг</div>
-                    <div className={s.rating_num}>1 - 5</div>
+                    <div className={s.rating_num}>0 - 5</div>
                 </div>
-                <MultiRangeSlider min={1} max={5} onChange={setRange} maxVal={range.max} setMaxVal={setMaxVal} minVal={range.min} setMinVal={setMinVal}/>
+                <MultiRangeSlider min={0} max={5} onChange={setRange} maxVal={range.max} setMaxVal={setMaxVal} minVal={range.min} setMinVal={setMinVal}/>
             </div>
             <div className={s.btn_container}>
                 <button onClick={resetFilters} className={s.btn_clear_filter}>Сбросить все фильтры</button>

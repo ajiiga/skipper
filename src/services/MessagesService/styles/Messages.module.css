@@ -33,6 +33,12 @@
   .container {
     height: calc(100vh - 120px);
   }
+  /* iOS */
+  @supports (-webkit-touch-callout: none) {
+    .container {
+      height: calc(100vh - 180px);
+    }
+  }
 }
 
 @media only screen and (max-width: 425px) {

@@ -138,7 +138,7 @@
   }
 }
 
-@media only screen and (min-height: 630px) and (max-width: 450px) {
+@media only screen and (min-height: 630px) and (max-width: 500px) {
   .container {
     margin-top: 40px;
   }
@@ -150,7 +150,7 @@
   }
 }
 
-@media only screen and (min-height: 700px) and (min-width: 400px) and (max-width: 450px) {
+@media only screen and (min-height: 700px) and (min-width: 400px) and (max-width: 500px) {
   .track {
     gap: 20px;
   }
@@ -163,7 +163,7 @@
 }
 
 /* iphone x, xs */
-@media only screen and (min-height: 780px) and (min-width: 370px) and (max-width: 450px) {
+@media only screen and (min-height: 780px) and (min-width: 370px) and (max-width: 500px) {
   .container {
     margin-top: 40px;
   }

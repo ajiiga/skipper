@@ -18,7 +18,7 @@ import ChangeCommunicationModal from "./ChangeCommunicationModal/ChangeCommunica
 import LessonInformationModal from "./LessonInformationModal/LessonInformationModal";
 import TerminationLessonModal from "./TerminationLessonModal/TerminationLessonModal";
 import MessagesNavigator from "./MessagesNavigator/MessagesNavigator";
-
+import arrow_back_img from '../../../../static/img/header_icons/rightArrow.svg';
 
 const io = require("socket.io-client");
 
@@ -164,11 +164,11 @@ const MessagesRightSideTitle = ({firstName, secondName, img, id, isMentor}) => {
         <div className={s.title_container}>
             {width <= 500 && (
                 <Link to="/messages" className={s.link_container}>
-                    {/*<img*/}
-                    {/*    src={arrow_back_img}*/}
-                    {/*    alt=""*/}
-                    {/*    className={s.arrow_back_image}*/}
-                    {/*/>*/}
+                    <img
+                        src={arrow_back_img}
+                        alt=""
+                        className={s.arrow_back_image}
+                    />
                 </Link>
             )}
 

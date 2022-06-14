@@ -22,7 +22,7 @@
     width: 100%;
   }
   .container {
-    height: calc(100vh - 120px);
+    height: calc(100% - 120px);
     max-width: 90%;
   }
 }

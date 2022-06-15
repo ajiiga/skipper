@@ -21,8 +21,10 @@ class AuthService {
     notifications = []
 
     async deleteNotification(id) {
+
         try {
-            let r = await deleteNotificationRequest(id)
+            //let r = await deleteNotificationRequest(id)
+            console.log(id)
             this.notifications = this.notifications.filter(notification => notification.ID !== id)
         }
         catch (e) {

@@ -56,7 +56,7 @@ const NotificationModal = ({ setOpen }) => {
       {
         <div className={s.notifications_container}>
           {authStore.notifications.map((notification) => (
-            <NotificationBlock data={notification} />
+            <NotificationBlock key={notification.ID} data={notification} />
           ))}
         </div>
       }

@@ -5,6 +5,7 @@ import closeImg from '../../../static/img/delete.svg'
 import messagesStore from "../../../store/messagesStore";
 import {Link, useHistory} from 'react-router-dom'
 import authStore from "../../../store/authStore";
+import {observer} from "mobx-react-lite";
 
 const NotificationBlock = ({data}) => {
 
@@ -52,7 +53,7 @@ const NotificationBlock = ({data}) => {
                 setText(`Вам предложили поменять способ коммуникации занятия "${jsonData.class_name}"`)
                 break;
         }
-    }, [])
+    }, [data])
 
     const clickHandler = () => {
         switch (data["Type"]) {
@@ -115,4 +116,4 @@ const NotificationBlock = ({data}) => {
     );
 };
 
-export default NotificationBlock;
+export default observer(NotificationBlock);

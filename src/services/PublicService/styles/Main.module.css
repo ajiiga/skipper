@@ -268,7 +268,7 @@
     zoom: 0.35;
   }
 }
-@media only screen and (min-height: 630px) and (min-width: 370px) and (max-width: 450px) {
+@media only screen and (min-height: 630px) and (min-width: 370px) and (max-width: 500px) {
   .main_img {
     left: 150px;
     zoom: 0.5;
@@ -278,7 +278,7 @@
   }
 }
 
-@media only screen and (min-height: 700px) and (min-width: 360px) and (max-width: 450px) {
+@media only screen and (min-height: 700px) and (min-width: 360px) and (max-width: 500px) {
   .title {
     font-size: 26px;
     line-height: 2.5rem;
@@ -301,7 +301,7 @@
 }
 
 /* iphone x, xs */
-@media only screen and (min-height: 780px) and (min-width: 370px) and (max-width: 450px) {
+@media only screen and (min-height: 780px) and (min-width: 370px) and (max-width: 500px) {
   .title {
     font-size: 26px;
     line-height: 2.5rem;

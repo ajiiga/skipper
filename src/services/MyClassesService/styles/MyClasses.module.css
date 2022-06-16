@@ -230,17 +230,12 @@
     width: 100%;
   }
   .btn_sort_types {
-    padding: 10px 15px;
+    padding: 10px 10px;
   }
 }
 @media only screen and (max-width: 350px) {
   .title_buttons {
     font-size: 10px;
-  }
-  .sorting_types {
-    padding: 10px 10px;
-    font-size: 11px;
-    flex-direction: column;
   }
   .sorting_types div {
     align-self: flex-start;

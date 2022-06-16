@@ -70,7 +70,7 @@ const MenteeProfile = ({}) => {
                                 <RateDisplay rate={user.rating}/>
                                 <div className={s.date}>На Skipper
                                     с {user.day} {monthName[parseInt(user.month)]} {user.year}</div>
-                                <div className={s.stat_count}>248 занятий</div>
+                                <div className={s.stat_count}>217 занятий</div>
                             </div>
                         </div>
                         <div className={s.buttons}>

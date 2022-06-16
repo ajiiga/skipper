@@ -127,7 +127,7 @@ const MentorProfile = () => {
                     На Skipper с {user.day} {monthName[parseInt(user.month)]}{" "}
                     {user.year}
                   </div>
-                  <div className={s.stat_count}>248 занятий 46 студентов</div>
+                  <div className={s.stat_count}>217 занятия 40 студента</div>
                 </div>
               </div>
               {width > 500 && (

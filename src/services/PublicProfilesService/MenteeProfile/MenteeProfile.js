@@ -99,10 +99,10 @@ const MenteeProfile = ({}) => {
                     </div>
                 </div>
                 <div className={s.right_side}>
-                    <div className={s.reviews_block}>
+                    {JSON.parse(user.comments).length > 0 && <div className={s.reviews_block}>
                         <div className={s.title}>Отзывы</div>
                         <Reviews n={3} allReviews={JSON.parse(user.comments)}/>
-                    </div>
+                    </div>}
                 </div>
             </div>
             <ComplainModal active={active} setActive={setActive}/>

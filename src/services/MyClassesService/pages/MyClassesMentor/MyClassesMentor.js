@@ -7,6 +7,7 @@ import PlannedItem from "./PlannedItems/PlannedItem";
 import PlannedItems from "./PlannedItems/PlannedItems";
 import CompletedItems from "./ CompletedItems/CompletedItems";
 import CanceledItems from "./CanceledItems/CanceledItems";
+import cross_img from '../../../../static/img/cross.svg'
 
 const MyClassesMentor = () => {
   let location = useLocation();
@@ -72,7 +73,7 @@ const MyClassesMentor = () => {
           </Link>
           {width > 500 && (
             <Link to={"/edit-classes"} className={s.link_container}>
-              <div className={s.create_classes}>Мои занятия +</div>
+              <div className={s.create_classes}><span>Мои занятия</span> <img src={cross_img} alt=""/></div>
             </Link>
           )}
         </div>

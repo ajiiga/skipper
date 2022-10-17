@@ -1,13 +1,17 @@
 .container {
     background: #FFFFFF;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
     border: 1px solid rgba(0, 0, 0, 0.135216);
-    border-radius: 8px;
     padding: 10px 20px;
     display: flex;
     cursor: pointer;
-    margin: 5px 5px 20px;
+}
 
+.container:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.container:last-child {
+    border-radius: 0 0 8px 8px;
 }
 
 .container:hover {

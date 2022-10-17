@@ -277,10 +277,10 @@ const MentorProfile = () => {
             )}
           </div>
           <div className={s.right_side}>
-            <div className={s.reviews_block}>
+            {JSON.parse(user.comments).length > 0 && <div className={s.reviews_block}>
               <div className={s.title}>Отзывы</div>
-              <Reviews n={2} allReviews={JSON.parse(user.comments)} />
-            </div>
+              <Reviews n={2} allReviews={JSON.parse(user.comments)}/>
+            </div>}
             {width <= 500 && (
               <div className={s.hate_buttons}>
                 <div className={s.btn} onClick={() => setActive(true)}>

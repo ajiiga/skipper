@@ -10,10 +10,13 @@ import Preloader from '../../../../components/UI/Preloader/Preloader';
 import { observer } from 'mobx-react-lite';
 import { motion } from 'framer-motion';
 import Footer from '../../../../components/Footer/Footer';
+import {useParams} from "react-router-dom";
 
 const Catalog = () => {
   let [isFetching, setIsFetching] = useState(true);
   let [items, setItems] = useState('');
+  let params = useParams()
+  let id = params.id
 
   useEffect(() => {
     publicStore.getCategories().then((data) => {
@@ -31,7 +34,7 @@ const Catalog = () => {
       let jsonItems = JSON.parse(items);
       for (let block of jsonItems) {
         let delta = block['Child0'].filter(
-          (x) => x.ID === publicStore.activeTheme
+          (x) => x.ID == id
         );
         if (delta.length !== 0) {
           return delta[0]['Child1'];
@@ -39,7 +42,7 @@ const Catalog = () => {
       }
     }
     return [];
-  }, [publicStore.activeTheme, items]);
+  }, [id, items]);
 
   if (isFetching) {
     return <Preloader />;
@@ -63,8 +66,7 @@ const Catalog = () => {
           <MiniNavBar child={'Каталог'} />
           <SideBar
             items={items}
-            activeTheme={publicStore.activeTheme}
-            setActiveTheme={publicStore.setActiveTheme}
+            activeTheme={id}
           />
         </div>
         <CatalogContent activeThemes={activeThemes} />

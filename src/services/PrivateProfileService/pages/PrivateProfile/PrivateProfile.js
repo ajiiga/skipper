@@ -45,8 +45,8 @@ const PrivateProfile = () => {
                 <EditForm />
                 <div className={s.title}>Способы коммуникации</div>
                 <CommunicationsForm listMessengers={listMessengers} listMyCommunications={listMyCommunications} setListMyCommunications={setListMyCommunications}/>
-                <div className={s.title}>Кошелёк</div>
-                <PurseForm />
+                {/*<div className={s.title}>Кошелёк</div>*/}
+                {/*<PurseForm />*/}
                 <div className={s.title}>Уведомления</div>
                 <NotificationsForm />
                 {authStore.user?.is_mentor && (

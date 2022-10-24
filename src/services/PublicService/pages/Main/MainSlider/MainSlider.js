@@ -34,8 +34,7 @@ const MainSlider = ({items}) => {
             <div className={s.track_container}>
                 <div className={s.track} ref={track}>
                     {items.map((text, index) => <div key={index} className={s.item} onClick={() => {
-                        publicStore.setActiveTheme(text.id)
-                        history.push('/catalog')
+                        history.push(`/catalog/${text.id}`)
                     }}>{text.name}</div>)}
                 </div>
             </div>

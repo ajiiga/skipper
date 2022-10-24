@@ -7,8 +7,6 @@ import photo from "../../../../../static/img/Login/photo.svg";
 import TextArea from "../../../../../components/UI/TextArea/TextArea";
 import CustomSelect from "../../../../../components/UI/CustomSelect/CustomSelect";
 import Button from "../../../../../components/UI/Button/Button";
-import {Link} from "react-router-dom";
-import publicStore from "../../../../../store/publicStore";
 import authStore from "../../../../../store/authStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";
 

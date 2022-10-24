@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import s from "../../styles/AuthService.module.css";
 import AuthContainer from "../../../../components/UI/AuthContainer/AuthContainer";
 import img from "../../../../static/img/mentor_log_reg.svg";
-import skype from "../../../../static/img/Login/skype.png";
 import MentorRegistrationForm from "./MentorRegistrationForm/MentorRegistrationForm";
 import authStore from "../../../../store/authStore";
 import MentorMenteeRegistrationForm
@@ -26,10 +25,6 @@ const MentorRegistration = () => {
                                 <MentorMenteeRegistrationForm isFetching={isFetching} setIsFetching={setIsFetching}/> :
                                 <MentorRegistrationForm isFetching={isFetching} setIsFetching={setIsFetching}/>
                         }
-                        <p className={s.description}>
-                            Входя в систему или регистрируясь, вы соглашаетесь с <u>политикой безопасности</u> и <u>правилами
-                            поведения</u> Skipper
-                        </p>
                     </div>
                 </AuthContainer>
 

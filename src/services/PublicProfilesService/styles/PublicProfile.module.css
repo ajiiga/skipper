@@ -15,7 +15,7 @@
   background: #ffffff;
   border-radius: 8px;
   box-sizing: border-box;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .title {
@@ -25,6 +25,7 @@
   text-align: center;
   width: fit-content;
   box-sizing: border-box;
+  margin-bottom: 20px;
 }
 
 .rate_info {
@@ -87,12 +88,13 @@
   width: 400px;
   justify-content: space-between;
   position: absolute;
+  margin-left: 20px;
   bottom: 0;
 }
 
 .btn {
   padding: 9px 20px;
-  border: 1px solid black;
+  border: 1px solid #808080;
   border-radius: 8px;
   background: white;
   cursor: pointer;

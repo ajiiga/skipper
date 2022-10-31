@@ -88,7 +88,6 @@ const FreeTimeCalendar = ({ classes }) => {
           <span className={s.busy_example} /> - запись ограничена
         </div>
       )}
-      <button className={s.check_btn}>Проверить</button>
     </div>
   );
 };

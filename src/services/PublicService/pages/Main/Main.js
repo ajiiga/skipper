@@ -68,7 +68,7 @@ const Main = () => {
         <img className={s.main_img} src={img} alt="" />
       </div>
       <div className={s.lower_display}>
-        <Link to={'/catalog'}>
+        <Link to={`/catalog/${items.sort((a, b) => a.id - b.id)[0].id}`}>
           <div className={`${s.yellow_text} ${s.full_catalog}`}>
             Полный каталог
             <img src={right_arrow} className={s.right_arrow} alt="" />

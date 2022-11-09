@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import s from '../../../styles/MessageBlock.module.css';
-import profile from '../../../../../static/img/profile.jfif';
 import close from '../../../../../static/img/delete.svg';
-import read from '../../../../../static/img/Messages/coolicon.svg';
-import sent from '../../../../../static/img/Messages/coolicon_2.svg';
 import {NavLink, useParams} from 'react-router-dom';
 import {API_URL} from '../../../../../api/api_setting';
 import messagesStore from '../../../../../store/messagesStore';

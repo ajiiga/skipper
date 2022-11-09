@@ -46,22 +46,22 @@ const MessagesLeftSide = ({
   return (
     <div className={s.container}>
       <SearchBar query={query} setQuery={setQuery} />
-      <div className={s.content_container}>
-        <div className={s.messengers_items}>
-          {sortedUser.length > 0 ? (
-            sortedUser.map((x) => (
-              <MessagesBlock
-                setShowRightSide={setShowRightSide}
-                key={x.ID}
-                data={x}
-                isActive={x.ID === activeUser}
-              />
-            ))
-          ) : (
-            <div className={s.empty_messages_items}>У вас еще нет диалогов</div>
-          )}
-        </div>
-      </div>
+        {sortedUser.length > 0 && <div className={s.content_container}>
+            <div className={s.messengers_items}>
+                {sortedUser.length > 0 ? (
+                    sortedUser.map((x) => (
+                        <MessagesBlock
+                            setShowRightSide={setShowRightSide}
+                            key={x.ID}
+                            data={x}
+                            isActive={x.ID === activeUser}
+                        />
+                    ))
+                ) : (
+                    <div className={s.empty_messages_items}>У вас еще нет диалогов</div>
+                )}
+            </div>
+        </div>}
     </div>
   );
 };

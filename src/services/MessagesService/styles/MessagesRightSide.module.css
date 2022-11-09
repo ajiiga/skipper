@@ -177,6 +177,11 @@
   background-color: #fedc2e;
 }
 
+.empty_message_subtitle {
+  font-size: 14px;
+  line-height: 30px;
+}
+
 @media (max-width: 1680px) and (-webkit-device-pixel-ratio: 1) {
   .scroll_container {
     max-height: 480px;

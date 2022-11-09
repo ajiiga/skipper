@@ -62,7 +62,7 @@ const Messages = () => {
                             />
                         </Route>
                         <Route path={'/messages'} exact={true}>
-                            <MessagesRightSideEmpty />
+                            <MessagesRightSideEmpty emptyDialogs={chatList.length === 0} />
                         </Route>
                     </Switch>
                 </div>

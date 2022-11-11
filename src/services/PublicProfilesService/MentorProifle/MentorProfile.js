@@ -27,6 +27,7 @@ const MentorProfile = () => {
   let [user, setUser] = useState({});
   let [active, setActive] = useState(false);
   let [tags, setTags] = useState([]);
+  let [statistic, setStatistic] = useState({});
 
   let history = useHistory();
 
@@ -36,6 +37,7 @@ const MentorProfile = () => {
       if (!x.user.response) history.push("/");
       setUser(x.user.data);
       setTags(x.tags);
+      setStatistic(x.statistic);
       setIsFetching(false);
     });
   }, [id]);
@@ -127,7 +129,7 @@ const MentorProfile = () => {
                     На Skipper с {user.day} {monthName[parseInt(user.month)]}{" "}
                     {user.year}
                   </div>
-                  <div className={s.stat_count}>217 занятия 40 студента</div>
+                  <div className={s.stat_count}>{statistic.lessons_count} занятий {statistic.students_count} студент</div>
                 </div>
               </div>
               {width > 500 && (
@@ -190,7 +192,7 @@ const MentorProfile = () => {
 
             <div className={s.info_container}>
               <div className={s.title}>Статистика занятий</div>
-              <LessonStatistics />
+              <LessonStatistics statistic={statistic} />
             </div>
           </div>
           {width > 500 && (

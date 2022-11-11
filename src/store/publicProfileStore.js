@@ -1,8 +1,8 @@
 import {makeAutoObservable} from "mobx";
 import {
     getBookingListRequest,
-    getMenteeInfoRequest,
-    getMentorInfoRequest,
+    getMenteeInfoRequest, getMenteeStatisticRequest,
+    getMentorInfoRequest, getMentorStatisticRequest,
     registrationLessonRequest
 } from "../api/api_public_profile";
 import authStore from "./authStore";
@@ -33,6 +33,18 @@ class publicProfileStore {
         }
     }
 
+    async initializeMenteeInfo(id) {
+        try {
+            let r = await Promise.all([
+                await this.getMenteeInfo(id),
+                await this.getMenteeStatistic(id)
+            ])
+            return {user: r[0], statistic:r[1] }
+        } catch (e) {
+
+        }
+    }
+
 
     async getMentorInfo(id) {
         try {
@@ -53,9 +65,10 @@ class publicProfileStore {
     async initializeMentorInfo(id) {
         let res = await Promise.all([
             await publicStore.getChildTags(),
-            await this.getMentorInfo(id)
+            await this.getMentorInfo(id),
+            await this.getMentorStatistic(id)
         ])
-        return {tags: res[0], user: res[1]}
+        return {tags: res[0], user: res[1], statistic: res[2]}
     }
 
     async registrationLesson(data) {
@@ -65,6 +78,16 @@ class publicProfileStore {
         } catch (e) {
 
         }
+    }
+
+    async getMentorStatistic(id) {
+        let r = await getMentorStatisticRequest(id)
+        return r.data;
+    }
+
+    async getMenteeStatistic(id) {
+        let r = await getMenteeStatisticRequest(id)
+        return r.data
     }
 }
 

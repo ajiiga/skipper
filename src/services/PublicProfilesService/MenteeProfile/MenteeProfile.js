@@ -20,15 +20,17 @@ const MenteeProfile = ({}) => {
     let [isFetching, setIsFetching] = useState(true)
     let [user, setUser] = useState({})
     let [active, setActive] = useState(false)
+    let [statistic, setStatistic] = useState({})
 
     let history = useHistory()
 
     useEffect(() => {
         setIsFetching(true)
-        publicProfileStore.getMenteeInfo(id).then(x => {
-            if (!x.response)
+        publicProfileStore.initializeMenteeInfo(id).then(x => {
+            if (!x.user?.response)
                 history.push('/')
-            setUser(x.data)
+            setUser(x.user.data)
+            setStatistic(x.statistic)
             setIsFetching(false)
         })
     }, [id])
@@ -85,7 +87,7 @@ const MenteeProfile = ({}) => {
 
                     <div className={s.info_container}>
                         <div className={s.title}>Статистика занятий</div>
-                        <LessonStatistics/>
+                        <LessonStatistics statistic={statistic}/>
                     </div>
                     <div className={s.mentee_hate_buttons}>
                         <div className={s.hate_buttons}>

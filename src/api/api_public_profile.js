@@ -20,3 +20,11 @@ export let getMyBookingListRequest = (status) => {
 export let registrationLessonRequest = (data) => {
     return $api.post('/api/class/booking', {...data})
 }
+
+export let getMentorStatisticRequest = (id) => {
+    return $api.get(`/public-api/public-user/mentor/statistic/${id}`)
+}
+
+export let getMenteeStatisticRequest = (id) => {
+    return $api.get(`/public-api/public-user/menti/statistic/${id}`)
+}

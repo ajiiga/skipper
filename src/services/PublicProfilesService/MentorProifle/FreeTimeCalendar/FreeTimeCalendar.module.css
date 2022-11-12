@@ -1,5 +1,5 @@
 .container {
-  margin-top: 75px;
+  /*margin-top: 75px;*/
 }
 
 .change_week_display {
@@ -23,7 +23,7 @@
 }
 
 .content_container {
-  width: 100%;
+  width: 97%;
   display: flex;
   margin-top: 25px;
   justify-content: space-between;

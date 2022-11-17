@@ -31,7 +31,7 @@ const RegistrationForm = ({isFetching, setIsFetching}) => {
             }}
             onSubmit={(values) => {
                 setIsFetching(true)
-                authStore.registration(values.firstName, values.secondName, `8${values.tel}`, values.password).then(x => {
+                authStore.registration(values.firstName, values.secondName, `8${values.tel}`, values.password, values.saveMe).then(x => {
                     setIsFetching(false)
                     if (!x.response) {
                         setStatus(x.message)

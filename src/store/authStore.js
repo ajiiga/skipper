@@ -16,6 +16,10 @@ class AuthService {
     isAuth = false
     isInitialisation = true
 
+    get token(): string {
+        return sessionStorage.getItem('token') || localStorage.getItem('token')
+    }
+
     user = {}
 
     notifications = []
@@ -25,8 +29,7 @@ class AuthService {
         try {
             let r = await deleteNotificationRequest(id)
             this.notifications = this.notifications.filter(notification => notification.ID !== id)
-        }
-        catch (e) {
+        } catch (e) {
 
         }
     }
@@ -40,8 +43,7 @@ class AuthService {
                 }
                 return n
             })
-        }
-        catch (e) {
+        } catch (e) {
 
         }
     }
@@ -70,24 +72,29 @@ class AuthService {
         try {
             let r = await getStatusRequest()
             this.setUser(r.data)
-        }
-        catch (e) {
+        } catch (e) {
             this.logout()
         }
     }
 
-    setTokensAndUser = (response) => {
-        localStorage.setItem('token', response.data.token)
-        localStorage.setItem('refreshToken', response.data.refreshToken)
+    setTokensAndUser = (response, saveMe: boolean) => {
+        sessionStorage.setItem('saveMe', saveMe)
+        if (!saveMe) {
+            sessionStorage.setItem('token', response.data.token)
+            sessionStorage.setItem('refreshToken', response.data.refreshToken)
+        } else {
+            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('refreshToken', response.data.refreshToken)
+        }
         this.setAuth(true)
         this.getNotificationClass()
         return {response: true}
     }
 
-    async login(login, password) {
+    async login(login, password, saveMe) {
         try {
             let r = await loginRequest(login, password)
-            return this.setTokensAndUser(r)
+            return this.setTokensAndUser(r, saveMe)
         } catch (e) {
             return {response: false, message: e.response.data['error']}
         }
@@ -95,28 +102,28 @@ class AuthService {
     }
 
 
-    async registration(first_name, second_name, phone, password) {
+    async registration(first_name, second_name, phone, password, saveMe: boolean) {
         try {
             let r = await registrationRequest(first_name, second_name, phone, password)
-            return this.setTokensAndUser(r)
+            return this.setTokensAndUser(r, saveMe)
         } catch (e) {
             return {response: false, message: e.response.data.error}
         }
     }
 
-    async registrationMentor(phone, second_name, first_name, specialization, description, time, password, file) {
+    async registrationMentor(phone, second_name, first_name, specialization, description, time, password, file, saveMe: boolean) {
         try {
             let r = await registrationMentorRequest(phone, second_name, first_name, specialization, description, time, password, file)
-            return this.setTokensAndUser(r)
+            return this.setTokensAndUser(r, saveMe)
         } catch (e) {
             return {response: false, message: e?.response?.data?.error}
         }
     }
 
-    async registrationMenteeMentor(specialization, description, time, file) {
+    async registrationMenteeMentor(specialization, description, time, file, saveMe: boolean) {
         try {
             let r = await registrationMenteeMentorRequest(specialization, description, time, file)
-            this.setTokensAndUser(r)
+            this.setTokensAndUser(r, saveMe)
             return {response: true}
         } catch (e) {
             return {response: false, message: e?.response?.data?.error}
@@ -134,7 +141,8 @@ class AuthService {
 
     async checkAuth() {
         try {
-            await axios.post(`${API_URL}/auth/refresh-token`, {refreshToken: localStorage.getItem('refreshToken')}).then(r => {
+            await axios.post(`${API_URL}/auth/refresh-token`,
+                {refreshToken: sessionStorage.getItem('refreshToken') || localStorage.getItem('refreshToken')}).then(r => {
                 localStorage.setItem('token', r.data.token)
                 this.setAuth(true)
             })
@@ -147,8 +155,7 @@ class AuthService {
         try {
             let r = await getNotificationsClassRequest()
             this.notifications = JSON.parse(r.data)
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e)
         }
     }

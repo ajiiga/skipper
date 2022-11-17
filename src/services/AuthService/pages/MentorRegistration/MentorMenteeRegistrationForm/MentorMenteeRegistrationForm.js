@@ -76,7 +76,7 @@ const MentorMenteeRegistrationForm = ({isFetching, setIsFetching}) => {
             }}
             onSubmit={(values) => {
                 setIsFetching(true)
-                authStore.registrationMenteeMentor(values.specialization, values.description, selected, values.file[0].file).then(x => {
+                authStore.registrationMenteeMentor(values.specialization, values.description, selected, values.file[0].file, values.saveMe).then(x => {
                     setIsFetching(false)
                     if (!x.response) {
                         setStatus(x.message)

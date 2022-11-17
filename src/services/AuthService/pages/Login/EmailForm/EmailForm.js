@@ -26,7 +26,7 @@ const EmailForm = ({isFetching, setIsFetching}) => {
             }}
             onSubmit={(values) => {
                 setIsFetching(true)
-                authStore.login(values.email, values.password).then(x => {
+                authStore.login(values.email, values.password, values.saveMe).then(x => {
                     setIsFetching(false)
                     if (!x.response) {
                         setStatus(x.message)

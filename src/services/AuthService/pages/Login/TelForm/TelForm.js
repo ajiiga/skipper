@@ -25,7 +25,7 @@ const TelForm = ({isFetching, setIsFetching}) => {
             }}
             onSubmit={(values) => {
                 setIsFetching(true)
-                authStore.login(`8${values.tel}`, values.password).then(x => {
+                authStore.login(`8${values.tel}`, values.password, values.saveMe).then(x => {
                     setIsFetching(false)
                     if (!x.response) {
                         setStatus(x.message)

@@ -43,9 +43,9 @@ const CompletedItem = ({data, deleteItem}) => {
                 <div className={s.communication_container}>
                     <div className={s.communication_name_container}>
                         <img src={messengersIcons[data.messenger_name]} className={s.communication_image} alt=""/>
-                        <div className={s.communication_name}>Zoom</div>
+                        <div className={s.communication_name}>{data.messenger_name}</div>
                     </div>
-                    <div className={s.communication_user_id}>User id: bolshoyPapochka93</div>
+                    <div className={s.communication_user_id}>User id: {data.communication_login}</div>
                 </div>
                 <div className={s.price}>
                     {data.Price} руб.

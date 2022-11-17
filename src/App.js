@@ -16,7 +16,7 @@ import messagesStore from "./store/messagesStore";
 
 function App() {
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (authStore.token) {
       authStore.initializationApp().then((x) => {
         messagesStore.startEvents();
       });

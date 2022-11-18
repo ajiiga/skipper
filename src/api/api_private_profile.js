@@ -62,3 +62,5 @@ export let deleteWorkExperienceRequest = (id) => $api.delete(`/api/work-experien
 export let addOtherInfoRequest = (data) => $api.post('/api/other-info/add-user-other-info', {data: data})
 
 export let deleteOtherInfoRequest = (id) => $api.delete(`/api/other-info/user-other-info/${id}`)
+
+export let newPasswordRequest = (old_password, new_password) => $api.post('/api/user/change-password', {old_password: old_password, new_password: new_password})

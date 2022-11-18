@@ -7,6 +7,8 @@ import {FieldArray, Formik} from "formik";
 import privateProfileStore from "../../../../../store/privateProfileStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";
 import * as yup from "yup";
+import ModalContainer from "../../../../../components/UI/ModalContainer/ModalContainer";
+import Button from "../../../../../components/UI/Button/Button";
 
 function range(start, stop, step) {
     if (typeof stop == 'undefined') {
@@ -55,6 +57,8 @@ const EditForm = () => {
     let [status, setStatus] = useState('')
     let [error, setError] = useState('')
 
+    let [active, setActive] = useState(false)
+
     const validationSchema = yup.object({
         first_name: yup.string().required('Поле "Имя" не заполнено'),
         second_name: yup.string().required('Поле "Фамилия" не заполнено'),
@@ -62,102 +66,111 @@ const EditForm = () => {
         description: yup.string().max(400, 'Слишком много символов в описании'),
     })
 
+    const validationSchemaNewPassword = yup.object({
+        oldPassword: yup.string().required('Поле "Старый пароль" не заполнено'),
+        newPassword: yup.string().required('Поле "Новый пароль" не заполнено'),
+        confirmPassword: yup.string().required('Поле "Подтверждение пароля" не заполнено').oneOf([yup.ref('newPassword')], 'Пароли не совпадают'),
+    })
+
     return (
-        <Formik
-            initialValues={
-                {
-                    first_name: authStore.user.first_name,
-                    second_name: authStore.user.second_name,
-                    patronymic: authStore.user?.patronymic ? authStore.user.patronymic : '',
-                    description: authStore.user?.description ? authStore.user.description : ''
-                }
-            }
-            validationSchema={validationSchema}
-            onSubmit={(values) => {
-                setIsFetching(true)
-                privateProfileStore.UpdateProfileData(values.first_name,
-                    values.second_name,
-                    values.patronymic,
-                    [day, months.filter(x => x.name === month)[0].num, year].join('.'),
-                    timezone,
-                    values.description).then(
-                    (r) => {
-                        setIsFetching(false)
-                        if (r.response)
-                            setStatus('Данные успешно изменены')
-                        if (!r.response) {
-                            setError(r.message)
-                        }
+        <>
+            <Formik
+                initialValues={
+                    {
+                        first_name: authStore.user.first_name,
+                        second_name: authStore.user.second_name,
+                        patronymic: authStore.user?.patronymic ? authStore.user.patronymic : '',
+                        description: authStore.user?.description ? authStore.user.description : ''
                     }
-                )
-            }}>
-            {({
-                  values,
-                  errors,
-                  touched,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                  isSubmitting,
-              }) => (<div className={s.form_container}>
-                    <SetPhoto/>
-                    <div className={s.form}>
-                        <form onSubmit={handleSubmit}>
-                            <div className={s.block}>
-                                <div className={s.block_title}>Ваше полное имя</div>
-                                <div className={s.block_input_display}>
-                                    <input
-                                        type="text"
-                                        name="second_name"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        value={values.second_name}
-                                        placeholder={'Фамилия'}
-                                    />
-                                    <input
-                                        type="text"
-                                        name="first_name"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        placeholder={'Имя'}
-                                        value={values.first_name}
-                                    />
-                                    <input
-                                        type="text"
-                                        name="patronymic"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        value={values.patronymic}
-                                        placeholder={'Отчество'}
-                                    />
+                }
+                validationSchema={validationSchema}
+                onSubmit={(values) => {
+                    setIsFetching(true)
+                    privateProfileStore.UpdateProfileData(values.first_name,
+                        values.second_name,
+                        values.patronymic,
+                        [day, months.filter(x => x.name === month)[0].num, year].join('.'),
+                        timezone,
+                        values.description).then(
+                        (r) => {
+                            setIsFetching(false)
+                            if (r.response)
+                                setStatus('Данные успешно изменены')
+                            if (!r.response) {
+                                setError(r.message)
+                            }
+                        }
+                    )
+                }}>
+                {({
+                      values,
+                      errors,
+                      touched,
+                      handleChange,
+                      handleBlur,
+                      handleSubmit,
+                      isSubmitting,
+                  }) => (<div className={s.form_container}>
+                        <SetPhoto/>
+                        <div className={s.form}>
+                            <form onSubmit={handleSubmit}>
+                                <div className={s.block}>
+                                    <div className={s.block_title}>Ваше полное имя</div>
+                                    <div className={s.block_input_display}>
+                                        <input
+                                            type="text"
+                                            name="second_name"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.second_name}
+                                            placeholder={'Фамилия'}
+                                        />
+                                        <input
+                                            type="text"
+                                            name="first_name"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder={'Имя'}
+                                            value={values.first_name}
+                                        />
+                                        <input
+                                            type="text"
+                                            name="patronymic"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.patronymic}
+                                            placeholder={'Отчество'}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className={s.block}>
-                                <div className={s.block_title}>Дата рождения</div>
-                                <div className={s.block_select_date_container}>
-                                    <CustomMiniSelect list={days} setSelected={setDay} selected={day}/>
+                                <div className={s.block}>
+                                    <div className={s.block_title}>Дата рождения</div>
+                                    <div className={s.block_select_date_container}>
+                                        <CustomMiniSelect list={days} setSelected={setDay} selected={day}/>
+                                    </div>
+                                    <div className={s.block_select_date_container}>
+                                        <CustomMiniSelect list={months.map(x => x.name)} setSelected={setMonth}
+                                                          selected={month}/>
+                                    </div>
+                                    <div className={s.block_select_date_container}>
+                                        <CustomMiniSelect list={years} setSelected={setYear} selected={year}/>
+                                    </div>
                                 </div>
-                                <div className={s.block_select_date_container}>
-                                    <CustomMiniSelect list={months.map(x => x.name)} setSelected={setMonth}
-                                                      selected={month}/>
-                                </div>
-                                <div className={s.block_select_date_container}>
-                                    <CustomMiniSelect list={years} setSelected={setYear} selected={year}/>
-                                </div>
-                            </div>
 
-                            <div className={s.block}>
-                                <div className={s.block_title}>Часовой пояс</div>
-                                <div className={s.block_select_timezone_container}>
-                                    <CustomMiniSelect list={['(GMT+5) Екатеринбург', '(GMT-3) Лондон', '(GMT+2) Сидней', '(GMT+4) Москва', '(GMT-10) Манчестер']} setSelected={setTimezone}
-                                                      selected={timezone}/>
+                                <div className={s.block}>
+                                    <div className={s.block_title}>Часовой пояс</div>
+                                    <div className={s.block_select_timezone_container}>
+                                        <CustomMiniSelect
+                                            list={['(GMT+5) Екатеринбург', '(GMT-3) Лондон', '(GMT+2) Сидней', '(GMT+4) Москва', '(GMT-10) Манчестер']}
+                                            setSelected={setTimezone}
+                                            selected={timezone}/>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className={s.block} style={{alignItems: 'flex-start'}}>
-                                <div className={s.block_title}>Обо мне</div>
-                                <div className={s.block_description}>
+                                <div className={s.block} style={{alignItems: 'flex-start'}}>
+                                    <div className={s.block_title}>Обо мне</div>
+                                    <div className={s.block_description}>
                         <textarea placeholder={'Расскажите о себе'} className={s.textarea}
                                   onChange={handleChange}
                                   onBlur={handleBlur}
@@ -165,51 +178,118 @@ const EditForm = () => {
                         >
                             {values.description}
                         </textarea>
-                                    <div className={s.description_counter}>
-                                        {values.description.length}/400
+                                        <div className={s.description_counter}>
+                                            {values.description.length}/400
+                                        </div>
+                                    </div>
+                                </div>
+                                {errors.first_name && touched.first_name && <div
+                                    className={`${s.preloader_container} ${s.error_status}`}>{errors.first_name && touched.first_name && errors.first_name}</div>}
+                                {errors.second_name && touched.second_name && <div
+                                    className={`${s.preloader_container} ${s.error_status}`}>{errors.second_name && touched.second_name && errors.second_name}</div>}
+                                {errors.patronymic && touched.patronymic && <div
+                                    className={`${s.preloader_container} ${s.error_status}`}>{errors.patronymic && touched.patronymic && errors.patronymic}</div>}
+                                {errors.description && touched.description && <div
+                                    className={`${s.preloader_container} ${s.error_status}`}>{errors.description && touched.description && errors.description}</div>}
+                                {isFetching && <div className={s.preloader_container}><Preloader/></div>}
+                                {status && <div className={`${s.preloader_container} ${s.good_status}`}>{status}</div>}
+                                {error && <div className={`${s.preloader_container} ${s.error_status}`}>{error}</div>}
+                                <button disabled={isFetching} className={`${s.btn} ${s.submit_btn}`} onClick={() => {
+                                    setStatus('')
+                                    setError('')
+                                    if (day === 'День' || month === 'Месяц' || year === 'Год') {
+                                        setError('Неправильная форма даты рождения')
+                                    } else
+                                        handleSubmit()
+                                }}>Подтвердить изменения
+                                </button>
+                            </form>
+
+
+                            <EmailConfirm/>
+                            {authStore.user.is_mentor &&
+                                <ChangeSpecialization specialization={authStore.user.specialization}/>}
+
+                            <div className={s.block}>
+                                <div className={s.block_title}>Пароль</div>
+                                <div className={s.btn} onClick={() => setActive(true)}>Сменить пароль</div>
+                            </div>
+
+                            <div className={s.block}>
+                                <div className={s.block_title}>Удаление аккаунта</div>
+                                <div className={s.btn}>Удалить аккаунт</div>
+                            </div>
+
+                        </div>
+                    </div>
+                )}
+            </Formik>
+            <ModalContainer active={active} setActive={setActive} title={'Изменить пароль'}>
+                <Formik
+                    initialValues={{
+                        oldPassword: '',
+                        newPassword: '',
+                        confirmPassword: ''
+                    }}
+                    onSubmit={(values) => {
+                        privateProfileStore.newPassword(values.oldPassword, values.newPassword)
+                        setActive(false)
+                    }}
+                    validationSchema={validationSchemaNewPassword}
+                >
+                    {({
+                          values,
+                          errors,
+                          touched,
+                          handleChange,
+                          handleBlur,
+                          handleSubmit,
+                          isSubmitting,
+                      }) => (
+                        <form onSubmit={handleSubmit}>
+                            <div className={s.form_content}>
+                                {<div className={s.form_block}><div className={s.error_status}>{errors.oldPassword && touched.oldPassword && errors.oldPassword}</div></div>}
+                                {<div className={s.form_block}><div className={s.error_status}>{errors.newPassword && touched.newPassword && errors.newPassword}</div></div>}
+                                {<div className={s.form_block}><div className={s.error_status}>{errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}</div></div>}
+                                {<div className={s.form_block}>
+                                    <div
+                                        className={s.error_status}>{errors.login && touched.login && errors.login}</div>
+                                </div>}
+                                {isFetching && <div className={s.form_block}><Preloader/></div>}
+                                <div className={s.form_blocks}>
+                                    <div className={s.form_block}>
+                                        <div className={s.form_block}>
+                                            <div className={s.form_block_title}>Старый пароль</div>
+                                            <input placeholder={'Старый пароль'} type="password" name="oldPassword"
+                                                   onChange={handleChange} onBlur={handleBlur}
+                                                   value={values.oldPassword} className={s.form_input}/>
+                                        </div>
+                                    </div>
+                                    <div className={s.form_block}>
+                                        <div className={s.form_block}>
+                                            <div className={s.form_block_title}>Новый пароль</div>
+                                            <input placeholder={'Новый пароль'} type="password" name="newPassword"
+                                                   onChange={handleChange} onBlur={handleBlur}
+                                                   value={values.newPassword} className={s.form_input}/>
+                                        </div>
+                                    </div>
+                                    <div className={s.form_block}>
+                                        <div className={s.form_block}>
+                                            <div className={s.form_block_title}>Подтверждение пароля</div>
+                                            <input placeholder={'Подтверждение пароля'} type="password"
+                                                   name="confirmPassword" onChange={handleChange} onBlur={handleBlur}
+                                                   value={values.confirmPassword} className={s.form_input}/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            {errors.first_name && touched.first_name && <div
-                                className={`${s.preloader_container} ${s.error_status}`}>{errors.first_name && touched.first_name && errors.first_name}</div>}
-                            {errors.second_name && touched.second_name && <div
-                                className={`${s.preloader_container} ${s.error_status}`}>{errors.second_name && touched.second_name && errors.second_name}</div>}
-                            {errors.patronymic && touched.patronymic && <div
-                                className={`${s.preloader_container} ${s.error_status}`}>{errors.patronymic && touched.patronymic && errors.patronymic}</div>}
-                            {errors.description && touched.description && <div
-                                className={`${s.preloader_container} ${s.error_status}`}>{errors.description && touched.description && errors.description}</div>}
-                            {isFetching && <div className={s.preloader_container}><Preloader/></div>}
-                            {status && <div className={`${s.preloader_container} ${s.good_status}`}>{status}</div>}
-                            {error && <div className={`${s.preloader_container} ${s.error_status}`}>{error}</div>}
-                            <button disabled={isFetching} className={`${s.btn} ${s.submit_btn}`} onClick={() => {
-                                setStatus('')
-                                setError('')
-                                if (day === 'День' || month === 'Месяц' || year === 'Год') {
-                                    setError('Неправильная форма даты рождения')
-                                } else
-                                    handleSubmit()
-                            }}>Подтвердить изменения
-                            </button>
-                        </form>
 
-
-                        <EmailConfirm/>
-                        {authStore.user.is_mentor && <ChangeSpecialization specialization={authStore.user.specialization}/>}
-
-                        <div className={s.block}>
-                            <div className={s.block_title}>Пароль</div>
-                            <div className={s.btn}>Сменить пароль</div>
-                        </div>
-
-                        <div className={s.block}>
-                            <div className={s.block_title}>Удаление аккаунта</div>
-                            <div className={s.btn}>Удалить аккаунт</div>
-                        </div>
-
-                    </div>
-                </div>
-            )}
-        </Formik>
+                            <Button title={'Сохранить'} disabled={false} onClick={handleSubmit}/>
+                        </form>)
+                    }
+                </Formik>
+            </ModalContainer>
+        </>
     );
 };
 
@@ -282,7 +362,8 @@ const ChangeSpecialization = ({specialization}) => {
                 <div className={s.block}>
                     <div className={s.block_title}>Специализация</div>
                     <div className={s.email_input_display}>
-                        <input type="text" name="specialization" value={values.specialization} onChange={handleChange} onBlur={handleBlur}
+                        <input type="text" name="specialization" value={values.specialization} onChange={handleChange}
+                               onBlur={handleBlur}
                                placeholder={'Ваша специализация'}/>
                         <div className={s.btn} onClick={handleSubmit}>Подтвердить</div>
                     </div>
@@ -355,23 +436,25 @@ const SetPhoto = () => {
     return (
         <Formik
             initialValues={{
-            file: undefined
-        }}
-                onSubmit={(values) => {
+                file: undefined
+            }}
+            onSubmit={(values) => {
 
-                }}
-        validationSchema={validationSchema}
+            }}
+            validationSchema={validationSchema}
         >
             {({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                isSubmitting,
-            }) => <div className={s.set_photo_display}>
-                {!preview || errors.file?.length > 0 ? <img src={`${API_URL}${authStore.user.profile_picture}`} className={s.profile_img} alt=""/>:<img src={preview} alt="" className={s.profile_img}/>}
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  isSubmitting,
+              }) => <div className={s.set_photo_display}>
+                {!preview || errors.file?.length > 0 ?
+                    <img src={`${API_URL}${authStore.user.profile_picture}`} className={s.profile_img} alt=""/> :
+                    <img src={preview} alt="" className={s.profile_img}/>}
                 {getArrErrorsMessages(errors.file).map((error) => <div key={getError(true, error)}
                                                                        className={s.error}>{getError(true, error)}</div>)}
                 <FieldArray name={'file'}>

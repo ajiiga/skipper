@@ -14,7 +14,7 @@ import {
     getMyEducationRequest,
     getMyOtherInfoRequest,
     getMyWorkExperienceRequest,
-    makeVerifyEmailRequest,
+    makeVerifyEmailRequest, newPasswordRequest,
     UpdateProfileDataRequest
 } from "../api/api_private_profile";
 import {makeAutoObservable} from "mobx";
@@ -175,6 +175,11 @@ class PrivateProfileStore {
         catch (e) {
 
         }
+    }
+
+    async newPassword(old_password, new_password) {
+        let r = await newPasswordRequest(old_password, new_password)
+        return r.data;
     }
 
 

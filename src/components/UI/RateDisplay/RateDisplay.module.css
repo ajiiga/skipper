@@ -2,8 +2,17 @@
   display: flex;
 }
 
+.rating_container {
+  width: 150px;
+  margin-left: 20px;
+}
+
 /* Mobile */
 @media only screen and (max-width: 500px) {
+  .rating_container {
+    width: auto;
+    margin-left: 20px;
+  }
   .stars {
     width: max-content;
     margin-right: 10px;

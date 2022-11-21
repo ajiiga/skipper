@@ -11,9 +11,9 @@
 }
 
 .no_rating {
-  padding: 2px 10px;
-  /* margin-left: 5px; */
-  margin-left: 10px;
+  padding: 3px 0;
+  text-align: center;
+  width: 100%;
 }
 
 /* Mobile */

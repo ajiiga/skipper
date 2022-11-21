@@ -22,6 +22,13 @@ class publicProfileStore {
         return res.map(x => x.split('').map(x => parseInt(x)))
     }
 
+    transform(numeral: number, oneFormat: string, twoFormat: string, fewFormat: string, capitalize: boolean = false) {
+        const cases = [2, 0, 1, 1, 1, 2];
+        const formats: string[] = [oneFormat, twoFormat, fewFormat];
+        const word = formats[numeral % 100 > 4 && numeral % 100 < 20 ? 2 : cases[numeral % 10 < 5 ? numeral % 10 : 5]];
+        return capitalize ? word.charAt(0).toUpperCase() + word.slice(1) : word;
+    }
+
     async getMenteeInfo(id) {
         try {
             let r = await getMenteeInfoRequest(id)

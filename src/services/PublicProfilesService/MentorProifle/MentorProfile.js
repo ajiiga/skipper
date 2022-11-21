@@ -18,6 +18,7 @@ import ComplainModal from "../../../components/UI/ComplainModal/ComplainModal";
 import { Route } from "react-router-dom";
 import ModalRegistrationLesson from "./ModalRegistrationLesson/ModalRegistartionLesson";
 import authStore from "../../../store/authStore";
+import {transform} from "framer-motion";
 
 const MentorProfile = () => {
   let params = useParams();
@@ -129,7 +130,7 @@ const MentorProfile = () => {
                     На Skipper с {user.day} {monthName[parseInt(user.month)]}{" "}
                     {user.year}
                   </div>
-                  <div className={s.stat_count}>{statistic.lessons_count} занятий {statistic.students_count} студент</div>
+                  <div className={s.stat_count}>{statistic.lessons_count} {publicProfileStore.transform(statistic.lessons_count, 'занятие', 'занятия', 'занятий')} {statistic.students_count} {publicProfileStore.transform(statistic.students_count, 'студент', 'студента', 'студентов')}</div>
                 </div>
               </div>
               {width > 500 && (

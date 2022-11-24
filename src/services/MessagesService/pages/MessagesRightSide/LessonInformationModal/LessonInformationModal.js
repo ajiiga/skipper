@@ -5,12 +5,14 @@ import StarsRating from "../../../../../components/UI/StarsRating/StarsRating";
 import messagesStore from "../../../../../store/messagesStore";
 import authStore from "../../../../../store/authStore";
 import {useHistory} from "react-router-dom";
+import useQuery from "../../../../../CustomHooks/useQuery";
 
 const LessonInformationModal = ({id}) => {
 
     let [selectedStar, setSelected] = useState(undefined)
 
     const history = useHistory()
+    const query = useQuery();
 
 
     const closeModal = () => {

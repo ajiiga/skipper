@@ -133,7 +133,7 @@ class MessagesStore {
 
     async lessonDidNot(booking_id) {
         try {
-            let r = await lessonDidNotRequest(class_id)
+            let r = await lessonDidNotRequest(booking_id)
         }
         catch (e) {
 

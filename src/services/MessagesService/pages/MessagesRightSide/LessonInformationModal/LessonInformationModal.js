@@ -17,6 +17,11 @@ const LessonInformationModal = ({id}) => {
         history.push(`/messages/${id}`)
     }
 
+    const lessonDidNotClick = () => {
+        let class_id = query.get("class_id")
+        messagesStore.lessonDidNot(class_id).then(() => closeModal());
+    }
+
     const submitHandler = () => {
         if (selectedStar !== undefined)
             messagesStore.sendReview(authStore.user.id, parseInt(id), '', selectedStar + 1, true).then(response => closeModal())
@@ -34,7 +39,7 @@ const LessonInformationModal = ({id}) => {
                 <button className={s.submit_btn} style={{marginTop: '0px'}} onClick={submitHandler}>
                     Отправить
                 </button>
-                <button className={s.second_submit_btn} onClick={closeModal}>
+                <button className={s.second_submit_btn} onClick={lessonDidNotClick}>
                     Занятие не состоялость
                 </button>
 

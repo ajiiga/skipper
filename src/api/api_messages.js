@@ -29,3 +29,5 @@ export let changeCommunicationRequest = (class_id, communication_id) => $api.put
     class_id: class_id,
     communication_id: communication_id
 })
+
+export let lessonDidNotRequest = (booking_id) => $api.post(`/api/class/booking/status/unsuccess/${booking_id}`)

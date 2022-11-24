@@ -5,7 +5,7 @@ import {
     getChatListRequest,
     getCurrentChatInfoRequest, getDataForChangeDateRequest, getNotificationsClassUrl,
     getNotificationsRequest,
-    getNotificationsUrl, sendReviewUrl
+    getNotificationsUrl, lessonDidNotRequest, sendReviewUrl
 } from "../api/api_messages";
 import authStore from "./authStore";
 import myClassesStore from "./myClassesStore";
@@ -128,6 +128,15 @@ class MessagesStore {
         }
         catch (e) {
             console.log(e)
+        }
+    }
+
+    async lessonDidNot(booking_id) {
+        try {
+            let r = await lessonDidNotRequest(class_id)
+        }
+        catch (e) {
+
         }
     }
 

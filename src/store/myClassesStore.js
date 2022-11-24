@@ -213,7 +213,6 @@ class MyClassesStore {
         if (turnkeyState.valid) {
             //Проверяем, существует ли такое занятие уже
             if (classItem.KeyClass.ClassParentId === 0) {
-                debugger
                 let r = await this.createTurnkeyClass(
                     classItem.ID,
                     [].concat(...turnkeyState.calendar).join(''),

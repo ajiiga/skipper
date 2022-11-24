@@ -17,7 +17,11 @@ class AuthService {
     isInitialisation = true
 
     get token(): string {
-        return sessionStorage.getItem('token') || localStorage.getItem('token')
+        return !this.saveMe ? sessionStorage.getItem('token') : localStorage.getItem('token')
+    }
+
+    get saveMe(): boolean {
+        return localStorage.getItem('saveMe') === 'true'
     }
 
     user = {}
@@ -78,7 +82,7 @@ class AuthService {
     }
 
     setTokensAndUser = (response, saveMe: boolean) => {
-        sessionStorage.setItem('saveMe', saveMe)
+        localStorage.setItem('saveMe', saveMe)
         if (!saveMe) {
             sessionStorage.setItem('token', response.data.token)
             sessionStorage.setItem('refreshToken', response.data.refreshToken)

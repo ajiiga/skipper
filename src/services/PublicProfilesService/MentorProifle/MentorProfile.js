@@ -160,7 +160,7 @@ const MentorProfile = () => {
                 </div>
               </div>
             </div>
-            {width <= 500 && (
+            {user.classes !== '[]' && width <= 500 && (
               <div className={`${s.info_container} ${s.service_list}`}>
                 <div className={s.title}>Занятия</div>
                 <div>
@@ -205,7 +205,7 @@ const MentorProfile = () => {
             </div>
           )}
         </div>
-        {width > 500 && (
+        {user.classes !== '[]' && width > 500 && (
           <div className={`${s.info_container} ${s.service_list}`}>
             <div className={s.title}>Занятия</div>
             <div>
@@ -229,7 +229,7 @@ const MentorProfile = () => {
 
         <div className={s.content_container}>
           <div className={s.left_side}>
-            <div className={s.head_container}>
+            {(user.work_experience !== '[]' || user.education !== '[]' || user.other_info !== '[]') && <div className={s.head_container}>
               <div className={s.title}>Резюме</div>
               <div className={s.summary_title}>
                 <div>Опыт работы</div>
@@ -240,36 +240,36 @@ const MentorProfile = () => {
               <div className={s.summary_content}>
                 <div>
                   {user.work_experience &&
-                    JSON.parse(user.work_experience).map((x, index) => (
-                      <main className={s.summary_block} key={index}>
+                      JSON.parse(user.work_experience).map((x, index) => (
+                          <main className={s.summary_block} key={index}>
                         <span className={s.year}>
                           {x.StartYear} - {x.EndYear}
                         </span>
-                        <br />
-                        <span>{x.Organization}</span>
-                      </main>
-                    ))}
+                            <br/>
+                            <span>{x.Organization}</span>
+                          </main>
+                      ))}
                 </div>
                 <div>
                   {JSON.parse(user.education).map((x, index) => (
-                    <main className={s.summary_block} key={index}>
+                      <main className={s.summary_block} key={index}>
                       <span className={s.year}>
                         {x.StartYear} - {x.EndYear}
                       </span>
-                      <br />
-                      <span>
+                        <br/>
+                        <span>
                         {x.Degree}, {x.Institution}
                       </span>
-                    </main>
+                      </main>
                   ))}
                 </div>
                 <div>
                   {JSON.parse(user.other_info).map((x) => (
-                    <main className={s.summary_block}>{x.Data}</main>
+                      <main className={s.summary_block}>{x.Data}</main>
                   ))}
                 </div>
               </div>
-            </div>
+            </div>}
             {width > 500 && (
               <div className={s.hate_buttons}>
                 <div className={s.btn} onClick={() => setActive(true)}>

@@ -228,6 +228,10 @@
   font-size: 14px;
 }
 
+.free_time_container {
+  margin-top: 115px;
+}
+
 @media (max-width: 1680px) and (-webkit-device-pixel-ratio: 1) {
   .right_side {
     width: 37%;
@@ -250,6 +254,9 @@
 
 /* Mobile */
 @media only screen and (max-width: 500px) {
+  .free_time_container {
+    margin-top: 0px;
+  }
   .content_container {
     flex-direction: column;
     margin-top: 15px;

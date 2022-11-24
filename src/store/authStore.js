@@ -137,6 +137,8 @@ class AuthService {
     logout = () => {
         localStorage.removeItem('token')
         localStorage.removeItem('refreshToken')
+        sessionStorage.removeItem('token')
+        sessionStorage.removeItem('refreshToken')
         messagesStore.setNewMessage(false)
         this.notifications = []
         this.setAuth(false)

@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from './SearchService.module.css'
 import Tag from "../../../../../../components/UI/Tag/Tag";
 import arrow from '../../../../../../static/img/Search/arrow.svg'
 import {useHistory} from 'react-router-dom'
+import authStore from "../../../../../../store/authStore";
 
 const SearchService = ({name, description, tags, id, service_id, blocked}) => {
 
     let history=useHistory()
+
+    const onClick = () => {
+        if (!authStore.isAuth) {
+            history.push('/login')
+        } else {
+            history.push(`/mentor-profile/${id}/${service_id}`)
+        }
+    }
 
     if (blocked) {
         return (
@@ -25,7 +34,7 @@ const SearchService = ({name, description, tags, id, service_id, blocked}) => {
         )
     }
     return (
-        <div className={s.container} onClick={() => {history.push(`/mentor-profile/${id}/${service_id}`)}}>
+        <div className={s.container} onClick={() => {onClick()}}>
             <div>
                 <div className={s.title_container}>
                     <div className={s.title}>{name}</div>

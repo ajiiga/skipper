@@ -304,6 +304,7 @@ const MentorProfile = () => {
                         <ModalRegistrationLesson
                             classes={JSON.parse(user.classes)}
                             communications={user.communications}
+                            user_id={id}
                         />
                     </Route>
                 }

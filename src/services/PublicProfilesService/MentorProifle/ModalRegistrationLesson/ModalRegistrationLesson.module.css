@@ -212,6 +212,16 @@
   width: 150px;
 }
 
+.empty_communication {
+  width: 560px;
+  margin: 165px auto 0;
+}
+
+.chat_btn_container {
+  width: 170px;
+  margin: 20px auto 0;
+}
+
 @media (max-width: 1680px) and (-webkit-min-device-pixel-ratio: 1) {
   .block {
     /* margin-top: 50px; */

@@ -15,7 +15,7 @@ import publicProfileStore from "../../../../store/publicProfileStore";
 import privateProfileStore from "../../../../store/privateProfileStore";
 
 
-const ModalRegistrationLesson = ({classes, communications}) => {
+const ModalRegistrationLesson = ({classes, communications, user_id}) => {
 
 
     let [isFetching, setIsFetching] = useState(true)
@@ -235,7 +235,7 @@ const ModalRegistrationLesson = ({classes, communications}) => {
                                                             setCalendarState={setCalendarState}/>}
                         {stage === 4 &&
                         <SelectCommunicationType communications={communications} myCommunications={myCommunications} setActiveItem={setActiveCommunication}
-                                                 activeItem={activeCommunication}/>}
+                                                 activeItem={activeCommunication} user_id={user_id}/>}
 
                     </div>
                     <div className={s.btn_container}>

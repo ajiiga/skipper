@@ -131,7 +131,7 @@
 }
 
 .list_container {
-  box-shadow: 0px 2px 8px rgb(0 0 0 / 14%);
+  border: 1px solid #00000023;
   border-radius: 8px;
   margin-top: 33px;
   padding: 35px 50px;
@@ -139,6 +139,88 @@
 
 .img_empty_favorites {
   width: 100%;
+}
+
+.info_block {
+  margin-left: 24px;
+}
+
+.block_container {
+  display: flex;
+  border: 1px solid #00000023;
+  border-radius: 8px;
+}
+
+.left_side {
+  display: flex;
+  padding: 15px 20px;
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.title_container {
+  display: flex;
+  align-items: center;
+  width: 800px;
+
+}
+
+.info_block__subtitle {
+  font-size: 12px;
+  color: #2C2C2C;
+  margin-left: 30px;
+}
+
+.info {
+  width: 700px;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 23px;
+}
+
+.profile_chat {
+  border-left: 1px solid #00000023;
+  border-right: 1px solid #00000023;
+  width: 441px;
+  padding: 16px 20px;
+}
+
+.profile_btn, .chat_btn {
+  font-weight: 600;
+  border-radius: 8px;
+  text-align: center;
+  padding: 5px 0;
+  background: #fedc2e;
+  font-size: 14px;
+  width: 100%;
+}
+
+.chat_btn {
+  background: #EDEDED;
+  margin-top: 24px;
+}
+
+.delete_btn_container {
+  display: grid;
+  width: 100vh;
+}
+
+.delete_btn {
+  font-weight: 600;
+  border-radius: 8px;
+  text-align: center;
+  padding: 5px 0;
+  background: black;
+  color: white;
+  font-size: 14px;
+  width: 162px;
+  height: fit-content;
+  margin: auto;
 }
 
 @media (max-width: 1680px) and (-webkit-min-device-pixel-ratio: 1) {

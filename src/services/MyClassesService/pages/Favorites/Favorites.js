@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import MiniNavBar from "../../../../components/UI/MiniNavBar/MiniNavBar";
 import s from '../../styles/MyClasses.module.css'
 import img from '../../../../static/img/Favorites/empty_favorites.svg'
+import FavoritesBlock from "./FavoritesBlock/FavoritesBlock";
 
 const Favorites = () => {
     let [favoriteMentors, setFavoriteMentors] = useState(true)
@@ -18,7 +19,8 @@ const Favorites = () => {
                     </div>
                 </div>
                 <div className={s.list_container}>
-                    <img src={img} className={s.img_empty_favorites} alt=""/>
+                    {/*<img src={img} className={s.img_empty_favorites} alt=""/>*/}
+                    <FavoritesBlock />
                 </div>
             </div>
         </div>

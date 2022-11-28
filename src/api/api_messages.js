@@ -30,4 +30,4 @@ export let changeCommunicationRequest = (class_id, communication_id) => $api.put
     communication_id: communication_id
 })
 
-export let lessonDidNotRequest = (booking_id) => $api.post(`/api/class/booking/status/unsuccess/${booking_id}`)
+export let lessonDidNotRequest = (booking_id) => $api.put(`/api/class/booking/status/unsuccess/${booking_id}`)

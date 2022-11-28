@@ -58,7 +58,7 @@ const NotificationBlock = ({data}) => {
     const clickHandler = () => {
         switch (data["Type"]) {
             case "lesson complete":
-                history.push(`/messages/${notificationData.chat_user_id}/lesson-information`)
+                history.push(`/messages/${notificationData.chat_user_id}/lesson-information?class_id=${notificationData.booking_id}`)
                 break;
             case "class completed":
                 history.push(`/messages/${notificationData.chat_user_id}/review?lessons_count=${notificationData.lesson_count}`)

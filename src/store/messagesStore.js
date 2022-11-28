@@ -134,6 +134,7 @@ class MessagesStore {
     async lessonDidNot(booking_id) {
         try {
             let r = await lessonDidNotRequest(booking_id)
+            return r.data
         }
         catch (e) {
 

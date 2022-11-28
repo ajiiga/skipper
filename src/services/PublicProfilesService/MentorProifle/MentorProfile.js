@@ -29,6 +29,7 @@ const MentorProfile = () => {
     let [active, setActive] = useState(false);
     let [tags, setTags] = useState([]);
     let [statistic, setStatistic] = useState({});
+    let [isFavorite, setIsFavorite] = useState(false);
 
     let history = useHistory();
 
@@ -37,6 +38,7 @@ const MentorProfile = () => {
             setIsFetching(true);
             if (!x.user.response) history.push("/");
             setUser(x.user.data);
+            setIsFavorite(x.user.isFavorite);
             setTags(x.tags);
             setStatistic(x.statistic);
             setIsFetching(false);
@@ -153,7 +155,7 @@ const MentorProfile = () => {
                                 <div className={s.timezone}>Время пользователя {user.time}</div>
                                 <div className={s.btns}>
                                     <div className={s.btn_container}>
-                                        <FollowButton/>
+                                        <FollowButton user_id={parseInt(id)} status={'mentor'} isFavorite={isFavorite}/>
                                     </div>
                                     <div className={s.btn_container}>
                                         <ChatButton id={id}/>

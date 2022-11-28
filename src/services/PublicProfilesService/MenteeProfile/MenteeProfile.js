@@ -77,7 +77,7 @@ const MenteeProfile = ({}) => {
                         </div>
                         <div className={s.buttons}>
                             <div className={s.btn_container}>
-                                <FollowButton/>
+                                <FollowButton user_id={parseInt(id)} status={'menti'}/>
                             </div>
                             <div className={s.btn_container}>
                                 <ChatButton id={id}/>

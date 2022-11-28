@@ -1,12 +1,13 @@
 import {makeAutoObservable} from "mobx";
 import {
+    addFavoriteRequest,
     changeStatusClassRequest,
     confirmClassRequest,
     createClassRequest,
     createPracticeClassRequest,
     createTheoreticClassRequest,
     createTurnkeyClassRequest, deleteClassRequest,
-    getClassesRequest, getCommunicationsRequest, rejectClassRequest,
+    getClassesRequest, getCommunicationsRequest, getFavoritesRequest, rejectClassRequest,
     updateClassRequest,
     updatePracticeClassRequest,
     updateTheoreticClassRequest,
@@ -311,7 +312,24 @@ class MyClassesStore {
         catch (e) {
             console.log(e)
         }
+    }
 
+    async getFavorites(status: string) {
+        try {
+            let r = await getFavoritesRequest(status)
+            return r.data
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async addFavorite(user_id: number, status: string) {
+        try {
+            let r = await addFavoriteRequest(user_id, status)
+            return r.data
+        } catch (e) {
+            console.log(e);
+        }
     }
 }
 

@@ -7,6 +7,7 @@ import {
 } from "../api/api_public_profile";
 import authStore from "./authStore";
 import publicStore from "./publicStore";
+import myClassesStore from "./myClassesStore";
 
 
 class publicProfileStore {
@@ -73,9 +74,14 @@ class publicProfileStore {
         let res = await Promise.all([
             await publicStore.getChildTags(),
             await this.getMentorInfo(id),
-            await this.getMentorStatistic(id)
+            await this.getMentorStatistic(id),
+            await myClassesStore.getFavorites('mentor')
         ])
-        return {tags: res[0], user: res[1], statistic: res[2]}
+        let isFavorite = !!res[3].filter(x => {
+            return parseInt(id) === x.id
+        }).length
+        console.log(isFavorite)
+        return {tags: res[0], user: {...res[1], isFavorite: isFavorite}, statistic: res[2]}
     }
 
     async registrationLesson(data) {

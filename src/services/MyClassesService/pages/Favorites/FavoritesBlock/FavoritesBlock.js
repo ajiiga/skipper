@@ -3,31 +3,32 @@ import s from '../../../styles/MyClasses.module.css'
 import img from '../../../../../static/img/profile.jfif'
 import ChatButton from "../../../../../components/UI/ChatButton/ChatButton";
 import {Link} from "react-router-dom";
+import {API_URL} from "../../../../../api/api_setting";
 
 
-const FavoritesBlock = () => {
+const FavoritesBlock = ({data, isMentor}) => {
     return (
         <div className={s.block_container}>
             <div className={s.left_side}>
-                <img src={img} className={s.icon} alt=""/>
+                <img src={`${API_URL}/public-api/user/profile-picture/${data.profilePicture}`} className={s.icon} alt=""/>
                 <div className={s.info_block}>
-                    <div className={s.title_container}>
-                        <div className={s.info_block__title}>Сергей Веснушкин</div>
-                        <div className={s.info_block__subtitle}>Senior react developer</div>
+                    <div className={`${s.title_container} ${!data.specialization ? s.title_empty_container : ''}`}>
+                        <div className={s.info_block__title}>{data.FirstName} {data.SecondName}</div>
+                        <div className={s.info_block__subtitle}>{data.specialization}</div>
                     </div>
                     <div className={s.info}>
-                        Более 10 лет занимаюсь налогами, откатами и прочими бухгалтерскими штучками на производстве. Готов помочь с вопросами составления отчетности и прочих...
+                        {data.description}
                     </div>
                 </div>
             </div>
 
             <div className={s.profile_chat}>
-                <Link to={`/mentor-profile/${1}`}>
+                <Link to={`/${isMentor ? 'mentor' : 'mentee'}-profile/${data.id}`}>
                     <div className={s.profile_btn}>
                         Профиль
                     </div>
                 </Link>
-                <Link to={`/messages/${1}`}>
+                <Link to={`/messages/${data.id}`}>
                     <div className={s.chat_btn}>
                         Чат
                     </div>

@@ -4,9 +4,17 @@ import img from '../../../../../static/img/profile.jfif'
 import ChatButton from "../../../../../components/UI/ChatButton/ChatButton";
 import {Link} from "react-router-dom";
 import {API_URL} from "../../../../../api/api_setting";
+import myClassesStore from "../../../../../store/myClassesStore";
 
 
-const FavoritesBlock = ({data, isMentor}) => {
+const FavoritesBlock = ({data, isMentor, deleteBlock }) => {
+
+    const deleteFavorite = () => {
+        myClassesStore.deleteFavorite(data.id, isMentor ? 'mentor' : 'menti').then(() => {
+            deleteBlock()
+        })
+    }
+
     return (
         <div className={s.block_container}>
             <div className={s.left_side}>
@@ -35,7 +43,7 @@ const FavoritesBlock = ({data, isMentor}) => {
                 </Link>
             </div>
             <div className={s.delete_btn_container}>
-                <button className={s.delete_btn}>Удалить</button>
+                <button onClick={() => deleteFavorite()} className={s.delete_btn}>Удалить</button>
             </div>
         </div>
     );

@@ -10,7 +10,11 @@ const FollowButton = ({user_id, status, isFavorite}) => {
     return (
         <div className={s.follow_btn} onClick={() => {
             if (authStore.user.id !== user_id) {
-                myClassesStore.addFavorite(user_id, status)
+                if (favorite) {
+                    myClassesStore.deleteFavorite(user_id, status)
+                } else {
+                    myClassesStore.addFavorite(user_id, status)
+                }
                 setFavorite(!favorite)
             }
         }}>

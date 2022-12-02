@@ -6,7 +6,7 @@ import {
     createClassRequest,
     createPracticeClassRequest,
     createTheoreticClassRequest,
-    createTurnkeyClassRequest, deleteClassRequest,
+    createTurnkeyClassRequest, deleteClassRequest, deleteFavoriteRequest,
     getClassesRequest, getCommunicationsRequest, getFavoritesRequest, rejectClassRequest,
     updateClassRequest,
     updatePracticeClassRequest,
@@ -326,6 +326,15 @@ class MyClassesStore {
     async addFavorite(user_id: number, status: string) {
         try {
             let r = await addFavoriteRequest(user_id, status)
+            return r.data
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async deleteFavorite(user_id: number, status: string) {
+        try {
+            let r = await deleteFavoriteRequest(user_id, status)
             return r.data
         } catch (e) {
             console.log(e);

@@ -75,13 +75,8 @@ class publicProfileStore {
             await publicStore.getChildTags(),
             await this.getMentorInfo(id),
             await this.getMentorStatistic(id),
-            await myClassesStore.getFavorites('mentor')
         ])
-        let isFavorite = !!res[3].filter(x => {
-            return parseInt(id) === x.id
-        }).length
-        console.log(isFavorite)
-        return {tags: res[0], user: {...res[1], isFavorite: isFavorite}, statistic: res[2]}
+        return {tags: res[0], user: res[1], statistic: res[2]}
     }
 
     async registrationLesson(data) {

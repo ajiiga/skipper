@@ -38,7 +38,7 @@ const MentorProfile = () => {
             setIsFetching(true);
             if (!x.user.response) history.push("/");
             setUser(x.user.data);
-            setIsFavorite(x.user.isFavorite);
+            setIsFavorite(x.user.data.is_favourite);
             setTags(x.tags);
             setStatistic(x.statistic);
             setIsFetching(false);

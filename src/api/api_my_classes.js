@@ -114,3 +114,8 @@ export let getCommunicationsRequest = (class_id) => {
 export let getFavoritesRequest = (status: string) => $api.get(`/api/user/favourite/${status}`)
 
 export let addFavoriteRequest = (user_id: number, status: string) => $api.post(`/api/user/favourite/`, {user_id: user_id, status: status})
+
+export let deleteFavoriteRequest = (user_id: number, status: string) => $api.delete(`/api/user/favourite/`, {data: {
+        user_id: user_id, status: status
+    }
+})

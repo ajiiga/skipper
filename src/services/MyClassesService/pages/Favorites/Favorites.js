@@ -21,6 +21,10 @@ const Favorites = () => {
         })
     }, [favoriteMentors])
 
+    const deleteBlock = (id) => {
+        setItems(items => items.filter(x => x.id !== id))
+    }
+
     return (
         <div className={s.container}>
             <MiniNavBar child={'Избранное'} />
@@ -34,7 +38,7 @@ const Favorites = () => {
                 </div>
                 {!isLoading && <div className={s.list_container}>
                     {items.length === 0 && <img src={img} className={s.img_empty_favorites} alt=""/>}
-                    {items.map(x => <FavoritesBlock data={x} isMentor={favoriteMentors}/>)}
+                    {items.map(x => <FavoritesBlock data={x} isMentor={favoriteMentors} deleteBlock={() => deleteBlock(x.id)}/>)}
                 </div>}
             </div>
         </div>

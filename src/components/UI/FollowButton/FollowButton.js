@@ -18,8 +18,10 @@ const FollowButton = ({user_id, status, isFavorite}) => {
                 setFavorite(!favorite)
             }
         }}>
-            <img src={favorite? full_heart : black_heart} className={s.heart} alt=""/>
-            В избранное
+            <div className={s.flex_container}>
+                <img src={favorite ? full_heart : black_heart} className={s.heart} alt=""/>
+                <div>В избранное</div>
+            </div>
         </div>
     );
 };

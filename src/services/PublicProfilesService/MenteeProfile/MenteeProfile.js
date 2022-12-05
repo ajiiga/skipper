@@ -12,6 +12,7 @@ import {API_URL} from "../../../api/api_setting";
 import {useHistory} from "react-router-dom"
 import RateDisplay from "../../../components/UI/RateDisplay/RateDisplay";
 import ComplainModal from "../../../components/UI/ComplainModal/ComplainModal";
+import authStore from "../../../store/authStore";
 
 const MenteeProfile = ({}) => {
     let params = useParams()
@@ -75,14 +76,14 @@ const MenteeProfile = ({}) => {
                                 <div className={s.stat_count}>{statistic.lessons_count} занятий</div>
                             </div>
                         </div>
-                        <div className={s.buttons}>
+                        {authStore.user.id != id && <div className={s.buttons}>
                             <div className={s.btn_container}>
                                 <FollowButton user_id={parseInt(id)} status={'menti'} isFavorite={user.is_favourite}/>
                             </div>
                             <div className={s.btn_container}>
                                 <ChatButton id={id}/>
                             </div>
-                        </div>
+                        </div>}
                     </div>
 
                     <div className={s.info_container}>

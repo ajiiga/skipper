@@ -153,14 +153,14 @@ const MentorProfile = () => {
 
                             <div className={s.buttons}>
                                 <div className={s.timezone}>Время пользователя {user.time}</div>
-                                <div className={s.btns}>
+                                {authStore.user.id != id && <div className={s.btns}>
                                     <div className={s.btn_container}>
                                         <FollowButton user_id={parseInt(id)} status={'mentor'} isFavorite={isFavorite}/>
                                     </div>
                                     <div className={s.btn_container}>
                                         <ChatButton id={id}/>
                                     </div>
-                                </div>
+                                </div>}
                             </div>
                         </div>
                         {user.classes !== '[]' && width <= 500 && (

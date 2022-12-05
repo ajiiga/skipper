@@ -7,6 +7,16 @@
   background: #fedc2e;
   font-size: 14px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.flex_container {
+  display: flex;
 }
 
 /* Mobile */

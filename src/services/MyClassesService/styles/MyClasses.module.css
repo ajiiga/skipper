@@ -205,7 +205,7 @@
 }
 
 .chat_btn {
-  background: #EDEDED;
+  background: #dadada;
   margin-top: 24px;
 }
 
@@ -225,6 +225,7 @@
   width: 162px;
   height: fit-content;
   margin: auto;
+  cursor: pointer;
 }
 
 .title_empty_container {

@@ -1,11 +1,10 @@
 import React from 'react';
 import s from '../../../styles/MyClasses.module.css'
 import img from '../../../../../static/img/profile.jfif'
-import ChatButton from "../../../../../components/UI/ChatButton/ChatButton";
 import {Link} from "react-router-dom";
 import {API_URL} from "../../../../../api/api_setting";
 import myClassesStore from "../../../../../store/myClassesStore";
-
+import messageIcon from '../../../../../static/img/Search/message_icon.svg'
 
 const FavoritesBlock = ({data, isMentor, deleteBlock }) => {
 
@@ -37,10 +36,12 @@ const FavoritesBlock = ({data, isMentor, deleteBlock }) => {
                     </div>
                 </Link>
                 <Link to={`/messages/${data.id}`}>
-                    <div className={s.chat_btn}>
+                    <div style={{position: 'relative'}} className={s.chat_btn}>
+                        <img src={messageIcon} alt="" style={{position: 'absolute', left: '20px'}}/>
                         Чат
                     </div>
                 </Link>
+
             </div>
             <div className={s.delete_btn_container}>
                 <button onClick={() => deleteFavorite()} className={s.delete_btn}>Удалить</button>

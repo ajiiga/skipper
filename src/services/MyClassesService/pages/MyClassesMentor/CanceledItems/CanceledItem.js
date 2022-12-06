@@ -5,6 +5,7 @@ import zoom from "../../../../../static/img/messenger_icons/zoom.png";
 import myClassesStore from "../../../../../store/myClassesStore";
 import {messengersIcons} from "../../../../PublicProfilesService/MentorProifle/ModalRegistrationLesson/MessengersIcons";
 import {Link} from "react-router-dom";
+import messageIcon from "../../../../../static/img/Search/message_icon.svg";
 
 const CanceledItem = ({data, deleteItem}) => {
 
@@ -26,7 +27,7 @@ const CanceledItem = ({data, deleteItem}) => {
                 <button className={s.right_title_btn} onClick={() => deleteClass()}>Удалить</button>
             </div>
             <div className={s.tag_container}>
-                {data.tags.map(x => <Tag title={x} />)}
+                {data.tags.map(x => <Tag title={x}/>)}
             </div>
             <div>
                 <div className={s.text}>Тип занятия: {data.typeName}</div>
@@ -40,7 +41,9 @@ const CanceledItem = ({data, deleteItem}) => {
                         <div>{x.time}</div>
                     </div>)}
                 </div>
-                <Link to={`/messages/${data.MentiId}/change-lessons-dates?id=${data.ID}`}><button className={s.right_title_btn}>Предложить другое время</button></Link>
+                <Link to={`/messages/${data.MentiId}/change-lessons-dates?id=${data.ID}`}>
+                    <button className={s.right_title_btn}>Предложить другое время</button>
+                </Link>
             </div>
             <div className={s.text}>Способ связи:</div>
             <div className={s.communication_price_container}>
@@ -58,8 +61,23 @@ const CanceledItem = ({data, deleteItem}) => {
             <div className={s.under_container}>
                 <div>Время пользователя {data.user_time}</div>
                 <div className={s.button_containers}>
-                    <Link className={s.chat_btn} to={`/messages/${data.MentiId}`}><button style={{cursor: "pointer", border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Чат</button></Link>
-                    <Link to={`/messages/${data.MentiId}/resume-lesson?id=${data.ID}&is_mentor=true`} className={s.confirm_btn}><button style={{cursor: "pointer", border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Возобновить</button></Link>
+                    <Link className={s.chat_btn} to={`/messages/${data.MentiId}`}>
+                        <img style={{
+                            marginRight: '8px'
+                        }} src={messageIcon} alt=""/>
+
+                        <div>Сообщение</div>
+                    </Link>
+                    <Link to={`/messages/${data.MentiId}/resume-lesson?id=${data.ID}&is_mentor=true`}
+                          className={s.confirm_btn}>
+                        <button style={{
+                            cursor: "pointer",
+                            border: 0,
+                            background: 'rgba(0, 0, 0, 0)',
+                            fontWeight: 'bold'
+                        }}>Возобновить
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

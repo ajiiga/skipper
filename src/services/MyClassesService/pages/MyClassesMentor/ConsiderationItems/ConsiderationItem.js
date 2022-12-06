@@ -5,6 +5,7 @@ import zoom from '../../../../../static/img/messenger_icons/zoom.png'
 import myClassesStore from "../../../../../store/myClassesStore";
 import {messengersIcons} from "../../../../PublicProfilesService/MentorProifle/ModalRegistrationLesson/MessengersIcons";
 import {Link} from "react-router-dom";
+import messageIcon from "../../../../../static/img/Search/message_icon.svg";
 
 const ConsiderationItem = ({data, deleteItem}) => {
 
@@ -49,12 +50,13 @@ const ConsiderationItem = ({data, deleteItem}) => {
             </div>
             <div className={s.text}>Способ связи:</div>
             <div className={s.communication_price_container}>
-                <Link className={s.communication_container} to={`/messages/${data.MentiId}/change-communication?class_id=${data.ID}&active_item=${data.Communication}`}>
-                        <div className={s.communication_name_container}>
-                            <img src={messengersIcons[data.messenger_name]} className={s.communication_image} alt=""/>
-                            <div className={s.communication_name}>{data.messenger_name}</div>
-                        </div>
-                        <div className={s.communication_user_id}>User id: {data.communication_login}</div>
+                <Link className={s.communication_container}
+                      to={`/messages/${data.MentiId}/change-communication?class_id=${data.ID}&active_item=${data.Communication}`}>
+                    <div className={s.communication_name_container}>
+                        <img src={messengersIcons[data.messenger_name]} className={s.communication_image} alt=""/>
+                        <div className={s.communication_name}>{data.messenger_name}</div>
+                    </div>
+                    <div className={s.communication_user_id}>User id: {data.communication_login}</div>
                 </Link>
                 <div className={s.price}>
                     {data.Price} руб.
@@ -64,13 +66,11 @@ const ConsiderationItem = ({data, deleteItem}) => {
                 <div>Время пользователя {data.user_time}</div>
                 <div className={s.button_containers}>
                     <Link className={s.chat_btn} to={`/messages/${data.MentiId}`}>
-                        <button style={{
-                            cursor: 'pointer',
-                            border: 0,
-                            background: 'rgba(0, 0, 0, 0)',
-                            fontWeight: 'bold'
-                        }}>Чат
-                        </button>
+                        <img style={{
+                            marginRight: '8px'
+                        }} src={messageIcon} alt=""/>
+
+                        <div>Сообщение</div>
                     </Link>
                     <button className={s.confirm_btn} onClick={() => confirmClass()}>Принять</button>
                 </div>

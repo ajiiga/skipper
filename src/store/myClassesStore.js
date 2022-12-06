@@ -272,7 +272,6 @@ class MyClassesStore {
             x.Price = trueKey === 'FullTime' ? x.PriceFullTime : x[`Price${trueKey.slice(8)}`]
             x.typeName = this.typeNames[x.ClassType]
             x.fixedTime = x.Time.map(y => {
-                debugger;
                 let [date, time] = y.Time.split(' ')
                 date = new Date(date)
                 return {name: `${this.monthNames[date.getMonth()].toLowerCase()} ${date.getDate()} `, time: this.timesArray[parseInt(time)]}

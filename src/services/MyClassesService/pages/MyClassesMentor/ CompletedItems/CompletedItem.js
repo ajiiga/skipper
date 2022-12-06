@@ -5,6 +5,7 @@ import zoom from "../../../../../static/img/messenger_icons/zoom.png";
 import {messengersIcons} from "../../../../PublicProfilesService/MentorProifle/ModalRegistrationLesson/MessengersIcons";
 import {Link} from "react-router-dom";
 import myClassesStore from "../../../../../store/myClassesStore";
+import messageIcon from "../../../../../static/img/Search/message_icon.svg";
 
 
 const CompletedItem = ({data, deleteItem}) => {
@@ -23,7 +24,7 @@ const CompletedItem = ({data, deleteItem}) => {
                 <button onClick={deleteClass} className={s.right_title_btn_v2}>Удалить</button>
             </div>
             <div className={s.tag_container}>
-                {data.tags.map(x => <Tag title={x} />)}
+                {data.tags.map(x => <Tag title={x}/>)}
             </div>
             <div>
                 <div className={s.text}>Тип занятия: {data.typeName}</div>
@@ -54,8 +55,23 @@ const CompletedItem = ({data, deleteItem}) => {
             <div className={s.under_container}>
                 <div>{data.user_time}</div>
                 <div className={`${s.button_containers} ${s.button_containers_v3}`}>
-                    <Link className={s.chat_btn} to={`/messages/${data.MentiId}`}><button style={{border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Чат</button></Link>
-                    <Link to={`/messages/${data.MentiId}/review?lessons_count=${data.fixedTime.length}`} className={s.confirm_btn}><button style={{cursor: "pointer", border: 0, background: 'rgba(0, 0, 0, 0)', fontWeight: 'bold'}}>Оставить отзыв</button></Link>
+                    <Link className={s.chat_btn} to={`/messages/${data.MentiId}`}>
+                        <img style={{
+                            marginRight: '8px'
+                        }} src={messageIcon} alt=""/>
+
+                        <div>Сообщение</div>
+                    </Link>
+                    <Link to={`/messages/${data.MentiId}/review?lessons_count=${data.fixedTime.length}`}
+                          className={s.confirm_btn}>
+                        <button style={{
+                            cursor: "pointer",
+                            border: 0,
+                            background: 'rgba(0, 0, 0, 0)',
+                            fontWeight: 'bold'
+                        }}>Оставить отзыв
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import zoom from "../../../../../static/img/messenger_icons/zoom.png";
 import { messengersIcons } from "../../../../PublicProfilesService/MentorProifle/ModalRegistrationLesson/MessengersIcons";
 import myClassesStore from "../../../../../store/myClassesStore";
 import { Link } from "react-router-dom";
+import messageIcon from "../../../../../static/img/Search/message_icon.svg";
 
 const CanceledItem = ({ data, deleteItem }) => {
   let archiveItem = () => {
@@ -71,18 +72,13 @@ const CanceledItem = ({ data, deleteItem }) => {
       <div className={s.under_container}>
         <div>Время пользователя {data.user_time}</div>
         <div className={`${s.button_containers} ${s.button_containers_v2}`}>
-          <Link className={s.chat_btn} to={`/messages/${data.UserID}`}>
-            <button
-              style={{
-                cursor: "pointer",
-                border: 0,
-                background: "rgba(0, 0, 0, 0)",
-                fontWeight: "600",
-              }}
-            >
-              Чат
-            </button>
-          </Link>
+            <Link className={s.chat_btn} to={`/messages/${data.MentiId}`}>
+                <img style={{
+                    marginRight: '8px'
+                }} src={messageIcon} alt=""/>
+
+                <div>Сообщение</div>
+            </Link>
         </div>
       </div>
     </div>

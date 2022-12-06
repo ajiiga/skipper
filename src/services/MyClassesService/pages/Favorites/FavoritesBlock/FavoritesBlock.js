@@ -36,9 +36,9 @@ const FavoritesBlock = ({data, isMentor, deleteBlock }) => {
                     </div>
                 </Link>
                 <Link to={`/messages/${data.id}`}>
-                    <div style={{position: 'relative'}} className={s.chat_btn}>
-                        <img src={messageIcon} alt="" style={{position: 'absolute', left: '20px'}}/>
-                        Чат
+                    <div style={{display: 'flex', justifyContent: 'center'}} className={s.chat_btn}>
+                        <img src={messageIcon} alt="" style={{ marginRight: '10px'}}/>
+                        <div>Сообщение</div>
                     </div>
                 </Link>
 

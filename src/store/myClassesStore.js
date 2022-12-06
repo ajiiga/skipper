@@ -30,7 +30,7 @@ class MyClassesStore {
 
     timesArray = ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00']
 
-    monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", ""]
+    monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
 
     async getClasses() {
         let r = await getClassesRequest()
@@ -272,6 +272,7 @@ class MyClassesStore {
             x.Price = trueKey === 'FullTime' ? x.PriceFullTime : x[`Price${trueKey.slice(8)}`]
             x.typeName = this.typeNames[x.ClassType]
             x.fixedTime = x.Time.map(y => {
+                debugger;
                 let [date, time] = y.Time.split(' ')
                 date = new Date(date)
                 return {name: `${this.monthNames[date.getMonth()].toLowerCase()} ${date.getDate()} `, time: this.timesArray[parseInt(time)]}

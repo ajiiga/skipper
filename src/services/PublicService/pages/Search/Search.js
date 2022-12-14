@@ -135,6 +135,7 @@ const Search = () => {
                                                specialization={x.Specialization} description={x.Description}
                                                picture={x.ProfilePicture} classes={x.classes} tags={tagList}
                                                rating={x.rating}
+                                               isFavorite={x.is_favourite_user}
                                                averagePrice={x.AverageClassPrice}/>
                         })
                     }

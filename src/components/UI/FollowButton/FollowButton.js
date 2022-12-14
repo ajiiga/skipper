@@ -9,7 +9,7 @@ const FollowButton = ({user_id, status, isFavorite}) => {
     let [favorite, setFavorite] = useState(isFavorite)
     return (
         <div className={s.follow_btn} onClick={() => {
-            if (authStore.user.id !== user_id) {
+            if (authStore.user.id && authStore.user.id !== user_id) {
                 if (favorite) {
                     myClassesStore.deleteFavorite(user_id, status)
                 } else {

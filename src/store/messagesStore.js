@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {
     changeCommunicationRequest,
-    changeDateRequest,
+    changeDateRequest, deleteDialog,
     getChatListRequest,
     getCurrentChatInfoRequest, getDataForChangeDateRequest, getNotificationsClassUrl,
     getNotificationsRequest,
@@ -49,17 +49,18 @@ class MessagesStore {
         let myId = authStore.user.id
 
         let result = jsonData.map(x => {
-
             let refactoredDate = x.LastMessage.CreatedAt === '0001-01-01T00:00:00Z'? '' : this.refactorDate(x.LastMessage.CreatedAt)
             if (x.ReceiverID != myId) {
                 let delta = x.Receiver
                 delta.lastMessageDate = refactoredDate
                 delta.count_unread_messages = x.count_unread_messages
+                delta.chat_id = x.ID
                 return delta
             } else {
                 let delta = x.Sender
                 delta.lastMessageDate = refactoredDate
                 delta.count_unread_messages = x.count_unread_messages
+                delta.chat_id = x.ID
                 return delta
             }
         })
@@ -197,6 +198,15 @@ class MessagesStore {
     stopEvents() {
         this.eventSource.close()
         this.eventSourceClass.close()
+    }
+
+    deleteChat(chat_id) {
+        try {
+            let r = deleteDialog(chat_id)
+            return r
+        } catch (e) {
+            console.log(e)
+        }
     }
 
 

@@ -3,7 +3,7 @@ import s from "../../styles/MessagesLeftSide.module.css";
 import SearchBar from "../../../../components/UI/SearchBar/SearchBar";
 import MessagesBlock from "./MessagesBlock/MessagesBlock";
 import messagesStore from "../../../../store/messagesStore";
-import { useParams } from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 const MessagesLeftSide = ({
@@ -15,6 +15,7 @@ const MessagesLeftSide = ({
   setShowRightSide,
 }) => {
   let params = useParams();
+  const history = useHistory()
 
   let sortedUser = useMemo(() => {
     let lowCaseQuery = query.toLowerCase();
@@ -43,6 +44,13 @@ const MessagesLeftSide = ({
   //
   // }, [activeUser])
 
+  const deleteBlock = (id) => {
+    if (id === activeUser) {
+      history.push('/messages')
+    }
+    setUsers((users) => users.filter(x => x.ID !== id))
+  }
+
   return (
     <div className={s.container}>
       <SearchBar query={query} setQuery={setQuery} />
@@ -55,6 +63,7 @@ const MessagesLeftSide = ({
                             key={x.ID}
                             data={x}
                             isActive={x.ID === activeUser}
+                            deleteBlock={() => deleteBlock(x.ID)}
                         />
                     ))
                 ) : (

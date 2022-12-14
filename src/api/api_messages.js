@@ -31,3 +31,5 @@ export let changeCommunicationRequest = (class_id, communication_id) => $api.put
 })
 
 export let lessonDidNotRequest = (booking_id) => $api.put(`/api/class/booking/status/unsuccess/${booking_id}`)
+
+export let deleteDialog = (chat_id) => $api.delete(`/api/chat/${chat_id}`)

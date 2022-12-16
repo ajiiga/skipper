@@ -44,7 +44,12 @@ class PrivateProfileStore {
     }
 
     async makeVerifyEmail(email) {
-        let r = await makeVerifyEmailRequest(email)
+        try {
+            let r = await makeVerifyEmailRequest(email)
+            return r
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     async getMessengerList() {

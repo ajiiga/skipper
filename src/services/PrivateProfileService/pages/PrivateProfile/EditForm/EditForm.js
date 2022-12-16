@@ -206,7 +206,7 @@ const EditForm = () => {
                             </form>
 
 
-                            <EmailConfirm/>
+                            <EmailConfirm email={authStore.user.email}/>
                             {authStore.user.is_mentor &&
                                 <ChangeSpecialization specialization={authStore.user.specialization}/>}
 
@@ -294,7 +294,7 @@ const EditForm = () => {
 };
 
 
-const EmailConfirm = () => {
+const EmailConfirm = ({email}) => {
     let [status, setStatus] = useState('')
     const validationSchema = yup.object({
         email: yup.string().required('Заполните поле с почтой').email('Неправильная форма почты'),
@@ -302,7 +302,7 @@ const EmailConfirm = () => {
     return (
         <Formik
             initialValues={{
-                email: ''
+                email: email ?? ''
             }}
             onSubmit={(values) => {
                 setStatus('')
@@ -323,7 +323,7 @@ const EmailConfirm = () => {
                     <div className={s.email_input_display}>
                         <input type="text" name="email" value={values.email} onChange={handleChange} onBlur={handleBlur}
                                placeholder={'Адрес электронной почты'}/>
-                        <div className={s.btn} onClick={handleSubmit}>Подтвердить</div>
+                        <div className={s.btn} onClick={handleSubmit}>{email ? 'Изменить' : 'Подтвердить'}</div>
                     </div>
                 </div>
                 {errors.email && <div

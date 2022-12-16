@@ -14,7 +14,7 @@ export let UpdateProfileDataRequest = (first_name, second_name, patronymic, date
 
 
 export let makeVerifyEmailRequest = (email) => {
-    return $api.get('api/user/user-verify-email', {data: {email: email}})
+    return $api.post('/api/user/user-verify-email', {email: email})
 }
 
 export let AddCommunicationRequest = (messenger_id, login) => {

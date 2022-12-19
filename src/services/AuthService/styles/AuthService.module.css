@@ -93,6 +93,22 @@
   }
 }
 
+.container_recovery_password {
+  justify-content: center;
+}
+
+.input {
+  background: #ffffff;
+  border: 1px solid #aeaeae;
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: 100%;
+  margin-right: 8px;
+  padding: 8px 12px;
+  outline: none;
+  margin-bottom: 15px;
+}
+
 /* Mobile */
 @media only screen and (max-width: 500px) {
   .main_img {

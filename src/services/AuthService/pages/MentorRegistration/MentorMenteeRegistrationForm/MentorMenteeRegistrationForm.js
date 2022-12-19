@@ -9,6 +9,7 @@ import CustomSelect from "../../../../../components/UI/CustomSelect/CustomSelect
 import Button from "../../../../../components/UI/Button/Button";
 import authStore from "../../../../../store/authStore";
 import Preloader from "../../../../../components/UI/Preloader/Preloader";
+import {Link} from "react-router-dom";
 
 const MentorMenteeRegistrationForm = ({isFetching, setIsFetching}) => {
     let [preview, setPreview] = useState(null)
@@ -194,7 +195,7 @@ const MentorMenteeRegistrationForm = ({isFetching, setIsFetching}) => {
                                     value={values.saveMe}/>
                                 Оставаться в системе</label>
                         </div>
-                        <span className={s.lost_password}>Забыли пароль?</span>
+                        <Link to={'/password-recovery'}><span className={s.lost_password}>Забыли пароль?</span></Link>
                     </div>
                     {isFetching && <Preloader />}
                     <div className={s.btn_container}>

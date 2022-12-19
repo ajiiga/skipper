@@ -51,8 +51,10 @@ export let registrationMenteeMentorRequest = (specialization, description, time,
         method: 'post',
         url: `${API_URL}/api/user/user-mentor-sign-up`,
         data: bodyFormData,
-        headers: {'Content-Type': 'multipart/form-data',
-                    Authorization: `Bearer ${localStorage.getItem('token')}`}
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
     })
 }
 
@@ -66,4 +68,12 @@ export let deleteNotificationRequest = (id) => {
 
 export let readNotificationRequest = (id) => {
     return $api.put(`/notifications/?notification_id=${id}`)
+}
+
+export let resetPasswordRequest = (login) => {
+    return $api.post('auth/reset-password', {login: login})
+}
+
+export let newPasswordRequest = (password, token) => {
+    return $api.post('/auth/new-password', {password: password, token: token})
 }

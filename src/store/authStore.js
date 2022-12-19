@@ -3,10 +3,10 @@ import {
     deleteNotificationRequest,
     getNotificationsClassRequest,
     getStatusRequest,
-    loginRequest, readNotificationRequest,
+    loginRequest, newPasswordRequest, readNotificationRequest,
     registrationMenteeMentorRequest,
     registrationMentorRequest,
-    registrationRequest
+    registrationRequest, resetPasswordRequest
 } from "../api/api_auth";
 import axios from "axios";
 import {API_URL} from "../api/api_setting";
@@ -163,6 +163,24 @@ class AuthService {
             this.notifications = JSON.parse(r.data)
         } catch (e) {
             console.log(e)
+        }
+    }
+
+    async resetPassword(login) {
+        try {
+            let r = await resetPasswordRequest(login)
+            return r.data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async newPassword(password, token) {
+        try {
+            let r = await newPasswordRequest(password, token)
+            return r.data
+        } catch (e) {
+
         }
     }
 

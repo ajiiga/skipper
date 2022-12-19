@@ -88,7 +88,7 @@ const EmailForm = ({isFetching, setIsFetching}) => {
                                     value={values.saveMe}/>
                                 Оставаться в системе</label>
                         </div>
-                        <span className={s.lost_password}>Забыли пароль?</span>
+                        <Link to={'/password-recovery'}><span className={s.lost_password}>Забыли пароль?</span></Link>
                     </div>
                     {isFetching && <Preloader/>}
 

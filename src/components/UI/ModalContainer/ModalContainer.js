@@ -5,8 +5,11 @@ import {values} from "mobx";
 import {Formik} from "formik";
 import * as yup from "yup";
 
-const ModalContainer = ({setActive, active, children, title}) => {
+const ModalContainer = ({setActive, active, children, title, onClose}) => {
     let closeModal = () => {
+        if (onClose) {
+            onClose()
+        }
         setActive(false)
     }
 
@@ -17,7 +20,12 @@ const ModalContainer = ({setActive, active, children, title}) => {
                 <div className={s.title_container}>
                     <div/>
                     <div className={s.title}>{title}</div>
-                    <img src={close} className={s.close} alt="" onClick={() => setActive(false)}/>
+                    <img src={close} className={s.close} alt="" onClick={() => {
+                        if (onClose) {
+                            onClose()
+                        }
+                        setActive(false)
+                    }}/>
                     <div className={s.circle}/>
                 </div>
                 <div className={s.content}>

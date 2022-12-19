@@ -81,7 +81,7 @@ const PlannedItem = ({data, deleteItem}) => {
             <div className={s.under_container}>
                 <div>Время пользователя {data.user_time}</div>
                 <div className={`${s.button_containers} ${s.button_containers_v2}`}>
-                    <Link className={s.chat_btn} to={`/messages/${data.MentiId}`}>
+                    <Link className={s.chat_btn} to={`/messages/${data.UserID}`}>
                         <img style={{
                             marginRight: '8px'
                         }} src={messageIcon} alt=""/>

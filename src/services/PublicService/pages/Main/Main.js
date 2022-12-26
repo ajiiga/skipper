@@ -99,7 +99,7 @@ const Main = () => {
                     marginTop: '30px',
                     textAlign: 'center',
                     fontSize: '16px'
-                }}>Вы успешно сменили почту.
+                }}>Вы успешно подтвердили почту.
                 </div>
                 <div style={{textAlign: 'center', marginTop: '30px', fontSize: '14px'}}>Теперь вы можете использовать новые данные для авторизации.</div>
             </ModalContainer>

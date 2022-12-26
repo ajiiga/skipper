@@ -276,7 +276,7 @@ const MentorProfile = () => {
                                     </div>
                                 </div>
                             </div>}
-                        {width > 500 && (
+                        {width > 500 && id != authStore.user.id && (
                             <div className={s.hate_buttons}>
                                 <div className={s.btn} onClick={() => setActive(true)}>
                                     Пожаловаться
@@ -300,7 +300,7 @@ const MentorProfile = () => {
                         )}
                     </div>
                 </div>
-                <ComplainModal active={active} setActive={setActive}/>
+                <ComplainModal active={active} setActive={setActive} id={id}/>
                 {
                     <Route path={`/mentor-profile/${id}/:service_id`}>
                         <ModalRegistrationLesson

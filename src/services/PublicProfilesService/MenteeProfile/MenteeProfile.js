@@ -90,7 +90,7 @@ const MenteeProfile = ({}) => {
                         <div className={s.title}>Статистика занятий</div>
                         <LessonStatistics statistic={statistic}/>
                     </div>
-                    <div className={s.mentee_hate_buttons}>
+                    {id != authStore.user.id && <div className={s.mentee_hate_buttons}>
                         <div className={s.hate_buttons}>
                             <div className={s.btn} onClick={() => setActive(true)}>
                                 Пожаловаться
@@ -99,7 +99,7 @@ const MenteeProfile = ({}) => {
                                 Заблокировать профиль
                             </div>
                         </div>
-                    </div>
+                    </div>}
                 </div>
                 <div className={s.right_side}>
                     {JSON.parse(user.comments).length > 0 && <div className={s.reviews_block}>
@@ -108,7 +108,7 @@ const MenteeProfile = ({}) => {
                     </div>}
                 </div>
             </div>
-            <ComplainModal active={active} setActive={setActive}/>
+            <ComplainModal active={active} setActive={setActive} id={id} />
         </div>
     );
 };

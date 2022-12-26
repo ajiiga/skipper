@@ -28,3 +28,7 @@ export let getMentorStatisticRequest = (id) => {
 export let getMenteeStatisticRequest = (id) => {
     return $api.get(`/public-api/public-user/menti/statistic/${id}`)
 }
+
+export let reportUserRequest = (id, report_text, report_theme) => {
+    return $api.post(`/api/reports/`, {report_text: report_text, user_id: id, report_theme: report_theme})
+}

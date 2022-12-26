@@ -3,7 +3,7 @@ import {
     getBookingListRequest,
     getMenteeInfoRequest, getMenteeStatisticRequest,
     getMentorInfoRequest, getMentorStatisticRequest,
-    registrationLessonRequest
+    registrationLessonRequest, reportUserRequest
 } from "../api/api_public_profile";
 import authStore from "./authStore";
 import publicStore from "./publicStore";
@@ -96,6 +96,15 @@ class publicProfileStore {
     async getMenteeStatistic(id) {
         let r = await getMenteeStatisticRequest(id)
         return r.data
+    }
+
+    async reportUser(id, report_theme, report_text) {
+        try {
+            let r = reportUserRequest(id, report_text, report_theme)
+            return r.data
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
 

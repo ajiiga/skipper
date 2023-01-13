@@ -303,6 +303,40 @@
   .miniNavBar_container a {
     width: max-content;
   }
+
+  .block_container {
+    display: block;
+  }
+
+  .profile_chat {
+    width: auto;
+  }
+
+  .delete_btn_container {
+    width: auto;
+    padding: 10px;
+  }
+
+  .list_container {
+    padding: 15px;
+  }
+
+  .title_container {
+    width: auto;
+  }
+
+  .favorites_title_container {
+    flex-direction: column;
+  }
+
+  .info {
+    width: auto;
+  }
+
+  .status_buttons {
+    width: 100%;
+    margin-top: 10px;
+  }
 }
 
 @media only screen and (max-width: 425px) {

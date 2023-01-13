@@ -26,9 +26,8 @@
     margin-top: 8px;
     background: #fedc2e;
     font-size: 10px;
-    width: max-content;
+    width: 100%;
     min-width: 115px;
-    margin-left: auto;
   }
 }
 

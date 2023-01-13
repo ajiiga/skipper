@@ -208,7 +208,7 @@ const EditForm = () => {
 
                             <EmailConfirm email={authStore.user.email}/>
                             {authStore.user.is_mentor &&
-                                <ChangeSpecialization specialization={authStore.user.specialization}/>}
+                            <ChangeSpecialization specialization={authStore.user.specialization}/>}
 
                             <div className={s.block}>
                                 <div className={s.block_title}>Пароль</div>
@@ -248,9 +248,18 @@ const EditForm = () => {
                       }) => (
                         <form onSubmit={handleSubmit}>
                             <div className={s.form_content}>
-                                {<div className={s.form_block}><div className={s.error_status}>{errors.oldPassword && touched.oldPassword && errors.oldPassword}</div></div>}
-                                {<div className={s.form_block}><div className={s.error_status}>{errors.newPassword && touched.newPassword && errors.newPassword}</div></div>}
-                                {<div className={s.form_block}><div className={s.error_status}>{errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}</div></div>}
+                                {<div className={s.form_block}>
+                                    <div
+                                        className={s.error_status}>{errors.oldPassword && touched.oldPassword && errors.oldPassword}</div>
+                                </div>}
+                                {<div className={s.form_block}>
+                                    <div
+                                        className={s.error_status}>{errors.newPassword && touched.newPassword && errors.newPassword}</div>
+                                </div>}
+                                {<div className={s.form_block}>
+                                    <div
+                                        className={s.error_status}>{errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}</div>
+                                </div>}
                                 {<div className={s.form_block}>
                                     <div
                                         className={s.error_status}>{errors.login && touched.login && errors.login}</div>
@@ -296,43 +305,53 @@ const EditForm = () => {
 
 const EmailConfirm = ({email}) => {
     let [status, setStatus] = useState('')
+    let [showModal, setShowModal] = useState(false)
     const validationSchema = yup.object({
         email: yup.string().required('Заполните поле с почтой').email('Неправильная форма почты'),
     })
     return (
-        <Formik
-            initialValues={{
-                email: email ?? ''
-            }}
-            onSubmit={(values) => {
-                setStatus('')
-                privateProfileStore.makeVerifyEmail(values.email).then(x => setStatus('Письмо отправлено на почту'))
-            }}
-            validationSchema={validationSchema}>
-            {({
-                  values,
-                  errors,
-                  touched,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                  isSubmitting,
-              }) => <form onSubmit={handleSubmit}>
-                <div className={s.block}>
-                    <div className={s.block_title}>Email</div>
-                    <div className={s.email_input_display}>
-                        <input type="text" name="email" value={values.email} onChange={handleChange} onBlur={handleBlur}
-                               placeholder={'Адрес электронной почты'}/>
-                        <div className={s.btn} onClick={handleSubmit}>{email ? 'Изменить' : 'Подтвердить'}</div>
+        <>
+            <Formik
+                initialValues={{
+                    email: email ?? ''
+                }}
+                onSubmit={(values) => {
+                    setStatus('')
+                    privateProfileStore.makeVerifyEmail(values.email).then(x => {
+                        setShowModal(true)
+                        setStatus('Письмо отправлено на почту')
+                    })
+                }}
+                validationSchema={validationSchema}>
+                {({
+                      values,
+                      errors,
+                      touched,
+                      handleChange,
+                      handleBlur,
+                      handleSubmit,
+                      isSubmitting,
+                  }) => <form onSubmit={handleSubmit}>
+                    <div className={s.block}>
+                        <div className={s.block_title}>Email</div>
+                        <div className={s.email_input_display}>
+                            <input type="text" name="email" value={values.email} onChange={handleChange}
+                                   onBlur={handleBlur}
+                                   placeholder={'Адрес электронной почты'}/>
+                            <div className={s.btn} onClick={handleSubmit}>{email ? 'Изменить' : 'Подтвердить'}</div>
+                        </div>
                     </div>
-                </div>
-                {errors.email && <div
-                    className={`${s.error_status} ${s.email_error}`}>{errors.email && touched.email && errors.email}</div>}
-                {status && <div className={`${s.good_status} ${s.email_error}`}>{status}</div>}
-            </form>
+                    {errors.email && <div
+                        className={`${s.error_status} ${s.email_error}`}>{errors.email && touched.email && errors.email}</div>}
+                    {status && <div className={`${s.good_status} ${s.email_error}`}>{status}</div>}
+                </form>
 
-            }
-        </Formik>)
+                }
+            </Formik>
+        <ModalContainer active={showModal} setActive={setShowModal} title={'Отправлено письмо'}>
+            <div style={{marginTop: '30px', textAlign: 'center'}}>Мы отправили вам ссылку для подтверждения вам на почту<br/>Перейдите по ссылке на почту, чтобы подтвердить, что аккаунт пренадлежит вам.</div>
+        </ModalContainer>
+        </>)
 }
 
 const ChangeSpecialization = ({specialization}) => {
@@ -347,7 +366,10 @@ const ChangeSpecialization = ({specialization}) => {
             }}
             onSubmit={(values) => {
                 setStatus('')
-                privateProfileStore.changeSpecialization(values.specialization).then(x => setStatus('Специализация изменена'))
+                privateProfileStore.changeSpecialization(values.specialization).then(x => {
+                    setStatus('Специализация изменена')
+
+                })
             }}
             validationSchema={validationSchema}>
             {({

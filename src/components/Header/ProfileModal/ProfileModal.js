@@ -32,7 +32,6 @@ const ProfileModal = ({open, setOpen}) => {
             <NavLink to={'/my-profile'}>
                 <div className={s.block}>Личный кабинет</div>
             </NavLink>
-            <div className={s.block}>Техническая поддержка</div>
             <div className={`${s.block} ${s.exit}`} onClick={() => authStore.logout()}>Выйти</div>
         </motion.div>
     );

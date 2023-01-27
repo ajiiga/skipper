@@ -12,6 +12,7 @@ import Footer from "../../../../components/Footer/Footer";
 import useDebounce from "../../../../CustomHooks/useDebounce";
 import Preloader from "../../../../components/UI/Preloader/Preloader";
 import {motion} from 'framer-motion'
+import authStore from "../../../../store/authStore";
 
 const Search = () => {
 
@@ -78,7 +79,10 @@ const Search = () => {
                 price = {down_price: low, high_price: high}
             }
             publicStore.getSearchClasses(strTags === "" ? undefined : strTags, 1, 100, searchInfo.range.min, searchInfo.range.max, price).then(x => {
-                setClasses(x)
+                setClasses(x.filter(mentor => {
+                    let user = authStore.user;
+                    return mentor.ID !== user.id;
+                }))
                 setSearchIsFetching(false)
             })
         }

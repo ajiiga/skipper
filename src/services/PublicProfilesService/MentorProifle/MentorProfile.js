@@ -281,7 +281,6 @@ const MentorProfile = () => {
                                 <div className={s.btn} onClick={() => setActive(true)}>
                                     Пожаловаться
                                 </div>
-                                <div className={s.btn}>Заблокировать профиль</div>
                             </div>
                         )}
                     </div>
@@ -295,7 +294,6 @@ const MentorProfile = () => {
                                 <div className={s.btn} onClick={() => setActive(true)}>
                                     Пожаловаться
                                 </div>
-                                <div className={s.btn}>Заблокировать профиль</div>
                             </div>
                         )}
                     </div>

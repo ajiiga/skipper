@@ -95,9 +95,6 @@ const MenteeProfile = ({}) => {
                             <div className={s.btn} onClick={() => setActive(true)}>
                                 Пожаловаться
                             </div>
-                            <div className={s.btn}>
-                                Заблокировать профиль
-                            </div>
                         </div>
                     </div>}
                 </div>
